@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl"
+       class="in-text"
+       version="1.0"
+       demote-non-dropping-particle="sort-only"
+       default-locale="en-US">
+
+  <info>
+    <title>ACE Reference Style</title>
+    <id>https://auditclinicalevidence.org/styles/ace</id>
+    <link href="https://auditclinicalevidence.org/styles/ace" rel="self"/>
+    <author>
+      <name>Audit for Clinical Evidence</name>
+    </author>
+    <category citation-format="author-date"/>
+    <updated>2026-06-27T00:00:00+00:00</updated>
+  </info>
+
+  <!-- This removes "et al." from in-text citations. -->
+  <locale xml:lang="en-US">
+    <terms>
+      <term name="et-al"></term>
+    </terms>
+  </locale>
+
+  <!-- In-text citation author: first author's last name only -->
+  <macro name="citation-author">
+    <names variable="author" et-al-min="2" et-al-use-first="1">
+      <name form="short"/>
+      <substitute>
+        <names variable="editor"/>
+        <text variable="title"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <!-- Full reference authors: all last names only -->
+  <macro name="reference-authors">
+    <names variable="author" delimiter=", ">
+      <name form="short" delimiter=", "/>
+      <substitute>
+        <names variable="editor"/>
+        <text variable="title"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="issued-year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="title">
+    <text variable="title" text-case="sentence"/>
+  </macro>
+
+  <macro name="container">
+    <choose>
+      <if variable="container-title">
+        <text variable="container-title" font-style="italic"/>
+      </if>
+      <else-if variable="publisher">
+        <text variable="publisher" font-style="italic"/>
+      </else-if>
+    </choose>
+  </macro>
+
+  <macro name="doi-or-url">
+    <choose>
+      <if variable="DOI">
+        <group delimiter=" ">
+          <text value="DOI:"/>
+          <text variable="DOI"/>
+        </group>
+      </if>
+      <else-if variable="URL">
+        <group delimiter=" ">
+          <text value="URL:"/>
+          <text variable="URL"/>
+        </group>
+      </else-if>
+    </choose>
+  </macro>
+
+  <citation
+    et-al-min="2"
+    et-al-use-first="1"
+    disambiguate-add-year-suffix="true"
+    collapse="year">
+  
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=" ">
+        <text macro="citation-author"/>
+        <group>
+          <text macro="issued-year"/>
+          <text variable="year-suffix"/>
+        </group>
+      </group>
+    </layout>
+  </citation>
+
+  <bibliography hanging-indent="false" et-al-min="999" et-al-use-first="999">
+    <layout suffix=".">
+      <group delimiter=" ">
+        <text macro="reference-authors"/>
+        <group prefix="(" suffix=")">
+          <text macro="issued-year"/>
+          <text variable="year-suffix"/>
+        </group>
+        <text macro="title" suffix="."/>
+        <text macro="container" suffix="."/>
+        <text macro="doi-or-url"/>
+      </group>
+    </layout>
+  </bibliography>
+
+</style>

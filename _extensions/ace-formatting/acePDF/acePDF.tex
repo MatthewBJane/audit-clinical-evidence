@@ -1,0 +1,166 @@
+% load packages
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{tikz}
+  
+%% Set page size with a wider right margin
+\geometry{a4paper, total={170mm,257mm}, left=25mm, top=20mm, bottom=20mm, right=25mm}
+
+%% Let's define some colours
+\definecolor{light}{HTML}{000000}
+\definecolor{highlight}{HTML}{999999}
+\definecolor{dark}{HTML}{000000}
+
+
+% ---------------------------------------------------------
+% GLOBAL BACKGROUND STYLING (Sidebars and Corners)
+% The \ifnum logic uses a custom counter to ensure 
+% it NEVER draws on the physical first page.
+% ---------------------------------------------------------
+\newcounter{physicalpage}
+\setcounter{physicalpage}{0}
+
+\AddToShipoutPicture{% 
+  \stepcounter{physicalpage}%
+  \ifnum\value{physicalpage}>1
+     % logo
+    \AtPageUpperLeft{% 
+        \put(\LenToUnit{\dimexpr\paperwidth-2.5cm},-2.5cm){% 
+            \color{light}\includegraphics[width=2.5cm]{brand/alt_logo.png}
+          }%
+     }%
+  \fi
+}
+
+\AddToShipoutPictureBG{
+  \ifnum\value{physicalpage}>1
+    \AtPageCenter{
+      \hspace{-10.77cm}
+      \raisebox{11.2cm}{
+        \includegraphics[width=3.7cm]{brand/corner.png}
+      }
+    }
+  \fi
+}
+
+
+% ---------------------------------------------------------
+% PAGE NUMBERING & HEADER STYLING
+% ---------------------------------------------------------
+\fancypagestyle{mystyle}{
+  \fancyhf{} 
+  \renewcommand\headrulewidth{0pt} 
+  \fancyheadoffset{1.45cm} 
+  \fancyhead[L]{\textcolor{black}{\thepage}} 
+}
+
+% Force the 'plain' style (used by TOC and Chapter starts) to match 'mystyle'
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \renewcommand\headrulewidth{0pt}
+  \fancyheadoffset{1.45cm}
+  \fancyhead[L]{\textcolor{black}{\thepage}} 
+}
+
+\setlength{\footskip}{20pt}
+\pagestyle{mystyle} 
+
+
+% ---------------------------------------------------------
+% CHAPTER & SECTION FONTS
+% ---------------------------------------------------------
+\setcounter{secnumdepth}{3}
+
+% Number ## headings as 1, 2, 3...
+\renewcommand{\thesubsection}{\arabic{subsection}}
+
+% Number ### headings as 1.A, 1.B, 2.A...
+\renewcommand{\thesubsubsection}{\thesubsection.\Alph{subsubsection}}
+
+% Style ## headings
+\titleformat{\subsection}
+  {\sffamily\Large\bfseries}
+  {\thesubsection}
+  {1em}
+  {}
+  [{\titlerule[0.8pt]}]
+
+% Style ### headings
+\titleformat{\subsubsection}
+  {\sffamily\large\bfseries}
+  {\thesubsubsection}
+  {1em}
+  {}
+
+% ---------------------------------------------------------
+% BUILD THE COVER PAGE
+% ---------------------------------------------------------
+\makeatletter
+\AtBeginDocument{
+    \thispagestyle{empty} % Ensure no headers/footers on the cover
+    
+    \begin{tikzpicture}[remember picture,overlay]
+        \node at (current page.north) [anchor=north, yshift=1cm] {
+            \includegraphics[width=0.6\paperwidth, height=0.4\paperheight, keepaspectratio]{brand/logo_whitebg_text.png}
+        };
+        
+        \node at (current page.center) [anchor=center,yshift=1cm] {
+            \includegraphics[width=.8\paperwidth, height=0.6\paperheight]{brand/banner.png}
+        }; 
+            
+        \node at (current page.center) [anchor=center, color=white, yshift=1.7cm] {\huge\textbf{\@title}};
+        \node at (current page.center) [anchor=center, color=white, yshift=.9cm] {\Large\textbf{\@subtitle}};
+        \node at (current page.center) [color=white, anchor=center, yshift=0cm] {\Large\textbf{\@date}};
+        
+        \node at (current page.east) [anchor=east, yshift=-5cm, xshift=-2cm] {\Large\textbf{\@author}};
+        \node at (current page.east) [anchor=east, yshift=-5.7cm, xshift=-2cm] {\Large\text{\coverAffiliation}};
+        \node at (current page.east) [anchor=east, yshift=-6.4cm, xshift=-2cm] {\Large\text{contact@auditclinicalevidence.org}};
+        
+        \node at (current page.west) [anchor=west, yshift=-11.5cm, xshift=2cm] {\scriptsize\text{Copyright: © 2026 Matthew B. Jané}};
+        \node at (current page.west) [anchor=west, yshift=-12cm, xshift=2cm] {\scriptsize\text{License: CC BY-NC-ND 4.0}};
+        \node at (current page.west) [anchor=west, yshift=-12.5cm, xshift=2cm] {\scriptsize\text{Disclaimer: The views expressed herein are solely those of the author and do not represent any affiliated organizations.}};
+    \end{tikzpicture}
+    
+    % End the cover page
+    \clearpage
+    
+    % Force the NEXT page to be labeled as Page 1
+    \setcounter{page}{1}
+}
+\makeatother
+
+% ---------------------------------------------------------
+% CUSTOM FONTS
+% ---------------------------------------------------------
+\setmainfont{Roboto}[
+    Path=_extensions/ace-formatting/acePDF/Roboto/static/,
+    Scale=0.9,
+    Extension = .ttf,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Italic,
+    ]
+    
+\setsansfont{Roboto}[
+    Path=_extensions/ace-formatting/acePDF/Roboto/static/,
+    Scale=0.9,
+    Extension = .ttf,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Italic,
+    ]
+
+\setmonofont{RobotoMono}[
+    Path=_extensions/ace-formatting/acePDF/Roboto_Mono/static/,
+    Scale=0.9,
+    Extension = .ttf,
+    UprightFont=*-Medium,
+    BoldFont=*-Bold,
+    ItalicFont=*-Italic,
+    ]

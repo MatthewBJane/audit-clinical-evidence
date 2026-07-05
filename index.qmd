@@ -1,0 +1,37 @@
+---
+title: "ACE"
+subtitle: "Audit Clinical Evidence"
+about:
+  template: trestles
+  links:
+    - icon: github
+      text: Github Repository
+      href: https://github.com/[your-repo]
+    - icon: envelope
+      text: Contact
+      href: mailto:contact@AuditClinicalEvidence.org
+      
+      
+body-classes: homepage
+
+
+
+listing:
+  - id: ACEreports
+    contents: "reports/*.qmd"
+    template: ace-report-listing.ejs.md
+    fields: [title, subtitle, abstract, categories, date, date-modified, button, ace-id]
+    sort: "date desc"
+    page-size: 10
+    categories: true
+    sort-ui: false
+    filter-ui: true
+---
+
+
+**Audit Clinical Evidence (ACE)** is a platform dedicated to evaluating research integrity in the medical and clinical sciences. ACE independently reviews published papers for errors and indicators of potential fabrication or misconduct. Ultimately, ACE aims to protect the credibility of the scientific record.
+
+#### Reports
+
+::: {#ACEreports}
+:::

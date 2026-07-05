@@ -1,0 +1,93 @@
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    css: ../styles.css
+    toc: true
+    mainfont: "Roboto, sans-serif"
+    monofont: "Roboto Mono, monospace"
+    code-fold: true
+    code-summary: "Show code"
+    code-overflow: wrap
+    code-copy: true
+    number-depth: 3
+    include-after-body: 
+      text: |
+        <script>
+        (function () {
+          function toAlpha(n) {
+            let s = "";
+            while (n > 0) {
+              n--;
+              s = String.fromCharCode(65 + (n % 26)) + s;
+              n = Math.floor(n / 26);
+            }
+            return s;
+          }
+    
+          function convertSectionNumbers() {
+            document.querySelectorAll("h3 .header-section-number").forEach(function(el) {
+              const raw = el.textContent.trim();
+              const parts = raw.split(".");
+    
+              if (parts.length >= 2) {
+                const section = parts[0];
+                const subsection = parseInt(parts[1], 10);
+    
+                if (!isNaN(subsection)) {
+                  el.textContent = section + "." + toAlpha(subsection);
+                }
+              }
+            });
+    
+            document.querySelectorAll('nav[role="doc-toc"] a').forEach(function(link) {
+              link.innerHTML = link.innerHTML.replace(
+                /(\d+)\.(\d+)/g,
+                function(match, section, subsection) {
+                  const n = parseInt(subsection, 10);
+                  if (isNaN(n)) return match;
+                  return section + "." + toAlpha(n);
+                }
+              );
+            });
+          }
+    
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", convertSectionNumbers);
+          } else {
+            convertSectionNumbers();
+          }
+    
+          window.addEventListener("load", convertSectionNumbers);
+        })();
+        </script>
+  acePDF-pdf:
+    top-level-division: section
+    toc: true
+    toc-depth: 3
+    shift-heading-level-by: -1
+    header-includes:
+      - \newcommand{\coverAffiliation}{University of Connecticut, Storrs, CT}
+    filters:
+      - _extensions/ace-formatting/acePDF/fields.lua
+
+
+number-sections: true
+bibliography: references/references.bib
+csl: references/ace.csl
+
+fig-pos: H
+
+
+execute:
+  echo: !expr knitr::is_html_output()
+  warning: false
+  message: false
+  fig-dpi: 600
+  
+
+citation:
+  type: article-journal
+  container-title: "Audit Clinical Evidence"
+

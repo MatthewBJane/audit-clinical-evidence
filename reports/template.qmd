@@ -1,0 +1,136 @@
+---
+title: "Report title used for citing and referencing this report"
+subtitle: "The short title coming after the colon"
+
+ace-id: "ACE2026000"
+output-file: "ACE2026000.pdf"
+
+date: "2026-06-21"
+date-modified: "2026-06-01"
+
+Status: "Nothing yet"
+DOI: "10.01040/10049012092"
+Journal: "Medicine"
+
+categories: ["Exercise", "Depression", "RCT"]
+
+abstract: "Short report abstract or listing abstract goes here."
+
+author:
+  - family: "Jané"
+    given: "Matthew B."
+    email: contact@auditclinicalevidence.org
+    affiliations: 
+      - id: uconn
+        name: University of Connecticut
+        city: Storrs
+        state: CT
+
+format:
+  html: {}
+  acePDF-pdf:
+    header-includes:
+      - \newcommand{\coverAffiliation}{University of Connecticut, Storrs, CT}
+
+button: |
+  <a class="ace-pdf-button" href="documents/reports/ACE2026000.pdf" target="_blank">PDF</a>
+
+
+
+
+---
+
+
+```{r}
+#| include: false
+
+source("reports/helpers/themes.R")
+source("reports/helpers/functions.R")
+
+
+```
+
+\clearpage
+
+
+<!-- ######################### -->
+<!-- ######################### -->
+<!-- START REPORT WRITING HERE -->
+<!-- ######################### -->
+<!-- ######################### -->
+
+
+## SECTION
+
+
+```{r}
+#| label: fig-example-ace-regression-filled
+#| fig-cap: "Example ACE-style ggplot figure with matched confidence bands."
+#| fig-width: 7
+#| fig-height: 4.5
+
+
+dat <- tibble(
+  x = rep(seq(0, 10, length.out = 40), 2),
+  group = rep(c("Group A", "Group B"), each = 40),
+  y = case_when(
+    group == "Group A" ~ 2.5 + 0.55 * x + rnorm(40, 0, 0.8),
+    group == "Group B" ~ 1.5 + 0.95 * x + rnorm(40, 0, 0.8)
+  )
+)
+
+
+ggplot(dat, aes(x = x, y = y, color = group, fill = group)) +
+  geom_point(size = 2.2, alpha = 0.75) +
+  geom_smooth(
+    method = "lm",
+    linewidth = 1.15,
+    alpha = 0.16
+  ) +
+  scale_color_manual(
+    values = c(
+      "Group A" = ace_blue,
+      "Group B" = ace_purple
+    )
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Group A" = ace_blue,
+      "Group B" = ace_purple
+    )
+  ) +
+  labs(
+    title = "Example Regression Figure",
+    subtitle = "Two fitted regression lines with semi-transparent confidence bands",
+    x = "Predictor",
+    y = "Outcome",
+    caption = "Note. Simulated data shown for ACE figure style development."
+  ) +
+  theme_ace()
+```
+
+
+
+
+
+
+
+### SUBSECTION
+
+
+Smith [-@abdelbasset2019a] reported the primary outcome.
+
+The primary outcome was reported previously [@abdelbasset2019a].
+
+## htdgfdgfd
+
+
+
+
+
+\clearpage
+
+## References {.unnumbered}
+
+
+

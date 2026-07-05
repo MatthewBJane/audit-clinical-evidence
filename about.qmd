@@ -1,0 +1,18 @@
+---
+title: "ABOUT"
+---
+
+
+The purpose of ACE is to provide a transparent and reproducible audit of clinical evidence, specifically identifying observable statistical errors, internal inconsistencies, image anomalies, and potential violations of publication ethics. The identification of errors or anomalies in these reports are strictly objective. Findings are limited to pointing out clear and obvious data discrepancies, methodological errors, and potential signatures of misconduct as they appear in the published record.
+
+Each report will contain a clear description of the errors and integrity issues found in one or more related articles. Including figures, tables, and screenshots of the audited article. Reports will have a unique identifier with the following format:
+$$
+\overset{\textsf{year}}{\overbrace{\textsf{ACE}\vphantom{^0_0}}}\;\underset{\textsf{year}}{\underbrace{\textsf{2026}\vphantom{^0_0}}}\!\!\!\!\!\overset{\textsf{report number}}{\overbrace{\textsf{0001}\vphantom{^0_0}}}\!\!\!\!\!\!\!\;\text{-}\!\!\!\!\!\!\!\!\!\underset{\textsf{version number}}{\underbrace{\textsf{01}\vphantom{^0_0}}}
+$$
+The unique identifier will be used to reference other reports. 
+
+All version control will be done via Github. When new report versions are made public, the change log will be updated at the bottom of the report. All code will be available in the corresponding quarto report documents on Github. The online report viewer will contain drop downs for all code blocks in the report. The PDFs will ***not*** contain any code to ensure ease of readability.
+
+
+
+

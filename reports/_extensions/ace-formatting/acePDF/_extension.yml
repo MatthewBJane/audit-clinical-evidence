@@ -1,0 +1,15 @@
+title: acePDF
+contributes:
+  project:
+    project:
+      type: book
+  formats: 
+    pdf:
+      include-in-header: 
+       - "acePDF.tex"
+      include-before-body:
+       - "pagestyle.tex"
+      toc: false
+      code-block-bg: light
+      linkcolor: highlight
+      urlcolor: highlight

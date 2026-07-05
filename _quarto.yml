@@ -1,0 +1,40 @@
+project:
+  type: website
+  output-dir: documents
+  execute-dir: project
+
+ 
+website:
+  title: "ACE"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: reports.qmd
+        text: Reports
+      - href: about.qmd
+        text: About
+      - href: disclaimers.qmd
+        text: Disclaimers
+      - href: riv.qmd
+        text: Integrity Violations
+    right:
+      - icon: github
+        href: https://github.com/[your-repo]
+        
+  page-footer:
+    left: "© 2026 Matthew B. Jané"
+    right: "Open Access: CC BY-NC-ND 4.0"
+    center: "contact@auditclinicalevidence.org"
+
+format:
+  html:
+    theme: 
+      light: flatly
+      dark: darkly # A better base theme for a black background
+    css: styles.css
+    toc: true
+    mainfont: "Roboto, sans-serif"
+    monofont: "Roboto Mono, monospace"
+
+

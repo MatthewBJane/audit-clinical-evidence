@@ -1,0 +1,954 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Roboto+Mono&family=Rubik+Glitch&display=swap');
+
+/* ---- GLOBAL STYLES ---- */
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 90%;
+}
+
+
+code, pre {
+  font-family: 'Roboto Mono', monospace;
+}
+
+
+/* Gradient & Glitch Font for Main Headers (H1, H2) - Gradient Intact */
+h1, .navbar-title {
+  font-family: 'Rubik Glitch', system-ui;
+  font-weight: normal !important; /* Removes the default bold effect */
+  background: white;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; 
+  font-size: 36pt;
+  filter: 
+    drop-shadow(3px 3px 0px #e262e2) 
+    drop-shadow(-3px -3px 0px #03e5ff);
+}
+
+
+/* Directly targets the title class on the homepage - Gradient Intact */
+.homepage h1.title {
+  font-size: 70pt !important;
+  font-family: 'Rubik Glitch', system-ui !important;
+  font-weight: normal !important;
+
+  background: black !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+
+  filter:
+    drop-shadow(3px 3px 0px #e262e2)
+    drop-shadow(-3px -3px 0px #03e5ff);
+}
+
+/* Directly targets the title class on the homepage - Gradient Intact */
+h1.title {
+  font-size: 30pt !important;
+  font-family: 'Rubik Glitch', system-ui !important;
+  font-weight: normal !important;
+
+  background: black !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+
+  filter:
+    drop-shadow(3px 3px 0px #e262e2)
+    drop-shadow(-3px -3px 0px #03e5ff);
+}
+
+/* Dark theme possibilities */
+html[data-bs-theme="dark"] h1.title,
+body[data-bs-theme="dark"] h1.title,
+[data-bs-theme="dark"] h1.title,
+body.quarto-dark h1.title,
+.quarto-dark h1.title {
+  background: white !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+/* Light theme possibilities */
+html[data-bs-theme="light"] h1.title,
+body[data-bs-theme="light"] h1.title,
+[data-bs-theme="light"] h1.title,
+body.quarto-light h1.title,
+.quarto-light h1.title {
+  background: #222222 !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+.subtitle {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 15pt !important;
+  font-weight: bold !important;
+
+  width: fit-content;
+  padding: 4pt 7pt;
+
+  /* More whitespace between title and subtitle */
+  margin-top: 1.25em;
+  margin-bottom: 1em;
+
+  /* No glitch shadow by default */
+  filter: none;
+
+  transition:
+    filter 0.15s ease,
+    transform 0.15s ease;
+}
+
+/* Add glitch shadow only on hover */
+.subtitle:hover {
+  filter:
+    drop-shadow(4px 4px 0px #e262e2)
+    drop-shadow(-4px -4px 0px #03e5ff);
+  transform: translateY(-1px);
+}
+
+/* Light theme: black background, white letters */
+html[data-bs-theme="light"] .subtitle,
+body[data-bs-theme="light"] .subtitle,
+[data-bs-theme="light"] .subtitle,
+body.quarto-light .subtitle,
+.quarto-light .subtitle {
+  background-color: #222222 !important;
+  color: white !important;
+}
+
+/* Dark theme: white background, black letters */
+html[data-bs-theme="dark"] .subtitle,
+body[data-bs-theme="dark"] .subtitle,
+[data-bs-theme="dark"] .subtitle,
+body.quarto-dark .subtitle,
+.quarto-dark .subtitle {
+  background-color: white !important;
+  color: #222222 !important;
+}
+
+/* Standard styling for smaller headers */
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 17pt;
+  font-weight: bold;
+  padding: 0pt;
+}
+
+h3 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14pt;
+  font-weight: normal;
+  padding: 0pt;
+}
+
+h4, h5 {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* ---------------------------------------------------------
+   ACE HTML SECTION NUMBER STYLE
+   Quarto still generates the numbers.
+   JavaScript below converts h3 numbers from 1.1 to 1.A.
+--------------------------------------------------------- */
+
+.header-section-number {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 700;
+  margin-right: 0.35rem;
+}
+
+/* Light theme section numbers */
+html[data-bs-theme="light"] .header-section-number,
+body[data-bs-theme="light"] .header-section-number,
+body.quarto-light .header-section-number {
+  color: #222 !important;
+}
+
+/* Dark theme section numbers */
+html[data-bs-theme="dark"] .header-section-number,
+body[data-bs-theme="dark"] .header-section-number,
+body.quarto-dark .header-section-number {
+  color: #fff !important;
+}
+
+/* Hyperlinks */
+a {
+  color: #03e5ff; /* Changed from orange to red */
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff; /* High-contrast white hover */
+  text-decoration: underline;
+}
+
+/* Link hover override for Light Mode */
+[data-bs-theme="light"] a:hover {
+  color: #222222; /* High-contrast black hover */
+}
+
+/* ---- CUSTOM TEXT SELECTION HIGHLIGHT ---- */
+/* Light theme selection */
+html[data-bs-theme="light"] ::selection,
+body[data-bs-theme="light"] ::selection,
+body.quarto-light ::selection {
+  background: rgba(226, 98, 226, 0.28);
+  color: inherit;
+}
+
+/* Dark theme selection */
+html[data-bs-theme="dark"] ::selection,
+body[data-bs-theme="dark"] ::selection,
+body.quarto-dark ::selection {
+  background: rgba(3, 229, 255, 0.32);
+  color: inherit;
+}
+
+/* ---- GLOBAL NAVBAR STYLE ---- */
+.navbar {
+  background-color: #222222 !important; /* Smooth off-black for both themes */
+  border-width: 10px 0 10px 0; 
+  border-style: solid;
+  border-image: linear-gradient(90deg, #e262e2, #d75dd7) 1;
+}
+
+.navbar {
+  background-color: #222222 !important;
+  border-width: 10px 0 10px 0;
+  border-style: solid;
+  border-image: linear-gradient(90deg, #e262e2, #d75dd7) 1;
+}
+
+/* Light theme gradient */
+html[data-bs-theme="light"] .navbar,
+body[data-bs-theme="light"] .navbar,
+[data-bs-theme="light"] .navbar,
+body.quarto-light .navbar,
+.quarto-light .navbar {
+  border-image: linear-gradient(90deg, #03e5ff, #03cee6) 1 !important;
+}
+
+
+/* ---- THEME OVERRIDES (Body Backgrounds) ---- */
+[data-bs-theme="dark"] body {
+  background-color: #222222 !important;
+  color: #ffffff;
+}
+
+[data-bs-theme="light"] body {
+  background-color: #ffffff !important;
+  color: #222222;
+}
+
+
+div.quarto-about-trestles .about-entity .about-link:hover {
+    color: #03e5ff; /* Changed from orange to red */
+}
+
+/* ---- CUSTOM TOC COLORS ---- */
+
+/* Base TOC links */
+.sidebar nav[role="doc-toc"] a,
+.sidebar nav[role="doc-toc"] .nav-link {
+  text-decoration: none !important;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    border-left-color 0.15s ease;
+}
+
+/* Light theme: unhovered */
+html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a,
+html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link,
+body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a,
+body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link,
+body.quarto-light .sidebar nav[role="doc-toc"] a,
+body.quarto-light .sidebar nav[role="doc-toc"] .nav-link {
+  color: #222222 !important;
+  -webkit-text-fill-color: #222222 !important;
+  background-color: transparent !important;
+}
+
+/* Dark theme: unhovered */
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a,
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link,
+body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a,
+body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link,
+body.quarto-dark .sidebar nav[role="doc-toc"] a,
+body.quarto-dark .sidebar nav[role="doc-toc"] .nav-link {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-color: transparent !important;
+}
+
+/* Light theme: hover / active / clicked */
+html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a:hover,
+html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link:hover,
+html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a:active,
+html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link:active,
+html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a:focus,
+html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link:focus,
+body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a:hover,
+body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link:hover,
+body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a:active,
+body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link:active,
+body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a:focus,
+body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link:focus,
+body.quarto-light .sidebar nav[role="doc-toc"] a:hover,
+body.quarto-light .sidebar nav[role="doc-toc"] .nav-link:hover,
+body.quarto-light .sidebar nav[role="doc-toc"] a:active,
+body.quarto-light .sidebar nav[role="doc-toc"] .nav-link:active,
+body.quarto-light .sidebar nav[role="doc-toc"] a:focus,
+body.quarto-light .sidebar nav[role="doc-toc"] .nav-link:focus {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-color: #e262e2 !important;
+  border-left: 2px solid #e262e2 !important;
+  font-weight: bold !important;
+  text-decoration: none !important;
+}
+
+/* Dark theme: hover / active / clicked */
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a:hover,
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link:hover,
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a:active,
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link:active,
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a:focus,
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link:focus,
+body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a:hover,
+body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link:hover,
+body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a:active,
+body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link:active,
+body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a:focus,
+body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link:focus,
+body.quarto-dark .sidebar nav[role="doc-toc"] a:hover,
+body.quarto-dark .sidebar nav[role="doc-toc"] .nav-link:hover,
+body.quarto-dark .sidebar nav[role="doc-toc"] a:active,
+body.quarto-dark .sidebar nav[role="doc-toc"] .nav-link:active,
+body.quarto-dark .sidebar nav[role="doc-toc"] a:focus,
+body.quarto-dark .sidebar nav[role="doc-toc"] .nav-link:focus {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-color: #03e5ff !important;
+  border-left: 2px solid #03e5ff !important;
+  font-weight: bold !important;
+  text-decoration: none !important;
+}
+
+/* Light theme: current/active section */
+html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a.active,
+html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link.active,
+html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a[aria-current="true"],
+body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a.active,
+body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link.active,
+body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a[aria-current="true"],
+body.quarto-light .sidebar nav[role="doc-toc"] a.active,
+body.quarto-light .sidebar nav[role="doc-toc"] .nav-link.active,
+body.quarto-light .sidebar nav[role="doc-toc"] a[aria-current="true"] {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-color: #e262e2 !important;
+  border-left: 2px solid #e262e2 !important;
+  font-weight: bold !important;
+  text-decoration: none !important;
+}
+
+/* Dark theme: current/active section */
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a.active,
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link.active,
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a[aria-current="true"],
+body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a.active,
+body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link.active,
+body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a[aria-current="true"],
+body.quarto-dark .sidebar nav[role="doc-toc"] a.active,
+body.quarto-dark .sidebar nav[role="doc-toc"] .nav-link.active,
+body.quarto-dark .sidebar nav[role="doc-toc"] a[aria-current="true"] {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-color: #03e5ff !important;
+  border-left: 2px solid #03e5ff !important;
+  font-weight: bold !important;
+  text-decoration: none !important;
+}
+
+/* ---- CUSTOM TITLE COLORS ---- */
+/* Forces specific letters to be solid colored instead of the gradient */
+.solid-letter {
+  background: none !important;
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+/* Adjusts solid letters to black in Light Mode using Quarto's native body class */
+body.quarto-light .solid-letter {
+  -webkit-text-fill-color: #222222 !important;
+  color: #222222 !important;
+}
+
+/* Forces the navbar letters to STAY white in Light Mode since the navbar is always dark */
+body.quarto-light .navbar .solid-letter {
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+.aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item.search-result-more, .aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item .search-result-section, .aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item .search-result-text, .aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item .search-result-title-container, .aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item .search-result-text-container, #quarto-search-results li.aa-Item[aria-selected=true] .search-item.search-result-more, #quarto-search-results li.aa-Item[aria-selected=true] .search-item .search-result-section, #quarto-search-results li.aa-Item[aria-selected=true] .search-item .search-result-text, #quarto-search-results li.aa-Item[aria-selected=true] .search-item .search-result-title-container, #quarto-search-results li.aa-Item[aria-selected=true] .search-item .search-result-text-container {
+    color: #fff;
+    background-color: #e262e2;
+}
+
+:root {
+    --bslib-page-sidebar-title-bg: #03e5ff;
+    --bslib-page-sidebar-title-color: #fff;
+}
+
+
+/* ---------------------------------------------------------
+   ACE REPORT LISTING BUTTONS
+--------------------------------------------------------- */
+
+.ace-report-card-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  min-width: 0;
+  margin-top: 0.5rem;
+}
+
+/* Both Read online and PDF buttons use .ace-pdf-button */
+.ace-report-card-actions .ace-pdf-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  max-width: max-content;
+  white-space: nowrap;
+
+  border: 1px solid #222;
+  border-radius: 6px;
+  padding: 0.55rem 0.85rem;
+
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.1;
+  text-decoration: none;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease,
+    filter 0.15s ease;
+}
+
+/* Light theme */
+html[data-bs-theme="light"] .ace-report-card-actions .ace-pdf-button,
+body[data-bs-theme="light"] .ace-report-card-actions .ace-pdf-button,
+body.quarto-light .ace-report-card-actions .ace-pdf-button {
+  background-color: #222222 !important;
+  color: white !important;
+}
+
+/* Dark theme */
+html[data-bs-theme="dark"] .ace-report-card-actions .ace-pdf-button,
+body[data-bs-theme="dark"] .ace-report-card-actions .ace-pdf-button,
+body.quarto-dark .ace-report-card-actions .ace-pdf-button {
+  background-color: white !important;
+  color: #222222 !important;
+}
+
+/* Hover effect for both buttons */
+.ace-report-card-actions .ace-pdf-button:hover {
+  transform: translateY(-2px);
+  filter:
+    drop-shadow(3px 3px 0px #e262e2)
+    drop-shadow(-3px -3px 0px #03e5ff);
+  text-decoration: none;
+}
+
+.quarto-alternate-formats a,
+.quarto-alternate-formats a:visited,
+.quarto-alternate-formats a:hover,
+.quarto-alternate-formats a:focus,
+.quarto-other-formats a,
+.quarto-other-formats a:visited,
+.quarto-other-formats a:hover,
+.quarto-other-formats a:focus {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+
+
+
+/* ---------------------------------------------------------
+   ACE LISTING ABSTRACT DROPDOWN
+--------------------------------------------------------- */
+
+.ace-listing-abstract {
+  margin: 0.85rem 0 0.95rem 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.ace-listing-abstract summary {
+  cursor: pointer;
+  padding: 0.55rem 0.75rem;
+
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #222;
+  background: #fff;
+
+  list-style: none;
+}
+
+.ace-listing-abstract summary::-webkit-details-marker {
+  display: none;
+}
+
+.ace-listing-abstract summary::before {
+  content: "+";
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-weight: 700;
+}
+
+.ace-listing-abstract[open] summary::before {
+  content: "−";
+}
+
+.ace-listing-abstract-content {
+  padding: 0.85rem 0.95rem;
+
+  color: #222;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.ace-listing-abstract-content p {
+  margin: 0;
+}
+
+/* Dark theme */
+html[data-bs-theme="dark"] .ace-listing-abstract,
+body[data-bs-theme="dark"] .ace-listing-abstract,
+body.quarto-dark .ace-listing-abstract {
+  background: #222;
+  border-color: #444;
+}
+
+html[data-bs-theme="dark"] .ace-listing-abstract summary,
+body[data-bs-theme="dark"] .ace-listing-abstract summary,
+body.quarto-dark .ace-listing-abstract summary {
+  background: #222;
+  color: #fff;
+}
+
+html[data-bs-theme="dark"] .ace-listing-abstract-content,
+body[data-bs-theme="dark"] .ace-listing-abstract-content,
+body.quarto-dark .ace-listing-abstract-content {
+  color: #f2f2f2;
+}
+
+/* ---------------------------------------------------------
+   ACE LISTING OUTER BORDER
+--------------------------------------------------------- */
+
+.ace-report-listing {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+  background: transparent;
+}
+
+html[data-bs-theme="dark"] .ace-report-listing,
+body[data-bs-theme="dark"] .ace-report-listing,
+body.quarto-dark .ace-report-listing {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* ---------------------------------------------------------
+   ACE LISTING TITLE + SUBTITLE
+--------------------------------------------------------- */
+
+.ace-report-title {
+  margin: 0.5rem 0 0.5rem 0;
+  padding: 0;
+
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.35rem);
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.ace-report-title a {
+  text-decoration: none;
+}
+
+.ace-report-title a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-color: currentColor;
+}
+
+.ace-report-subtitle {
+  margin: 0.2rem 0 0.9rem 0;
+
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
+  line-height: 1.35;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  font-style: normal;
+}
+
+/* Light theme subtitle */
+html[data-bs-theme="light"] .ace-report-subtitle,
+body[data-bs-theme="light"] .ace-report-subtitle,
+body.quarto-light .ace-report-subtitle {
+  color: #333333;
+}
+
+/* Dark theme subtitle */
+html[data-bs-theme="dark"] .ace-report-subtitle,
+body[data-bs-theme="dark"] .ace-report-subtitle,
+body.quarto-dark .ace-report-subtitle {
+  color: #e8e8e8;
+}
+
+/* ---------------------------------------------------------
+   ACE LISTING TITLE COLORS
+--------------------------------------------------------- */
+
+/* Light theme */
+html[data-bs-theme="light"] .ace-report-title a,
+body[data-bs-theme="light"] .ace-report-title a,
+body.quarto-light .ace-report-title a {
+  color: #e262e2 !important;
+}
+
+/* Dark theme */
+html[data-bs-theme="dark"] .ace-report-title a,
+body[data-bs-theme="dark"] .ace-report-title a,
+body.quarto-dark .ace-report-title a {
+  color: #03e5ff !important;
+}
+
+
+
+/* ---------------------------------------------------------
+   ACE ID BADGE
+--------------------------------------------------------- */
+
+.ace-report-id {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.25rem 0.65rem;
+
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  border: none;
+}
+
+/* Light theme: blue badge, slightly darker gradient */
+html[data-bs-theme="light"] .ace-report-id,
+body[data-bs-theme="light"] .ace-report-id,
+body.quarto-light .ace-report-id {
+  background: linear-gradient(135deg, #03e5ff 0%, #00cfe6 100%) !important;
+  color: #fff !important;
+}
+
+/* Dark theme: pink badge, slightly lighter gradient */
+html[data-bs-theme="dark"] .ace-report-id,
+body[data-bs-theme="dark"] .ace-report-id,
+body.quarto-dark .ace-report-id {
+  background: linear-gradient(135deg, #e262e2 0%, #f08cf0 100%) !important;
+  color: #222 !important;
+}
+
+
+/* ---------------------------------------------------------
+   ACE LISTING CATEGORY TAGS
+--------------------------------------------------------- */
+
+.ace-report-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.55rem 0 0.9rem 0;
+}
+
+.ace-report-category {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.22rem 0.55rem;
+
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  border: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+/* Light theme */
+html[data-bs-theme="light"] .ace-report-category,
+body[data-bs-theme="light"] .ace-report-category,
+body.quarto-light .ace-report-category {
+  background: rgba(226, 98, 226, 0.12);
+  color: #222222;
+  border-color: rgba(226, 98, 226, 0.35);
+}
+
+/* Dark theme */
+html[data-bs-theme="dark"] .ace-report-category,
+body[data-bs-theme="dark"] .ace-report-category,
+body.quarto-dark .ace-report-category {
+  background: rgba(3, 229, 255, 0.13);
+  color: #f2f2f2;
+  border-color: rgba(3, 229, 255, 0.35);
+}
+
+
+/* Reference and citation links */
+html[data-bs-theme="light"] #refs a,
+html[data-bs-theme="light"] .references a,
+html[data-bs-theme="light"] a.citation,
+html[data-bs-theme="light"] a[role="doc-biblioref"],
+html[data-bs-theme="light"] a[role="doc-noteref"],
+body[data-bs-theme="light"] #refs a,
+body[data-bs-theme="light"] .references a,
+body[data-bs-theme="light"] a.citation,
+body[data-bs-theme="light"] a[role="doc-biblioref"],
+body[data-bs-theme="light"] a[role="doc-noteref"],
+body.quarto-light #refs a,
+body.quarto-light .references a,
+body.quarto-light a.citation,
+body.quarto-light a[role="doc-biblioref"],
+body.quarto-light a[role="doc-noteref"] {
+  color: #888888 !important;
+  -webkit-text-fill-color: #888888 !important;
+  text-decoration-color: #888888 !important;
+}
+
+html[data-bs-theme="dark"] #refs a,
+html[data-bs-theme="dark"] .references a,
+html[data-bs-theme="dark"] a.citation,
+html[data-bs-theme="dark"] a[role="doc-biblioref"],
+html[data-bs-theme="dark"] a[role="doc-noteref"],
+body[data-bs-theme="dark"] #refs a,
+body[data-bs-theme="dark"] .references a,
+body[data-bs-theme="dark"] a.citation,
+body[data-bs-theme="dark"] a[role="doc-biblioref"],
+body[data-bs-theme="dark"] a[role="doc-noteref"],
+body.quarto-dark #refs a,
+body.quarto-dark .references a,
+body.quarto-dark a.citation,
+body.quarto-dark a[role="doc-biblioref"],
+body.quarto-dark a[role="doc-noteref"] {
+  color: #cccccc !important;
+  -webkit-text-fill-color: #cccccc !important;
+  text-decoration-color: #cccccc !important;
+}
+
+
+html[data-bs-theme="light"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a),
+body[data-bs-theme="light"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a),
+body.quarto-light main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a) {
+  color: #888888 !important;
+  -webkit-text-fill-color: #888888 !important;
+  text-decoration-color: #888888 !important;
+}
+
+html[data-bs-theme="dark"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a),
+body[data-bs-theme="dark"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a),
+body.quarto-dark main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a) {
+  color: #cccccc !important;
+  -webkit-text-fill-color: #cccccc !important;
+  text-decoration-color: #cccccc !important;
+}
+
+/* Keep ACE listing titles from inheriting global gray body-link colors */
+html[data-bs-theme="light"] main .ace-report-title a,
+body[data-bs-theme="light"] main .ace-report-title a,
+body.quarto-light main .ace-report-title a {
+  color: #e262e2 !important;
+  -webkit-text-fill-color: #e262e2 !important;
+  text-decoration-color: #e262e2 !important;
+}
+
+html[data-bs-theme="dark"] main .ace-report-title a,
+body[data-bs-theme="dark"] main .ace-report-title a,
+body.quarto-dark main .ace-report-title a {
+  color: #03e5ff !important;
+  -webkit-text-fill-color: #03e5ff !important;
+  text-decoration-color: #03e5ff !important;
+}
+
+
+
+/* ---------------------------------------------------------
+   ACE REPORT PAGE CATEGORY PILLS
+   Matches .ace-report-category from listing cards
+--------------------------------------------------------- */
+
+.quarto-title .quarto-categories,
+.quarto-title-block .quarto-categories,
+#title-block-header .quarto-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.75rem 0 1rem 0;
+}
+
+.quarto-title .quarto-category,
+.quarto-title-block .quarto-category,
+#title-block-header .quarto-category,
+.quarto-title .quarto-categories a,
+.quarto-title-block .quarto-categories a,
+#title-block-header .quarto-categories a {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.22rem 0.55rem;
+
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  text-decoration: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+/* Light theme */
+html[data-bs-theme="light"] .quarto-title .quarto-category,
+html[data-bs-theme="light"] .quarto-title-block .quarto-category,
+html[data-bs-theme="light"] #title-block-header .quarto-category,
+html[data-bs-theme="light"] .quarto-title .quarto-categories a,
+html[data-bs-theme="light"] .quarto-title-block .quarto-categories a,
+html[data-bs-theme="light"] #title-block-header .quarto-categories a,
+body[data-bs-theme="light"] .quarto-title .quarto-category,
+body[data-bs-theme="light"] .quarto-title-block .quarto-category,
+body[data-bs-theme="light"] #title-block-header .quarto-category,
+body[data-bs-theme="light"] .quarto-title .quarto-categories a,
+body[data-bs-theme="light"] .quarto-title-block .quarto-categories a,
+body[data-bs-theme="light"] #title-block-header .quarto-categories a,
+body.quarto-light .quarto-title .quarto-category,
+body.quarto-light .quarto-title-block .quarto-category,
+body.quarto-light #title-block-header .quarto-category,
+body.quarto-light .quarto-title .quarto-categories a,
+body.quarto-light .quarto-title-block .quarto-categories a,
+body.quarto-light #title-block-header .quarto-categories a {
+  background: rgba(226, 98, 226, 0.12) !important;
+  color: #222222 !important;
+  -webkit-text-fill-color: #222222 !important;
+  border-color: rgba(226, 98, 226, 0.35) !important;
+}
+
+/* Dark theme */
+html[data-bs-theme="dark"] .quarto-title .quarto-category,
+html[data-bs-theme="dark"] .quarto-title-block .quarto-category,
+html[data-bs-theme="dark"] #title-block-header .quarto-category,
+html[data-bs-theme="dark"] .quarto-title .quarto-categories a,
+html[data-bs-theme="dark"] .quarto-title-block .quarto-categories a,
+html[data-bs-theme="dark"] #title-block-header .quarto-categories a,
+body[data-bs-theme="dark"] .quarto-title .quarto-category,
+body[data-bs-theme="dark"] .quarto-title-block .quarto-category,
+body[data-bs-theme="dark"] #title-block-header .quarto-category,
+body[data-bs-theme="dark"] .quarto-title .quarto-categories a,
+body[data-bs-theme="dark"] .quarto-title-block .quarto-categories a,
+body[data-bs-theme="dark"] #title-block-header .quarto-categories a,
+body.quarto-dark .quarto-title .quarto-category,
+body.quarto-dark .quarto-title-block .quarto-category,
+body.quarto-dark #title-block-header .quarto-category,
+body.quarto-dark .quarto-title .quarto-categories a,
+body.quarto-dark .quarto-title-block .quarto-categories a,
+body.quarto-dark #title-block-header .quarto-categories a {
+  background: rgba(3, 229, 255, 0.13) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: rgba(3, 229, 255, 0.35) !important;
+}
+
+/* Hover */
+.quarto-title .quarto-category:hover,
+.quarto-title-block .quarto-category:hover,
+#title-block-header .quarto-category:hover,
+.quarto-title .quarto-categories a:hover,
+.quarto-title-block .quarto-categories a:hover,
+#title-block-header .quarto-categories a:hover {
+  transform: translateY(-1px);
+  text-decoration: none !important;
+}
+
+
+
+
+table {
+  border-collapse: separate !important;
+  border-spacing: 0 0.25rem !important;
+}
+
+/* Remove ordinary cell borders */
+table td,
+table th {
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  vertical-align: middle !important;
+}
+
+/* Keep a rule separating header from body */
+table thead th {
+  border-bottom: 1px solid var(--bs-border-color, #767676) !important;
+}
+
+/* Keep a rule separating table body from notes/footer */
+table tfoot td,
+table tfoot th {
+  border-top: 1px solid var(--bs-border-color, #767676) !important;
+}
+
+/* Add comfortable row height */
+table td {
+  padding-top: 0.45rem !important;
+  padding-bottom: 0.45rem !important;
+}
+
+
+
+/* Add vertical space between bibliography entries */
+#refs .csl-entry {
+  margin-bottom: 0.75rem;
+}
+
+

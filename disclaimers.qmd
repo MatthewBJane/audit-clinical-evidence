@@ -1,0 +1,33 @@
+---
+title: "DISCLAIMERS"
+---
+
+
+### Statement of Independence
+
+The views expressed on this website and associated audit reports are solely those of the author and do not represent any affiliated organizations.
+
+### Scope of Audit
+
+The sole purpose of this report is to provide a transparent and reproducible audit of clinical evidence, specifically identifying observable statistical errors, internal inconsistencies, image anomalies, and potential violations of publication ethics. The identification of errors or anomalies in this report is strictly objective. This report does not accuse any author, researcher, institution, or publisher of deliberate fraud or intentional misconduct. Findings are limited to pointing out clear and obvious data discrepancies, methodological errors, and potential signatures of misconduct as they appear in the published record.
+
+### Limitation of Liability
+
+The information and analyses provided in this report are for informational, academic, and scientific integrity purposes only. While every effort is made to ensure the accuracy and reproducibility of these findings, the author makes no warranties regarding the absolute completeness of the information. The author assumes no legal liability or responsibility for any consequences, actions, or decisions made by third parties (such as journals, institutions, or readers) based on the contents of this report.
+
+### Edi REVIEW & CORRESPONDENCE
+
+The ACE project encourages open, post-publication discussion. As part of our commitment to the integrity of the scientific record, copies of finalized ACE audit reports are routinely forwarded to the editorial boards and/or publishers of the corresponding journals for their independent review. If you identify an error in this report, or if you are an author of an investigated study and wish to provide data or clarifications, please contact: contact@ace-reports.org. Unless confidentiality is explicitly agreed to in advance, ACE reserves the right to publish or quote correspondence relating to audit findings, methodological concerns, or factual disputes, with personal or sensitive information redacted where appropriate. ACE also accepts confidential tips regarding potential statistical inconsistencies, publication irregularities, image anomalies, or other integrity concerns. Confidential sources and whistleblowers will not be publicly identified, and all reasonable efforts will be made to protect anonymity and confidentiality unless explicit permission for disclosure is provided.
+
+### FAIR USE & COPYRIGHTED MATERIALS
+
+This report reproduces excerpts, data, and images from published scientific literature strictly for the purposes of objective academic review, criticism, and statistical or visual audit. All original sources are fully cited. The reproduction of these specific, limited excerpts is intended to fall under the 'Fair Use' provision of U.S. copyright law.
+
+### FUNDING & CONFLICT OF INTEREST
+
+This independent audit received no external funding, with all project costs borne personally by the author. Furthermore, the author declares no financial or commercial conflict of interest regarding the studies, outcomes, or institutions investigated.
+
+### COPYRIGHT & OPEN ACCESS
+
+© 2026 Matthew B. Jané. This is an Open Access report distributed under the terms of the Creative Commons Attribution-NonCommercial-NoDerivatives (CC BY-NC-ND 4.0) license, which permits non-commercial re-use, distribution, and reproduction in any medium, provided that no alterations or modifications are made and the original work is properly cited.
+

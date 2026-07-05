@@ -1,0 +1,16 @@
+---
+title: "REPORTS"
+format: html
+
+listing:
+  - id: ACEreports
+    contents: "reports/ACE*.qmd"
+    template: ace-report-listing.ejs.md
+    fields: [title, subtitle, abstract, categories, date, date-modified, button, ace-id]
+    sort: "date desc"
+    page-size: 10
+    categories: true
+    sort-ui: false
+    filter-ui: true
+---
+

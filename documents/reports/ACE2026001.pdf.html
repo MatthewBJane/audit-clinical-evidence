@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Matthew B. Jané">
+<meta name="author" content="Kutenda F. Mvududu">
+<meta name="dcterms.date" content="2026-06-27">
+
+<title>Audit of Abdelbasset et al.&nbsp;(2019) – ACE</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">ACE</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../reports.html"> 
+<span class="menu-text">Reports</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../disclaimers.html"> 
+<span class="menu-text">Disclaimers</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../riv.html"> 
+<span class="menu-text">Integrity Violations</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/[your-repo]"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary"><span class="header-section-number">1</span> Executive summary</a>
+  <ul class="collapse">
+  <li><a href="#description-of-audited-studies" id="toc-description-of-audited-studies" class="nav-link" data-scroll-target="#description-of-audited-studies"><span class="header-section-number">1.1</span> Description of audited studies</a></li>
+  <li><a href="#impact-of-audited-studies" id="toc-impact-of-audited-studies" class="nav-link" data-scroll-target="#impact-of-audited-studies"><span class="header-section-number">1.2</span> Impact of audited studies</a></li>
+  </ul></li>
+  <li><a href="#authorship-and-publication-integrity-issues" id="toc-authorship-and-publication-integrity-issues" class="nav-link" data-scroll-target="#authorship-and-publication-integrity-issues"><span class="header-section-number">2</span> Authorship and publication integrity issues</a>
+  <ul class="collapse">
+  <li><a href="#sec-duplicated" id="toc-sec-duplicated" class="nav-link" data-scroll-target="#sec-duplicated"><span class="header-section-number">2.1</span> Duplicated data across studies</a></li>
+  <li><a href="#sec-auth-for-sale" id="toc-sec-auth-for-sale" class="nav-link" data-scroll-target="#sec-auth-for-sale"><span class="header-section-number">2.2</span> Authorship-for-sale scheme</a></li>
+  <li><a href="#sec-peer-review-subversion" id="toc-sec-peer-review-subversion" class="nav-link" data-scroll-target="#sec-peer-review-subversion"><span class="header-section-number">2.3</span> Compromised peer review process due to self-editing</a></li>
+  <li><a href="#sec-authorship-contributions" id="toc-sec-authorship-contributions" class="nav-link" data-scroll-target="#sec-authorship-contributions"><span class="header-section-number">2.4</span> Incompatible authorship contribution statements</a></li>
+  <li><a href="#sec-ethics-approval" id="toc-sec-ethics-approval" class="nav-link" data-scroll-target="#sec-ethics-approval"><span class="header-section-number">2.5</span> Incompatible ethical approval numbers</a></li>
+  </ul></li>
+  <li><a href="#impossible-data-and-extreme-treatment-effects" id="toc-impossible-data-and-extreme-treatment-effects" class="nav-link" data-scroll-target="#impossible-data-and-extreme-treatment-effects"><span class="header-section-number">3</span> Impossible data and extreme treatment effects</a>
+  <ul class="collapse">
+  <li><a href="#sec-grimmer" id="toc-sec-grimmer" class="nav-link" data-scroll-target="#sec-grimmer"><span class="header-section-number">3.1</span> Impossible means and standard deviations</a></li>
+  <li><a href="#sec-extreme-effects" id="toc-sec-extreme-effects" class="nav-link" data-scroll-target="#sec-extreme-effects"><span class="header-section-number">3.2</span> Extreme treatment effects</a></li>
+  </ul></li>
+  <li><a href="#sec-conclusion" id="toc-sec-conclusion" class="nav-link" data-scroll-target="#sec-conclusion"><span class="header-section-number">4</span> Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ACE2026001.pdf"><i class="bi bi-file-pdf"></i>PDF (acePDF)</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Audit of Abdelbasset et al.&nbsp;(2019)</h1>
+<p class="subtitle lead">Three randomized controlled trials on exercise and depression</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Exercise</div>
+    <div class="quarto-category">Depression</div>
+    <div class="quarto-category">RCT</div>
+  </div>
+  </div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Matthew B. Jané <a href="mailto:contact@auditclinicalevidence.org" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Connecticut, Storrs, CT
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Kutenda F. Mvududu </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Independent researcher
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 27, 2026</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">June 29, 2026</p>
+    </div>
+  </div>
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    Short report abstract or listing abstract goes here.
+  </div>
+</div>
+
+
+</header>
+
+
+<!-- ######################### -->
+<!-- ######################### -->
+<!-- START REPORT WRITING HERE -->
+<!-- ######################### -->
+<!-- ######################### -->
+<section id="executive-summary" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="executive-summary"><span class="header-section-number">1</span> Executive summary</h2>
+<section id="description-of-audited-studies" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="description-of-audited-studies"><span class="header-section-number">1.1</span> Description of audited studies</h3>
+<p>In this report, we investigate three studies: <span class="citation" data-cites="abdelbasset2019a">Abdelbasset (<a href="#ref-abdelbasset2019a" role="doc-biblioref">2019a</a>)</span>, <span class="citation" data-cites="abdelbasset2019b">Abdelbasset (<a href="#ref-abdelbasset2019b" role="doc-biblioref">2019b</a>)</span>, and <span class="citation" data-cites="abdelbasset2019c">Abdelbasset (<a href="#ref-abdelbasset2019c" role="doc-biblioref">2019c</a>)</span>. Each of these studies report a randomized controlled trial (RCT) on the effectiveness of moderate-low intensity exercise on depression scores in patients with Congestive Heart Disease/Failure (CHF) related depression. In each study, moderate and low intensity exercise conditions consist of a 12-week intervention with three sessions per week of walking on a treadmill until subjects reached a specified maximum heart rate. Depression was measured using the Patient Health Questionnaire 9 (PHQ-9) for each study.</p>
+</section>
+<section id="impact-of-audited-studies" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="impact-of-audited-studies"><span class="header-section-number">1.2</span> Impact of audited studies</h3>
+<p>Based on an analysis of Scopus, these studies have been cited 70 times in total and 20 times by meta-analyses and reviews (see <a href="#tbl-impact" class="quarto-xref">Table&nbsp;1</a>). These RCTs appear as the largest effects in these meta-analyses <span class="citation" data-cites="banyard2025">(e.g., <a href="#ref-banyard2025" role="doc-biblioref">Banyard 2025</a>)</span> reporting standardized mean differences over –2.9. A particularly high-impact meta-analysis with over 550 citations, <span class="citation" data-cites="heissel2023">Heissel (<a href="#ref-heissel2023" role="doc-biblioref">2023</a>)</span>, reported an effect of –2.91 for <span class="citation" data-cites="abdelbasset2019a">Abdelbasset (<a href="#ref-abdelbasset2019a" role="doc-biblioref">2019a</a>)</span> making it the third largest effect in the meta-analysis<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. An effect of this magnitude has high leverage on the mean effect of the meta-analysis and therefore ensuring the accuracy and integrity of this effect is critical to evidence syntheses in this field.</p>
+<div id="tbl-impact" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-impact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Citation counts for audited studies
+</figcaption>
+<div aria-describedby="tbl-impact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Study</th>
+<th style="text-align: center;">Total</th>
+<th style="text-align: center;">Meta-analyses &amp; Reviews</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="citation" data-cites="abdelbasset2019a">Abdelbasset (<a href="#ref-abdelbasset2019a" role="doc-biblioref">2019a</a>)</span></td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="citation" data-cites="abdelbasset2019b">Abdelbasset (<a href="#ref-abdelbasset2019b" role="doc-biblioref">2019b</a>)</span></td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="citation" data-cites="abdelbasset2019c">Abdelbasset (<a href="#ref-abdelbasset2019c" role="doc-biblioref">2019c</a>)</span></td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Total</strong></td>
+<td style="text-align: center;"><strong>70</strong></td>
+<td style="text-align: center;"><strong>20</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="authorship-and-publication-integrity-issues" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="authorship-and-publication-integrity-issues"><span class="header-section-number">2</span> Authorship and publication integrity issues</h2>
+<p>Section 1 of ACE’s taxonomy of Research Integrity Violations (RIVs) concerns the <em>Authorship and Publication</em> process of these three studies. The following sections are specific Section 1 RIVs that have been found in the audited studies along with the evidence for each one.</p>
+<section id="sec-duplicated" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="sec-duplicated"><span class="header-section-number">2.1</span> Duplicated data across studies</h3>
+<p>The three RCTs do not appear to represent three independent clinical trials. Rather, they appear to report overlapping and duplicated data from the same clinical trial.</p>
+<p>The clearest evidence comes from the statistical tables displaying the differences between the exercise and control arms. Across the relevant articles, the baseline characteristics for these groups are identical identical, including age, sex distribution, BMI, ejection fraction, VO2peak, and all other clinical variables (see <a href="#fig-baseline-tables" class="quarto-xref">Figure&nbsp;1</a>). The reported PHQ-9 outcome values are also identical across the shared arms. The exercise group is reported with the same baseline, 6-week, and 12-week PHQ-9 scores, and the control group is likewise reported with the same baseline, 6-week, and 12-week values (see <a href="#fig-results-tables" class="quarto-xref">Figure&nbsp;2</a>).</p>
+<p>The <em>Clinics</em> article reports a two-arm trial with 46 participants, consisting of a low-to-moderate exercise group and a control group. The later <em>Medicine</em> article reports a three-arm trial with 69 participants, reproducing the same low-to-moderate exercise and control-arm data while adding a third moderate-intensity exercise group. A separate <em>Medicine</em> article reports the moderate-intensity exercise comparison as its own trial. This is consistent with duplicated publication or salami slicing, where the same underlying trial is split across multiple publications without transparent disclosure.</p>
+<p>Accordingly, this report identifies two instances of <strong>RIV 1.6: Duplicate Publication and Salami Slicing</strong>, corresponding to the two smaller articles <span class="citation" data-cites="abdelbasset2019a abdelbasset2019c">(<a href="#ref-abdelbasset2019a" role="doc-biblioref">Abdelbasset 2019a</a>, <a href="#ref-abdelbasset2019c" role="doc-biblioref">2019c</a>)</span> whose findings are subsumed by the three-arm <em>Medicine</em> article <span class="citation" data-cites="abdelbasset2019b">(<a href="#ref-abdelbasset2019b" role="doc-biblioref">Abdelbasset 2019b</a>)</span>.</p>
+<div id="fig-baseline-tables" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-baseline-tables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/abdelbasset_baseline_tables.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-baseline-tables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Baseline statistics for each of the three studies: panel A is <span class="citation" data-cites="abdelbasset2019a">Abdelbasset (<a href="#ref-abdelbasset2019a" role="doc-biblioref">2019a</a>)</span>, panel B is <span class="citation" data-cites="abdelbasset2019b">Abdelbasset (<a href="#ref-abdelbasset2019b" role="doc-biblioref">2019b</a>)</span>, panel C is <span class="citation" data-cites="abdelbasset2019c">Abdelbasset (<a href="#ref-abdelbasset2019c" role="doc-biblioref">2019c</a>)</span>. Highlighted colors shows the matched data across studies.
+</figcaption>
+</figure>
+</div>
+<div id="fig-results-tables" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-results-tables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/abdelbasset_results_tables.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-results-tables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Statistics for PHQ-9 results (primary outcome) for each of the three studies: panel A is <span class="citation" data-cites="abdelbasset2019a">Abdelbasset (<a href="#ref-abdelbasset2019a" role="doc-biblioref">2019a</a>)</span>, panel B is <span class="citation" data-cites="abdelbasset2019b">Abdelbasset (<a href="#ref-abdelbasset2019b" role="doc-biblioref">2019b</a>)</span>, panel C is <span class="citation" data-cites="abdelbasset2019c">Abdelbasset (<a href="#ref-abdelbasset2019c" role="doc-biblioref">2019c</a>)</span>. Highlighted colors shows the matched data across studies.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-auth-for-sale" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="sec-auth-for-sale"><span class="header-section-number">2.2</span> Authorship-for-sale scheme</h3>
+<p>These three publications exhibit multiple characteristics consistent with a documented publication network that has previously been linked to authorship-for-sale schemes.</p>
+<p>Independent investigations by <span class="citation" data-cites="wise2022">Wise (<a href="#ref-wise2022" role="doc-biblioref">2022</a>)</span> identified Walid Kamal Abdelbasset as a recurring member of a broader network of authors publishing across unrelated disciplines, including nanotechnology, chemistry, engineering, and aquaculture, despite Abdelbasset’s primary appointment in physical therapy and rehabilitation. Multiple publications involving this network were directly matched to contemporaneous Facebook advertisements offering authorship positions for sale. For example, one publication involving Abdelbasset and members of this network, <em>Role of alloying composition on the nanomechanical behavior of amorphous nanolaminates</em>, was later retracted after the publisher concluded that there was sufficient evidence that several authorship positions had been purchased <span class="citation" data-cites="wise2022pubpeer">(<a href="#ref-wise2022pubpeer" role="doc-biblioref">Wise 2022</a>)</span>.</p>
+<p>Importantly, <span class="citation" data-cites="wise2022">Wise (<a href="#ref-wise2022" role="doc-biblioref">2022</a>)</span> emphasizes that the sale of authorship shows common indicators such as implausible collaborations, abrupt increases in publication volume, recurring author networks spanning unrelated disciplines, and, where available, advertisements matching published papers. The three RCTs examined here are consistent with these characteristics.</p>
+<p>These publications were produced during the same period in which Abdelbasset’s publication output started to increase dramatically. Wise identified Abdelbasset as one of several authors exhibiting an abrupt rise in publication volume consisting of papers that were often substantively unrelated. Wise described this pattern as the emergence of modern “Renaissance men and women,” in which the same authors repeatedly appeared on papers spanning numerous unrelated scientific disciplines <span class="citation" data-cites="wise2022">(<a href="#ref-wise2022" role="doc-biblioref">Wise 2022</a>)</span>. An analysis of Scopus showed that Abdelbasset published in fields such as mechanical properties of amorphous metallic glasses, sulfone synthesis and applications in organic chemistry, probiotic applications in aquaculture health, inequalities and means in mathematical functions, and modified atmosphere packaging for fresh produce quality. This is highly unusual for an academic specializing in physiotherapy and women’s health.</p>
+<p>Taken together, these indicators, along with the additional issues documented in what follows as well as the data duplication and salami slicing described in <a href="#sec-duplicated" class="quarto-xref">Section&nbsp;2.1</a>, warrant classifying each of the three RCTs as an instance of <strong>RIV 1.3: Authorship for Sale and Paper Mill Activity</strong>.</p>
+</section>
+<section id="sec-peer-review-subversion" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="sec-peer-review-subversion"><span class="header-section-number">2.3</span> Compromised peer review process due to self-editing</h3>
+<p>The published article for <span class="citation" data-cites="abdelbasset2019a">Abdelbasset (<a href="#ref-abdelbasset2019a" role="doc-biblioref">2019a</a>)</span> identifies Walid Kamal Abdelbasset as the editor of the same study on which he is also the first author. This represents a serious violation of publication ethics. Because an author cannot independently oversee peer review of his own manuscript, this report classifies the issue as one instance of <strong>RIV 1.8: Peer Review Subversion</strong>.</p>
+<p>This issue adds additional support to the three instances of <strong>RIV 1.3: Authorship for Sale and Paper Mill Activity</strong> described previously in <a href="#sec-auth-for-sale" class="quarto-xref">Section&nbsp;2.2</a>. Compromised editorial handling is a known method by which paper mill and authorship-for-sale publications can enter the literature.</p>
+<p>It is worth noting that two of the three studies <span class="citation" data-cites="abdelbasset2019a abdelbasset2019c">(<a href="#ref-abdelbasset2019a" role="doc-biblioref">Abdelbasset 2019a</a>, <a href="#ref-abdelbasset2019c" role="doc-biblioref">2019c</a>)</span> were both published in the journal <em>Medicine</em> where Abdelbasset is on the editorial board for physiotherapy and rehabilitation <span class="citation" data-cites="MedicineAbdelbasset">(<a href="#ref-MedicineAbdelbasset" role="doc-biblioref">Medicine n.d.</a>)</span>.</p>
+</section>
+<section id="sec-authorship-contributions" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="sec-authorship-contributions"><span class="header-section-number">2.4</span> Incompatible authorship contribution statements</h3>
+<p>The authorship contribution statements are incompatible with the conclusion that these papers report independent studies. The two heart-failure papers appear to report the same underlying trial data, but they assign materially different contributors to core research roles that should not change if the underlying study is the same.</p>
+<p>In the two-author <em>Medicine</em> article <span class="citation" data-cites="abdelbasset2019a">(<a href="#ref-abdelbasset2019a" role="doc-biblioref">Abdelbasset 2019a</a>)</span>, conceptualization is attributed only to Abdelbasset; data curation and formal analysis are attributed only to Abdelbasset and Alqahtani; funding acquisition is attributed only to Abdelbasset; and resources and software are attributed only to Alqahtani. By contrast, the later three-arm <em>Medicine</em> article assigns conceptualization to Abdelbasset, Alqahtani, and Ahmed; data curation to five authors; formal analysis to Abdelbasset, Ahmed, and Ibrahim; funding acquisition to Alqahtani, Alrawaili, Ahmed, and Ibrahim; resources only to Ibrahim; and software to Alrawaili and Elnegamy. The same reported trial cannot coherently have one set of individuals who acquired funding, curated the data, performed the analysis, supplied resources, and provided software in one article, and a different set of individuals performing those same roles in another article.</p>
+<p>The <em>Clinics</em> article’s <span class="citation" data-cites="abdelbasset2019c">(<a href="#ref-abdelbasset2019c" role="doc-biblioref">Abdelbasset 2019c</a>)</span> author contribution statement assigns study design, data curation, and analysis primarily to Abdelbasset, Alqahtani, Elshehawy, Tantawy, Elnegamy, and Kamel. Several authors credited with core roles in the three-arm <em>Medicine</em> article are absent from the <em>Clinics</em> contribution statement, while several authors credited in the <em>Clinics</em> article are absent from the three-arm <em>Medicine</em> article. This is difficult to reconcile if the papers derive from the same trial data.</p>
+<p>These incompatible contribution statements warrant three instances of <strong>RIV 1.7: Incompatible Authorship Contribution Statements</strong> because the three studies indicate that authorship roles were not assigned according to stable, verifiable contributions to the underlying clinical trial.</p>
+</section>
+<section id="sec-ethics-approval" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="sec-ethics-approval"><span class="header-section-number">2.5</span> Incompatible ethical approval numbers</h3>
+<p>The ethical approval statements also differ across the three articles. The two-arm <em>Medicine</em> article reports ethical approval number <code>RHPT/017/008</code> <span class="citation" data-cites="abdelbasset2019a">(<a href="#ref-abdelbasset2019a" role="doc-biblioref">Abdelbasset 2019a</a>)</span>. The <em>Clinics</em> article reports ethical approval number <code>RHPT/017/009</code> <span class="citation" data-cites="abdelbasset2019c">(<a href="#ref-abdelbasset2019c" role="doc-biblioref">Abdelbasset 2019c</a>)</span>. The three-arm <em>Medicine</em> article reports ethical approval number <code>RHPT/017/010</code> <span class="citation" data-cites="abdelbasset2019b">(<a href="#ref-abdelbasset2019b" role="doc-biblioref">Abdelbasset 2019b</a>)</span>.</p>
+<p>This discrepancy is difficult to reconcile with the duplicated trial data described in <a href="#sec-duplicated" class="quarto-xref">Section&nbsp;2.1</a>. If the three articles reported three independent clinical trials, different ethical approval numbers would not necessarily be problematic. However, the articles do not appear to report independent trials. The <em>Clinics</em> article reproduces the same low-to-moderate intensity exercise and control-arm data that appear in the later three-arm <em>Medicine</em> article, while the separate two-arm <em>Medicine</em> article reports the moderate-intensity exercise comparison as its own trial. Thus, the same apparent underlying clinical trial is associated with three different ethical approval numbers.</p>
+<p>The structure of the approval numbers suggests a common institutional or committee prefix (<code>RHPT</code>, probably referring to rehabilitation and physical therapy), a shared year or protocol field (<code>017</code>, probably corresponding to 2017), and a final sequential approval identifier (<code>008</code>, <code>009</code>, <code>010</code>). The three articles therefore do not report differently formatted versions of the same approval number. They report three consecutive but distinct approval identifiers.</p>
+<p>This inconsistency is especially concerning because the reported trial is within a highly vulnerable population. The participants had chronic heart failure, were assigned to exercise interventions, and had high baseline PHQ-9 scores indicating substantial depressive symptom burden. In such a context, clear ethical approval is particularly important. Without clarification, the presence of three different approval numbers for overlapping trial data raises serious concerns about the adequacy of the ethical oversight.</p>
+<p>Accordingly, without further clarification by the authors this report classifies the issue as three instances of <strong>RIV 3.3: Ethics Approval Anomalies</strong> because the ethical approval information is not reconcilable with the apparent reuse of the same underlying trial data across multiple publications.</p>
+</section>
+</section>
+<section id="impossible-data-and-extreme-treatment-effects" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="impossible-data-and-extreme-treatment-effects"><span class="header-section-number">3</span> Impossible data and extreme treatment effects</h2>
+<section id="sec-grimmer" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="sec-grimmer"><span class="header-section-number">3.1</span> Impossible means and standard deviations</h3>
+<p>The results table in each of the three RCTs show means and SDs of PHQ-9 scores across each group for the baseline, 6-week, and 12-week timepoints. Since PHQ-9 is scored as a sum of item responses and therefore the resulting total score is on an integer scale. Using the GRIM/MER test <span class="citation" data-cites="grim grimmer">(<a href="#ref-grim" role="doc-biblioref">Brown 2017</a>; <a href="#ref-grimmer" role="doc-biblioref">Anaya 2016</a>)</span>, we can demonstrate that the means and standard deviations are impossible to be produced given the sample size. In all three RCTs, it is made clear that each group has 23 patients and none of them were lost to follow-ups at 6 or 12 weeks. <a href="#tbl-grimmer" class="quarto-xref">Table&nbsp;2</a> shows the extracted PHQ-9 mean, standard deviation, and sample size values for each of the three groups (LMIE, MICE, Non-Exercised) and the three time-points (baseline, 6-weeks, 12-weeks), making <span class="math inline">\(3\times 3 = 9\)</span> testable GRIMMER cases. The results of the GRIMMER tests can be seen in <a href="#tbl-grimmer" class="quarto-xref">Table&nbsp;2</a>. Since <span class="citation" data-cites="abdelbasset2019b">Abdelbasset (<a href="#ref-abdelbasset2019b" role="doc-biblioref">2019b</a>)</span> reports all groups in their results, we extract the summary statistics from the corresponding table (panel B of <a href="#fig-results-tables" class="quarto-xref">Figure&nbsp;2</a>).</p>
+<p>The results displayed in <a href="#tbl-grimmer" class="quarto-xref">Table&nbsp;2</a> show that of the nine GRIMMER cases, seven of them are inconsistent. Five of the seven cases that are inconsistent have means that can not possibly be calculated from a real data set (i.e., GRIMMER inconsistent) and the remaining two cases show standard deviations that can not come from a possible data set (i.e., GRIMMER inconsistent).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scrutiny)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tinytable)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>phq9_grimmer_data <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>Timepoint, <span class="sc">~</span>Group, <span class="sc">~</span>Mean, <span class="sc">~</span>SD, <span class="sc">~</span>n,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Baseline"</span>, <span class="st">"LMIE"</span>, <span class="st">"16.12"</span>, <span class="st">"3.10"</span>, <span class="dv">23</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Baseline"</span>, <span class="st">"MICE"</span>, <span class="st">"16.34"</span>, <span class="st">"2.58"</span>, <span class="dv">23</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Baseline"</span>, <span class="st">"Control"</span>, <span class="st">"15.95"</span>, <span class="st">"3.14"</span>, <span class="dv">23</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"6 weeks"</span>, <span class="st">"LMIE"</span>, <span class="st">"7.74"</span>, <span class="st">"3.26"</span>, <span class="dv">23</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"6 weeks"</span>, <span class="st">"MICE"</span>, <span class="st">"7.83"</span>, <span class="st">"3.22"</span>, <span class="dv">23</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"6 weeks"</span>, <span class="st">"Control"</span>, <span class="st">"11.65"</span>, <span class="st">"3.28"</span>, <span class="dv">23</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"12 weeks"</span>, <span class="st">"LMIE"</span>, <span class="st">"3.65"</span>, <span class="st">"1.21"</span>, <span class="dv">23</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"12 weeks"</span>, <span class="st">"MICE"</span>, <span class="st">"3.12"</span>, <span class="st">"1.18"</span>, <span class="dv">23</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"12 weeks"</span>, <span class="st">"Control"</span>, <span class="st">"8.54"</span>, <span class="st">"2.14"</span>, <span class="dv">23</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">grimmer_tt</span>(</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> phq9_grimmer_data,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_col =</span> Mean,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd_col =</span> SD,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_col =</span> n,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">note =</span> <span class="st">"Note. SD = standard deviation, n = sample size, LMIE = Low to Moderate Intensity Exercise, MICE = Moderate-Intensity Continuous Exercise, Control = Non-exercised"</span>,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">id_cols =</span> <span class="fu">c</span>(<span class="st">"Timepoint"</span>, <span class="st">"Group"</span>),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">items =</span> <span class="dv">1</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-grimmer" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-grimmer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: GRIMMER consistency for reported PHQ-9 means and standard deviations.
+</figcaption>
+<div aria-describedby="tbl-grimmer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_v187qlgnpmaavlwkqwh5(i, j, css_id) {
+          var table = document.getElementById("tinytable_v187qlgnpmaavlwkqwh5");
+          var cell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function spanCell_v187qlgnpmaavlwkqwh5(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_v187qlgnpmaavlwkqwh5");
+        const targetCell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
+        if (!targetCell) {
+          console.warn(`Cell at (${i}, ${j}) not found.`);
+        }
+
+        // Get all cells that need to be removed
+        const cellsToRemove = [];
+        for (let r = 0; r < rowspan; r++) {
+          for (let c = 0; c < colspan; c++) {
+            if (r === 0 && c === 0) continue; // Skip the target cell
+            const cell = table.querySelector(`[data-row="${i + r}"][data-col="${j + c}"]`);
+            if (cell) {
+              cellsToRemove.push(cell);
+            }
+          }
+        }
+
+        // Remove all cells
+        cellsToRemove.forEach(cell => cell.remove());
+
+        // Set rowspan and colspan of the target cell if it exists
+        if (targetCell) {
+          targetCell.rowSpan = rowspan;
+          targetCell.colSpan = colspan;
+        }
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '9', j: 5 },  ], css_id: 'tinytable_css_qyfvliuzv7fw2ny9izry',}, 
+          { positions: [ { i: '4', j: 5 }, { i: '6', j: 5 },  ], css_id: 'tinytable_css_zmfbzenimv8p20uixpvc',}, 
+          { positions: [ { i: '1', j: 5 }, { i: '8', j: 5 }, { i: '5', j: 5 }, { i: '2', j: 5 }, { i: '3', j: 5 }, { i: '7', j: 5 },  ], css_id: 'tinytable_css_80tzfg8ge1uv2qyxivg5',}, 
+          { positions: [ { i: '9', j: 3 }, { i: '9', j: 2 }, { i: '9', j: 4 },  ], css_id: 'tinytable_css_cm244t50hu59g665lsqt',}, 
+          { positions: [ { i: '5', j: 2 }, { i: '3', j: 2 }, { i: '8', j: 2 }, { i: '2', j: 4 }, { i: '6', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '6', j: 3 }, { i: '4', j: 2 }, { i: '8', j: 3 }, { i: '3', j: 4 }, { i: '7', j: 2 }, { i: '1', j: 4 }, { i: '6', j: 4 }, { i: '4', j: 3 }, { i: '4', j: 4 }, { i: '5', j: 4 }, { i: '7', j: 3 }, { i: '5', j: 3 }, { i: '8', j: 4 }, { i: '7', j: 4 },  ], css_id: 'tinytable_css_p6t38z15whaexf1w1udn',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 4 }, { i: '0', j: 5 }, { i: '0', j: 3 },  ], css_id: 'tinytable_css_t4vix67hk7q7extvgqhp',}, 
+          { positions: [ { i: '9', j: 1 }, { i: '9', j: 0 }, { i: '9', j: 6 },  ], css_id: 'tinytable_css_61f2h6jton3ae563iz1z',}, 
+          { positions: [ { i: '0', j: 0 }, { i: '0', j: 6 }, { i: '0', j: 1 },  ], css_id: 'tinytable_css_wmqjeq5i4lm05b9pi84z',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_v187qlgnpmaavlwkqwh5(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_qyfvliuzv7fw2ny9izry, .table th.tinytable_css_qyfvliuzv7fw2ny9izry { text-align: center; font-weight: bold; color: white; background-color: #cf50cf; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_zmfbzenimv8p20uixpvc, .table th.tinytable_css_zmfbzenimv8p20uixpvc { text-align: center; font-weight: bold; color: white; background-color: #02cfe6; }
+      .table td.tinytable_css_80tzfg8ge1uv2qyxivg5, .table th.tinytable_css_80tzfg8ge1uv2qyxivg5 { text-align: center; font-weight: bold; color: white; background-color: #cf50cf; }
+      .table td.tinytable_css_cm244t50hu59g665lsqt, .table th.tinytable_css_cm244t50hu59g665lsqt { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_p6t38z15whaexf1w1udn, .table th.tinytable_css_p6t38z15whaexf1w1udn { text-align: center; }
+      .table td.tinytable_css_t4vix67hk7q7extvgqhp, .table th.tinytable_css_t4vix67hk7q7extvgqhp { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_61f2h6jton3ae563iz1z, .table th.tinytable_css_61f2h6jton3ae563iz1z { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_wmqjeq5i4lm05b9pi84z, .table th.tinytable_css_wmqjeq5i4lm05b9pi84z { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_v187qlgnpmaavlwkqwh5" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col" data-row="0" data-col="0">Timepoint</th>
+                <th scope="col" data-row="0" data-col="1">Group</th>
+                <th scope="col" data-row="0" data-col="2">Mean</th>
+                <th scope="col" data-row="0" data-col="3">SD</th>
+                <th scope="col" data-row="0" data-col="4">n</th>
+                <th scope="col" data-row="0" data-col="5">Consistent</th>
+                <th scope="col" data-row="0" data-col="6">Reason</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="7">Note. SD = standard deviation, n = sample size, LMIE = Low to Moderate Intensity Exercise, MICE = Moderate-Intensity Continuous Exercise, Control = Non-exercised</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="0">Baseline</td>
+                  <td data-row="1" data-col="1">LMIE</td>
+                  <td data-row="1" data-col="2">16.12</td>
+                  <td data-row="1" data-col="3">3.10</td>
+                  <td data-row="1" data-col="4">23</td>
+                  <td data-row="1" data-col="5">No</td>
+                  <td data-row="1" data-col="6">GRIM inconsistent</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="0">Baseline</td>
+                  <td data-row="2" data-col="1">MICE</td>
+                  <td data-row="2" data-col="2">16.34</td>
+                  <td data-row="2" data-col="3">2.58</td>
+                  <td data-row="2" data-col="4">23</td>
+                  <td data-row="2" data-col="5">No</td>
+                  <td data-row="2" data-col="6">GRIM inconsistent</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="0">Baseline</td>
+                  <td data-row="3" data-col="1">Control</td>
+                  <td data-row="3" data-col="2">15.95</td>
+                  <td data-row="3" data-col="3">3.14</td>
+                  <td data-row="3" data-col="4">23</td>
+                  <td data-row="3" data-col="5">No</td>
+                  <td data-row="3" data-col="6">GRIM inconsistent</td>
+                </tr>
+                <tr>
+                  <td data-row="4" data-col="0">6 weeks</td>
+                  <td data-row="4" data-col="1">LMIE</td>
+                  <td data-row="4" data-col="2">7.74</td>
+                  <td data-row="4" data-col="3">3.26</td>
+                  <td data-row="4" data-col="4">23</td>
+                  <td data-row="4" data-col="5">Yes</td>
+                  <td data-row="4" data-col="6">Passed all</td>
+                </tr>
+                <tr>
+                  <td data-row="5" data-col="0">6 weeks</td>
+                  <td data-row="5" data-col="1">MICE</td>
+                  <td data-row="5" data-col="2">7.83</td>
+                  <td data-row="5" data-col="3">3.22</td>
+                  <td data-row="5" data-col="4">23</td>
+                  <td data-row="5" data-col="5">No</td>
+                  <td data-row="5" data-col="6">GRIMMER inconsistent (test 3)</td>
+                </tr>
+                <tr>
+                  <td data-row="6" data-col="0">6 weeks</td>
+                  <td data-row="6" data-col="1">Control</td>
+                  <td data-row="6" data-col="2">11.65</td>
+                  <td data-row="6" data-col="3">3.28</td>
+                  <td data-row="6" data-col="4">23</td>
+                  <td data-row="6" data-col="5">Yes</td>
+                  <td data-row="6" data-col="6">Passed all</td>
+                </tr>
+                <tr>
+                  <td data-row="7" data-col="0">12 weeks</td>
+                  <td data-row="7" data-col="1">LMIE</td>
+                  <td data-row="7" data-col="2">3.65</td>
+                  <td data-row="7" data-col="3">1.21</td>
+                  <td data-row="7" data-col="4">23</td>
+                  <td data-row="7" data-col="5">No</td>
+                  <td data-row="7" data-col="6">GRIMMER inconsistent (test 3)</td>
+                </tr>
+                <tr>
+                  <td data-row="8" data-col="0">12 weeks</td>
+                  <td data-row="8" data-col="1">MICE</td>
+                  <td data-row="8" data-col="2">3.12</td>
+                  <td data-row="8" data-col="3">1.18</td>
+                  <td data-row="8" data-col="4">23</td>
+                  <td data-row="8" data-col="5">No</td>
+                  <td data-row="8" data-col="6">GRIM inconsistent</td>
+                </tr>
+                <tr>
+                  <td data-row="9" data-col="0">12 weeks</td>
+                  <td data-row="9" data-col="1">Control</td>
+                  <td data-row="9" data-col="2">8.54</td>
+                  <td data-row="9" data-col="3">2.14</td>
+                  <td data-row="9" data-col="4">23</td>
+                  <td data-row="9" data-col="5">No</td>
+                  <td data-row="9" data-col="6">GRIM inconsistent</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>One possible explanation for the GRIMMER failures is that the reported group sample size of <span class="math inline">\(n = 23\)</span> was incorrect. This explanation is unlikely. The group sample sizes are reported consistently within the articles, and the same <span class="math inline">\(n = 23\)</span> group sizes appears across the study articles. Nevertheless, we evaluated whether the inconsistencies could be resolved by assuming smaller analyzed sample sizes, such as might occur if some participants were excluded from the final analysis.</p>
+<p>To test this, we recalculated GRIMMER consistency for every candidate group sample size from <span class="math inline">\(n = 2\)</span> through the reported <span class="math inline">\(n = 23\)</span>. For each group and each candidate sample size, <a href="#fig-grimmer-n" class="quarto-xref">Figure&nbsp;3</a> shows how many of the three reported PHQ-9 mean-SD pairs (for each timepoint) were GRIMMER-consistent. A fully plausible sample-size correction would require all three timepoints within a group to become consistent at the same candidate sample size. This does not occur for any group at any sample size below <span class="math inline">\(n = 23\)</span>.</p>
+<p>Thus, the GRIMMER failures are not resolved by assuming that the true sample sizes were smaller than reported. The inconsistencies instead persist across the possible smaller group sizes.</p>
+<p>This is classified as seven instances of <strong>RIV 2.2: Statistical Inconsistencies and Impossible Data Sets</strong>, one for each failed GRIMMER test.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scrutiny)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>expanded_grimmer <span class="ot">&lt;-</span> phq9_grimmer_data <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">|&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">crossing</span>(<span class="at">candidate_n =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">23</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>grimmer_results_n <span class="ot">&lt;-</span> expanded_grimmer <span class="sc">|&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  scrutiny<span class="sc">::</span><span class="fu">grimmer_map</span>(</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> Mean,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> SD,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> candidate_n,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">items =</span> <span class="dv">1</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">transmute</span>(</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">consistent =</span> consistency</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>checked_grimmer <span class="ot">&lt;-</span> expanded_grimmer <span class="sc">|&gt;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">bind_cols</span>(grimmer_results_n)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>grimmer_counts <span class="ot">&lt;-</span> checked_grimmer <span class="sc">|&gt;</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(Group, candidate_n) <span class="sc">|&gt;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_consistent =</span> <span class="fu">sum</span>(consistent),</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>grimmer_tiles <span class="ot">&lt;-</span> grimmer_counts <span class="sc">|&gt;</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">crossing</span>(<span class="at">case_count =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">Status =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>      case_count <span class="sc">&lt;=</span> n_consistent,</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Consistent"</span>,</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Not consistent"</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">Group =</span> <span class="fu">factor</span>(</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>      Group,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"LMIE"</span>, <span class="st">"MICE"</span>, <span class="st">"Non-exercised"</span>)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  grimmer_tiles,</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> candidate_n, <span class="at">y =</span> case_count, <span class="at">fill =</span> Status)</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.45</span>,</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.95</span>,</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="fl">0.95</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Group <span class="sc">~</span> .) <span class="sc">+</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Consistent"</span> <span class="ot">=</span> <span class="st">"black"</span>,</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Not consistent"</span> <span class="ot">=</span> <span class="st">"grey85"</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">23</span>,</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">3.5</span>),</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Candidate sample size"</span>,</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of consistent cases"</span>,</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="cn">NULL</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> ace_text),</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> ace_text,</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>      <span class="at">angle =</span> <span class="dv">90</span>,</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>      <span class="at">vjust =</span> <span class="fl">0.5</span>,</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="dv">1</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">color =</span> ace_text),</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">color =</span> ace_text),</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> ace_axis),</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> ace_axis),</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> ace_text),</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-grimmer-n" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-grimmer-n-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ACE2026001_files/figure-html/fig-grimmer-n-1.png" class="img-fluid figure-img" width="2400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-grimmer-n-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: GRIMMER consistency across candidate sample sizes. Black tiles indicate PHQ-9 mean-SD pairs that are GRIMMER-consistent; light grey tiles indicate inconsistent pairs. No group has any candidate sample size below <span class="math inline">\(n = 23\)</span> for which all three timepoints are simultaneously consistent.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-extreme-effects" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="sec-extreme-effects"><span class="header-section-number">3.2</span> Extreme treatment effects</h3>
+<p>The reported PHQ-9 outcomes imply extremely large treatment effects. In meta-analyses that include at least one of the three Abdelbasset studies, the Abdelbasset effect is consistently among the largest effects in the meta-analysis. For example, see the meta-analyses by <span class="citation" data-cites="bricca2020">Bricca (<a href="#ref-bricca2020" role="doc-biblioref">2020</a>)</span> and <span class="citation" data-cites="banyard2025">Banyard (<a href="#ref-banyard2025" role="doc-biblioref">2025</a>)</span>. Across these meta-analyses, the reported effects are generally near –2.90, with some variation depending on the estimation procedure and the treatment arm used for the comparison.</p>
+<p>Using the values reported in the three-arm article, this report estimates the 12-week between-group standardized mean differences as –2.81 for the low-to-moderate intensity exercise group and –3.14 for the moderate-intensity continuous exercise group, each compared with the non-exercised control group. These values imply that, after 12 weeks, the exercise groups had PHQ-9 scores approximately three standard deviations lower than the control group.</p>
+<p>These effects are implausibly large in the context of clinical trials. According to the benchmarks proposed by <span class="citation" data-cites="sawilowsky2009">Sawilowsky (<a href="#ref-sawilowsky2009" role="doc-biblioref">2009</a>)</span>, standardized mean differences above 0.80 are considered large, values above 1.20 are considered very large, and values above 2.00 are considered huge. The reported Abdelbasset effects exceed even the “huge” benchmark by approximately one entire standard deviation. Although effect-size benchmarks are only descriptive heuristics and cannot by themselves establish an error, effects of this magnitude warrant explanation, particularly when combined with the duplicated publication pattern (<a href="#sec-duplicated" class="quarto-xref">Section&nbsp;2.1</a>), GRIMMER failures (<a href="#sec-grimmer" class="quarto-xref">Section&nbsp;3.1</a>), and other internal inconsistencies documented in this report.</p>
+<p>This warrants two instances of <strong>RIV 2.1: Anomalies and Extreme Values</strong> for the two extreme between-study effects.</p>
+</section>
+</section>
+<section id="sec-conclusion" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="sec-conclusion"><span class="header-section-number">4</span> Conclusion</h2>
+<p>The three Abdelbasset et al.&nbsp;articles audited in this report contain multiple anomalies and errors across publication, authorship, ethics approval, and statistical reporting. The articles appear to report overlapping trial arms from the same underlying clinical trial across multiple publications, without transparent disclosure that the articles are linked in any way. This pattern supports two instances of <strong>RIV 1.6: Duplicate Publication and Salami Slicing</strong>.</p>
+<p>The publication record also contains serious authorship and editorial concerns. The studies are connected to an author network previously associated with authorship-for-sale concerns, and one article identifies Abdelbasset as both first author and editor of the same manuscript. The contribution statements across the articles are also incompatible, assigning different individuals to core study roles that should be the same if the same clinical trial is being reported. These issues support instances of <strong>RIV 1.3: Authorship for Sale and Paper Mill Activity</strong>, <strong>RIV 1.8: Peer Review Subversion</strong>, and <strong>RIV 1.7: Incompatible Authorship Contribution Statements</strong>.</p>
+<p>The ethical approval is also not reconcilable with the duplication of trial data. The three articles report three distinct ethical approval numbers, despite reporting overlapping arms from the same clinical trial. This is especially concerning because the reported trial population was highly vulnerable: participants had chronic heart failure, were assigned to exercise interventions, and had high baseline depressive symptoms. In this context, clear ethical oversight and approval is essential. Without further clarification, the differing approval numbers warrant three instances of <strong>RIV 3.3: Ethics Approval Anomalies</strong>.</p>
+<p>The statistical evidence raises severe concerns about the integrity of the data. The summary statistics for the PHQ-9 outcome consistently fail GRIMMER checks, indicating that the reported summary statistics could not have been produced by a real data set (this warrants seven instances of <strong>RIV 2.2: Statistical Inconsistencies and Impossible Data Sets</strong>). These failures are not resolved by when allowing for possible unreported list-wise deletion of some individuals from the data set. The reported outcomes also imply extremely large between-group treatment effects, approximately three standard deviations in magnitude at 12 weeks, which are far beyond conventional benchmarks for large treatment effects and appear as highly influential outliers in later meta-analyses. Due to the massive effect size observed in the articles it warrants two instances of <strong>RIV 2.1: Anomalies and Extreme Values</strong>.</p>
+<p>Taken together, these findings substantially undermine the reliability and integrity of the three reported RCTs. This report cannot verify that the reported trial data correspond to an actual conducted randomized controlled trial as described in the publications. The combination of duplicated trial arms, incompatible authorship roles, inconsistent ethical approval identifiers, impossible descriptive statistics, and extreme treatment effects leaves the provenance of the reported patient data unresolved.</p>
+<p>We believe that the appropriate editorial action is <em>retraction</em>. The journals that published these articles, <em>Medicine</em> and <em>Clinics</em>, should retract all three articles because they contain duplicated trial arms, incompatible ethical approval identifiers, incompatible authorship contribution statements, compromised editorial handling, impossible PHQ-9 results, extreme treatment effects that have influenced later meta-analyses, and is potentially a product of a well-documented authorship-for-sale publication mill. These are mutually reinforcing failures that undermine the integrity and evidentiary value of the reported clinical trial.</p>
+<p>Until retractions are issued, meta-analysts, guideline developers, and readers should treat the three studies as unreliable and exclude them from evidence syntheses.</p>
+<div id="tbl-riv-summary" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-riv-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Summary of Research Integrity Violations identified across the audited Abdelbasset et al.&nbsp;studies
+</figcaption>
+<div aria-describedby="tbl-riv-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 54%">
+<col style="width: 13%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">RIV</th>
+<th style="text-align: left;">Title</th>
+<th style="text-align: center;">Instances</th>
+<th style="text-align: left;">Section</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>RIV 1.3</strong></td>
+<td style="text-align: left;">Authorship for Sale and Paper Mill Activity</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><a href="#sec-auth-for-sale" class="quarto-xref">Section&nbsp;2.2</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>RIV 1.6</strong></td>
+<td style="text-align: left;">Duplicate Publication and Salami Slicing</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><a href="#sec-duplicated" class="quarto-xref">Section&nbsp;2.1</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>RIV 1.7</strong></td>
+<td style="text-align: left;">Incompatible Authorship Contribution Statements</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><a href="#sec-authorship-contributions" class="quarto-xref">Section&nbsp;2.4</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>RIV 1.8</strong></td>
+<td style="text-align: left;">Peer Review Subversion</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><a href="#sec-peer-review-subversion" class="quarto-xref">Section&nbsp;2.3</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>RIV 2.1</strong></td>
+<td style="text-align: left;">Anomalies and Extreme Values</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><a href="#sec-extreme-effects" class="quarto-xref">Section&nbsp;3.2</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>RIV 2.2</strong></td>
+<td style="text-align: left;">Statistical Inconsistencies and Impossible Data Sets</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: left;"><a href="#sec-grimmer" class="quarto-xref">Section&nbsp;3.1</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>RIV 3.3</strong></td>
+<td style="text-align: left;">Ethics Approval Anomalies</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><a href="#sec-ethics-approval" class="quarto-xref">Section&nbsp;2.5</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong><em>Total</em></strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><strong><em>21</em></strong></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="references" class="level2 unnumbered">
+
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-abdelbasset2019a" class="csl-entry" role="listitem">
+Abdelbasset, Alqahtani (2019a) A randomized controlled trial on the impact of moderate-intensity continuous aerobic exercise on the depression status of middle-aged patients with congestive heart failure. <em>Medicine</em>. DOI: <a href="https://doi.org/10.1097/MD.0000000000015344">10.1097/MD.0000000000015344</a>.
+</div>
+<div id="ref-abdelbasset2019b" class="csl-entry" role="listitem">
+Abdelbasset, Alqahtani, Alrawaili, Ahmed, Elnegamy, Ibrahim, Soliman (2019b) Similar effects of low to moderate-intensity exercise program vs moderate-intensity continuous exercise program on depressive disorder in heart failure patients: A 12-week randomized controlled trial. <em>Medicine</em>. DOI: <a href="https://doi.org/10.1097/MD.0000000000016820">10.1097/MD.0000000000016820</a>.
+</div>
+<div id="ref-abdelbasset2019c" class="csl-entry" role="listitem">
+Abdelbasset, Alqahtani, Elshehawy, Tantawy, Elnegamy, Kamel (2019c) Examining the impacts of 12 weeks of low to moderate-intensity aerobic exercise on depression status in patients with systolic congestive heart failure-a randomized controlled study. <em>Clinics</em>. DOI: <a href="https://doi.org/10.6061/clinics/2019/e1017">10.6061/clinics/2019/e1017</a>.
+</div>
+<div id="ref-banyard2025" class="csl-entry" role="listitem">
+Banyard, Edward, Garvey, Stephenson, Azevedo, Benson (2025) The effects of aerobic and resistance exercise on depression and anxiety: Systematic review with meta-analysis. <em>International journal of mental health nursing</em>. DOI: <a href="https://doi.org/10.1111/inm.70054">10.1111/inm.70054</a>.
+</div>
+<div id="ref-heissel2023" class="csl-entry" role="listitem">
+Heissel, Heinen, Brokmeier, Skarabis, Kangas, Vancampfort, Stubbs, Firth, Ward, Rosenbaum (2023) Exercise as medicine for depressive symptoms? A systematic review and meta-analysis with meta-regression. <em>British journal of sports medicine</em>. DOI: <a href="https://doi.org/10.1136/bjsports-2022-106282">10.1136/bjsports-2022-106282</a>.
+</div>
+<div id="ref-wise2022" class="csl-entry" role="listitem">
+Wise, Magazinov (2022) The incredible collaborations of renaissance men and women. <em>For Better Science</em>. URL: <a href="https://forbetterscience.com/2022/10/19/the-incredible-collaborations-of-renaissance-men-and-women/">https://forbetterscience.com/2022/10/19/the-incredible-collaborations-of-renaissance-men-and-women/</a>.
+</div>
+<div id="ref-wise2022pubpeer" class="csl-entry" role="listitem">
+Wise (2022) Comments on "role of alloying composition on the nanomechanical behavior of amorphous nanolaminates". URL: <a href="https://pubpeer.com/publications/01530E72364AB34E7CFC9F3A1ADD86#1">https://pubpeer.com/publications/01530E72364AB34E7CFC9F3A1ADD86#1</a>.
+</div>
+<div id="ref-MedicineAbdelbasset" class="csl-entry" role="listitem">
+Medicine (n.d.) Editorial board. URL: <a href="https://journals.lww.com/md-journal/Pages/editorialboard.aspx#:~:text=Walid%20Kamal%20Abdelbasset">https://journals.lww.com/md-journal/Pages/editorialboard.aspx#:~:text=Walid%20Kamal%20Abdelbasset</a>.
+</div>
+<div id="ref-grim" class="csl-entry" role="listitem">
+Brown, Heathers (2017) The GRIM test: A simple technique detects numerous anomalies in the reporting of results in psychology. <em>Social Psychological and Personality Science</em>. DOI: <a href="https://doi.org/10.1177/1948550616673876">10.1177/1948550616673876</a>.
+</div>
+<div id="ref-grimmer" class="csl-entry" role="listitem">
+Anaya (2016) The GRIMMER test: A method for testing the validity of reported measures of variability. <em>PeerJ</em>. DOI: <a href="https://doi.org/10.7287/peerj.preprints.2400v1">10.7287/peerj.preprints.2400v1</a>.
+</div>
+<div id="ref-bricca2020" class="csl-entry" role="listitem">
+Bricca, Harris, Jäger, Smith, Juhl, Skou (2020) Benefits and harms of exercise therapy in people with multimorbidity: A systematic review and meta-analysis of randomised controlled trials. <em>Ageing Research Reviews</em>. DOI: <a href="https://doi.org/10.1016/j.arr.2020.101166">10.1016/j.arr.2020.101166</a>.
+</div>
+<div id="ref-sawilowsky2009" class="csl-entry" role="listitem">
+Sawilowsky (2009) New effect size rules of thumb. <em>Journal of Modern Applied Statistical Methods</em>. DOI: <a href="https://doi.org/10.22237/jmasm/1257035100">10.22237/jmasm/1257035100</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>the two larger effects both have integrity issues which will be discussed in future reports.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{jané2026,
+  author = {Jané, Matthew B. and Mvududu, Kutenda F.},
+  title = {Audit of {Abdelbasset} Et Al. (2019)},
+  journal = {Audit Clinical Evidence},
+  date = {2026-06-27},
+  langid = {en},
+  abstract = {Short report abstract or listing abstract goes here.}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-jané2026" class="csl-entry quarto-appendix-citeas" role="listitem">
+Jané, Mvududu (2026) Audit of abdelbasset et al. (2019). <em>Audit
+Clinical Evidence</em>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 Matthew B. Jané</p>
+</div>   
+    <div class="nav-footer-center">
+<p>contact@auditclinicalevidence.org</p>
+</div>
+    <div class="nav-footer-right">
+<p>Open Access: CC BY-NC-ND 4.0</p>
+</div>
+  </div>
+</footer>
+<script>
+(function () {
+  function toAlpha(n) {
+    let s = "";
+    while (n > 0) {
+      n--;
+      s = String.fromCharCode(65 + (n % 26)) + s;
+      n = Math.floor(n / 26);
+    }
+    return s;
+  }
+
+  function convertSectionNumbers() {
+    document.querySelectorAll("h3 .header-section-number").forEach(function(el) {
+      const raw = el.textContent.trim();
+      const parts = raw.split(".");
+
+      if (parts.length >= 2) {
+        const section = parts[0];
+        const subsection = parseInt(parts[1], 10);
+
+        if (!isNaN(subsection)) {
+          el.textContent = section + "." + toAlpha(subsection);
+        }
+      }
+    });
+
+    document.querySelectorAll('nav[role="doc-toc"] a').forEach(function(link) {
+      link.innerHTML = link.innerHTML.replace(
+        /(\d+)\.(\d+)/g,
+        function(match, section, subsection) {
+          const n = parseInt(subsection, 10);
+          if (isNaN(n)) return match;
+          return section + "." + toAlpha(n);
+        }
+      );
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", convertSectionNumbers);
+  } else {
+    convertSectionNumbers();
+  }
+
+  window.addEventListener("load", convertSectionNumbers);
+})();
+</script>
+
+
+
+
+</body></html>

@@ -1,0 +1,150 @@
+---
+title: "Research Integrity Violations"
+subtitle: "A Standardized Taxonomy"
+shorttitle: "Research Integrity Violations"
+
+author:
+  - name: Matthew B. Jané
+    email: contact@auditclinicalevidence.org
+    affiliations: 
+      - id: uconn
+        name: University of Connecticut
+        city: Storrs
+        state: CT
+
+journal:
+  title: "Audit Clinical Evidence"
+date: "2026-06-21"
+
+abstract: "The Audit Clinical Evidence (ACE) initiative introduces the Standardized Research Integrity Violations (RIVs) framework to systematically classify and report scientific malpractices. By standardizing the taxonomy of these violations, the ACE-RIV framework guarantees transparent, reproducible documentation."
+
+
+
+format:
+  html:
+    includes:
+      in-header: google-scholar.html
+  acePDF-pdf:
+    header-includes:
+     - \newcommand{\coverAffiliation}{University of Connecticut, Storrs, CT}
+---
+
+
+
+## The ACE Research Integrity Violations (ACE-RIV)
+
+The ACE Research Integrity Violations framework is a classification system used to identify and categorize scientific errors and integrity issues in academic publishing. It synthesizes existing standards from global authorities such as: the Committee on Publication Ethics (COPE), the Council of Science Editors (CSE), the International Committee of Medical Journal Editors (ICMJE), and the European Code of Conduct for Research Integrity (ALLEA)---into four primary domains: Authorship and Publication, Statistical and Data Integrity, Ethical Oversight, and Minor Errors.
+
+Within ACE audit reports, each identified violation is described clearly and backed by objective evidence. For instance, if a statistical inconsistency is found, the report will detail the exact table or figure containing the impossible data and explain why it is invalid. To provide a comprehensive overview, each report opens with an Executive Summary featuring a reference table of all RIVs found in the study. The summary concludes with a clear, actionable recommendation advising on appropriate next steps, such as requesting raw data, issuing a correction, or initiating a full retraction. Rather than conducting systemic reviews of the literature to identify problematic clinical research, ACE uses personal and others' expertise, leads, and potential signatures of misconduct. Ultimately, ACE focuses its resources on producing comprehensive audit reports for papers exhibiting severe integrity violations, meaning the vast majority of these audits will conclude with a recommendation for retraction.
+
+*(Note: The following list of standard violations is subject to ongoing updates and revisions.)*
+
+
+
+## Section 1: Authorship and Publication
+
+
+#### **RIV 1.1: Guest, Honorary, or Gift Authorship.**
+
+Authorship is granted to individuals who have not made a substantial intellectual contribution to the research.
+
+#### **RIV 1.2: Ghost Authorship.**
+
+Individuals who actively participated in the research, data analysis, or manuscript drafting are absent from the author byline or acknowledgments.
+
+
+#### **RIV 1.3: Authorship for Sale and Paper Mill Activity.**
+
+Authorship positions on a scientific manuscript are bought, sold, or traded. Also, includes industrialized publishing of fabricated, sloppy, or low-quality papers.
+
+#### **RIV 1.4: Plagiarism.**
+
+Another person's work, ideas, texts, or intellectual property are included in a manuscript without providing proper attribution, credit, or citation to the original source.
+
+
+#### **RIV 1.5: Tortured Phrases and Text Spinners.**
+
+The manuscript contains bizarre, unnatural synonyms or "tortured phrases" (e.g., using "flag to clamor" instead of "signal to noise," or "bosom malignancy" instead of "breast cancer").
+
+
+#### **RIV 1.6: Duplicate Publication and Salami Slicing.**
+
+Content or findings from previously published work are reproduced verbatim without explicit disclosure and justification. This also encompasses "salami slicing," where a single coherent body of research is segmented into multiple smaller papers, expanding publication counts without adding proportionate scientific value.
+
+#### **RIV 1.7: Citation Manipulation.**
+
+Systematic practices are employed to force or pressure the citation of specific material, resulting in artificially elevated citation metrics for an author, journal, or institution.
+
+#### **RIV 1.8: Peer Review Subversion.**
+
+The independent peer review process is bypassed or compromised. This includes participating in "collusion rings" (where groups of reviewers and authors coordinate to automatically approve each other’s publications) or the exchange of payment or favors for the allowance of uncritical or hijacked peer review reports.
+
+#### **RIV 1.9: Irrelevant Citations and Reference Padding.**
+
+Distinct from citation manipulation (ACE-RIV 1.7), this involves injecting citations into the bibliography that have absolutely no relevance to the surrounding text. This is a common paper mill tactic where references are sold to researchers to artificially boost their h-index, resulting in physics papers bizarrely citing clinical oncology research.
+
+#### **RIV 1.10: Trial Registration and Protocol Deviations.**
+
+The manuscript reports results from a clinical trial or pre-registered study that either failed to register in a recognized public database (e.g., ClinicalTrials.gov) prior to the onset of subject enrollment, or contains significant, undisclosed deviations from the original pre-registered protocol.
+
+
+## Section 2: Statistical and Data Integrity
+
+#### **RIV 2.1: Anomalies and Extreme Values.**
+
+The reported data, statistics, or results display extreme, unrealistic values, or improbable distributions that are exceedingly unusual given random, natural processes.
+
+#### **RIV 2.2: Statistical Inconsistencies and Impossible Data Sets.**
+
+Statistics and data that are internally incompatible with one another (e.g., reported *p* value and sample size does not match reported *t* value). Statistics that are impossible to come from a real data set (e.g., a proportion of .83 can not possibly occur from a data set of five patients)
+
+#### **RIV 2.3: Selective Reporting, Suppressed Data, and Omitted Methodology.**
+
+Published outcomes exclude relevant data, negative results, or conflicting findings that impact the study's conclusions. This violation also applies when important aspects of the study's methodology that are necessary for independent verification and reproducibility are absent.
+
+#### **RIV 2.4: Data Miscalculation or Erroneous Reporting.**
+
+Quantitative data and statistical results are inaccurately calculated, transcribed, or reported.
+
+
+#### **RIV 2.5: Image and Figure Manipulation.**
+
+Images, figures, or graphical data contain duplicated, spliced, rotated, or artificially generated elements. This violation includes taking images from other websites, people, or papers and advertising it as your own. This also applies when images, figures, or graphical data from previously published works or external sources are presented as original findings without proper attribution and authorization.
+
+#### **RIV 2.6: Data Set Anomalies.**
+
+The raw dataset exhibits structural irregularities or improper manual alterations that compromise data integrity. Examples include unexplained duplicate records, artificially injected or unjustifiably deleted rows (data trimming), manual cell overwrites, and fundamental transcription or miscalculation errors.
+
+#### **RIV 2.7: Image and Figure Errors.**
+
+Images, figures, or graphical data contain incorrect values, nonsensical results, or other errors.
+
+
+## Section 3: Ethical Oversight and Transparency
+
+#### **RIV 3.1: Failure to Disclose Conflicts of Interest (COI).**
+
+Financial, personal, or professional conflicts of interest are not disclosed in research proposals, publications, or public communications, where such associations could be perceived by readers or reviewers as compromising the objectivity of the work.
+
+#### **RIV 3.2: Bypass of Ethical Oversight.**
+
+Required institutional ethical oversight committees (such as IRBs or animal care committees) are bypassed, or research participants (human or animal) are not handled strictly in accordance with established legal provisions, safety regulations, and ethical principles.
+
+#### **RIV 3.3: Ethics Approval Anomalies.**
+
+The ethics approval or IRB (Institutional Review Board) number provided in the manuscript is fake, belongs to a completely different study, or is attributed to an ethics committee that does not actually exist at the specified institution.
+
+
+## Section 4: Minor Errors
+
+#### **RIV 4.1: Minor Typographical Error.**
+
+The manuscript contains spelling errors, grammatical mistakes, formatting inconsistencies, or minor transcription typos that do not alter the underlying data, the statistical significance, or the overall scientific conclusions of the research. These errors may affect meta-analyses or secondary analyses.
+
+#### **RIV 4.2: Crude and Indirect Signatures of Publication Mill Work.**
+
+Several flags or characteristic patterns within the manuscript suggest the potential involvement of a paper mill. These indicators include the use of suspicious or non-institutional email domains (such as generic or disposable accounts), unusual dispersion of author affiliations across countries, authors with high number of retracted papers, authors with many publications in disparate fields, authors with unrealistically high publication rate, high rate of self-publication, and boilerplate text or formatting that closely mirrors unrelated submissions.
+
+
+
+
