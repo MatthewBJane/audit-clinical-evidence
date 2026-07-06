@@ -91,3 +91,15 @@ citation:
   type: article-journal
   container-title: "Audit Clinical Evidence"
 
+
+comments:
+  giscus:
+    repo: matthewbjane/audit-clinical-evidence
+    mapping: pathname
+    category: "Report Comments"
+    reactions-enabled: false
+    input-position: bottom
+    loading: lazy
+    theme:
+      light: light
+      dark: dark_dimmed

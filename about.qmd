@@ -2,17 +2,128 @@
 title: "ABOUT"
 ---
 
+::: {.about-page-grid}
 
-The purpose of ACE is to provide a transparent and reproducible audit of clinical evidence, specifically identifying observable statistical errors, internal inconsistencies, image anomalies, and potential violations of publication ethics. The identification of errors or anomalies in these reports are strictly objective. Findings are limited to pointing out clear and obvious data discrepancies, methodological errors, and potential signatures of misconduct as they appear in the published record.
+::: {.about-photo}
 
-Each report will contain a clear description of the errors and integrity issues found in one or more related articles. Including figures, tables, and screenshots of the audited article. Reports will have a unique identifier with the following format:
+```{=html}
+<div class="ace-hover-photo">
+  <img 
+    src="images/about_photo.png" 
+    alt="Stylized ACE team portrait with Kutenda F. Mvududu on the left and Matthew B. Jane on the right."
+  >
+
+  <div class="ace-photo-hotspot ace-photo-left" title="Kutenda" aria-label="Kutenda F. Mvududu">
+    <span class="ace-photo-tooltip">Kutenda</span>
+  </div>
+
+  <div class="ace-photo-hotspot ace-photo-right" title="Matt" aria-label="Matthew B. Jane">
+    <span class="ace-photo-tooltip">Matt</span>
+  </div>
+</div>
+```
+
+:::
+
+::: {.about-team}
+
+## Team
+
+### Matthew B. Jané [PhD candidate, MS, BS]{.degree-suffix}  
+**Lead Auditor**
+
+Matthew B. Jané is the founder and lead auditor of Audit Clinical Evidence and a PhD candidate in Quantitative Psychology at the University of Connecticut, where his work focuses on statistical methods for meta-analysis and forensic meta-science. Within ACE, he leads study identification, statistical auditing, reproducibility workflows, report development, and project standards.
+
+### Kutenda F. Mvududu [BS, NREMT]{.degree-suffix}  
+**Auditor**
+
+Kutenda F. Mvududu serves as an auditor for Audit Clinical Evidence. She holds a Bachelor of Science in Biology with a pre-medical concentration and is a certified EMT through the National Registry of Emergency Medical Technicians. Within ACE, she supports study identification, article screening, documentation review, source-material organization, and report preparation.
+
+:::
+
+:::
+
+## Mission
+
+The purpose of **Audit Clinical Evidence** is to provide transparent, reproducible, and evidence-based audits of clinical and medical research. ACE reports focus on observable statistical errors, internal inconsistencies, image anomalies, potential data fabrication, publication ethics issues, and other research integrity concerns.
+
+The identification of errors or anomalies in ACE reports is strictly evidence-based. Findings are limited to issues that can be documented from the published record, trial registrations, supplementary materials, public databases, article metadata, and reproducible statistical checks. ACE avoids unsupported speculation, but may identify plausible integrity concerns when the public record contains strong convergent evidence. Each report identifies clear errors and integrity concerns and shows how the relevant checks can be reproduced.
+
+## Scope of ACE Reports
+
+Each ACE report provides a structured audit of one or more related clinical research articles. Reports may examine randomized controlled trials, observational studies, meta-analyses, systematic reviews, clinical guidelines, or clusters of related publications.
+
+Depending on the article(s) under review, an ACE audit may include checks for:
+
+- impossible or internally inconsistent summary statistics;
+- mismatches between reported test statistics, sample sizes, confidence intervals, and *p* values;
+- GRIM, GRIMMER, SPRITE, or related numerical consistency failures;
+- discrepancies between trial registrations and published outcomes;
+- duplicated, overlapping, or implausibly related datasets;
+- image or figure anomalies;
+- authorship, publication, or peer-review irregularities;
+- unexplained changes in sample size, analysis sets, or outcome reporting;
+- methodological errors that affect interpretation or downstream evidence synthesis.
+
+When possible, ACE includes figures, tables, screenshots, code, and step-by-step explanations showing exactly where an error appears and how it was evaluated.
+
+## Report Identifiers
+
+Each ACE report receives a unique identifier. The identifier records the project name, publication year, and report number.
 $$
-\overset{\textsf{year}}{\overbrace{\textsf{ACE}\vphantom{^0_0}}}\;\underset{\textsf{year}}{\underbrace{\textsf{2026}\vphantom{^0_0}}}\!\!\!\!\!\overset{\textsf{report number}}{\overbrace{\textsf{0001}\vphantom{^0_0}}}\!\!\!\!\!\!\!\;\text{-}\!\!\!\!\!\!\!\!\!\underset{\textsf{version number}}{\underbrace{\textsf{01}\vphantom{^0_0}}}
+\overset{\textsf{project}}{\overbrace{\textsf{ACE}\vphantom{^0_0}}}\;\underset{\textsf{year}}{\underbrace{\textsf{2026}\vphantom{^0_0}}}\!\!\!\!\!\overset{\textsf{report number}}{\overbrace{\textsf{0001}\vphantom{^0_0}}}\!\!\!\!\!\!\!\;
 $$
-The unique identifier will be used to reference other reports. 
+For example, `ACE20260001` refers to the first ACE report issued in 2026.
 
-All version control will be done via Github. When new report versions are made public, the change log will be updated at the bottom of the report. All code will be available in the corresponding quarto report documents on Github. The online report viewer will contain drop downs for all code blocks in the report. The PDFs will ***not*** contain any code to ensure ease of readability.
+## Reproducibility and Version Control
+
+ACE reports are versioned through Zenodo, which provides persistent DOIs for report releases and archived versions. Each report includes a changelog as the final section so readers can track what has changed since the originally published version.
+
+Whenever possible, the code used to generate calculations, figures, tables, and consistency checks is included in the corresponding Quarto report files. The online report viewer includes collapsible code blocks so readers can inspect the code workflow without interrupting the main narrative. The PDF versions do **not** include code, in order to preserve readability and make the reports easier to share, cite, and review.
+
+Additionally, people can submit corrections to reports. Corrections are screened and subsequently incorporated into the latest version of a report.
+
+## Evidence Standard
+
+The goal is to separate what errors or integrity concerns can be demonstrated from what can only be suspected.
+
+A typical ACE finding must satisfy four conditions:
+
+1. the issue must be observable in the public record;
+2. the reasoning must be explainable from the reported data, text, images, metadata, or registrations;
+3. the check must be reproducible by an independent reader;
+4. the claim made in the audit must reasonably follow from the available evidence.
+
+The purpose to ensure that every finding is tied to a transparent evidentiary basis and does not exceed what the evidence can reasonably support.
+
+## Why ACE Exists
+
+Clinical research influences meta-analyses, clinical guidelines, patient care, health policy, and public trust in medicine. When published studies contain impossible statistics, undisclosed protocol deviations, duplicated data, fabricated images, or other serious integrity problems, those problems can propagate far beyond the original article.
+
+ACE was created to make these problems easier to identify, document, and act upon. The project focuses on producing detailed, reproducible reports that can be used by journals, publishers, institutions, guideline developers, meta-analysts, clinicians, and readers who need to assess whether a study should be trusted as evidence.
 
 
+## Tips and Documentation
 
+ACE welcomes tips related to potential errors or integrity concerns in clinical research. Tips and whistleblower communications are treated as confidential.
+
+To be useful, a tip should be specific and evidence-based. General claims that a researcher, institution, journal, or public figure is “a fraud” are not sufficient on their own. A useful tip should identify the specific study, report, trial registration, dataset, figure, table, author group, journal, or publication record at issue and explain what appears to be wrong.
+
+Helpful tips may include:
+
+1. the article title, DOI, journal, or trial registration number;
+2. the specific table, figure, outcome, image, statistic, or passage that appears problematic;
+3. the suspected issue, such as impossible statistics, duplicated data, image manipulation, authorship irregularities, undisclosed protocol deviations, plagiarism, or publication mill indicators;
+4. any supporting documentation, screenshots, archived pages, PubPeer threads, registry records, code, calculations, or related publications;
+5. a brief explanation of why the issue matters.
+
+ACE may review submitted tips, but submission does not guarantee that a report will be produced. Due to limited manpower, priority is given to cases where the concern is specific, tractable, reproducible, and relevant to the reliability of clinical evidence. Send tips to contact@AuditClinicalEvidence.org.
+
+## Contact
+
+Questions, corrections, tips, and documentation relevant to ACE reports can be sent to:
+
+**contact@AuditClinicalEvidence.org**
+
+Tips and whistleblower communications are treated as confidential. ACE welcomes corrections and will update reports when credible evidence shows that a finding should be revised.
 

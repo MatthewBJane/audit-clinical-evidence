@@ -398,10 +398,6 @@ body.quarto-light .navbar .solid-letter {
   color: #ffffff !important;
 }
 
-.aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item.search-result-more, .aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item .search-result-section, .aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item .search-result-text, .aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item .search-result-title-container, .aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item .search-result-text-container, #quarto-search-results li.aa-Item[aria-selected=true] .search-item.search-result-more, #quarto-search-results li.aa-Item[aria-selected=true] .search-item .search-result-section, #quarto-search-results li.aa-Item[aria-selected=true] .search-item .search-result-text, #quarto-search-results li.aa-Item[aria-selected=true] .search-item .search-result-title-container, #quarto-search-results li.aa-Item[aria-selected=true] .search-item .search-result-text-container {
-    color: #fff;
-    background-color: #e262e2;
-}
 
 :root {
     --bslib-page-sidebar-title-bg: #03e5ff;
@@ -568,22 +564,85 @@ body.quarto-dark .ace-listing-abstract-content {
 }
 
 /* ---------------------------------------------------------
-   ACE LISTING OUTER BORDER
+   ACE REPORT LISTING LAYOUT
 --------------------------------------------------------- */
 
 .ace-report-listing {
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 14px;
-  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
   margin-top: 1.5rem;
+  padding: 0;
+  border: none;
   background: transparent;
 }
 
-html[data-bs-theme="dark"] .ace-report-listing,
-body[data-bs-theme="dark"] .ace-report-listing,
-body.quarto-dark .ace-report-listing {
+.ace-report-card {
+  display: block;
+  width: 100%;
+
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 14px;
+  padding: 1.25rem 1.35rem;
+
+  background: transparent;
+}
+
+.ace-report-card-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* Dark theme */
+html[data-bs-theme="dark"] .ace-report-card,
+body[data-bs-theme="dark"] .ace-report-card,
+body.quarto-dark .ace-report-card {
   border-color: rgba(255, 255, 255, 0.18);
 }
+
+/* ---------------------------------------------------------
+   ACE REPORT CARD TARGETED HOVER EFFECTS
+   Hover works only on title and abstract box
+--------------------------------------------------------- */
+
+.ace-report-card {
+  transition:
+    border-color 0.15s ease,
+    filter 0.15s ease;
+}
+
+/* Title hover */
+.ace-report-title a {
+  display: inline-block;
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease;
+}
+
+.ace-report-title a:hover {
+  transform: translateY(-2px);
+  filter:
+    drop-shadow(3px 3px 0px rgba(226, 98, 226, 0.45))
+    drop-shadow(-3px -3px 0px rgba(3, 229, 255, 0.35));
+}
+
+/* Abstract hover */
+.ace-listing-abstract {
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.ace-listing-abstract:hover {
+  transform: translateY(-2px);
+  filter:
+    drop-shadow(4px 4px 0px #e262e2)
+    drop-shadow(-4px -4px 0px #03e5ff);
+}
+
 
 /* ---------------------------------------------------------
    ACE LISTING TITLE + SUBTITLE
@@ -952,3 +1011,446 @@ table td {
 }
 
 
+
+/* ---------------------------------------------------------
+   ACE SEARCH MODAL / SEARCH RESULTS
+--------------------------------------------------------- */
+
+
+/* Light theme modal */
+html[data-bs-theme="light"] .aa-DetachedContainer,
+html[data-bs-theme="light"] .aa-Panel,
+body.quarto-light .aa-DetachedContainer,
+body.quarto-light .aa-Panel {
+  background: #ffffff !important;
+  color: #222222 !important;
+}
+
+/* Dark theme modal */
+html[data-bs-theme="dark"] .aa-DetachedContainer,
+html[data-bs-theme="dark"] .aa-Panel,
+body.quarto-dark .aa-DetachedContainer,
+body.quarto-dark .aa-Panel {
+  background: #222222 !important;
+  color: #ffffff !important;
+}
+
+/* Search input area */
+.aa-DetachedSearchButton,
+.aa-InputWrapper,
+.aa-InputWrapperPrefix,
+.aa-InputWrapperSuffix,
+.aa-Form {
+  border-radius: 10px !important;
+}
+
+.aa-Form {
+  border: 1px solid rgba(3, 229, 255, 0.65) !important;
+  box-shadow: none !important;
+}
+
+.aa-Input {
+  font-family: "Roboto Mono", monospace !important;
+  font-size: 0.95rem !important;
+}
+
+/* Light input */
+html[data-bs-theme="light"] .aa-Form,
+body.quarto-light .aa-Form {
+  background: #ffffff !important;
+  color: #222222 !important;
+}
+
+/* Dark input */
+html[data-bs-theme="dark"] .aa-Form,
+body.quarto-dark .aa-Form {
+  background: #222222 !important;
+  color: #ffffff !important;
+}
+
+/* Search results list */
+.aa-List {
+  padding: 0.6rem !important;
+}
+
+/* Individual search result item */
+.aa-Item {
+  border-radius: 10px !important;
+  margin-bottom: 0.4rem !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Result body */
+.search-item {
+  padding: 0.75rem 0.85rem !important;
+  border-radius: 10px !important;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease,
+    filter 0.15s ease !important;
+}
+
+/* Light result */
+html[data-bs-theme="light"] .search-item,
+body.quarto-light .search-item {
+  background: #ffffff !important;
+  color: #222222 !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Dark result */
+html[data-bs-theme="dark"] .search-item,
+body.quarto-dark .search-item {
+  background: #222222 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+}
+
+/* Selected / hovered search result */
+.aa-Item[aria-selected="true"] .search-item,
+.aa-Item:hover .search-item {
+  transform: translateY(-1px);
+  filter:
+    drop-shadow(3px 3px 0px #e262e2)
+    drop-shadow(-3px -3px 0px #03e5ff);
+}
+
+/* Light selected result */
+html[data-bs-theme="light"] .aa-Item[aria-selected="true"] .search-item,
+html[data-bs-theme="light"] .aa-Item:hover .search-item,
+body.quarto-light .aa-Item[aria-selected="true"] .search-item,
+body.quarto-light .aa-Item:hover .search-item {
+  background: #222222 !important;
+  color: #ffffff !important;
+  border-color: #222222 !important;
+}
+
+/* Dark selected result */
+html[data-bs-theme="dark"] .aa-Item[aria-selected="true"] .search-item,
+html[data-bs-theme="dark"] .aa-Item:hover .search-item,
+body.quarto-dark .aa-Item[aria-selected="true"] .search-item,
+body.quarto-dark .aa-Item:hover .search-item {
+  background: #ffffff !important;
+  color: #222222 !important;
+  border-color: #ffffff !important;
+}
+
+/* Search result title */
+.search-result-title,
+.search-result-title-container {
+  font-family: "Roboto", sans-serif !important;
+  font-weight: 700 !important;
+}
+
+/* Search result section / breadcrumb */
+.search-result-section {
+  font-family: "Roboto Mono", monospace !important;
+  font-size: 0.72rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  opacity: 0.8 !important;
+}
+
+/* Search result preview text */
+.search-result-text,
+.search-result-text-container {
+  font-family: "Roboto", sans-serif !important;
+  font-size: 0.86rem !important;
+  line-height: 1.35 !important;
+  opacity: 0.9 !important;
+}
+
+/* Force selected search result text to inherit correctly */
+.aa-Item[aria-selected="true"] .search-item,
+.aa-Item[aria-selected="true"] .search-item *,
+.aa-Item:hover .search-item,
+.aa-Item:hover .search-item * {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  background-color: transparent !important;
+}
+
+/* Search buttons / clear / submit icons */
+.aa-SubmitButton,
+.aa-ClearButton,
+.aa-DetachedCancelButton {
+  color: inherit !important;
+}
+
+/* Detached cancel button */
+.aa-DetachedCancelButton {
+  font-family: "Roboto Mono", monospace !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+/* Light cancel button */
+html[data-bs-theme="light"] .aa-DetachedCancelButton,
+body.quarto-light .aa-DetachedCancelButton {
+  color: #e262e2 !important;
+}
+
+/* Dark cancel button */
+html[data-bs-theme="dark"] .aa-DetachedCancelButton,
+body.quarto-dark .aa-DetachedCancelButton {
+  color: #03e5ff !important;
+}
+
+/* Remove weird default highlight colors */
+mark,
+.search-result-highlight {
+  background: rgba(226, 98, 226, 0.25) !important;
+  color: inherit !important;
+  padding: 0.05rem 0.15rem !important;
+  border-radius: 4px !important;
+}
+
+html[data-bs-theme="dark"] mark,
+html[data-bs-theme="dark"] .search-result-highlight,
+body.quarto-dark mark,
+body.quarto-dark .search-result-highlight {
+  background: rgba(3, 229, 255, 0.28) !important;
+  color: inherit !important;
+}
+
+
+/* Dark theme: search input text and magnifying glass */
+html[data-bs-theme="dark"] .aa-Input,
+body[data-bs-theme="dark"] .aa-Input,
+body.quarto-dark .aa-Input {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+html[data-bs-theme="dark"] .aa-Input::placeholder,
+body[data-bs-theme="dark"] .aa-Input::placeholder,
+body.quarto-dark .aa-Input::placeholder {
+  color: rgba(255, 255, 255, 0.75) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* Magnifying glass / search icon */
+html[data-bs-theme="dark"] .aa-SubmitIcon,
+html[data-bs-theme="dark"] .aa-SubmitButton svg,
+html[data-bs-theme="dark"] .aa-InputWrapperPrefix svg,
+body[data-bs-theme="dark"] .aa-SubmitIcon,
+body[data-bs-theme="dark"] .aa-SubmitButton svg,
+body[data-bs-theme="dark"] .aa-InputWrapperPrefix svg,
+body.quarto-dark .aa-SubmitIcon,
+body.quarto-dark .aa-SubmitButton svg,
+body.quarto-dark .aa-InputWrapperPrefix svg {
+  color: rgba(255, 255, 255, 0.75) !important;
+  fill: rgba(255, 255, 255, 0.75) !important;
+}
+
+
+
+
+
+/* ---------------------------------------------------------
+   ACE HOMEPAGE ABOUT LINKS
+   GitHub / Contact buttons
+--------------------------------------------------------- */
+
+div.quarto-about-trestles .about-entity .about-link {
+  border-radius: 6px !important;
+
+  font-family: "Roboto Mono", monospace !important;
+  font-weight: 700 !important;
+
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+/* Light theme */
+html[data-bs-theme="light"] div.quarto-about-trestles .about-entity .about-link,
+body[data-bs-theme="light"] div.quarto-about-trestles .about-entity .about-link,
+body.quarto-light div.quarto-about-trestles .about-entity .about-link {
+  background-color: #222222 !important;
+  color: white !important;
+  border-color: white !important;
+}
+
+/* Dark theme */
+html[data-bs-theme="dark"] div.quarto-about-trestles .about-entity .about-link,
+body[data-bs-theme="dark"] div.quarto-about-trestles .about-entity .about-link,
+body.quarto-dark div.quarto-about-trestles .about-entity .about-link {
+  background-color: white !important;
+  color: #222222 !important;
+  border-color: #222222 !important;
+}
+
+/* Hover effect matching Read online / PDF buttons */
+div.quarto-about-trestles .about-entity .about-link:hover {
+  transform: translateY(-2px);
+  filter:
+    drop-shadow(3px 3px 0px #e262e2)
+    drop-shadow(-3px -3px 0px #03e5ff);
+  text-decoration: none !important;
+}
+
+/* ---------------------------------------------------------
+   ACE ABOUT PAGE TEAM GRID
+--------------------------------------------------------- */
+
+/* ---------------------------------------------------------
+   ACE ABOUT PAGE TEAM GRID
+--------------------------------------------------------- */
+
+.about-page-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 330px) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+  margin-bottom: 2rem;
+
+  background: transparent !important;
+}
+
+.about-photo {
+  background: transparent !important;
+}
+
+.about-photo p {
+  margin: 0;
+  background: transparent !important;
+}
+
+.about-photo img {
+  width: 100%;
+  display: block;
+
+  background: transparent !important;
+  border-radius: 0;      /* important if you do not want a box-like edge */
+  box-shadow: none;
+}
+
+.about-team {
+  padding-top: 0.25rem;
+  background: transparent !important;
+}
+
+.about-team h2 {
+  margin-top: 0;
+}
+
+.about-team h3 {
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+}
+
+.about-team p {
+  margin-bottom: 0.85rem;
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+  .about-page-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-photo img {
+    max-width: 360px;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   ACE ABOUT PHOTO HOVER LABELS
+--------------------------------------------------------- */
+
+.ace-hover-photo {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 330px;
+  background: transparent !important;
+}
+
+.ace-hover-photo img {
+  width: 100%;
+  display: block;
+  border-radius: 0;
+  background: transparent !important;
+}
+
+/* Invisible left/right hover zones */
+.ace-photo-hotspot {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  cursor: help;
+  background: transparent;
+}
+
+.ace-photo-left {
+  left: 0;
+}
+
+.ace-photo-right {
+  right: 0;
+}
+
+/* Tooltip base */
+.ace-photo-tooltip {
+  position: absolute;
+  top: 48%;
+  transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease,
+    filter 0.15s ease;
+}
+
+/* Kutenda label */
+.ace-photo-left .ace-photo-tooltip {
+  left: 12%;
+  background: #222222;
+  color: #e262e2;
+  border: 1px solid #e262e2;
+}
+
+/* Matt label */
+.ace-photo-right .ace-photo-tooltip {
+  right: 12%;
+  background: #222222;
+  color: #03e5ff;
+  border: 1px solid #03e5ff;
+}
+
+/* Show tooltip on hover or keyboard focus */
+.ace-photo-hotspot:hover .ace-photo-tooltip,
+.ace-photo-hotspot:focus .ace-photo-tooltip,
+.ace-photo-hotspot:focus-visible .ace-photo-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateY(-3px);
+  filter:
+    drop-shadow(2px 2px 0px #e262e2)
+    drop-shadow(-2px -2px 0px #03e5ff);
+}
+
+
+.degree-suffix {
+  font-size: 0.62em;
+  font-weight: 400 !important;
+  opacity: 0.8;
+  margin-left: 0.35rem;
+  white-space: nowrap;
+}

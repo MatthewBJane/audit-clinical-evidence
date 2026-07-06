@@ -5,8 +5,8 @@ about:
   template: trestles
   links:
     - icon: github
-      text: Github Repository
-      href: https://github.com/[your-repo]
+      text: Github
+      href: https://github.com/matthewbjane/audit-clinical-evidence
     - icon: envelope
       text: Contact
       href: mailto:contact@AuditClinicalEvidence.org
@@ -18,7 +18,7 @@ body-classes: homepage
 
 listing:
   - id: ACEreports
-    contents: "reports/*.qmd"
+    contents: "reports/ACE*.qmd"
     template: ace-report-listing.ejs.md
     fields: [title, subtitle, abstract, categories, date, date-modified, button, ace-id]
     sort: "date desc"

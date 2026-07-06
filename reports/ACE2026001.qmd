@@ -58,7 +58,7 @@ source("reports/helpers/functions.R")
 
 ### Description of audited studies
 
-In this report, we investigate three studies: @abdelbasset2019a, @abdelbasset2019b, and @abdelbasset2019c. Each of these studies report a randomized controlled trial (RCT) on the effectiveness of moderate-low intensity exercise on depression scores in patients with Congestive Heart Disease/Failure (CHF) related depression. In each study, moderate and low intensity exercise conditions consist of a 12-week intervention with three sessions per week of walking on a treadmill until subjects reached a specified maximum heart rate. Depression was measured using the Patient Health Questionnaire 9 (PHQ-9) for each study. 
+In this report, we investigate three studies: @abdelbasset2019a, @abdelbasset2019b, and @abdelbasset2019c. Each of these studies report a randomized controlled trial (RCT) on the effectiveness of moderate-low intensity exercise on depression scores in patients with Congestive Heart Disease/Failure (CHF) related depression. In each study, moderate and low intensity exercise conditions consist of a 12-week intervention with three sessions per week of walking on a treadmill until subjects reached a specified maximum heart rate. Depression was measured using the Patient Health Questionnaire 9 (PHQ-9) at baseline, 6 weeks, and 12 weeks (i.e., post-intervention) for each study. 
 
 ### Impact of audited studies
 
@@ -80,18 +80,18 @@ Based on an analysis of Scopus, these studies have been cited 70 times in total 
 
 Section 1 of ACE's taxonomy of Research Integrity Violations (RIVs) concerns the *Authorship and Publication* process of these three studies. The following sections are specific Section 1 RIVs that have been found in the audited studies along with the evidence for each one.
 
-
 ### Duplicated data across studies {#sec-duplicated}
 
 The three RCTs do not appear to represent three independent clinical trials. Rather, they appear to report overlapping and duplicated data from the same clinical trial.
 
-The clearest evidence comes from the statistical tables displaying the differences between the exercise and control arms. Across the relevant articles, the baseline characteristics for these groups are identical identical, including age, sex distribution, BMI, ejection fraction, VO2peak, and all other clinical variables (see @fig-baseline-tables). The reported PHQ-9 outcome values are also identical across the shared arms. The exercise group is reported with the same baseline, 6-week, and 12-week PHQ-9 scores, and the control group is likewise reported with the same baseline, 6-week, and 12-week values (see @fig-results-tables).
+The clearest evidence comes from the statistical tables displaying the differences between the exercise and control arms. Across the relevant articles, the baseline characteristics for these groups are identical, including age, sex distribution, BMI, ejection fraction, VO2peak, and all other clinical variables (see @fig-baseline-tables). The reported PHQ-9 outcome values are also identical across the shared arms. The exercise group is reported with the same baseline, 6-week, and 12-week PHQ-9 scores, and the control group is likewise reported with the same baseline, 6-week, and 12-week values (see @fig-results-tables).
 
 
-The *Clinics* article reports a two-arm trial with 46 participants, consisting of a low-to-moderate exercise group and a control group. The later *Medicine* article reports a three-arm trial with 69 participants, reproducing the same low-to-moderate exercise and control-arm data while adding a third moderate-intensity exercise group. A separate *Medicine* article reports the moderate-intensity exercise comparison as its own trial. This is consistent with duplicated publication or salami slicing, where the same underlying trial is split across multiple publications without transparent disclosure.
+The *Clinics* article reports a two-arm trial with 46 participants, consisting of a low-to-moderate exercise group and a control group. The later *Medicine* article reports a three-arm trial with 69 participants, reproducing the same low-to-moderate exercise and control-arm data while adding a third moderate-intensity exercise group. A separate *Medicine* article reports the same moderate-intensity exercise group as its own trial. This is consistent with duplicated publication or salami slicing, where the same underlying trial is split across multiple publications without transparent disclosure.
 
 
 Accordingly, this report identifies two instances of **RIV 1.6: Duplicate Publication and Salami Slicing**, corresponding to the two smaller articles [@abdelbasset2019a; @abdelbasset2019c] whose findings are subsumed by the three-arm *Medicine* article [@abdelbasset2019b].
+
 
 
 ![Baseline statistics for each of the three studies: panel A is @abdelbasset2019a, panel B is @abdelbasset2019b, panel C is @abdelbasset2019c. Highlighted colors shows the matched data across studies.](images/abdelbasset_baseline_tables.png){#fig-baseline-tables}
@@ -104,15 +104,16 @@ Accordingly, this report identifies two instances of **RIV 1.6: Duplicate Public
 
 ### Authorship-for-sale scheme {#sec-auth-for-sale}
 
-These three publications exhibit multiple characteristics consistent with a documented publication network that has previously been linked to authorship-for-sale schemes.
+These three publications exhibit multiple characteristics consistent with a documented publication network that has previously been linked to authorship-for-sale schemes, which is when individuals pay for their names to be added as authors on scientific papers, often produced by "paper mills".
 
-Independent investigations by @wise2022 identified Walid Kamal Abdelbasset as a recurring member of a broader network of authors publishing across unrelated disciplines, including nanotechnology, chemistry, engineering, and aquaculture, despite Abdelbasset's primary appointment in physical therapy and rehabilitation. Multiple publications involving this network were directly matched to contemporaneous Facebook advertisements offering authorship positions for sale. For example, one publication involving Abdelbasset and members of this network, *Role of alloying composition on the nanomechanical behavior of amorphous nanolaminates*, was later retracted after the publisher concluded that there was sufficient evidence that several authorship positions had been purchased [@wise2022pubpeer].
+Independent investigations by @wise2022 identified Walid Kamal Abdelbasset as a recurring member of a broader network of authors publishing across unrelated disciplines, including nanotechnology, chemistry, engineering, and aquaculture, despite Abdelbasset's primary appointment in physical therapy and rehabilitation. Multiple publications involving this network were directly matched to contemporaneous Facebook advertisements offering authorship positions for sale. For example, one publication involving Abdelbasset and members of this network titled, *Role of alloying composition on the nanomechanical behavior of amorphous nanolaminates*, was later retracted after the publisher concluded that there was sufficient evidence that several authorship positions had been purchased [@wise2022pubpeer].
 
 Importantly, @wise2022 emphasizes that the sale of authorship shows common indicators such as implausible collaborations, abrupt increases in publication volume, recurring author networks spanning unrelated disciplines, and, where available, advertisements matching published papers. The three RCTs examined here are consistent with these characteristics.
 
-These publications were produced during the same period in which Abdelbasset's publication output started to increase dramatically. Wise identified Abdelbasset as one of several authors exhibiting an abrupt rise in publication volume consisting of papers that were often substantively unrelated. Wise described this pattern as the emergence of modern "Renaissance men and women," in which the same authors repeatedly appeared on papers spanning numerous unrelated scientific disciplines [@wise2022]. An analysis of Scopus showed that Abdelbasset published in fields such as mechanical properties of amorphous metallic glasses, sulfone synthesis and applications in organic chemistry, probiotic applications in aquaculture health, inequalities and means in mathematical functions, and modified atmosphere packaging for fresh produce quality. This is highly unusual for an academic specializing in physiotherapy and women's health.
+These publications were produced during the same period in which Abdelbasset's publication output started to increase dramatically. Wise identified Abdelbasset as one of several authors exhibiting an abrupt rise in publication volume consisting of papers that were often substantively unrelated to his discipline. Wise described this pattern as the emergence of modern "Renaissance men and women," in which the same authors repeatedly appeared on papers spanning numerous unrelated scientific disciplines [@wise2022]. An analysis of Scopus showed that Abdelbasset published in fields such as mechanical properties of amorphous metallic glasses, sulfone synthesis and applications in organic chemistry, probiotic applications in aquaculture health, inequalities and means in mathematical functions, and modified atmosphere packaging for fresh produce quality. This is highly unusual for an academic specializing in physiotherapy and women's health.
 
 Taken together, these indicators, along with the additional issues documented in what follows as well as the data duplication and salami slicing described in @sec-duplicated, warrant classifying each of the three RCTs as an instance of **RIV 1.3: Authorship for Sale and Paper Mill Activity**.
+
 
 
 
@@ -125,20 +126,23 @@ Taken together, these indicators, along with the additional issues documented in
 
 The published article for @abdelbasset2019a identifies Walid Kamal Abdelbasset as the editor of the same study on which he is also the first author. This represents a serious violation of publication ethics. Because an author cannot independently oversee peer review of his own manuscript, this report classifies the issue as one instance of **RIV 1.8: Peer Review Subversion**.
 
-This issue adds additional support to the three instances of **RIV 1.3: Authorship for Sale and Paper Mill Activity** described previously in @sec-auth-for-sale. Compromised editorial handling is a known method by which paper mill and authorship-for-sale publications can enter the literature.
+This self-editing issue adds additional support to the three instances of **RIV 1.3: Authorship for Sale and Paper Mill Activity** described previously in @sec-auth-for-sale. Compromised editorial handling is a known method by which paper mill and authorship-for-sale publications can enter the literature.
 
 It is worth noting that two of the three studies [@abdelbasset2019a; @abdelbasset2019c] were both published in the journal *Medicine* where Abdelbasset is on the editorial board for physiotherapy and rehabilitation [@MedicineAbdelbasset].
+
+
 
 
 ### Incompatible authorship contribution statements {#sec-authorship-contributions}
 
 The authorship contribution statements are incompatible with the conclusion that these papers report independent studies. The two heart-failure papers appear to report the same underlying trial data, but they assign materially different contributors to core research roles that should not change if the underlying study is the same.
 
-In the two-author *Medicine* article [@abdelbasset2019a], conceptualization is attributed only to Abdelbasset; data curation and formal analysis are attributed only to Abdelbasset and Alqahtani; funding acquisition is attributed only to Abdelbasset; and resources and software are attributed only to Alqahtani. By contrast, the later three-arm *Medicine* article assigns conceptualization to Abdelbasset, Alqahtani, and Ahmed; data curation to five authors; formal analysis to Abdelbasset, Ahmed, and Ibrahim; funding acquisition to Alqahtani, Alrawaili, Ahmed, and Ibrahim; resources only to Ibrahim; and software to Alrawaili and Elnegamy. The same reported trial cannot coherently have one set of individuals who acquired funding, curated the data, performed the analysis, supplied resources, and provided software in one article, and a different set of individuals performing those same roles in another article.
+In the two-arm *Medicine* article [@abdelbasset2019a], conceptualization is attributed only to Abdelbasset; data curation and formal analysis are attributed only to Abdelbasset and Alqahtani; funding acquisition is attributed only to Abdelbasset; and resources and software are attributed only to Alqahtani. By contrast, the later three-arm *Medicine* article assigns conceptualization to Abdelbasset, Alqahtani, and Ahmed; data curation to five authors; formal analysis to Abdelbasset, Ahmed, and Ibrahim; funding acquisition to Alqahtani, Alrawaili, Ahmed, and Ibrahim; resources only to Ibrahim; and software to Alrawaili and Elnegamy. The same reported trial cannot coherently have one set of individuals who acquired funding, curated the data, performed the analysis, supplied resources, and provided software in one article, and a different set of individuals performing those same roles in another article.
 
 The *Clinics* article's [@abdelbasset2019c] author contribution statement assigns study design, data curation, and analysis primarily to Abdelbasset, Alqahtani, Elshehawy, Tantawy, Elnegamy, and Kamel. Several authors credited with core roles in the three-arm *Medicine* article are absent from the *Clinics* contribution statement, while several authors credited in the *Clinics* article are absent from the three-arm *Medicine* article. This is difficult to reconcile if the papers derive from the same trial data.
 
 These incompatible contribution statements warrant three instances of **RIV 1.7: Incompatible Authorship Contribution Statements** because the three studies indicate that authorship roles were not assigned according to stable, verifiable contributions to the underlying clinical trial.
+
 
 
 ### Incompatible ethical approval numbers {#sec-ethics-approval}
@@ -156,6 +160,8 @@ Accordingly, without further clarification by the authors this report classifies
 
 
 ## Impossible data and extreme treatment effects
+
+
 
 
 ### Impossible means and standard deviations {#sec-grimmer}
@@ -325,6 +331,18 @@ Using the values reported in the three-arm article, this report estimates the 12
 These effects are implausibly large in the context of clinical trials. According to the benchmarks proposed by @sawilowsky2009, standardized mean differences above 0.80 are considered large, values above 1.20 are considered very large, and values above 2.00 are considered huge. The reported Abdelbasset effects exceed even the “huge” benchmark by approximately one entire standard deviation. Although effect-size benchmarks are only descriptive heuristics and cannot by themselves establish an error, effects of this magnitude warrant explanation, particularly when combined with the duplicated publication pattern (@sec-duplicated), GRIMMER failures (@sec-grimmer), and other internal inconsistencies documented in this report.
 
 This warrants two instances of **RIV 2.1: Anomalies and Extreme Values** for the two extreme between-study effects.
+
+
+### Surprising level of treatment compliance
+
+The three Abdelbasset articles report that all randomized participants were retained through the 12-week follow-up. In all three arms of the underlying trial, 69 patients were randomized into three groups of 23, and all three groups were analyzed at follow-up [@abdelbasset2019b]. Thus, the demands of the intervention, the reported trial record implies zero attrition.
+
+This is not impossible, but it is surprising. The participants were patients with congestive heart failure and moderate-severe depressive symptoms. The intervention was not passive. Participants assigned to exercise were expected to complete treadmill exercise three times per week for 12 consecutive weeks, with intensity adjusted according to maximum heart rate. A study population with heart failure and depression would ordinarily be expected to include at least some missed complications, withdrawals, or incomplete follow-up assessments.
+
+The concern is strengthened by the limited reporting of adherence information. The articles state that the exercise groups were supervised and received feedback to adjust intensity, but they do not provide session attendance, missed-session counts, adherence percentages, reasons for missed visits, adverse-event monitoring by group, or the number of participants who completed the full exercise regimen.
+
+Perfect retention is another irregularity that warrants scrutiny. The absence of attrition is difficult to evaluate independently because the articles do not provide the participant-level adherence or follow-up information needed to verify the reported trial conduct.
+
 
 
 ## Conclusion {#sec-conclusion}

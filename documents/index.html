@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-title','listing-subtitle','listing-abstract','listing-categories','listing-date','listing-date-modified','listing-button','listing-ace-id',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-number-sections","listing-bibliography","listing-csl","listing-fig-pos","listing-execute","listing-citation","listing-title","listing-subtitle","listing-ace-id","listing-output-file","listing-date","listing-date-modified","listing-Status","listing-Journal","listing-categories","listing-abstract","listing-author","listing-button","listing-path","listing-outputHref","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-DOI"],
+      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-number-sections","listing-bibliography","listing-csl","listing-fig-pos","listing-execute","listing-citation","listing-comments","listing-title","listing-subtitle","listing-ace-id","listing-output-file","listing-date","listing-date-modified","listing-Status","listing-Journal","listing-categories","listing-abstract","listing-author","listing-button","listing-path","listing-outputHref","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -190,7 +190,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Depression">Depression <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Exercise">Exercise <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RCT">RCT <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Depression">Depression <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Exercise">Exercise <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RCT">RCT <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <div class="quarto-about-trestles">
   <div class="about-entity">
@@ -203,9 +203,9 @@ window.Quarto = {
   </div>
 </header>
     <div class="about-links">
-  <a href="https://github.com/[your-repo]" class="about-link" rel="" target="">
+  <a href="https://github.com/matthewbjane/audit-clinical-evidence" class="about-link" rel="" target="">
     <i class="bi bi-github"></i>
-     <span class="about-link-text">Github Repository</span>
+     <span class="about-link-text">Github</span>
   </a>
   <a href="mailto:contact@AuditClinicalEvidence.org" class="about-link" rel="" target="">
     <i class="bi bi-envelope"></i>
@@ -252,36 +252,6 @@ window.Quarto = {
       <div class="ace-report-card-actions">
         <a class="ace-pdf-button" href="./reports/ACE2026001.pdf.html">Read online</a>
           <a class="ace-pdf-button" href="documents/reports/ACE2026001.pdf" target="_blank">PDF</a>
-      </div>
-    </div>
-  </article>
-  <article class="ace-report-card">
-    <div class="ace-report-card-main">
-      <div class="ace-report-card-topline">
-          <span class="ace-report-id">ACE2026000</span>
-      </div>
-      <h2 class="ace-report-title">
-        <a href="./reports/ACE2026000.pdf.html">Report title used for citing and referencing this report</a>
-      </h2>
-        <p class="ace-report-subtitle">The short title coming after the colon</p>
-        <div class="ace-report-categories">
-            <span class="ace-report-category">Exercise</span>
-            <span class="ace-report-category">Depression</span>
-            <span class="ace-report-category">RCT</span>
-        </div>
-        <details class="ace-listing-abstract">
-          <summary>Abstract</summary>
-          <div class="ace-listing-abstract-content">
-            Short report abstract or listing abstract goes here.
-          </div>
-        </details>
-      <div class="ace-report-meta">
-          <span><strong>Published:</strong> Jun 21, 2026</span>
-          <span><strong>Updated:</strong> Jun 1, 2026</span>
-      </div>
-      <div class="ace-report-card-actions">
-        <a class="ace-pdf-button" href="./reports/ACE2026000.pdf.html">Read online</a>
-          <a class="ace-pdf-button" href="documents/reports/ACE2026000.pdf" target="_blank">PDF</a>
       </div>
     </div>
   </article>
