@@ -33,7 +33,7 @@ format:
       - \newcommand{\coverAffiliation}{University of Connecticut, Storrs, CT}
 
 button: |
-  <a class="ace-pdf-button" href="documents/reports/ACE2026000.pdf" target="_blank">PDF</a>
+  <a class="ace-pdf-button" href="reports/ACE2026000.pdf" target="_blank">PDF</a>
 
 
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ace-report-listing.ejs – ACE</title>
+<title>REPORTS – ACE</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,6 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,7 +70,65 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-ACEreports .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-subtitle','listing-abstract','listing-categories','listing-date','listing-date-modified','listing-button','listing-ace-id',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-number-sections","listing-bibliography","listing-csl","listing-fig-pos","listing-execute","listing-comments","listing-appendix-cite-as","listing-title","listing-subtitle","listing-ace-id","listing-output-file","listing-date","listing-date-modified","listing-Journal","listing-categories","listing-abstract","listing-author","listing-button","listing-citation","listing-path","listing-outputHref","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-ACEreports'] = new List('listing-ACEreports', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -95,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./reports.html"> 
+    <a class="nav-link active" href="./reports.html" aria-current="page"> 
 <span class="menu-text">Reports</span></a>
   </li>  
   <li class="nav-item">
@@ -113,7 +173,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/[your-repo]"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/MatthewBJane/audit-clinical-evidence"> <i class="bi bi-github" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -129,84 +189,114 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    </div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Depression">Depression <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Exercise">Exercise <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Heart Disease">Heart Disease <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RCT">RCT <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">REPORTS</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+
+
+
+
+<div class="quarto-listing quarto-listing-container-custom" id="listing-ACEreports">
+<div class="listing-actions-group">
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
 <div class="ace-report-listing">
-
-&lt;% for (const item of items) { %&gt;
 
   <article class="ace-report-card">
 
     <div class="ace-report-card-main">
 
       <div class="ace-report-card-topline">
-        &lt;% if (item["ace-id"]) { %&gt;
-          <span class="ace-report-id">&lt;%- item["ace-id"] %&gt;</span>
-        &lt;% } %&gt;
+        
+          <span class="ace-report-id">ACE2026001</span>
+        
 
       </div>
 
       <h2 class="ace-report-title anchored">
-        <a href="<%- item.path %>">&lt;%- item.title %&gt;</a>
+        <a href="./reports/ACE2026001.pdf.html">Audit of Abdelbasset et al. (2019)</a>
       </h2>
 
-      &lt;% if (item.subtitle) { %&gt;
-        <p class="ace-report-subtitle">&lt;%- item.subtitle %&gt;</p>
-        &lt;% } %&gt;
+      
+        <p class="ace-report-subtitle">Three randomized controlled trials on exercise and depression</p>
         
-      &lt;% if (item.categories &amp;&amp; item.categories.length) { %&gt;
+        
+      
         <div class="ace-report-categories">
-          &lt;% for (const category of item.categories) { %&gt;
-            <span class="ace-report-category">&lt;%- category %&gt;</span>
-          &lt;% } %&gt;
+          
+            <span class="ace-report-category">Exercise</span>
+          
+            <span class="ace-report-category">Depression</span>
+          
+            <span class="ace-report-category">Heart Disease</span>
+          
+            <span class="ace-report-category">RCT</span>
+          
         </div>
-      &lt;% } %&gt;
+      
         
-      &lt;% if (item.abstract) { %&gt;
+      
         <details class="ace-listing-abstract">
           <summary>Abstract</summary>
           <div class="ace-listing-abstract-content">
-            &lt;%- item.abstract %&gt;
+            This report audits three randomized controlled trials by Abdelbasset and colleagues (2019a; 2019b; 2019c) evaluating exercise interventions for depression in patients with congestive heart failure. The three articles appear to report overlapping arms from the same underlying clinical trial while presenting them as separate studies. Across the articles, duplicated baseline characteristics and PHQ-9 outcome statistics indicate reuse of the same trial data even though the paper reports incompatible authorship contribution statements, three distinct ethical approval numbers, and does not reference each other. The paper is potentially linked to a well-documented authorship-for-sale publication network. Furthermore, one of the three articles identifies Abdelbasset as both first author and editor which is a clear conflict of interest. Reported summary statistics are impossible given a real data set, specifically, seven of nine PHQ-9 (the primary outcome) mean and standard deviation pairs fail GRIMMER consistency tests. The reported outcomes also imply extreme between-group standardized mean differences of approximately three standard deviations at post-intervention, making the studies highly influential outliers in later meta-analyses. In total, this audit identifies 21 Research Integrity Violations. We conclude that the three articles are not credible and are unlikely to contain any evidentiary value thus we recommend retraction by the publishing journals.
           </div>
         </details>
-      &lt;% } %&gt;
+      
 
       <div class="ace-report-meta">
-        &lt;% if (item.date) { %&gt;
-          <span><strong>Published:</strong> &lt;%- item.date %&gt;</span>
-        &lt;% } %&gt;
+        
+          <span><strong>Published:</strong> Jun 27, 2026</span>
+        
 
-        &lt;% if (item["date-modified"]) { %&gt;
-          <span><strong>Updated:</strong> &lt;%- item["date-modified"] %&gt;</span>
-        &lt;% } %&gt;
+        
+          <span><strong>Updated:</strong> Jun 29, 2026</span>
+        
       </div>
 
       <div class="ace-report-card-actions">
-        <a class="ace-pdf-button" href="<%- item.path %>">Read online</a>
+        <a class="ace-pdf-button" href="./reports/ACE2026001.pdf.html">Read online</a>
 
-        &lt;% if (item.button) { %&gt;
-          &lt;%= item.button %&gt;
-        &lt;% } %&gt;
+        
+          <a class="ace-pdf-button" href="reports/ACE2026001.pdf" target="_blank">PDF</a>
+
+        
       </div>
 
     </div>
 
   </article>
 
-&lt;% } %&gt;
-
 </div>
-
-
-
-</main> <!-- /main -->
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

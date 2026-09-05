@@ -29,7 +29,7 @@ format:
   acePDF-pdf: {}
 
 button: |
-  <a class="ace-pdf-button" href="documents/reports/ACE2026001.pdf" target="_blank">PDF</a>
+  <a class="ace-pdf-button" href="reports/ACE2026001.pdf" target="_blank">PDF</a>
 
 citation:
   type: report

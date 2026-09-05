@@ -1,6 +1,6 @@
 project:
   type: website
-  output-dir: documents
+  output-dir: docs
   execute-dir: project
 
  
@@ -20,7 +20,7 @@ website:
         text: Integrity Violations
     right:
       - icon: github
-        href: https://github.com/[your-repo]
+        href: https://github.com/MatthewBJane/audit-clinical-evidence
         
   page-footer:
     left: "© 2026 Matthew B. Jané"

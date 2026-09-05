@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Matthew B. Jané">
+<meta name="dcterms.date" content="2026-06-21">
 
-<title>ABOUT – ACE</title>
+<title>Research Integrity Violations – ACE</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,35 +71,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -128,7 +101,7 @@ window.Quarto = {
 <span class="menu-text">Reports</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
@@ -136,13 +109,13 @@ window.Quarto = {
 <span class="menu-text">Disclaimers</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./riv.html"> 
+    <a class="nav-link active" href="./riv.html" aria-current="page"> 
 <span class="menu-text">Integrity Violations</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/[your-repo]"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/MatthewBJane/audit-clinical-evidence"> <i class="bi bi-github" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -163,139 +136,169 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#mission" id="toc-mission" class="nav-link active" data-scroll-target="#mission">Mission</a></li>
-  <li><a href="#scope-of-ace-reports" id="toc-scope-of-ace-reports" class="nav-link" data-scroll-target="#scope-of-ace-reports">Scope of ACE Reports</a></li>
-  <li><a href="#report-identifiers" id="toc-report-identifiers" class="nav-link" data-scroll-target="#report-identifiers">Report Identifiers</a></li>
-  <li><a href="#reproducibility-and-version-control" id="toc-reproducibility-and-version-control" class="nav-link" data-scroll-target="#reproducibility-and-version-control">Reproducibility and Version Control</a></li>
-  <li><a href="#evidence-standard" id="toc-evidence-standard" class="nav-link" data-scroll-target="#evidence-standard">Evidence Standard</a></li>
-  <li><a href="#why-ace-exists" id="toc-why-ace-exists" class="nav-link" data-scroll-target="#why-ace-exists">Why ACE Exists</a></li>
-  <li><a href="#tips-and-documentation" id="toc-tips-and-documentation" class="nav-link" data-scroll-target="#tips-and-documentation">Tips and Documentation</a></li>
-  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
+  <li><a href="#the-ace-research-integrity-violations-ace-riv" id="toc-the-ace-research-integrity-violations-ace-riv" class="nav-link active" data-scroll-target="#the-ace-research-integrity-violations-ace-riv">The ACE Research Integrity Violations (ACE-RIV)</a></li>
+  <li><a href="#section-1-authorship-and-publication" id="toc-section-1-authorship-and-publication" class="nav-link" data-scroll-target="#section-1-authorship-and-publication">Section 1: Authorship and Publication</a></li>
+  <li><a href="#section-2-statistical-and-data-integrity" id="toc-section-2-statistical-and-data-integrity" class="nav-link" data-scroll-target="#section-2-statistical-and-data-integrity">Section 2: Statistical and Data Integrity</a></li>
+  <li><a href="#section-3-ethical-oversight-and-transparency" id="toc-section-3-ethical-oversight-and-transparency" class="nav-link" data-scroll-target="#section-3-ethical-oversight-and-transparency">Section 3: Ethical Oversight and Transparency</a></li>
+  <li><a href="#section-4-minor-errors" id="toc-section-4-minor-errors" class="nav-link" data-scroll-target="#section-4-minor-errors">Section 4: Minor Errors</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="riv.pdf"><i class="bi bi-file-pdf"></i>PDF (acePDF)</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">ABOUT</h1>
+<h1 class="title">Research Integrity Violations</h1>
+<p class="subtitle lead">A Standardized Taxonomy</p>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Matthew B. Jané <a href="mailto:contact@auditclinicalevidence.org" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Connecticut
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 21, 2026</p>
+    </div>
+  </div>
   
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    The Audit Clinical Evidence (ACE) initiative introduces the Standardized Research Integrity Violations (RIVs) framework to systematically classify and report scientific malpractices. By standardizing the taxonomy of these violations, the ACE-RIV framework guarantees transparent, reproducible documentation.
+  </div>
+</div>
 
 
 </header>
 
 
-<div class="about-page-grid">
-<div class="about-photo">
-<div class="ace-hover-photo">
-  <img src="images/about_photo.png" alt="Stylized ACE team portrait with Kutenda F. Mvududu on the left and Matthew B. Jane on the right.">
+<section id="the-ace-research-integrity-violations-ace-riv" class="level2">
+<h2 class="anchored" data-anchor-id="the-ace-research-integrity-violations-ace-riv">The ACE Research Integrity Violations (ACE-RIV)</h2>
+<p>The ACE Research Integrity Violations framework is a classification system used to identify and categorize scientific errors and integrity issues in academic publishing. It synthesizes existing standards from global authorities such as: the Committee on Publication Ethics (COPE), the Council of Science Editors (CSE), the International Committee of Medical Journal Editors (ICMJE), and the European Code of Conduct for Research Integrity (ALLEA)—into four primary domains: Authorship and Publication, Statistical and Data Integrity, Ethical Oversight, and Minor Errors.</p>
+<p>Within ACE audit reports, each identified violation is described clearly and backed by objective evidence. For instance, if a statistical inconsistency is found, the report will detail the exact table or figure containing the impossible data and explain why it is invalid. To provide a comprehensive overview, each report opens with an Executive Summary featuring a reference table of all RIVs found in the study. The summary concludes with a clear, actionable recommendation advising on appropriate next steps, such as requesting raw data, issuing a correction, or initiating a full retraction. Rather than conducting systemic reviews of the literature to identify problematic clinical research, ACE uses personal and others’ expertise, leads, and potential signatures of misconduct. Ultimately, ACE focuses its resources on producing comprehensive audit reports for papers exhibiting severe integrity violations, meaning the vast majority of these audits will conclude with a recommendation for retraction.</p>
+<p><em>(Note: The following list of standard violations is subject to ongoing updates and revisions.)</em></p>
+</section>
+<section id="section-1-authorship-and-publication" class="level2">
+<h2 class="anchored" data-anchor-id="section-1-authorship-and-publication">Section 1: Authorship and Publication</h2>
+<section id="riv-1.1-guest-honorary-or-gift-authorship." class="level4">
+<h4 class="anchored" data-anchor-id="riv-1.1-guest-honorary-or-gift-authorship."><strong>RIV 1.1: Guest, Honorary, or Gift Authorship.</strong></h4>
+<p>Authorship is granted to individuals who have not made a substantial intellectual contribution to the research.</p>
+</section>
+<section id="riv-1.2-ghost-authorship." class="level4">
+<h4 class="anchored" data-anchor-id="riv-1.2-ghost-authorship."><strong>RIV 1.2: Ghost Authorship.</strong></h4>
+<p>Individuals who actively participated in the research, data analysis, or manuscript drafting are absent from the author byline or acknowledgments.</p>
+</section>
+<section id="riv-1.3-authorship-for-sale-and-paper-mill-activity." class="level4">
+<h4 class="anchored" data-anchor-id="riv-1.3-authorship-for-sale-and-paper-mill-activity."><strong>RIV 1.3: Authorship for Sale and Paper Mill Activity.</strong></h4>
+<p>Authorship positions on a scientific manuscript are bought, sold, or traded. Also, includes industrialized publishing of fabricated, sloppy, or low-quality papers.</p>
+</section>
+<section id="riv-1.4-plagiarism." class="level4">
+<h4 class="anchored" data-anchor-id="riv-1.4-plagiarism."><strong>RIV 1.4: Plagiarism.</strong></h4>
+<p>Another person’s work, ideas, texts, or intellectual property are included in a manuscript without providing proper attribution, credit, or citation to the original source.</p>
+</section>
+<section id="riv-1.5-tortured-phrases-and-text-spinners." class="level4">
+<h4 class="anchored" data-anchor-id="riv-1.5-tortured-phrases-and-text-spinners."><strong>RIV 1.5: Tortured Phrases and Text Spinners.</strong></h4>
+<p>The manuscript contains bizarre, unnatural synonyms or “tortured phrases” (e.g., using “flag to clamor” instead of “signal to noise,” or “bosom malignancy” instead of “breast cancer”).</p>
+</section>
+<section id="riv-1.6-duplicate-publication-and-salami-slicing." class="level4">
+<h4 class="anchored" data-anchor-id="riv-1.6-duplicate-publication-and-salami-slicing."><strong>RIV 1.6: Duplicate Publication and Salami Slicing.</strong></h4>
+<p>Content or findings from previously published work are reproduced verbatim without explicit disclosure and justification. This also encompasses “salami slicing,” where a single coherent body of research is segmented into multiple smaller papers, expanding publication counts without adding proportionate scientific value.</p>
+</section>
+<section id="riv-1.7-citation-manipulation." class="level4">
+<h4 class="anchored" data-anchor-id="riv-1.7-citation-manipulation."><strong>RIV 1.7: Citation Manipulation.</strong></h4>
+<p>Systematic practices are employed to force or pressure the citation of specific material, resulting in artificially elevated citation metrics for an author, journal, or institution.</p>
+</section>
+<section id="riv-1.8-peer-review-subversion." class="level4">
+<h4 class="anchored" data-anchor-id="riv-1.8-peer-review-subversion."><strong>RIV 1.8: Peer Review Subversion.</strong></h4>
+<p>The independent peer review process is bypassed or compromised. This includes participating in “collusion rings” (where groups of reviewers and authors coordinate to automatically approve each other’s publications) or the exchange of payment or favors for the allowance of uncritical or hijacked peer review reports.</p>
+</section>
+<section id="riv-1.9-irrelevant-citations-and-reference-padding." class="level4">
+<h4 class="anchored" data-anchor-id="riv-1.9-irrelevant-citations-and-reference-padding."><strong>RIV 1.9: Irrelevant Citations and Reference Padding.</strong></h4>
+<p>Distinct from citation manipulation (ACE-RIV 1.7), this involves injecting citations into the bibliography that have absolutely no relevance to the surrounding text. This is a common paper mill tactic where references are sold to researchers to artificially boost their h-index, resulting in physics papers bizarrely citing clinical oncology research.</p>
+</section>
+<section id="riv-1.10-trial-registration-and-protocol-deviations." class="level4">
+<h4 class="anchored" data-anchor-id="riv-1.10-trial-registration-and-protocol-deviations."><strong>RIV 1.10: Trial Registration and Protocol Deviations.</strong></h4>
+<p>The manuscript reports results from a clinical trial or pre-registered study that either failed to register in a recognized public database (e.g., ClinicalTrials.gov) prior to the onset of subject enrollment, or contains significant, undisclosed deviations from the original pre-registered protocol.</p>
+</section>
+</section>
+<section id="section-2-statistical-and-data-integrity" class="level2">
+<h2 class="anchored" data-anchor-id="section-2-statistical-and-data-integrity">Section 2: Statistical and Data Integrity</h2>
+<section id="riv-2.1-anomalies-and-extreme-values." class="level4">
+<h4 class="anchored" data-anchor-id="riv-2.1-anomalies-and-extreme-values."><strong>RIV 2.1: Anomalies and Extreme Values.</strong></h4>
+<p>The reported data, statistics, or results display extreme, unrealistic values, or improbable distributions that are exceedingly unusual given random, natural processes.</p>
+</section>
+<section id="riv-2.2-statistical-inconsistencies-and-impossible-data-sets." class="level4">
+<h4 class="anchored" data-anchor-id="riv-2.2-statistical-inconsistencies-and-impossible-data-sets."><strong>RIV 2.2: Statistical Inconsistencies and Impossible Data Sets.</strong></h4>
+<p>Statistics and data that are internally incompatible with one another (e.g., reported <em>p</em> value and sample size does not match reported <em>t</em> value). Statistics that are impossible to come from a real data set (e.g., a proportion of .83 can not possibly occur from a data set of five patients)</p>
+</section>
+<section id="riv-2.3-selective-reporting-suppressed-data-and-omitted-methodology." class="level4">
+<h4 class="anchored" data-anchor-id="riv-2.3-selective-reporting-suppressed-data-and-omitted-methodology."><strong>RIV 2.3: Selective Reporting, Suppressed Data, and Omitted Methodology.</strong></h4>
+<p>Published outcomes exclude relevant data, negative results, or conflicting findings that impact the study’s conclusions. This violation also applies when important aspects of the study’s methodology that are necessary for independent verification and reproducibility are absent.</p>
+</section>
+<section id="riv-2.4-data-miscalculation-or-erroneous-reporting." class="level4">
+<h4 class="anchored" data-anchor-id="riv-2.4-data-miscalculation-or-erroneous-reporting."><strong>RIV 2.4: Data Miscalculation or Erroneous Reporting.</strong></h4>
+<p>Quantitative data and statistical results are inaccurately calculated, transcribed, or reported.</p>
+</section>
+<section id="riv-2.5-image-and-figure-manipulation." class="level4">
+<h4 class="anchored" data-anchor-id="riv-2.5-image-and-figure-manipulation."><strong>RIV 2.5: Image and Figure Manipulation.</strong></h4>
+<p>Images, figures, or graphical data contain duplicated, spliced, rotated, or artificially generated elements. This violation includes taking images from other websites, people, or papers and advertising it as your own. This also applies when images, figures, or graphical data from previously published works or external sources are presented as original findings without proper attribution and authorization.</p>
+</section>
+<section id="riv-2.6-data-set-anomalies." class="level4">
+<h4 class="anchored" data-anchor-id="riv-2.6-data-set-anomalies."><strong>RIV 2.6: Data Set Anomalies.</strong></h4>
+<p>The raw dataset exhibits structural irregularities or improper manual alterations that compromise data integrity. Examples include unexplained duplicate records, artificially injected or unjustifiably deleted rows (data trimming), manual cell overwrites, and fundamental transcription or miscalculation errors.</p>
+</section>
+<section id="riv-2.7-image-and-figure-errors." class="level4">
+<h4 class="anchored" data-anchor-id="riv-2.7-image-and-figure-errors."><strong>RIV 2.7: Image and Figure Errors.</strong></h4>
+<p>Images, figures, or graphical data contain incorrect values, nonsensical results, or other errors.</p>
+</section>
+</section>
+<section id="section-3-ethical-oversight-and-transparency" class="level2">
+<h2 class="anchored" data-anchor-id="section-3-ethical-oversight-and-transparency">Section 3: Ethical Oversight and Transparency</h2>
+<section id="riv-3.1-failure-to-disclose-conflicts-of-interest-coi." class="level4">
+<h4 class="anchored" data-anchor-id="riv-3.1-failure-to-disclose-conflicts-of-interest-coi."><strong>RIV 3.1: Failure to Disclose Conflicts of Interest (COI).</strong></h4>
+<p>Financial, personal, or professional conflicts of interest are not disclosed in research proposals, publications, or public communications, where such associations could be perceived by readers or reviewers as compromising the objectivity of the work.</p>
+</section>
+<section id="riv-3.2-bypass-of-ethical-oversight." class="level4">
+<h4 class="anchored" data-anchor-id="riv-3.2-bypass-of-ethical-oversight."><strong>RIV 3.2: Bypass of Ethical Oversight.</strong></h4>
+<p>Required institutional ethical oversight committees (such as IRBs or animal care committees) are bypassed, or research participants (human or animal) are not handled strictly in accordance with established legal provisions, safety regulations, and ethical principles.</p>
+</section>
+<section id="riv-3.3-ethics-approval-anomalies." class="level4">
+<h4 class="anchored" data-anchor-id="riv-3.3-ethics-approval-anomalies."><strong>RIV 3.3: Ethics Approval Anomalies.</strong></h4>
+<p>The ethics approval or IRB (Institutional Review Board) number provided in the manuscript is fake, belongs to a completely different study, or is attributed to an ethics committee that does not actually exist at the specified institution.</p>
+</section>
+</section>
+<section id="section-4-minor-errors" class="level2">
+<h2 class="anchored" data-anchor-id="section-4-minor-errors">Section 4: Minor Errors</h2>
+<section id="riv-4.1-minor-typographical-error." class="level4">
+<h4 class="anchored" data-anchor-id="riv-4.1-minor-typographical-error."><strong>RIV 4.1: Minor Typographical Error.</strong></h4>
+<p>The manuscript contains spelling errors, grammatical mistakes, formatting inconsistencies, or minor transcription typos that do not alter the underlying data, the statistical significance, or the overall scientific conclusions of the research. These errors may affect meta-analyses or secondary analyses.</p>
+</section>
+<section id="riv-4.2-crude-and-indirect-signatures-of-publication-mill-work." class="level4">
+<h4 class="anchored" data-anchor-id="riv-4.2-crude-and-indirect-signatures-of-publication-mill-work."><strong>RIV 4.2: Crude and Indirect Signatures of Publication Mill Work.</strong></h4>
+<p>Several flags or characteristic patterns within the manuscript suggest the potential involvement of a paper mill. These indicators include the use of suspicious or non-institutional email domains (such as generic or disposable accounts), unusual dispersion of author affiliations across countries, authors with high number of retracted papers, authors with many publications in disparate fields, authors with unrealistically high publication rate, high rate of self-publication, and boilerplate text or formatting that closely mirrors unrelated submissions.</p>
 
-  <div class="ace-photo-hotspot ace-photo-left" title="Kutenda" aria-label="Kutenda F. Mvududu">
-    <span class="ace-photo-tooltip">Kutenda</span>
-  </div>
 
-  <div class="ace-photo-hotspot ace-photo-right" title="Matt" aria-label="Matthew B. Jane">
-    <span class="ace-photo-tooltip">Matt</span>
-  </div>
-</div>
-</div>
-<section id="team" class="level2 about-team">
-<h2 class="anchored" data-anchor-id="team">Team</h2>
-<section id="matthew-b.-jané-phd-candidate-ms-bs" class="level3">
-<h3 class="anchored" data-anchor-id="matthew-b.-jané-phd-candidate-ms-bs">Matthew B. Jané <span class="degree-suffix">PhD candidate, MS, BS</span></h3>
-<p><strong>Lead Auditor</strong></p>
-<p>Matthew B. Jané is the founder and lead auditor of Audit Clinical Evidence and a PhD candidate in Quantitative Psychology at the University of Connecticut, where his work focuses on statistical methods for meta-analysis and forensic meta-science. Within ACE, he leads study identification, statistical auditing, reproducibility workflows, report development, and project standards.</p>
 </section>
-<section id="kutenda-f.-mvududu-bs-nremt" class="level3">
-<h3 class="anchored" data-anchor-id="kutenda-f.-mvududu-bs-nremt">Kutenda F. Mvududu <span class="degree-suffix">BS, NREMT</span></h3>
-<p><strong>Auditor</strong></p>
-<p>Kutenda F. Mvududu serves as an auditor for Audit Clinical Evidence. She holds a Bachelor of Science in Biology with a pre-medical concentration and is a certified EMT through the National Registry of Emergency Medical Technicians. Within ACE, she supports study identification, article screening, documentation review, source-material organization, and report preparation.</p>
-</section>
-</section>
-</div>
-<section id="mission" class="level2">
-<h2 class="anchored" data-anchor-id="mission">Mission</h2>
-<p>The purpose of <strong>Audit Clinical Evidence</strong> is to provide transparent, reproducible, and evidence-based audits of clinical and medical research. ACE audit reports focus on observable statistical errors, internal inconsistencies, image anomalies, potential data fabrication, publication ethics issues, and other research integrity concerns.</p>
-<p>The identification of errors or anomalies in ACE reports is strictly evidence-based. Findings are limited to issues that can be documented from the published record, trial registrations, supplementary materials, public databases, article metadata, and reproducible statistical checks. ACE avoids unsupported speculation, but may identify plausible integrity concerns when the public record contains strong convergent evidence.</p>
-</section>
-<section id="scope-of-ace-reports" class="level2">
-<h2 class="anchored" data-anchor-id="scope-of-ace-reports">Scope of ACE Reports</h2>
-<p>Each ACE report provides a structured audit of one or more related clinical research articles. Reports may examine randomized controlled trials, observational studies, meta-analyses, systematic reviews, clinical guidelines, or clusters of related publications.</p>
-<p>Depending on the article(s) under review, an ACE audit may include checks for:</p>
-<ul>
-<li>impossible or internally inconsistent summary statistics;</li>
-<li>mismatches between reported test statistics, sample sizes, confidence intervals, and <em>p</em> values;</li>
-<li>GRIM, GRIMMER, SPRITE, or related numerical consistency failures;</li>
-<li>discrepancies between trial registrations and published outcomes;</li>
-<li>duplicated, overlapping, or implausibly related datasets;</li>
-<li>image or figure anomalies;</li>
-<li>authorship, publication, or peer-review irregularities;</li>
-<li>unexplained changes in sample size, analysis sets, or outcome reporting;</li>
-<li>methodological errors that affect interpretation or downstream evidence synthesis.</li>
-</ul>
-<p>When possible, ACE includes figures, tables, screenshots, code, and step-by-step explanations showing exactly where an error appears and how it was evaluated.</p>
-</section>
-<section id="report-identifiers" class="level2">
-<h2 class="anchored" data-anchor-id="report-identifiers">Report Identifiers</h2>
-<p>Each ACE report receives a unique identifier. The identifier records the project name, publication year, and report number. <span class="math display">\[
-\overset{\textsf{project}}{\overbrace{\textsf{ACE}\vphantom{^0_0}}}\;\underset{\textsf{year}}{\underbrace{\textsf{2026}\vphantom{^0_0}}}\!\!\!\!\!\overset{\textsf{report number}}{\overbrace{\textsf{0001}\vphantom{^0_0}}}\!\!\!\!\!\!\!\;
-\]</span> For example, <code>ACE20260001</code> refers to the first ACE report issued in 2026.</p>
-</section>
-<section id="reproducibility-and-version-control" class="level2">
-<h2 class="anchored" data-anchor-id="reproducibility-and-version-control">Reproducibility and Version Control</h2>
-<p>ACE reports are versioned through Zenodo, which provides persistent DOIs for report releases and archived versions. Each report includes a changelog as the final section so readers can track what has changed since the originally published version.</p>
-<p>Whenever possible, the code used to generate calculations, figures, tables, and consistency checks is included in the corresponding Quarto report files. The online report viewer includes collapsible code blocks so readers can inspect the code workflow without interrupting the main narrative. The PDF versions do <strong>not</strong> include code, in order to preserve readability and make the reports easier to share, cite, and review.</p>
-<p>Additionally, people can submit corrections to reports. Corrections are screened and subsequently incorporated into the latest version of a report.</p>
-</section>
-<section id="evidence-standard" class="level2">
-<h2 class="anchored" data-anchor-id="evidence-standard">Evidence Standard</h2>
-<p>The goal is to separate what errors or integrity concerns can be demonstrated from what can only be suspected.</p>
-<p>A typical ACE finding must satisfy four conditions:</p>
-<ol type="1">
-<li>the issue must be observable in the public record;</li>
-<li>the reasoning must be explainable from the reported data, text, images, metadata, or registrations;</li>
-<li>the check must be reproducible by an independent reader;</li>
-<li>the claim made in the audit must reasonably follow from the available evidence.</li>
-</ol>
-<p>The purpose to ensure that every finding is tied to a transparent evidentiary basis and does not exceed what the evidence can reasonably support.</p>
-</section>
-<section id="why-ace-exists" class="level2">
-<h2 class="anchored" data-anchor-id="why-ace-exists">Why ACE Exists</h2>
-<p>Clinical research influences meta-analyses, clinical guidelines, patient care, health policy, and public trust in medicine. When published studies contain impossible statistics, undisclosed protocol deviations, duplicated data, fabricated images, or other serious integrity problems, those problems can propagate far beyond the original article.</p>
-<p>ACE was created to make these problems easier to identify, document, and act upon. The project focuses on producing detailed, reproducible reports that can be used by journals, publishers, institutions, guideline developers, meta-analysts, clinicians, and readers who need to assess whether a study should be trusted as evidence.</p>
-</section>
-<section id="tips-and-documentation" class="level2">
-<h2 class="anchored" data-anchor-id="tips-and-documentation">Tips and Documentation</h2>
-<p>ACE welcomes tips related to potential errors or integrity concerns in clinical research. Tips and whistleblower communications are treated as confidential.</p>
-<p>To be useful, a tip should be specific and evidence-based. General claims that a researcher, institution, journal, or public figure is “a fraud” are not sufficient on their own. A useful tip should identify the specific study, report, trial registration, dataset, figure, table, author group, journal, or publication record at issue and explain what appears to be wrong.</p>
-<p>Helpful tips may include:</p>
-<ol type="1">
-<li>the article title, DOI, journal, or trial registration number;</li>
-<li>the specific table, figure, outcome, image, statistic, or passage that appears problematic;</li>
-<li>the suspected issue, such as impossible statistics, duplicated data, image manipulation, authorship irregularities, undisclosed protocol deviations, plagiarism, or publication mill indicators;</li>
-<li>any supporting documentation, screenshots, archived pages, PubPeer threads, registry records, code, calculations, or related publications;</li>
-<li>a brief explanation of why the issue matters.</li>
-</ol>
-<p>ACE may review submitted tips, but submission does not guarantee that a report will be produced. Due to limited manpower, priority is given to cases where the concern is specific, tractable, reproducible, and relevant to the reliability of clinical evidence. Send tips to contact@AuditClinicalEvidence.org.</p>
-</section>
-<section id="contact" class="level2">
-<h2 class="anchored" data-anchor-id="contact">Contact</h2>
-<p>Questions, corrections, tips, and documentation relevant to ACE reports can be sent to:</p>
-<p><strong>contact@AuditClinicalEvidence.org</strong></p>
-<p>Tips and whistleblower communications are treated as confidential. ACE welcomes corrections and will update reports when credible evidence shows that a finding should be revised.</p>
-
-
 </section>
 
 </main> <!-- /main -->
