@@ -1,2 +1,8 @@
 /.quarto/
 .Rproj.user
+
+# macOS
+.DS_Store
+
+# Stale Quarto output dir (site now renders to documents/)
+/_site/

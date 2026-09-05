@@ -20,6 +20,8 @@
 \definecolor{highlight}{HTML}{999999}
 \definecolor{dark}{HTML}{000000}
 
+% Report ID placeholder, populated from YAML by fields.lua
+\providecommand{\aceID}{}
 
 % ---------------------------------------------------------
 % GLOBAL BACKGROUND STYLING (Sidebars and Corners)
@@ -56,23 +58,36 @@
 % ---------------------------------------------------------
 % PAGE NUMBERING & HEADER STYLING
 % ---------------------------------------------------------
+
+\setlength{\headheight}{15pt}
+
 \fancypagestyle{mystyle}{
   \fancyhf{} 
   \renewcommand\headrulewidth{0pt} 
   \fancyheadoffset{1.45cm} 
+
+  % Page number
   \fancyhead[L]{\textcolor{black}{\thepage}} 
+
+  % Report ID, top center, Roboto Mono
+  \fancyhead[C]{\textcolor{black}{{\ttfamily\footnotesize\aceID}}}
 }
 
-% Force the 'plain' style (used by TOC and Chapter starts) to match 'mystyle'
+% Force the 'plain' style, used by TOC and chapter starts, to match 'mystyle'
 \fancypagestyle{plain}{
   \fancyhf{}
   \renewcommand\headrulewidth{0pt}
   \fancyheadoffset{1.45cm}
+
+  % Page number
   \fancyhead[L]{\textcolor{black}{\thepage}} 
+
+  % Report ID, top center, Roboto Mono
+  \fancyhead[C]{\textcolor{black}{{\ttfamily\footnotesize\aceID}}}
 }
 
 \setlength{\footskip}{20pt}
-\pagestyle{mystyle} 
+\pagestyle{mystyle}
 
 
 % ---------------------------------------------------------

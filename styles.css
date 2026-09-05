@@ -85,52 +85,78 @@ body.quarto-light h1.title,
   background-clip: text !important;
 }
 
+/* ---------------------------------------------------------
+   ACE SUBTITLE STYLE
+   Clean muted subtitle with ACE color accents
+--------------------------------------------------------- */
+
 .subtitle {
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 15pt !important;
-  font-weight: bold !important;
+  font-family: "Roboto", sans-serif !important;
+  font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.3rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
 
   width: fit-content;
-  padding: 4pt 7pt;
+  max-width: min(100%, 72ch);
 
-  /* More whitespace between title and subtitle */
-  margin-top: 1.25em;
-  margin-bottom: 1em;
+  padding: 0.45rem 0.75rem;
+  margin-top: 1.15rem;
+  margin-bottom: 1.25rem;
 
-  /* No glitch shadow by default */
-  filter: none;
+  border-radius: 0;
+  border-left: 4px solid;
+
+  filter: none !important;
+  box-shadow: none !important;
+  transform: none !important;
 
   transition:
-    filter 0.15s ease,
-    transform 0.15s ease;
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
-/* Add glitch shadow only on hover */
-.subtitle:hover {
-  filter:
-    drop-shadow(4px 4px 0px #e262e2)
-    drop-shadow(-4px -4px 0px #03e5ff);
-  transform: translateY(-1px);
-}
-
-/* Light theme: black background, white letters */
+/* Light theme: cyan accent */
 html[data-bs-theme="light"] .subtitle,
 body[data-bs-theme="light"] .subtitle,
-[data-bs-theme="light"] .subtitle,
-body.quarto-light .subtitle,
-.quarto-light .subtitle {
-  background-color: #222222 !important;
-  color: white !important;
+body.quarto-light .subtitle {
+  background: rgba(226, 98, 226, 0.13) !important;
+  color: #555555 !important;
+  -webkit-text-fill-color: #555555 !important;
+  border-left-color: #e262e2;
 }
 
-/* Dark theme: white background, black letters */
+/* Dark theme: magenta accent */
 html[data-bs-theme="dark"] .subtitle,
 body[data-bs-theme="dark"] .subtitle,
-[data-bs-theme="dark"] .subtitle,
-body.quarto-dark .subtitle,
-.quarto-dark .subtitle {
-  background-color: white !important;
-  color: #222222 !important;
+body.quarto-dark .subtitle {
+  background: rgba(3, 229, 255, 0.10) !important;
+  color: #d6d6d6 !important;
+  -webkit-text-fill-color: #d6d6d6 !important;
+  border-left-color: #03e5ff;
+}
+
+/* Subtle hover, still clean */
+.subtitle:hover {
+  filter: none !important;
+  transform: none !important;
+}
+
+html[data-bs-theme="light"] .subtitle:hover,
+body[data-bs-theme="light"] .subtitle:hover,
+body.quarto-light .subtitle:hover {
+  background: rgba(226, 98, 226, 0.19) !important;
+  color: #444444 !important;
+  -webkit-text-fill-color: #444444 !important;
+}
+
+html[data-bs-theme="dark"] .subtitle:hover,
+body[data-bs-theme="dark"] .subtitle:hover,
+body.quarto-dark .subtitle:hover {
+  background: rgba(3, 229, 255, 0.16) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
 /* Standard styling for smaller headers */
@@ -874,7 +900,7 @@ body.quarto-dark main .ace-report-title a {
 
 /* ---------------------------------------------------------
    ACE REPORT PAGE CATEGORY PILLS
-   Matches .ace-report-category from listing cards
+   Prevents double-pill rendering after Quarto navigation
 --------------------------------------------------------- */
 
 .quarto-title .quarto-categories,
@@ -886,12 +912,13 @@ body.quarto-dark main .ace-report-title a {
   margin: 0.75rem 0 1rem 0;
 }
 
+/* Style only the actual category wrapper or direct category link */
 .quarto-title .quarto-category,
 .quarto-title-block .quarto-category,
 #title-block-header .quarto-category,
-.quarto-title .quarto-categories a,
-.quarto-title-block .quarto-categories a,
-#title-block-header .quarto-categories a {
+.quarto-title .quarto-categories > a,
+.quarto-title-block .quarto-categories > a,
+#title-block-header .quarto-categories > a {
   display: inline-block;
   border-radius: 999px;
   padding: 0.22rem 0.55rem;
@@ -907,25 +934,42 @@ body.quarto-dark main .ace-report-title a {
   border: 1px solid rgba(0, 0, 0, 0.18);
 }
 
+/* Reset nested links so they do NOT become a second pill */
+.quarto-category a,
+.quarto-categories .quarto-category a {
+  display: inline !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  text-decoration: none !important;
+  font: inherit !important;
+  letter-spacing: inherit !important;
+  text-transform: inherit !important;
+}
+
 /* Light theme */
 html[data-bs-theme="light"] .quarto-title .quarto-category,
 html[data-bs-theme="light"] .quarto-title-block .quarto-category,
 html[data-bs-theme="light"] #title-block-header .quarto-category,
-html[data-bs-theme="light"] .quarto-title .quarto-categories a,
-html[data-bs-theme="light"] .quarto-title-block .quarto-categories a,
-html[data-bs-theme="light"] #title-block-header .quarto-categories a,
+html[data-bs-theme="light"] .quarto-title .quarto-categories > a,
+html[data-bs-theme="light"] .quarto-title-block .quarto-categories > a,
+html[data-bs-theme="light"] #title-block-header .quarto-categories > a,
 body[data-bs-theme="light"] .quarto-title .quarto-category,
 body[data-bs-theme="light"] .quarto-title-block .quarto-category,
 body[data-bs-theme="light"] #title-block-header .quarto-category,
-body[data-bs-theme="light"] .quarto-title .quarto-categories a,
-body[data-bs-theme="light"] .quarto-title-block .quarto-categories a,
-body[data-bs-theme="light"] #title-block-header .quarto-categories a,
+body[data-bs-theme="light"] .quarto-title .quarto-categories > a,
+body[data-bs-theme="light"] .quarto-title-block .quarto-categories > a,
+body[data-bs-theme="light"] #title-block-header .quarto-categories > a,
 body.quarto-light .quarto-title .quarto-category,
 body.quarto-light .quarto-title-block .quarto-category,
 body.quarto-light #title-block-header .quarto-category,
-body.quarto-light .quarto-title .quarto-categories a,
-body.quarto-light .quarto-title-block .quarto-categories a,
-body.quarto-light #title-block-header .quarto-categories a {
+body.quarto-light .quarto-title .quarto-categories > a,
+body.quarto-light .quarto-title-block .quarto-categories > a,
+body.quarto-light #title-block-header .quarto-categories > a {
   background: rgba(226, 98, 226, 0.12) !important;
   color: #222222 !important;
   -webkit-text-fill-color: #222222 !important;
@@ -936,27 +980,37 @@ body.quarto-light #title-block-header .quarto-categories a {
 html[data-bs-theme="dark"] .quarto-title .quarto-category,
 html[data-bs-theme="dark"] .quarto-title-block .quarto-category,
 html[data-bs-theme="dark"] #title-block-header .quarto-category,
-html[data-bs-theme="dark"] .quarto-title .quarto-categories a,
-html[data-bs-theme="dark"] .quarto-title-block .quarto-categories a,
-html[data-bs-theme="dark"] #title-block-header .quarto-categories a,
+html[data-bs-theme="dark"] .quarto-title .quarto-categories > a,
+html[data-bs-theme="dark"] .quarto-title-block .quarto-categories > a,
+html[data-bs-theme="dark"] #title-block-header .quarto-categories > a,
 body[data-bs-theme="dark"] .quarto-title .quarto-category,
 body[data-bs-theme="dark"] .quarto-title-block .quarto-category,
 body[data-bs-theme="dark"] #title-block-header .quarto-category,
-body[data-bs-theme="dark"] .quarto-title .quarto-categories a,
-body[data-bs-theme="dark"] .quarto-title-block .quarto-categories a,
-body[data-bs-theme="dark"] #title-block-header .quarto-categories a,
+body[data-bs-theme="dark"] .quarto-title .quarto-categories > a,
+body[data-bs-theme="dark"] .quarto-title-block .quarto-categories > a,
+body[data-bs-theme="dark"] #title-block-header .quarto-categories > a,
 body.quarto-dark .quarto-title .quarto-category,
 body.quarto-dark .quarto-title-block .quarto-category,
 body.quarto-dark #title-block-header .quarto-category,
-body.quarto-dark .quarto-title .quarto-categories a,
-body.quarto-dark .quarto-title-block .quarto-categories a,
-body.quarto-dark #title-block-header .quarto-categories a {
+body.quarto-dark .quarto-title .quarto-categories > a,
+body.quarto-dark .quarto-title-block .quarto-categories > a,
+body.quarto-dark #title-block-header .quarto-categories > a {
   background: rgba(3, 229, 255, 0.13) !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   border-color: rgba(3, 229, 255, 0.35) !important;
 }
 
+/* Hover only the outer pill */
+.quarto-title .quarto-category:hover,
+.quarto-title-block .quarto-category:hover,
+#title-block-header .quarto-category:hover,
+.quarto-title .quarto-categories > a:hover,
+.quarto-title-block .quarto-categories > a:hover,
+#title-block-header .quarto-categories > a:hover {
+  transform: translateY(-1px);
+  text-decoration: none !important;
+}
 /* Hover */
 .quarto-title .quarto-category:hover,
 .quarto-title-block .quarto-category:hover,

@@ -8,12 +8,11 @@ output-file: "ACE2026001.pdf"
 date: "6/27/2026"
 date-modified: "6/29/2026"
 
-Status: "Nothing yet"
 Journal: "Audit Clinical Evidence"
 
-categories: ["Exercise", "Depression", "RCT"]
+categories: ["Exercise", "Depression", "Heart Disease", "RCT"]
 
-abstract: "Short report abstract or listing abstract goes here."
+abstract: "This report audits three randomized controlled trials by Abdelbasset and colleagues (2019a; 2019b; 2019c) evaluating exercise interventions for depression in patients with congestive heart failure. The three articles appear to report overlapping arms from the same underlying clinical trial while presenting them as separate studies. Across the articles, duplicated baseline characteristics and PHQ-9 outcome statistics indicate reuse of the same trial data even though the paper reports incompatible authorship contribution statements, three distinct ethical approval numbers, and does not reference each other. The paper is potentially linked to a well-documented authorship-for-sale publication network. Furthermore, one of the three articles identifies Abdelbasset as both first author and editor which is a clear conflict of interest. Reported summary statistics are impossible given a real data set, specifically, seven of nine PHQ-9 (the primary outcome) mean and standard deviation pairs fail GRIMMER consistency tests. The reported outcomes also imply extreme between-group standardized mean differences of approximately three standard deviations at post-intervention, making the studies highly influential outliers in later meta-analyses. In total, this audit identifies 21 Research Integrity Violations. We conclude that the three articles are not credible and are unlikely to contain any evidentiary value thus we recommend retraction by the publishing journals."
 
 author: 
   - family: "Jané"
@@ -21,8 +20,9 @@ author:
     email: "contact@auditclinicalevidence.org"
     affiliation: "University of Connecticut, Storrs, CT"
   - family: "Mvududu"
+  
     given: "Kutenda F."
-    affiliation: "Independent researcher"
+    affiliation: "University of Massachusetts, Boston, MA"
 
 format:
   html: {}
@@ -31,6 +31,10 @@ format:
 button: |
   <a class="ace-pdf-button" href="documents/reports/ACE2026001.pdf" target="_blank">PDF</a>
 
+citation:
+  type: report
+  title: "Audit of Abdelbasset et al. (2019): Three randomized controlled trials on exercise and depression"
+  publisher: "Audit Clinical Evidence"
 ---
 
 
@@ -378,7 +382,7 @@ Until retractions are issued, meta-analysts, guideline developers, and readers s
 
 \clearpage
 
-## References {.unnumbered}
+
 
 
 

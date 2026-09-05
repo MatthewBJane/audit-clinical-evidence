@@ -52,7 +52,17 @@
   </macro>
 
   <macro name="title">
-    <text variable="title" text-case="sentence"/>
+    <choose>
+      <!-- ACE cite-as reports: preserve case exactly as written -->
+      <if type="report">
+        <text variable="title"/>
+      </if>
+  
+      <!-- Everything else: sentence case -->
+      <else>
+        <text variable="title" text-case="sentence"/>
+      </else>
+    </choose>
   </macro>
 
   <macro name="container">

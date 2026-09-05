@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-title','listing-subtitle','listing-abstract','listing-categories','listing-date','listing-date-modified','listing-button','listing-ace-id',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-number-sections","listing-bibliography","listing-csl","listing-fig-pos","listing-execute","listing-citation","listing-comments","listing-title","listing-subtitle","listing-ace-id","listing-output-file","listing-date","listing-date-modified","listing-Status","listing-Journal","listing-categories","listing-abstract","listing-author","listing-button","listing-path","listing-outputHref","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-number-sections","listing-bibliography","listing-csl","listing-fig-pos","listing-execute","listing-comments","listing-appendix-cite-as","listing-title","listing-subtitle","listing-ace-id","listing-output-file","listing-date","listing-date-modified","listing-Journal","listing-categories","listing-abstract","listing-author","listing-button","listing-citation","listing-path","listing-outputHref","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -190,7 +190,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Depression">Depression <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Exercise">Exercise <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RCT">RCT <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Depression">Depression <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Exercise">Exercise <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Heart Disease">Heart Disease <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RCT">RCT <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <div class="quarto-about-trestles">
   <div class="about-entity">
@@ -237,12 +237,13 @@ window.Quarto = {
         <div class="ace-report-categories">
             <span class="ace-report-category">Exercise</span>
             <span class="ace-report-category">Depression</span>
+            <span class="ace-report-category">Heart Disease</span>
             <span class="ace-report-category">RCT</span>
         </div>
         <details class="ace-listing-abstract">
           <summary>Abstract</summary>
           <div class="ace-listing-abstract-content">
-            Short report abstract or listing abstract goes here.
+            This report audits three randomized controlled trials by Abdelbasset and colleagues (2019a; 2019b; 2019c) evaluating exercise interventions for depression in patients with congestive heart failure. The three articles appear to report overlapping arms from the same underlying clinical trial while presenting them as separate studies. Across the articles, duplicated baseline characteristics and PHQ-9 outcome statistics indicate reuse of the same trial data even though the paper reports incompatible authorship contribution statements, three distinct ethical approval numbers, and does not reference each other. The paper is potentially linked to a well-documented authorship-for-sale publication network. Furthermore, one of the three articles identifies Abdelbasset as both first author and editor which is a clear conflict of interest. Reported summary statistics are impossible given a real data set, specifically, seven of nine PHQ-9 (the primary outcome) mean and standard deviation pairs fail GRIMMER consistency tests. The reported outcomes also imply extreme between-group standardized mean differences of approximately three standard deviations at post-intervention, making the studies highly influential outliers in later meta-analyses. In total, this audit identifies 21 Research Integrity Violations. We conclude that the three articles are not credible and are unlikely to contain any evidentiary value thus we recommend retraction by the publishing journals.
           </div>
         </details>
       <div class="ace-report-meta">

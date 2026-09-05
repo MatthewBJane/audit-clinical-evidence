@@ -65,6 +65,7 @@ format:
   acePDF-pdf:
     top-level-division: section
     toc: true
+    toc-title: "Sections"
     toc-depth: 3
     shift-heading-level-by: -1
     header-includes:
@@ -87,11 +88,6 @@ execute:
   fig-dpi: 600
   
 
-citation:
-  type: article-journal
-  container-title: "Audit Clinical Evidence"
-
-
 comments:
   giscus:
     repo: matthewbjane/audit-clinical-evidence
@@ -103,3 +99,7 @@ comments:
     theme:
       light: light
       dark: dark_dimmed
+
+
+
+appendix-cite-as: true
