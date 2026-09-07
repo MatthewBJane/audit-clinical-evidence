@@ -22,6 +22,9 @@
 
 % Report ID placeholder, populated from YAML by fields.lua
 \providecommand{\aceID}{}
+\providecommand{\aceDOI}{}
+\providecommand{\aceConceptDOI}{}
+\newlength{\aceInfoY}
 
 % ---------------------------------------------------------
 % GLOBAL BACKGROUND STYLING (Sidebars and Corners)
@@ -142,8 +145,24 @@
         \node at (current page.east) [anchor=east, yshift=-7.2cm, xshift=-2cm] {\Large\textbf{\coverAuthorTwo}};
         \node at (current page.east) [anchor=east, yshift=-7.9cm, xshift=-2cm] {\Large\coverAffiliationTwo};
         
+        % Report ID and DOIs, cover only - with the other document information.
+        % The version DOI is reserved on Zenodo before the render, so it is
+        % available here before publication. The concept DOI ("all versions") is
+        % only assigned at publish time, so it appears from the second version on.
+        % Lines are stacked bottom-up from just above "Copyright", so the block
+        % stays contiguous whichever DOI fields are present.
+        \setlength{\aceInfoY}{-11cm}
+        \ifx\aceConceptDOI\empty\else
+        \node at (current page.west) [anchor=west, yshift=\aceInfoY, xshift=2cm] {\scriptsize\text{All versions: {\ttfamily https://doi.org/\aceConceptDOI}}};
+        \addtolength{\aceInfoY}{0.5cm}
+        \fi
+        \ifx\aceDOI\empty\else
+        \node at (current page.west) [anchor=west, yshift=\aceInfoY, xshift=2cm] {\scriptsize\text{DOI: {\ttfamily https://doi.org/\aceDOI}}};
+        \addtolength{\aceInfoY}{0.5cm}
+        \fi
+        \node at (current page.west) [anchor=west, yshift=\aceInfoY, xshift=2cm] {\scriptsize\text{Report ID: {\ttfamily\aceID}}};
         \node at (current page.west) [anchor=west, yshift=-11.5cm, xshift=2cm] {\scriptsize\text{Copyright: © 2026 Matthew B. Jané}};
-        \node at (current page.west) [anchor=west, yshift=-12cm, xshift=2cm] {\scriptsize\text{License: Creative Commons Attribution-Non Commercial-No Derivatives License 4.0 (CC BY-NC-ND 4.0)}};
+        \node at (current page.west) [anchor=west, yshift=-12cm, xshift=2cm] {\scriptsize\text{License: Creative Commons Attribution 4.0 International (CC BY 4.0)}};
         \node at (current page.west) [anchor=west, yshift=-12.5cm, xshift=2cm] {\scriptsize\text{Disclaimer: The views expressed herein are solely those of the author and do not represent any affiliated organizations.}};
     \end{tikzpicture}
     
@@ -159,7 +178,7 @@
 % CUSTOM FONTS
 % ---------------------------------------------------------
 \setmainfont{Roboto}[
-    Path=_extensions/ace-formatting/acePDF/Roboto/static/,
+    Path=../_extensions/ace-formatting/acePDF/Roboto/static/,
     Scale=0.9,
     Extension = .ttf,
     UprightFont=*-Regular,
@@ -168,7 +187,7 @@
     ]
     
 \setsansfont{Roboto}[
-    Path=_extensions/ace-formatting/acePDF/Roboto/static/,
+    Path=../_extensions/ace-formatting/acePDF/Roboto/static/,
     Scale=0.9,
     Extension = .ttf,
     UprightFont=*-Regular,
@@ -177,7 +196,7 @@
     ]
 
 \setmonofont{RobotoMono}[
-    Path=_extensions/ace-formatting/acePDF/Roboto_Mono/static/,
+    Path=../_extensions/ace-formatting/acePDF/Roboto_Mono/static/,
     Scale=0.9,
     Extension = .ttf,
     UprightFont=*-Medium,
@@ -185,7 +204,21 @@
     ItalicFont=*-Italic,
     ]
     
-\setmathfont{texgyretermes-math.otf}[
-  Path = _extensions/ace-formatting/acePDF/fonts/,
+\setmathfont{FiraMath-Regular.otf}[
+  % Fira Math: sans-serif OpenType math font that pairs with Roboto.
+  % Bundled in the extension's fonts/ folder, like Roboto - no tlmgr needed.
+  Path = ../_extensions/ace-formatting/acePDF/fonts/,
+  Scale = MatchLowercase
+]
+
+% Fira Math has no distinct script alphabet (\mathcal falls back to its regular
+% letters). Take the calligraphic capitals alone from Euler Math: Zapf's Euler
+% Script is upright-leaning with a uniform stroke, so it stays legible and
+% sturdy beside a sans body where Computer Modern's hairlines look wispy.
+% Alternatives, same line: STIXTwoMath-Regular.otf (formal roundhand),
+% latinmodern-math.otf (Computer Modern).
+\setmathfont{Euler-Math.otf}[
+  range = {cal, bfcal},
+  Path = ../_extensions/ace-formatting/acePDF/fonts/,
   Scale = MatchLowercase
 ]

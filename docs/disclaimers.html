@@ -20,6 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 </style>
 
 
@@ -30,6 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,9 +70,31 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+window.MathJax = {
+  output: { font: "mathjax-fira" },
+  tex: {
+    inlineMath:  [["\\(", "\\)"], ["$", "$"]],
+    displayMath: [["\\[", "\\]"], ["$$", "$$"]]
+  }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml-nofont.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="DISCLAIMERS – ACE">
+<meta property="og:description" content="Independent audits of clinical research for statistical errors and research integrity violations.">
+<meta property="og:image" content="https://auditclinicalevidence.org/images/social-card.png">
+<meta property="og:site_name" content="ACE">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta name="twitter:title" content="DISCLAIMERS – ACE">
+<meta name="twitter:description" content="Independent audits of clinical research for statistical errors and research integrity violations.">
+<meta name="twitter:image" content="https://auditclinicalevidence.org/images/twitter-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="600">
+<meta name="twitter:image-width" content="1200">
 </head>
 
 <body class="nav-fixed">
@@ -103,6 +127,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./team.html"> 
+<span class="menu-text">Team</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link active" href="./disclaimers.html" aria-current="page"> 
 <span class="menu-text">Disclaimers</span></a>
   </li>  
@@ -113,7 +141,12 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/MatthewBJane/audit-clinical-evidence"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="./reports.xml"> <i class="bi bi-rss" role="img" aria-label="RSS feed of ACE reports">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/MatthewBJane/audit-clinical-evidence"> <i class="bi bi-github" role="img" aria-label="ACE on GitHub">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -137,10 +170,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#statement-of-independence" id="toc-statement-of-independence" class="nav-link active" data-scroll-target="#statement-of-independence">Statement of Independence</a></li>
   <li><a href="#scope-of-audit" id="toc-scope-of-audit" class="nav-link" data-scroll-target="#scope-of-audit">Scope of Audit</a></li>
   <li><a href="#limitation-of-liability" id="toc-limitation-of-liability" class="nav-link" data-scroll-target="#limitation-of-liability">Limitation of Liability</a></li>
-  <li><a href="#edi-review-correspondence" id="toc-edi-review-correspondence" class="nav-link" data-scroll-target="#edi-review-correspondence">Edi REVIEW &amp; CORRESPONDENCE</a></li>
+  <li><a href="#editorial-review-correspondence" id="toc-editorial-review-correspondence" class="nav-link" data-scroll-target="#editorial-review-correspondence">EDITORIAL REVIEW &amp; CORRESPONDENCE</a></li>
   <li><a href="#fair-use-copyrighted-materials" id="toc-fair-use-copyrighted-materials" class="nav-link" data-scroll-target="#fair-use-copyrighted-materials">FAIR USE &amp; COPYRIGHTED MATERIALS</a></li>
   <li><a href="#funding-conflict-of-interest" id="toc-funding-conflict-of-interest" class="nav-link" data-scroll-target="#funding-conflict-of-interest">FUNDING &amp; CONFLICT OF INTEREST</a></li>
-  <li><a href="#copyright-open-access" id="toc-copyright-open-access" class="nav-link" data-scroll-target="#copyright-open-access">COPYRIGHT &amp; OPEN ACCESS</a></li>
+  <li><a href="#copyright-licensing" id="toc-copyright-licensing" class="nav-link" data-scroll-target="#copyright-licensing">COPYRIGHT &amp; LICENSING</a></li>
   </ul>
 </nav>
     </div>
@@ -178,9 +211,9 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="limitation-of-liability">Limitation of Liability</h3>
 <p>The information and analyses provided in this report are for informational, academic, and scientific integrity purposes only. While every effort is made to ensure the accuracy and reproducibility of these findings, the author makes no warranties regarding the absolute completeness of the information. The author assumes no legal liability or responsibility for any consequences, actions, or decisions made by third parties (such as journals, institutions, or readers) based on the contents of this report.</p>
 </section>
-<section id="edi-review-correspondence" class="level3">
-<h3 class="anchored" data-anchor-id="edi-review-correspondence">Edi REVIEW &amp; CORRESPONDENCE</h3>
-<p>The ACE project encourages open, post-publication discussion. As part of our commitment to the integrity of the scientific record, copies of finalized ACE audit reports are routinely forwarded to the editorial boards and/or publishers of the corresponding journals for their independent review. If you identify an error in this report, or if you are an author of an investigated study and wish to provide data or clarifications, please contact: contact@ace-reports.org. Unless confidentiality is explicitly agreed to in advance, ACE reserves the right to publish or quote correspondence relating to audit findings, methodological concerns, or factual disputes, with personal or sensitive information redacted where appropriate. ACE also accepts confidential tips regarding potential statistical inconsistencies, publication irregularities, image anomalies, or other integrity concerns. Confidential sources and whistleblowers will not be publicly identified, and all reasonable efforts will be made to protect anonymity and confidentiality unless explicit permission for disclosure is provided.</p>
+<section id="editorial-review-correspondence" class="level3">
+<h3 class="anchored" data-anchor-id="editorial-review-correspondence">EDITORIAL REVIEW &amp; CORRESPONDENCE</h3>
+<p>The ACE project encourages open, post-publication discussion. As part of our commitment to the integrity of the scientific record, copies of finalized ACE audit reports are routinely forwarded to the editorial boards and/or publishers of the corresponding journals for their independent review. If you identify an error in this report, or if you are an author of an investigated study and wish to provide data or clarifications, please contact: contact@auditclinicalevidence.org. Unless confidentiality is explicitly agreed to in advance, ACE reserves the right to publish or quote correspondence relating to audit findings, methodological concerns, or factual disputes, with personal or sensitive information redacted where appropriate. ACE also accepts confidential tips regarding potential statistical inconsistencies, publication irregularities, image anomalies, or other integrity concerns. Confidential sources and whistleblowers will not be publicly identified, and all reasonable efforts will be made to protect anonymity and confidentiality unless explicit permission for disclosure is provided.</p>
 </section>
 <section id="fair-use-copyrighted-materials" class="level3">
 <h3 class="anchored" data-anchor-id="fair-use-copyrighted-materials">FAIR USE &amp; COPYRIGHTED MATERIALS</h3>
@@ -190,9 +223,13 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="funding-conflict-of-interest">FUNDING &amp; CONFLICT OF INTEREST</h3>
 <p>This independent audit received no external funding, with all project costs borne personally by the author. Furthermore, the author declares no financial or commercial conflict of interest regarding the studies, outcomes, or institutions investigated.</p>
 </section>
-<section id="copyright-open-access" class="level3">
-<h3 class="anchored" data-anchor-id="copyright-open-access">COPYRIGHT &amp; OPEN ACCESS</h3>
-<p>© 2026 Matthew B. Jané. This is an Open Access report distributed under the terms of the Creative Commons Attribution-NonCommercial-NoDerivatives (CC BY-NC-ND 4.0) license, which permits non-commercial re-use, distribution, and reproduction in any medium, provided that no alterations or modifications are made and the original work is properly cited.</p>
+<section id="copyright-licensing" class="level3">
+<h3 class="anchored" data-anchor-id="copyright-licensing">COPYRIGHT &amp; LICENSING</h3>
+<p>© 2026 Matthew B. Jané. ACE publishes under licences chosen to let its findings travel, while keeping the identity of the project and the integrity of the published record protected.</p>
+<p><strong>Audit reports</strong> — the text, figures, and tables authored by ACE — are released under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International licence (CC BY 4.0)</a>. You may copy, redistribute, translate, and adapt them for any purpose, including commercially, provided you credit ACE, link to the licence, and clearly indicate any changes. Cite the report’s concept DOI; each published version is archived immutably on Zenodo with its own version DOI, so any adaptation can be checked against the authoritative text.</p>
+<p><strong>Code</strong> — the analysis helpers, templates, and scripts in the <a href="https://github.com/MatthewBJane/audit-clinical-evidence">repository</a> — is released under the <a href="https://opensource.org/licenses/MIT">MIT Licence</a>.</p>
+<p><strong>Extracted data</strong> — values transcribed from the audited publications and compiled by ACE — are released under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a> to the extent ACE holds any rights in them.</p>
+<p><strong>Not covered by these licences.</strong> The ACE name, the ACE wordmark and logo, and the visual identity of this site are excluded from all of the above; all rights are reserved, and they may not be used in a way that suggests a report, statement, or product is published or endorsed by ACE. Excerpts, tables, and images reproduced from the audited publications remain the copyright of their original rights-holders and are reproduced here under fair use for the purpose of criticism and review; the CC BY licence does not extend to them.</p>
 
 
 </section>
@@ -434,7 +471,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/auditclinicalevidence\.org");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -772,7 +809,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <p>contact@auditclinicalevidence.org</p>
 </div>
     <div class="nav-footer-right">
-<p>Open Access: CC BY-NC-ND 4.0</p>
+<p>Reports CC BY 4.0 · Code MIT</p>
 </div>
   </div>
 </footer>

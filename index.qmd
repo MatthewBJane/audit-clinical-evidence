@@ -18,7 +18,7 @@ body-classes: homepage
 
 listing:
   - id: ACEreports
-    contents: "reports/ACE*.qmd"
+    contents: "reports/*/index.qmd"
     template: ace-report-listing.ejs.md
     fields: [title, subtitle, abstract, categories, date, date-modified, button, ace-id]
     sort: "date desc"
@@ -29,9 +29,11 @@ listing:
 ---
 
 
-**Audit Clinical Evidence (ACE)** is a platform dedicated to evaluating research integrity in the medical and clinical sciences. ACE independently reviews published papers for errors and indicators of potential fabrication or misconduct. Ultimately, ACE aims to protect the credibility of the scientific record.
+::: {.ace-intro}
+Audit Clinical Evidence (ACE) exists to protect the credibility of the scientific record. We audit published clinical research for errors and signs of falsification, fabrication, manipulation, and misconduct. If it slipped past peer review, we find it. We document it. We publish it. We report it.
+:::
 
-#### Reports
+#### [Reports]{.ace-section-label} [A catalogue of published ACE audit reports]{.ace-section-note} {.ace-section-heading}
 
 ::: {#ACEreports}
 :::

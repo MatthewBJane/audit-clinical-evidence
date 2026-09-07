@@ -20,6 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 </style>
 
 
@@ -30,6 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,38 +70,31 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
+<script>
+window.MathJax = {
+  output: { font: "mathjax-fira" },
+  tex: {
+    inlineMath:  [["\\(", "\\)"], ["$", "$"]],
+    displayMath: [["\\[", "\\]"], ["$$", "$$"]]
   }
-}
-window.Quarto = {
-  typesetMath
 };
 </script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml-nofont.js"></script>
+
 
 <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="ABOUT – ACE">
+<meta property="og:description" content="Independent audits of clinical research for statistical errors and research integrity violations.">
+<meta property="og:image" content="https://auditclinicalevidence.org/images/social-card.png">
+<meta property="og:site_name" content="ACE">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta name="twitter:title" content="ABOUT – ACE">
+<meta name="twitter:description" content="Independent audits of clinical research for statistical errors and research integrity violations.">
+<meta name="twitter:image" content="https://auditclinicalevidence.org/images/twitter-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="600">
+<meta name="twitter:image-width" content="1200">
 </head>
 
 <body class="nav-fixed">
@@ -132,6 +127,10 @@ window.Quarto = {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./team.html"> 
+<span class="menu-text">Team</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./disclaimers.html"> 
 <span class="menu-text">Disclaimers</span></a>
   </li>  
@@ -142,7 +141,12 @@ window.Quarto = {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/MatthewBJane/audit-clinical-evidence"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="./reports.xml"> <i class="bi bi-rss" role="img" aria-label="RSS feed of ACE reports">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/MatthewBJane/audit-clinical-evidence"> <i class="bi bi-github" role="img" aria-label="ACE on GitHub">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -165,11 +169,11 @@ window.Quarto = {
   <ul>
   <li><a href="#mission" id="toc-mission" class="nav-link active" data-scroll-target="#mission">Mission</a></li>
   <li><a href="#scope-of-ace-reports" id="toc-scope-of-ace-reports" class="nav-link" data-scroll-target="#scope-of-ace-reports">Scope of ACE Reports</a></li>
-  <li><a href="#report-identifiers" id="toc-report-identifiers" class="nav-link" data-scroll-target="#report-identifiers">Report Identifiers</a></li>
-  <li><a href="#reproducibility-and-version-control" id="toc-reproducibility-and-version-control" class="nav-link" data-scroll-target="#reproducibility-and-version-control">Reproducibility and Version Control</a></li>
   <li><a href="#evidence-standard" id="toc-evidence-standard" class="nav-link" data-scroll-target="#evidence-standard">Evidence Standard</a></li>
-  <li><a href="#why-ace-exists" id="toc-why-ace-exists" class="nav-link" data-scroll-target="#why-ace-exists">Why ACE Exists</a></li>
-  <li><a href="#tips-and-documentation" id="toc-tips-and-documentation" class="nav-link" data-scroll-target="#tips-and-documentation">Tips and Documentation</a></li>
+  <li><a href="#report-identifiers" id="toc-report-identifiers" class="nav-link" data-scroll-target="#report-identifiers">Report Identifiers</a></li>
+  <li><a href="#versioning-and-reproducibility" id="toc-versioning-and-reproducibility" class="nav-link" data-scroll-target="#versioning-and-reproducibility">Versioning and Reproducibility</a></li>
+  <li><a href="#corrections-and-responses" id="toc-corrections-and-responses" class="nav-link" data-scroll-target="#corrections-and-responses">Corrections and Responses</a></li>
+  <li><a href="#tips" id="toc-tips" class="nav-link" data-scroll-target="#tips">Tips</a></li>
   <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -196,37 +200,11 @@ window.Quarto = {
 </header>
 
 
-<div class="about-page-grid">
-<div class="about-photo">
-<div class="ace-hover-photo">
-  <img src="images/about_photo.png" alt="Stylized ACE team portrait with Kutenda F. Mvududu on the left and Matthew B. Jane on the right.">
-
-  <div class="ace-photo-hotspot ace-photo-left" title="Kutenda" aria-label="Kutenda F. Mvududu">
-    <span class="ace-photo-tooltip">Kutenda</span>
-  </div>
-
-  <div class="ace-photo-hotspot ace-photo-right" title="Matt" aria-label="Matthew B. Jane">
-    <span class="ace-photo-tooltip">Matt</span>
-  </div>
-</div>
-</div>
-<section id="team" class="level2 about-team">
-<h2 class="anchored" data-anchor-id="team">Team</h2>
-<section id="matthew-b.-jané-phd-candidate-ms-bs" class="level3">
-<h3 class="anchored" data-anchor-id="matthew-b.-jané-phd-candidate-ms-bs">Matthew B. Jané <span class="degree-suffix">PhD candidate, MS, BS</span></h3>
-<p><strong>Founder and Lead Auditor</strong></p>
-<p>Matthew B. Jané is the founder and lead auditor of the Audit Clinical Evidence initiative and a PhD candidate in Quantitative Psychology at the University of Connecticut, where his work focuses on statistical methods for meta-analysis and forensic meta-science. Within ACE, he leads study identification, report development, statistical analyses, and project standards.</p>
-</section>
-<section id="kutenda-f.-mvududu-bs-nremt" class="level3">
-<h3 class="anchored" data-anchor-id="kutenda-f.-mvududu-bs-nremt">Kutenda F. Mvududu <span class="degree-suffix">BS, NREMT</span></h3>
-<p><strong>Project Developer and Auditor</strong></p>
-<p>Kutenda F. Mvududu serves as a project developer and auditor for the Audit Clinical Evidence initiative. She holds a Bachelor of Science in Biology with a pre-medical concentration and is a certified EMT through the National Registry of Emergency Medical Technicians. Within ACE, she supports study identification, report preparation, documentation review, project organization, and social media content production.</p>
-</section>
-</section>
-</div>
+<p><strong>Audit Clinical Evidence (ACE)</strong> is an independent initiative that publishes detailed, reproducible audits of clinical and medical research. Each ACE report documents the errors, inconsistencies, and integrity concerns that can be verified from the public record of one or more published studies, and shows exactly how each finding was reached.</p>
 <section id="mission" class="level2">
 <h2 class="anchored" data-anchor-id="mission">Mission</h2>
-<p>The purpose of the <strong>Audit Clinical Evidence</strong> initiative is to provide transparent, reproducible, and evidence-based audits of clinical and medical research. ACE audit reports focus on observable statistical errors, internal inconsistencies, image anomalies, potential data fabrication, publication ethics issues, and other research integrity concerns.</p>
+<p>The purpose of ACE is to provide transparent, reproducible, and evidence-based audits of clinical and medical research. ACE reports focus on observable statistical errors, internal inconsistencies, image anomalies, potential data fabrication, publication ethics issues, and other research integrity concerns.</p>
+<p>Clinical research influences meta-analyses, clinical guidelines, patient care, health policy, and public trust in medicine. When a published study contains impossible statistics, undisclosed protocol deviations, duplicated data, fabricated images, or other serious integrity problems, those problems propagate far beyond the original article. ACE exists to make such problems easier to identify, document, and act upon, by producing reports that journals, publishers, institutions, guideline developers, meta-analysts, clinicians, and readers can use to assess whether a study should be trusted as evidence.</p>
 <p>The identification of errors or anomalies in ACE reports is strictly evidence-based. Findings are limited to issues that can be documented from the published record, trial registrations, supplementary materials, public databases, article metadata, and reproducible statistical checks. ACE avoids unsupported speculation, but may identify plausible integrity concerns when the public record contains strong convergent evidence.</p>
 </section>
 <section id="scope-of-ace-reports" class="level2">
@@ -246,54 +224,80 @@ window.Quarto = {
 </ul>
 <p>When possible, ACE includes figures, tables, screenshots, code, and step-by-step explanations showing exactly where an error appears and how it was evaluated.</p>
 </section>
-<section id="report-identifiers" class="level2">
-<h2 class="anchored" data-anchor-id="report-identifiers">Report Identifiers</h2>
-<p>Each ACE report receives a unique identifier. The identifier records the project name, publication year, and report number. <span class="math display">\[
-\overset{\textsf{project}}{\overbrace{\textsf{ACE}\vphantom{^0_0}}}\;\underset{\textsf{year}}{\underbrace{\textsf{2026}\vphantom{^0_0}}}\!\!\!\!\!\overset{\textsf{report number}}{\overbrace{\textsf{0001}\vphantom{^0_0}}}\!\!\!\!\!\!\!\;
-\]</span> For example, <code>ACE20260001</code> refers to the first ACE report issued in 2026.</p>
-</section>
-<section id="reproducibility-and-version-control" class="level2">
-<h2 class="anchored" data-anchor-id="reproducibility-and-version-control">Reproducibility and Version Control</h2>
-<p>ACE reports are versioned through Zenodo, which provides persistent DOIs for report releases and archived versions. Each report includes a changelog as the final section so readers can track what has changed since the originally published version.</p>
-<p>Whenever possible, the code used to generate calculations, figures, tables, and consistency checks is included in the corresponding Quarto report files. The online report viewer includes collapsible code blocks so readers can inspect the code workflow without interrupting the main narrative. The PDF versions do <strong>not</strong> include code, in order to preserve readability and make the reports easier to share, cite, and review.</p>
-<p>Additionally, people can submit corrections to reports. Corrections are screened and subsequently incorporated into the latest version of a report.</p>
-</section>
 <section id="evidence-standard" class="level2">
 <h2 class="anchored" data-anchor-id="evidence-standard">Evidence Standard</h2>
-<p>The goal is to separate what errors or integrity concerns can be demonstrated from what can only be suspected.</p>
-<p>A typical ACE finding must satisfy four conditions:</p>
+<p>The goal of every ACE report is to separate what can be demonstrated from what can only be suspected. Every finding must satisfy three conditions:</p>
 <ol type="1">
-<li>the issue must be observable in the public record;</li>
-<li>the reasoning must be explainable from the reported data, text, images, metadata, or registrations;</li>
+<li>the issue must be observable in the public record (reported data, text, images, metadata, or registrations);</li>
 <li>the check must be reproducible by an independent reader;</li>
-<li>the claim made in the audit must reasonably follow from the available evidence.</li>
+<li>the conclusion drawn must not exceed what the available evidence reasonably supports.</li>
 </ol>
-<p>The purpose to ensure that every finding is tied to a transparent evidentiary basis and does not exceed what the evidence can reasonably support.</p>
+<p>These conditions ensure that each finding is tied to a transparent evidentiary basis. ACE reports do not accuse any author, institution, or publisher of deliberate misconduct; they document what the record shows and let readers draw their own conclusions.</p>
 </section>
-<section id="why-ace-exists" class="level2">
-<h2 class="anchored" data-anchor-id="why-ace-exists">Why ACE Exists</h2>
-<p>Clinical research influences meta-analyses, clinical guidelines, patient care, health policy, and public trust in medicine. When published studies contain impossible statistics, undisclosed protocol deviations, duplicated data, fabricated images, or other serious integrity problems, those problems can propagate far beyond the original article.</p>
-<p>ACE was created to make these problems easier to identify, document, and act upon. The project focuses on producing detailed, reproducible reports that can be used by journals, publishers, institutions, guideline developers, meta-analysts, clinicians, and readers who need to assess whether a study should be trusted as evidence.</p>
+<section id="report-identifiers" class="level2">
+<h2 class="anchored" data-anchor-id="report-identifiers">Report Identifiers</h2>
+<p>Each ACE report receives a unique identifier made up of the project name, the publication year, and a three-digit report number.</p>
+<div class="ace-id-anatomy" role="img" aria-label="Anatomy of an ACE identifier: ACE is the project, 2026 is the year, 001 is the report number">
+  <span class="ace-id-part"><span class="ace-id-label">project</span><span class="ace-id-seg">ACE</span></span>
+  <span class="ace-id-part"><span class="ace-id-label">year</span><span class="ace-id-seg">2026</span></span>
+  <span class="ace-id-part"><span class="ace-id-label">report number</span><span class="ace-id-seg">001</span></span>
+</div>
+<p>For example, <code>ACE2026001</code> is the first ACE report issued in 2026. The identifier appears on the report page, on the cover of the PDF, and in the report’s Zenodo record, so a report can always be located from its ID alone.</p>
 </section>
-<section id="tips-and-documentation" class="level2">
-<h2 class="anchored" data-anchor-id="tips-and-documentation">Tips and Documentation</h2>
-<p>ACE welcomes tips related to potential errors or integrity concerns in clinical research. Tips and whistleblower communications are treated as confidential.</p>
-<p>To be useful, a tip should be specific and evidence-based. General claims that a researcher, institution, journal, or public figure is “a fraud” are not sufficient on their own. A useful tip should identify the specific study, report, trial registration, dataset, figure, table, author group, journal, or publication record at issue and explain what appears to be wrong.</p>
-<p>Helpful tips may include:</p>
+<section id="versioning-and-reproducibility" class="level2">
+<h2 class="anchored" data-anchor-id="versioning-and-reproducibility">Versioning and Reproducibility</h2>
+<p>ACE reports are archived on Zenodo. Each published version of a report receives its own DOI and is preserved immutably, while the report’s concept DOI always resolves to the most recent version. Cite the concept DOI when referring to a report in general and the version DOI when a specific wording matters. Each report ends with a <strong>Version history</strong> section listing what changed in every revision, so readers can track how the report has evolved since it was first published.</p>
+<p>Whenever possible, the code used to generate calculations, figures, tables, and consistency checks is included in the corresponding Quarto report files. The online report viewer includes collapsible code blocks so readers can inspect the code workflow without interrupting the main narrative. The PDF versions do <strong>not</strong> include code, in order to preserve readability and make the reports easier to share, cite, and review.</p>
+</section>
+<section id="corrections-and-responses" class="level2">
+<h2 class="anchored" data-anchor-id="corrections-and-responses">Corrections and Responses</h2>
+<p>Finalized ACE reports are routinely forwarded to the editorial boards and/or publishers of the corresponding journals for their independent review. Authors of an audited study who wish to provide data, clarifications, or a response are encouraged to contact ACE; correspondence relating to audit findings may be published or quoted, with personal or sensitive information redacted, unless confidentiality is agreed in advance.</p>
+<p>Readers may submit corrections to any report. Corrections are screened and, when credible evidence shows that a finding should be revised, incorporated into a new version of the report and recorded in its version history. See the <a href="./disclaimers.html">disclaimers</a> page for the full editorial and correspondence policy.</p>
+</section>
+<section id="tips" class="level2">
+<h2 class="anchored" data-anchor-id="tips">Tips</h2>
+<p>ACE welcomes tips about potential errors or integrity concerns in clinical research. Tips and whistleblower communications are treated as confidential, and sources will not be publicly identified without their explicit permission.</p>
+<p>To be useful, a tip should be specific and evidence-based. General claims that a researcher, institution, journal, or public figure is “a fraud” are not sufficient on their own. A useful tip identifies the specific study, report, trial registration, dataset, figure, table, author group, journal, or publication record at issue and explains what appears to be wrong. Helpful tips include:</p>
 <ol type="1">
 <li>the article title, DOI, journal, or trial registration number;</li>
 <li>the specific table, figure, outcome, image, statistic, or passage that appears problematic;</li>
-<li>the suspected issue, such as impossible statistics, duplicated data, image manipulation, authorship irregularities, undisclosed protocol deviations, plagiarism, or publication mill indicators;</li>
+<li>the suspected issue, such as impossible statistics, duplicated data, image manipulation, authorship irregularities, undisclosed protocol deviations, plagiarism, or paper-mill indicators;</li>
 <li>any supporting documentation, screenshots, archived pages, PubPeer threads, registry records, code, calculations, or related publications;</li>
 <li>a brief explanation of why the issue matters.</li>
 </ol>
-<p>ACE may review submitted tips, but submission does not guarantee that a report will be produced. Due to limited manpower, priority is given to cases where the concern is specific, tractable, reproducible, and relevant to the reliability of clinical evidence. Send tips to contact@AuditClinicalEvidence.org.</p>
+<p>ACE reviews submitted tips, but submission does not guarantee that a report will be produced. Because capacity is limited, priority is given to cases where the concern is specific, tractable, reproducible, and relevant to the reliability of clinical evidence.</p>
+<div class="about-page-grid">
+<div class="about-photo">
+<div class="ace-hover-photo">
+  <img src="images/about_photo.png" alt="Stylized ACE team portrait with Kutenda F. Mvududu on the left and Matthew B. Jané on the right.">
+
+  <div class="ace-photo-hotspot ace-photo-left" title="Kutenda" aria-label="Kutenda F. Mvududu">
+    <span class="ace-photo-tooltip">Kutenda</span>
+  </div>
+
+  <div class="ace-photo-hotspot ace-photo-right" title="Matt" aria-label="Matthew B. Jané">
+    <span class="ace-photo-tooltip">Matt</span>
+  </div>
+</div>
+</div>
+<section id="team" class="level2 about-team">
+<h2 class="anchored" data-anchor-id="team">Team</h2>
+<section id="matthew-b.-jané-phd-candidate-ms-bs" class="level3">
+<h3 class="anchored" data-anchor-id="matthew-b.-jané-phd-candidate-ms-bs">Matthew B. Jané <span class="degree-suffix">PhD candidate, MS, BS</span></h3>
+<p><strong>Founder and Lead Auditor</strong> · <a href="https://orcid.org/0000-0002-3121-7769">ORCID</a></p>
+<p>Matthew is a PhD candidate in Quantitative Psychology at the University of Connecticut, where his work focuses on statistical methods for meta-analysis and forensic meta-science. Within ACE, he leads study identification, report development, statistical analyses, and project standards.</p>
+</section>
+<section id="kutenda-f.-mvududu-bs-nremt" class="level3">
+<h3 class="anchored" data-anchor-id="kutenda-f.-mvududu-bs-nremt">Kutenda F. Mvududu <span class="degree-suffix">BS, NREMT</span></h3>
+<p><strong>Project Developer and Auditor</strong> · <a href="https://orcid.org/0009-0009-3977-1367">ORCID</a></p>
+<p>Kutenda holds a Bachelor of Science in Biology with a pre-medical concentration and is a certified EMT through the National Registry of Emergency Medical Technicians. Within ACE, she supports study identification, report preparation, documentation review, project organization, and social media content production.</p>
+</section>
+</section>
+</div>
 </section>
 <section id="contact" class="level2">
 <h2 class="anchored" data-anchor-id="contact">Contact</h2>
-<p>Questions, corrections, tips, and documentation relevant to ACE reports can be sent to:</p>
-<p><strong>contact@AuditClinicalEvidence.org</strong></p>
-<p>Tips and whistleblower communications are treated as confidential. ACE welcomes corrections and will update reports when credible evidence shows that a finding should be revised.</p>
+<p>Questions, corrections, tips, and responses from authors of audited studies can be sent to <strong><a href="mailto:contact@auditclinicalevidence.org">contact@AuditClinicalEvidence.org</a></strong>. Tips and whistleblower communications are treated as confidential.</p>
 
 
 </section>
@@ -535,7 +539,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/auditclinicalevidence\.org");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -873,7 +877,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <p>contact@auditclinicalevidence.org</p>
 </div>
     <div class="nav-footer-right">
-<p>Open Access: CC BY-NC-ND 4.0</p>
+<p>Reports CC BY 4.0 · Code MIT</p>
 </div>
   </div>
 </footer>

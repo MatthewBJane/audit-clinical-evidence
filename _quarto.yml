@@ -9,6 +9,14 @@ project:
  
 website:
   title: "ACE"
+  site-url: https://auditclinicalevidence.org
+  description: "Independent audits of clinical research for statistical errors and research integrity violations."
+  favicon: images/favicon.png
+  open-graph:
+    image: /images/social-card.png
+  twitter-card:
+    image: /images/twitter-card.png
+    card-style: summary_large_image
   navbar:
     left:
       - href: index.qmd
@@ -17,17 +25,23 @@ website:
         text: Reports
       - href: about.qmd
         text: About
+      - href: team.qmd
+        text: Team
       - href: disclaimers.qmd
         text: Disclaimers
       - href: riv.qmd
         text: Integrity Violations
     right:
+      - icon: rss
+        href: reports.xml
+        aria-label: RSS feed of ACE reports
       - icon: github
         href: https://github.com/MatthewBJane/audit-clinical-evidence
+        aria-label: ACE on GitHub
         
   page-footer:
     left: "© 2026 Matthew B. Jané"
-    right: "Open Access: CC BY-NC-ND 4.0"
+    right: "Reports CC BY 4.0 · Code MIT"
     center: "contact@auditclinicalevidence.org"
 
 format:
@@ -36,6 +50,23 @@ format:
       light: flatly
       dark: darkly # A better base theme for a black background
     css: styles.css
+    # Math: Quarto's bundled MathJax 3 cannot change font. Leave math as plain
+    # TeX in the page and load MathJax 4 ourselves with Fira Math, a sans
+    # math font that matches Roboto. Config must precede the script, so both
+    # live here rather than relying on Quarto's own math loader.
+    html-math-method: plain
+    include-in-header:
+      text: |
+        <script>
+        window.MathJax = {
+          output: { font: "mathjax-fira" },
+          tex: {
+            inlineMath:  [["\\(", "\\)"], ["$", "$"]],
+            displayMath: [["\\[", "\\]"], ["$$", "$$"]]
+          }
+        };
+        </script>
+        <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml-nofont.js"></script>
     toc: true
     mainfont: "Roboto, sans-serif"
     monofont: "Roboto Mono, monospace"

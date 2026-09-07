@@ -3,14 +3,22 @@ title: "Report title used for citing and referencing this report"
 subtitle: "The short title coming after the colon"
 
 ace-id: "ACE2026000"
-output-file: "ACE2026000.pdf"
 
 date: "2026-06-21"
 date-modified: "2026-06-01"
 
-Status: "Nothing yet"
-DOI: "10.01040/10049012092"
-Journal: "Medicine"
+doi: ""
+concept-doi: ""
+
+# DOIs of the papers this report audits (relation: reviews)
+audited: []
+# DOIs of supporting literature (relation: references)
+cites: []
+
+# Link-preview text only (og:description); hidden on the page itself by styles.css. One sentence.
+description: "One-sentence summary of the audit finding and recommendation."
+# Optional per-report preview image, 1200x630, relative to this folder:
+# image: images/social.png
 
 categories: ["Exercise", "Depression", "RCT"]
 
@@ -27,15 +35,15 @@ author:
         state: CT
 
 format:
-  html: {}
+  html:
+    output-file: "index.html"
   acePDF-pdf:
+    output-file: "ACE2026000.pdf"
     header-includes:
       - \newcommand{\coverAffiliation}{University of Connecticut, Storrs, CT}
 
 button: |
-  <a class="ace-pdf-button" href="reports/ACE2026000.pdf" target="_blank">PDF</a>
-
-
+  <a class="ace-pdf-button" href="reports/ACE2026000/ACE2026000.pdf" target="_blank">PDF</a>
 
 
 ---
@@ -132,5 +140,13 @@ The primary outcome was reported previously [@abdelbasset2019a].
 
 ## References {.unnumbered}
 
+\clearpage
 
+## Version history {.unnumbered}
 
+| Version | Date | DOI | Change |
+|---|---|---|---|
+| 1 | YYYY-MM-DD | (version DOI) | Initial publication. |
+
+: Any change to a finding, RIV count, or recommendation creates a new version with
+a new version DOI. Superseded versions remain permanently resolvable.

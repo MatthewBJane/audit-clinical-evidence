@@ -3,12 +3,22 @@ title: "Audit of Abdelbasset et al. (2019)"
 subtitle: "Three randomized controlled trials on exercise and depression"
 
 ace-id: "ACE2026001"
-output-file: "ACE2026001.pdf"
 
-date: "6/27/2026"
-date-modified: "6/29/2026"
+date: "9/6/2026"
+date-modified: "9/6/2026"
 
-Journal: "Audit Clinical Evidence"
+doi: ""
+concept-doi: ""
+
+# Papers this report audits -> Zenodo related_identifiers relation "reviews".
+# This is what links the audit to the audited work in the DataCite graph.
+audited:
+  - "10.1097/MD.0000000000015344"
+  - "10.1097/MD.0000000000016820"
+  - "10.6061/clinics/2019/e1017"
+
+# Link-preview text only (og:description); hidden on the page itself by styles.css.
+description: "Three 2019 RCTs on exercise for depression in heart failure: overlapping trial arms, duplicated PHQ-9 data, impossible statistics. 21 integrity violations; retraction recommended."
 
 categories: ["Exercise", "Depression", "Heart Disease", "RCT"]
 
@@ -19,17 +29,20 @@ author:
     given: "Matthew B."
     email: "contact@auditclinicalevidence.org"
     affiliation: "University of Connecticut, Storrs, CT"
+    orcid: 0000-0002-3121-7769
   - family: "Mvududu"
-  
     given: "Kutenda F."
-    affiliation: "University of Massachusetts, Boston, MA"
+    affiliation: "University of Massachusetts Boston, Boston, MA"
+    orcid: 0009-0009-3977-1367
 
 format:
-  html: {}
-  acePDF-pdf: {}
+  html:
+    output-file: "index.html"
+  acePDF-pdf:
+    output-file: "ACE2026001.pdf"
 
 button: |
-  <a class="ace-pdf-button" href="reports/ACE2026001.pdf" target="_blank">PDF</a>
+  <a class="ace-pdf-button" href="reports/ACE2026001/ACE2026001.pdf" target="_blank">PDF</a>
 
 citation:
   type: report
@@ -364,6 +377,10 @@ Taken together, these findings substantially undermine the reliability and integ
 We believe that the appropriate editorial action is *retraction*. The journals that published these articles, *Medicine* and *Clinics*, should retract all three articles because they contain duplicated trial arms, incompatible ethical approval identifiers, incompatible authorship contribution statements, compromised editorial handling, impossible PHQ-9 results, extreme treatment effects that have influenced later meta-analyses, and is potentially a product of a well-documented authorship-for-sale publication mill. These are mutually reinforcing failures that undermine the integrity and evidentiary value of the reported clinical trial.
 
 Until retractions are issued, meta-analysts, guideline developers, and readers should treat the three studies as unreliable and exclude them from evidence syntheses.
+
+$$
+x = \int\frac{\partial x}{\partial f(y)} g^{-1}(c; \theta) =  \mathbb{E}[X | Z, \sigma_{\mathcal{B}}]\mathcal{N}
+$$
 
 
 

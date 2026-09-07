@@ -6,3 +6,11 @@
 
 # Stale Quarto output dir (site now renders to documents/)
 /_site/
+
+# Secrets - never commit tokens. ZENODO_TOKEN belongs in your shell profile,
+# outside this repository.
+.env
+.env.*
+*token*
+*secret*
+.Renviron

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>ACE audit reports</title>
+<link>https://auditclinicalevidence.org/reports.html</link>
+<atom:link href="https://auditclinicalevidence.org/reports.xml" rel="self" type="application/rss+xml"/>
+<description>New and updated audit reports from Audit Clinical Evidence.</description>
+<image>
+<url>https://auditclinicalevidence.org/images/social-card.png</url>
+<title>ACE audit reports</title>
+<link>https://auditclinicalevidence.org/reports.html</link>
+<height>76</height>
+<width>144</width>
+</image>
+<generator>quarto-1.5.56</generator>
+<lastBuildDate>Sun, 06 Sep 2026 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Audit of Abdelbasset et al. (2019)</title>
+  <dc:creator>Matthew B. Jané</dc:creator>
+  <dc:creator>Kutenda F. Mvududu</dc:creator>
+  <link>https://auditclinicalevidence.org/reports/ACE2026001/</link>
+  <description><![CDATA[ Three 2019 RCTs on exercise for depression in heart failure: overlapping trial arms, duplicated PHQ-9 data, impossible statistics. 21 integrity violations; retraction recommended. ]]></description>
+  <category>Exercise</category>
+  <category>Depression</category>
+  <category>Heart Disease</category>
+  <category>RCT</category>
+  <guid>https://auditclinicalevidence.org/reports/ACE2026001/</guid>
+  <pubDate>Sun, 06 Sep 2026 04:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

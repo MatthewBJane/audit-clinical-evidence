@@ -1,5 +1,5 @@
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Roboto+Mono&family=Rubik+Glitch&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500;600;700&family=Rubik+Glitch&display=swap');
 
 /* ---- GLOBAL STYLES ---- */
 body {
@@ -13,32 +13,321 @@ code, pre {
 }
 
 
-/* Gradient & Glitch Font for Main Headers (H1, H2) - Gradient Intact */
-h1, .navbar-title {
+/* The wordmark's glitch shadows draw 3px outside the text box on every side,
+   and Rubik Glitch's ink overhangs its advance width. Bootstrap gives
+   .navbar-brand overflow:hidden (to truncate long titles), which clipped both.
+   Let it overflow and give the shadows room. */
+.navbar .navbar-brand {
+  overflow: visible !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+/* ---------------------------------------------------------
+   NAVBAR LINKS
+   Thin wireframe box in the navbar's own border colour
+   (magenta in dark, cyan in light); fills solid on hover.
+--------------------------------------------------------- */
+.navbar .navbar-nav .nav-link {
+  border: 1px solid rgba(226, 98, 226, 0.55);
+  border-radius: 0;
+  padding: 0.3rem 0.75rem !important;
+  margin: 0 0.2rem;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+/* hover: 75% fill (more than the 22% current-page tint, less than solid),
+   solid border for a crisp edge. Text colour chosen per theme for contrast
+   against the blended result over the dark navbar. */
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link:focus-visible {
+  text-decoration: none !important;
+  background-color: rgba(226, 98, 226, 0.75);
+  border-color: #e262e2;
+  color: #ffffff !important;
+}
+
+/* current page: a low-alpha fill of the theme colour; border stays subtle */
+.navbar .navbar-nav .nav-link.active {
+  background-color: rgba(226, 98, 226, 0.22);
+}
+
+/* light theme: the navbar border is cyan, so the boxes follow */
+body.quarto-light .navbar .navbar-nav .nav-link {
+  border-color: rgba(3, 229, 255, 0.55);
+}
+
+body.quarto-light .navbar .navbar-nav .nav-link:hover,
+body.quarto-light .navbar .navbar-nav .nav-link:focus-visible {
+  background-color: rgba(3, 229, 255, 0.75);
+  border-color: #03e5ff;
+  color: #ffffff !important;
+}
+
+body.quarto-light .navbar .navbar-nav .nav-link.active {
+  background-color: rgba(3, 229, 255, 0.22);
+}
+
+/* ---------------------------------------------------------
+   LIGHT / DARK TOGGLE
+   Quarto adds .alternate to the toggle link in dark mode and
+   draws its icon on .bi::before. Rebuilt as a switch: ::before
+   is the pill track, ::after is the knob, which carries a sun
+   (light, knob left) or crescent (dark, knob right).
+--------------------------------------------------------- */
+.navbar .quarto-color-scheme-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.45rem !important;
+}
+
+.navbar .quarto-color-scheme-toggle .bi {
+  display: inline-block;
+  position: relative;
+  width: 2.9rem;
+  height: 1.55rem;
+}
+
+/* track */
+.navbar .quarto-color-scheme-toggle .bi::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: auto !important;
+  height: auto !important;
+  background-image: none !important;
+  background-color: transparent;
+  border: 1px solid rgba(226, 98, 226, 0.75);
+  border-radius: 999px;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+body.quarto-light .navbar .quarto-color-scheme-toggle .bi::before {
+  border-color: rgba(3, 229, 255, 0.75);
+}
+
+.navbar .quarto-color-scheme-toggle:hover .bi::before {
+  background-color: rgba(226, 98, 226, 0.18);
+}
+
+body.quarto-light .navbar .quarto-color-scheme-toggle:hover .bi::before {
+  background-color: rgba(3, 229, 255, 0.18);
+}
+
+/* knob, carrying the icon for the CURRENT mode. The crescent is a dark disc
+   with a magenta disc cut across it - it only ever appears on the magenta knob. */
+.navbar .quarto-color-scheme-toggle .bi::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);   /* true vertical centre, whatever the track height */
+  left: 0.2rem;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background-color: #e262e2;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0.85rem 0.85rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6.3' fill='%23222'/%3E%3Ccircle cx='10.6' cy='6.5' r='5.1' fill='%23e262e2'/%3E%3C/svg%3E");
+  transition: left 0.2s ease, background-color 0.15s ease;
+}
+
+body.quarto-light .navbar .quarto-color-scheme-toggle .bi::after {
+  background-color: #03e5ff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23222' stroke-width='1.7' stroke-linecap='round'%3E%3Ccircle cx='8' cy='8' r='2.8' fill='%23222' stroke='none'/%3E%3Cpath d='M8 1.4v1.6M8 13v1.6M1.4 8h1.6M13 8h1.6M3.3 3.3l1.1 1.1M11.6 11.6l1.1 1.1M3.3 12.7l1.1-1.1M11.6 4.4l1.1-1.1'/%3E%3C/svg%3E");
+}
+
+/* dark: knob slides to the right */
+.navbar .quarto-color-scheme-toggle.alternate .bi::after {
+  left: calc(100% - 1.15rem - 0.2rem);
+}
+
+/* ---------------------------------------------------------
+   WORDMARK HOVER GLITCH
+   The ACE wordmark (navbar + homepage) is text with magenta/cyan
+   drop-shadows. On hover, jitter those offsets and add a little
+   skew, stepped rather than eased so it jumps between states like
+   a signal dropout. Snaps back to the resting look on mouse-out.
+--------------------------------------------------------- */
+@keyframes ace-glitch {
+  0%, 100% { filter: drop-shadow(3px 3px 0 #e262e2) drop-shadow(-3px -3px 0 #03e5ff); transform: none; }
+  8%   { filter: drop-shadow(-5px 2px 0 #e262e2) drop-shadow(5px -2px 0 #03e5ff); transform: translate(-2px, 1px) skewX(-6deg); }
+  16%  { filter: drop-shadow(6px -1px 0 #e262e2) drop-shadow(-6px 1px 0 #03e5ff); transform: translate(2px, -1px); }
+  24%  { filter: drop-shadow(-2px -5px 0 #e262e2) drop-shadow(2px 5px 0 #03e5ff); transform: translate(-1px, 0) skewX(4deg); }
+  32%  { filter: drop-shadow(4px 4px 0 #e262e2) drop-shadow(-4px -4px 0 #03e5ff); transform: translate(1px, 1px); }
+  40%  { filter: drop-shadow(-7px 0 0 #e262e2) drop-shadow(7px 0 0 #03e5ff); transform: translate(-3px, 0) skewX(-8deg); }
+  48%  { filter: drop-shadow(2px -3px 0 #e262e2) drop-shadow(-2px 3px 0 #03e5ff); transform: none; }
+  56%  { filter: drop-shadow(-3px 3px 0 #e262e2) drop-shadow(3px -3px 0 #03e5ff); transform: translate(2px, 0) skewX(5deg); }
+  64%  { filter: drop-shadow(5px 1px 0 #e262e2) drop-shadow(-5px -1px 0 #03e5ff); transform: translate(-1px, -1px); }
+  72%  { filter: drop-shadow(-4px -2px 0 #e262e2) drop-shadow(4px 2px 0 #03e5ff); transform: translate(1px, 0) skewX(-3deg); }
+  80%  { filter: drop-shadow(3px 3px 0 #e262e2) drop-shadow(-3px -3px 0 #03e5ff); transform: none; }
+  88%  { filter: drop-shadow(-6px 3px 0 #e262e2) drop-shadow(6px -3px 0 #03e5ff); transform: translate(-2px, 1px) skewX(6deg); }
+}
+
+/* Ambient: rest for ~3.5s, then a ~1s burst (the last 22% of a 4.5s
+   cycle, eleven stepped states). Only the burst repaints. */
+@keyframes ace-glitch-ambient {
+  0%, 77%, 100% { filter: drop-shadow(3px 3px 0 #e262e2) drop-shadow(-3px -3px 0 #03e5ff); transform: none; }
+  78% { filter: drop-shadow(-5px 2px 0 #e262e2) drop-shadow(5px -2px 0 #03e5ff); transform: translate(-2px, 1px) skewX(-6deg); }
+  80% { filter: drop-shadow(6px -1px 0 #e262e2) drop-shadow(-6px 1px 0 #03e5ff); transform: translate(2px, -1px); }
+  82% { filter: drop-shadow(-2px -5px 0 #e262e2) drop-shadow(2px 5px 0 #03e5ff); transform: translate(-1px, 0) skewX(4deg); }
+  84% { filter: drop-shadow(4px 4px 0 #e262e2) drop-shadow(-4px -4px 0 #03e5ff); transform: translate(1px, 1px); }
+  86% { filter: drop-shadow(-7px 0 0 #e262e2) drop-shadow(7px 0 0 #03e5ff); transform: translate(-3px, 0) skewX(-8deg); }
+  88% { filter: drop-shadow(2px -3px 0 #e262e2) drop-shadow(-2px 3px 0 #03e5ff); transform: none; }
+  90% { filter: drop-shadow(-3px 3px 0 #e262e2) drop-shadow(3px -3px 0 #03e5ff); transform: translate(2px, 0) skewX(5deg); }
+  92% { filter: drop-shadow(5px 1px 0 #e262e2) drop-shadow(-5px -1px 0 #03e5ff); transform: translate(-1px, -1px); }
+  94% { filter: drop-shadow(-4px -2px 0 #e262e2) drop-shadow(4px 2px 0 #03e5ff); transform: translate(1px, 0) skewX(-3deg); }
+  96% { filter: drop-shadow(-6px 3px 0 #e262e2) drop-shadow(6px -3px 0 #03e5ff); transform: translate(-2px, 1px) skewX(6deg); }
+  98% { filter: drop-shadow(4px -2px 0 #e262e2) drop-shadow(-4px 2px 0 #03e5ff); transform: translate(1px, 0); }
+}
+
+/* always on, intermittently; the homepage mark is offset so the two
+   don't burst in unison */
+.navbar .navbar-title {
+  animation: ace-glitch-ambient 4.5s steps(1, end) infinite;
+}
+
+body.homepage h1.title {
+  animation: ace-glitch-ambient 4.5s steps(1, end) -2s infinite;
+}
+
+/* hover: continuous */
+.navbar .navbar-brand:hover .navbar-title,
+body.homepage h1.title:hover {
+  animation: ace-glitch 0.8s steps(1, end) infinite;
+}
+
+/* keep it still for people who have asked their OS for less motion */
+@media (prefers-reduced-motion: reduce) {
+  .navbar .navbar-title,
+  body.homepage h1.title,
+  .navbar .navbar-brand:hover .navbar-title,
+  body.homepage h1.title:hover {
+    animation: none;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   TEXT HOVER GLITCH
+   Smaller-amplitude version for ordinary text: a cyan/magenta
+   split via text-shadow plus a little skew. Used on listing
+   titles and navbar link text on hover.
+--------------------------------------------------------- */
+@keyframes ace-text-glitch {
+  0%, 100% { text-shadow: none; transform: none; }
+  10% { text-shadow: -2px 0 #03e5ff, 2px 0 #e262e2; transform: translate(-1px, 0) skewX(-6deg); }
+  20% { text-shadow: 2px 0 #03e5ff, -2px 0 #e262e2; transform: translate(1px, 0); }
+  30% { text-shadow: -1px -1px #03e5ff, 1px 1px #e262e2; transform: translate(0, -1px) skewX(4deg); }
+  40% { text-shadow: 3px 0 #03e5ff, -3px 0 #e262e2; transform: translate(-2px, 0) skewX(-8deg); }
+  50% { text-shadow: none; transform: none; }
+  60% { text-shadow: -2px 1px #03e5ff, 2px -1px #e262e2; transform: translate(1px, 0) skewX(5deg); }
+  70% { text-shadow: 1px 0 #03e5ff, -1px 0 #e262e2; transform: translate(-1px, -1px); }
+  80% { text-shadow: none; transform: none; }
+  90% { text-shadow: -3px 0 #03e5ff, 3px 0 #e262e2; transform: translate(2px, 0) skewX(6deg); }
+}
+
+/* listing title: glitch on top of the existing background wash */
+.ace-report-title a:hover,
+.ace-report-title a:focus-visible {
+  animation: ace-text-glitch 0.8s steps(1, end) infinite;
+}
+
+/* navbar links: glitch the text only, so the wireframe box stays put */
+.navbar .navbar-nav .nav-link .menu-text {
+  display: inline-block;
+}
+
+.navbar .navbar-nav .nav-link:hover .menu-text,
+.navbar .navbar-nav .nav-link:focus-visible .menu-text {
+  animation: ace-text-glitch 0.8s steps(1, end) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ace-report-title a:hover,
+  .ace-report-title a:focus-visible,
+  .navbar .navbar-nav .nav-link:hover .menu-text,
+  .navbar .navbar-nav .nav-link:focus-visible .menu-text {
+    animation: none;
+  }
+}
+
+/* Navbar wordmark - keeps the ACE glitch treatment */
+.navbar-title {
   font-family: 'Rubik Glitch', system-ui;
-  font-weight: normal !important; /* Removes the default bold effect */
+  font-weight: normal !important;
   background: white;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent; 
+  color: transparent;
   font-size: 36pt;
-  filter: 
-    drop-shadow(3px 3px 0px #e262e2) 
+  filter:
+    drop-shadow(3px 3px 0px #e262e2)
     drop-shadow(-3px -3px 0px #03e5ff);
 }
 
+/* ---------------------------------------------------------
+   ACE TITLES
+   Clean, high-contrast headings. No display face, no glitch.
+--------------------------------------------------------- */
 
-/* Directly targets the title class on the homepage - Gradient Intact */
-.homepage h1.title {
+h1 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  font-size: 2rem;
+
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: currentColor;
+  color: inherit;
+  filter: none;
+}
+
+/* Report / page titles - clean. Homepage wordmark excluded below. */
+html body:not(.homepage) h1.title {
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: clamp(1.7rem, 1.3rem + 1.3vw, 2.35rem) !important;
+  letter-spacing: -0.022em !important;
+  line-height: 1.12 !important;
+  text-wrap: balance;
+
+  margin-bottom: 0.5rem !important;
+
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  filter: none !important;
+}
+
+html body.quarto-light:not(.homepage) h1.title {
+  color: #0f1419 !important;
+  -webkit-text-fill-color: #0f1419 !important;
+}
+
+html body.quarto-dark:not(.homepage) h1.title {
+  color: #f2f5f7 !important;
+  -webkit-text-fill-color: #f2f5f7 !important;
+}
+
+/* Homepage wordmark - keeps the ACE glitch treatment, matching the navbar */
+body.homepage h1.title {
   font-size: 70pt !important;
   font-family: 'Rubik Glitch', system-ui !important;
   font-weight: normal !important;
 
   background: black !important;
+
   -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
   color: transparent !important;
 
   filter:
@@ -46,118 +335,103 @@ h1, .navbar-title {
     drop-shadow(-3px -3px 0px #03e5ff);
 }
 
-/* Directly targets the title class on the homepage - Gradient Intact */
-h1.title {
-  font-size: 30pt !important;
-  font-family: 'Rubik Glitch', system-ui !important;
-  font-weight: normal !important;
-
-  background: black !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-  color: transparent !important;
-
-  filter:
-    drop-shadow(3px 3px 0px #e262e2)
-    drop-shadow(-3px -3px 0px #03e5ff);
-}
-
-/* Dark theme possibilities */
-html[data-bs-theme="dark"] h1.title,
-body[data-bs-theme="dark"] h1.title,
-[data-bs-theme="dark"] h1.title,
-body.quarto-dark h1.title,
-.quarto-dark h1.title {
-  background: white !important;
+body.homepage.quarto-light h1.title {
+  background-color: #222222 !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
 }
 
-/* Light theme possibilities */
-html[data-bs-theme="light"] h1.title,
-body[data-bs-theme="light"] h1.title,
-[data-bs-theme="light"] h1.title,
-body.quarto-light h1.title,
-.quarto-light h1.title {
-  background: #222222 !important;
+body.homepage.quarto-dark h1.title {
+  background-color: white !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
 }
 
 /* ---------------------------------------------------------
-   ACE SUBTITLE STYLE
-   Clean muted subtitle with ACE color accents
+   ACE SUBTITLE
+   Quiet deck line under the title. No box, no accent bar.
 --------------------------------------------------------- */
 
-.subtitle {
-  font-family: "Roboto", sans-serif !important;
-  font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.3rem) !important;
+html body .subtitle {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: clamp(1.15rem, 1.02rem + 0.45vw, 1.45rem) !important;
   font-weight: 400 !important;
-  line-height: 1.35;
-  letter-spacing: 0.01em;
+  line-height: 1.45 !important;
+  letter-spacing: 0 !important;
 
-  width: fit-content;
-  max-width: min(100%, 72ch);
+  width: auto !important;
+  max-width: 66ch !important;
 
-  padding: 0.45rem 0.75rem;
-  margin-top: 1.15rem;
-  margin-bottom: 1.25rem;
+  padding: 0 !important;
+  margin: 0.2rem 0 1.4rem !important;
 
-  border-radius: 0;
-  border-left: 4px solid;
-
-  filter: none !important;
+  border: 0 !important;
+  background: none !important;
+  background-color: transparent !important;
   box-shadow: none !important;
-  transform: none !important;
-
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    color 0.15s ease;
-}
-
-/* Light theme: cyan accent */
-html[data-bs-theme="light"] .subtitle,
-body[data-bs-theme="light"] .subtitle,
-body.quarto-light .subtitle {
-  background: rgba(226, 98, 226, 0.13) !important;
-  color: #555555 !important;
-  -webkit-text-fill-color: #555555 !important;
-  border-left-color: #e262e2;
-}
-
-/* Dark theme: magenta accent */
-html[data-bs-theme="dark"] .subtitle,
-body[data-bs-theme="dark"] .subtitle,
-body.quarto-dark .subtitle {
-  background: rgba(3, 229, 255, 0.10) !important;
-  color: #d6d6d6 !important;
-  -webkit-text-fill-color: #d6d6d6 !important;
-  border-left-color: #03e5ff;
-}
-
-/* Subtle hover, still clean */
-.subtitle:hover {
   filter: none !important;
   transform: none !important;
 }
 
-html[data-bs-theme="light"] .subtitle:hover,
-body[data-bs-theme="light"] .subtitle:hover,
-body.quarto-light .subtitle:hover {
-  background: rgba(226, 98, 226, 0.19) !important;
-  color: #444444 !important;
-  -webkit-text-fill-color: #444444 !important;
+html body.quarto-light .subtitle {
+  color: #6b7681 !important;
+  -webkit-text-fill-color: #6b7681 !important;
 }
 
-html[data-bs-theme="dark"] .subtitle:hover,
-body[data-bs-theme="dark"] .subtitle:hover,
-body.quarto-dark .subtitle:hover {
-  background: rgba(3, 229, 255, 0.16) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+html body.quarto-dark .subtitle {
+  color: #b8c2cb !important;
+  -webkit-text-fill-color: #b8c2cb !important;
 }
+
+html body .subtitle:hover {
+  background: none !important;
+  background-color: transparent !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+/* Homepage deck line under the ACE wordmark: tracked mono caps ruled
+   top and bottom in the theme accent (cyan light / magenta dark), matching
+   the navbar borders. Report pages keep the quiet subtitle above. */
+html body.homepage .subtitle {
+  font-family: 'Roboto Mono', monospace !important;
+  /* sized so the line spans roughly the ink width of the ACE wordmark above */
+  font-size: 0.76rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase;
+  line-height: 1.3 !important;
+
+  display: inline-block;
+  width: auto !important;
+  max-width: none !important;
+  padding: 0.4rem 0 !important;
+  margin: -0.1rem 0 1.3rem !important;
+
+  border-top: 2px solid #03e5ff !important;
+  border-bottom: 2px solid #03e5ff !important;
+}
+
+html body.homepage.quarto-light .subtitle {
+  color: #1a1f24 !important;
+  -webkit-text-fill-color: #1a1f24 !important;
+}
+
+html body.homepage.quarto-dark .subtitle {
+  color: #f2f5f7 !important;
+  -webkit-text-fill-color: #f2f5f7 !important;
+  border-top-color: #e262e2 !important;
+  border-bottom-color: #e262e2 !important;
+}
+
+html body.homepage .subtitle:hover {
+  animation: ace-text-glitch 0.8s steps(1, end) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body.homepage .subtitle:hover { animation: none; }
+}
+
 
 /* Standard styling for smaller headers */
 h2 {
@@ -639,34 +913,18 @@ body.quarto-dark .ace-report-card {
     filter 0.15s ease;
 }
 
-/* Title hover */
-.ace-report-title a {
-  display: inline-block;
-  transition:
-    transform 0.15s ease,
-    filter 0.15s ease;
-}
 
-.ace-report-title a:hover {
-  transform: translateY(-2px);
-  filter:
-    drop-shadow(3px 3px 0px rgba(226, 98, 226, 0.45))
-    drop-shadow(-3px -3px 0px rgba(3, 229, 255, 0.35));
-}
-
-/* Abstract hover */
+/* Abstract hover - plain: a quiet border change, no lift and no glitch */
 .ace-listing-abstract {
-  transition:
-    transform 0.15s ease,
-    filter 0.15s ease,
-    border-color 0.15s ease;
+  transition: border-color 0.15s ease;
 }
 
 .ace-listing-abstract:hover {
-  transform: translateY(-2px);
-  filter:
-    drop-shadow(4px 4px 0px #e262e2)
-    drop-shadow(-4px -4px 0px #03e5ff);
+  border-color: #999;
+}
+
+html body.quarto-dark .ace-listing-abstract:hover {
+  border-color: #666;
 }
 
 
@@ -685,14 +943,25 @@ body.quarto-dark .ace-report-card {
 }
 
 .ace-report-title a {
-  text-decoration: none;
+  display: inline-block;
+  text-decoration: none !important;
+  /* box hugs the text without shifting the layout */
+  padding: 0.1em 0.35em;
+  margin: -0.1em -0.35em;
+  border-radius: 3px;
+  transition: background-color 0.15s ease;
 }
 
-.ace-report-title a:hover {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-  text-decoration-color: currentColor;
+/* hover: a faint wash of the title's own colour, no underline */
+.ace-report-title a:hover,
+.ace-report-title a:focus-visible {
+  text-decoration: none !important;
+  background-color: rgba(226, 98, 226, 0.12);   /* magenta title (light) */
+}
+
+body.quarto-dark .ace-report-title a:hover,
+body.quarto-dark .ace-report-title a:focus-visible {
+  background-color: rgba(3, 229, 255, 0.12);    /* cyan title (dark) */
 }
 
 .ace-report-subtitle {
@@ -739,6 +1008,18 @@ body.quarto-dark .ace-report-title a {
 }
 
 
+
+/* `description:` exists for link previews (og:description). Quarto also
+   renders it in the title block, where it just duplicates the abstract. */
+#title-block-header .description,
+.quarto-title-block .description {
+  display: none;
+}
+
+/* ID pill above the title on report pages (see reports/_partials/title-block.html) */
+.quarto-title-block .ace-report-id-wrap {
+  margin: 0 0 0.7rem;
+}
 
 /* ---------------------------------------------------------
    ACE ID BADGE
@@ -837,9 +1118,9 @@ body.quarto-light .references a,
 body.quarto-light a.citation,
 body.quarto-light a[role="doc-biblioref"],
 body.quarto-light a[role="doc-noteref"] {
-  color: #888888 !important;
-  -webkit-text-fill-color: #888888 !important;
-  text-decoration-color: #888888 !important;
+  color: #0b7f97 !important;
+  -webkit-text-fill-color: #0b7f97 !important;
+  text-decoration-color: #0b7f97 !important;
 }
 
 html[data-bs-theme="dark"] #refs a,
@@ -857,26 +1138,61 @@ body.quarto-dark .references a,
 body.quarto-dark a.citation,
 body.quarto-dark a[role="doc-biblioref"],
 body.quarto-dark a[role="doc-noteref"] {
-  color: #cccccc !important;
-  -webkit-text-fill-color: #cccccc !important;
-  text-decoration-color: #cccccc !important;
+  color: #e39be0 !important;
+  -webkit-text-fill-color: #e39be0 !important;
+  text-decoration-color: #e39be0 !important;
 }
 
 
 html[data-bs-theme="light"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a),
 body[data-bs-theme="light"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a),
 body.quarto-light main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a) {
-  color: #888888 !important;
-  -webkit-text-fill-color: #888888 !important;
-  text-decoration-color: #888888 !important;
+  color: #0b7f97 !important;
+  -webkit-text-fill-color: #0b7f97 !important;
+  text-decoration-color: #0b7f97 !important;
 }
 
 html[data-bs-theme="dark"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a),
 body[data-bs-theme="dark"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a),
 body.quarto-dark main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a) {
-  color: #cccccc !important;
-  -webkit-text-fill-color: #cccccc !important;
-  text-decoration-color: #cccccc !important;
+  color: #e39be0 !important;
+  -webkit-text-fill-color: #e39be0 !important;
+  text-decoration-color: #e39be0 !important;
+}
+
+
+/* Links: no underline at rest; on hover the whole link is boxed with a
+   translucent fill in the link colour (same pattern as listing titles). */
+main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-orcid),
+#refs a,
+a.citation,
+a[role="doc-biblioref"],
+a[role="doc-noteref"] {
+  text-decoration: none !important;
+  padding: 0.02em 0.22em;
+  margin: 0 -0.22em;             /* cancel the padding so text position is unchanged */
+  border-radius: 0;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+body.quarto-light main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):hover,
+body.quarto-light #refs a:hover,
+body.quarto-light a.citation:hover,
+body.quarto-light a[role="doc-biblioref"]:hover,
+body.quarto-light a[role="doc-noteref"]:hover {
+  background-color: rgba(11, 127, 151, 0.14);
+  color: #066a80 !important;
+  -webkit-text-fill-color: #066a80 !important;
+}
+
+body.quarto-dark main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):hover,
+body.quarto-dark #refs a:hover,
+body.quarto-dark a.citation:hover,
+body.quarto-dark a[role="doc-biblioref"]:hover,
+body.quarto-dark a[role="doc-noteref"]:hover {
+  background-color: rgba(227, 155, 224, 0.18);
+  color: #f3bdee !important;
+  -webkit-text-fill-color: #f3bdee !important;
 }
 
 /* Keep ACE listing titles from inheriting global gray body-link colors */
@@ -970,10 +1286,10 @@ body.quarto-light #title-block-header .quarto-category,
 body.quarto-light .quarto-title .quarto-categories > a,
 body.quarto-light .quarto-title-block .quarto-categories > a,
 body.quarto-light #title-block-header .quarto-categories > a {
-  background: rgba(226, 98, 226, 0.12) !important;
+  background: rgba(226, 98, 226, 0.22) !important;
   color: #222222 !important;
   -webkit-text-fill-color: #222222 !important;
-  border-color: rgba(226, 98, 226, 0.35) !important;
+  border-color: rgba(226, 98, 226, 0.55) !important;
 }
 
 /* Dark theme */
@@ -995,10 +1311,10 @@ body.quarto-dark #title-block-header .quarto-category,
 body.quarto-dark .quarto-title .quarto-categories > a,
 body.quarto-dark .quarto-title-block .quarto-categories > a,
 body.quarto-dark #title-block-header .quarto-categories > a {
-  background: rgba(3, 229, 255, 0.13) !important;
+  background: rgba(3, 229, 255, 0.24) !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
-  border-color: rgba(3, 229, 255, 0.35) !important;
+  border-color: rgba(3, 229, 255, 0.55) !important;
 }
 
 /* Hover only the outer pill */
@@ -1389,7 +1705,8 @@ div.quarto-about-trestles .about-entity .about-link:hover {
   background: transparent !important;
 }
 
-.about-team h2 {
+.about-team h2,
+.about-team h3:first-child {
   margin-top: 0;
 }
 
@@ -1507,4 +1824,518 @@ div.quarto-about-trestles .about-entity .about-link:hover {
   opacity: 0.8;
   margin-left: 0.35rem;
   white-space: nowrap;
+}
+/* ---------------------------------------------------------
+   ACE ABOUT: REPORT IDENTIFIER ANATOMY
+--------------------------------------------------------- */
+
+.ace-id-anatomy {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.25rem;
+  margin: 1.4rem auto 1.6rem;
+  background: transparent !important;
+}
+
+.ace-id-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ace-id-label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #6b7681;
+  margin-bottom: 0.3rem;
+}
+
+.ace-id-seg {
+  font-family: 'Roboto Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+  font-size: 1.7rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  padding: 0.45rem 0.55rem 0.2rem;
+  border-top: 1.5px solid rgba(3, 229, 255, 0.85);
+  color: #0f1419;
+}
+
+body.quarto-dark .ace-id-label { color: #b8c2cb; }
+body.quarto-dark .ace-id-seg  { color: #f2f5f7; border-top-color: rgba(226, 98, 226, 0.85); }
+
+@media (max-width: 480px) {
+  .ace-id-seg { font-size: 1.3rem; padding-left: 0.35rem; padding-right: 0.35rem; }
+  .ace-id-label { font-size: 0.62rem; }
+}
+
+/* ---------------------------------------------------------
+   ORCID LINK WITH ICON (icon inherits the link text colour)
+--------------------------------------------------------- */
+
+a.ace-orcid {
+  white-space: nowrap;
+  padding: 0.08em 0.3em;
+  margin: 0 -0.3em;          /* padding is cancelled so the text position is unchanged */
+  text-decoration: none !important;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+/* Hover: fill with the link grey, flip words + icon to white.
+   Class is repeated to outrank the global grey body-link rule (!important, specificity 0,5,2). */
+body.quarto-light main a.ace-orcid.ace-orcid.ace-orcid.ace-orcid:hover,
+body.quarto-light main a.ace-orcid.ace-orcid.ace-orcid.ace-orcid:focus-visible {
+  background-color: #0b7f97;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+body.quarto-dark main a.ace-orcid.ace-orcid.ace-orcid.ace-orcid:hover,
+body.quarto-dark main a.ace-orcid.ace-orcid.ace-orcid.ace-orcid:focus-visible {
+  background-color: #e39be0;
+  color: #111111 !important;   /* dark text on the soft magenta fill */
+  -webkit-text-fill-color: #111111 !important;
+}
+
+.ace-orcid-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.28em;
+  vertical-align: -0.15em;   /* sit the icon on the text baseline, like a glyph */
+  fill: currentColor;
+  color: inherit;
+}
+
+/* ---------------------------------------------------------
+   HOMEPAGE INTRO CALLOUT
+   Bordered statement block; accent matches the navbar borders.
+--------------------------------------------------------- */
+
+.ace-intro {
+  border: 1px solid rgba(3, 229, 255, 0.85);
+  background-color: rgba(3, 229, 255, 0.06);
+  padding: 1rem 1.15rem;
+  margin: 0 0 1.6rem;
+}
+
+.ace-intro p {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: #1a1f24;
+}
+
+.ace-intro strong {
+  font-weight: 700;
+}
+
+body.quarto-dark .ace-intro {
+  border-color: rgba(226, 98, 226, 0.85);
+  background-color: rgba(226, 98, 226, 0.07);
+}
+
+body.quarto-dark .ace-intro p {
+  color: #f2f5f7;
+}
+
+/* ---------------------------------------------------------
+   SECTION HEADING TAB (homepage "Reports")
+   Full-width accent rule with a filled label hanging off it.
+   Usage: #### [Reports]{.ace-section-label} {.ace-section-heading}
+--------------------------------------------------------- */
+
+/* Quarto copies a heading's classes onto its wrapping <section>, so the
+   rule is scoped to the heading element itself or it draws twice. */
+h1.ace-section-heading, h2.ace-section-heading, h3.ace-section-heading,
+h4.ace-section-heading, h5.ace-section-heading {
+  border-top: 2px solid #03e5ff;
+  padding-top: 0;
+  margin: 2.4rem 0 1rem;
+  line-height: 1;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+/* Faded caption to the right of the label, outside the box */
+.ace-section-note {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: #8a949e;
+}
+
+body.quarto-dark .ace-section-note {
+  color: #8d979f;
+}
+
+section.ace-section-heading {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.ace-section-label {
+  display: inline-block;
+  background-color: #03e5ff;
+  color: #000000;
+  padding: 0.3rem 0.8rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+body.quarto-dark h1.ace-section-heading, body.quarto-dark h2.ace-section-heading,
+body.quarto-dark h3.ace-section-heading, body.quarto-dark h4.ace-section-heading,
+body.quarto-dark h5.ace-section-heading {
+  border-top-color: #e262e2;
+}
+
+body.quarto-dark .ace-section-label {
+  background-color: #e262e2;
+  color: #000000;
+}
+
+/* Tighten the gap between a section heading, the listing filter box, and
+   the first report card (was ~90px of stacked margins). */
+h4.ace-section-heading {
+  margin-bottom: 0.6rem;
+}
+
+.quarto-listing .quarto-listing-filter {
+  margin-bottom: 0.5rem;
+}
+
+.quarto-listing .listing-actions-group + .ace-report-listing {
+  margin-top: 0;
+}
+
+/* ---------------------------------------------------------
+   CODE: inline and blocks
+   Clean neutral surfaces, square corners, a restrained token
+   palette built from the ACE cyan/magenta + near-black.
+   Selectors are prefixed with the theme body class so they
+   outrank Quarto's generated `code span.xx` rules without
+   !important.
+--------------------------------------------------------- */
+
+/* --- Inline code (anything not inside a <pre>) --- */
+body.quarto-light :not(pre) > code:not(.sourceCode),
+body.quarto-light p code:not(.sourceCode),
+body.quarto-light li code:not(.sourceCode),
+body.quarto-light td code:not(.sourceCode) {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.9em;
+  color: #1f2933;
+  background-color: #eef1f4;
+  border: 1px solid #dfe4e8;
+  border-radius: 0;
+  padding: 0 0.25em 0.02em;
+}
+
+body.quarto-dark :not(pre) > code:not(.sourceCode),
+body.quarto-dark p code:not(.sourceCode),
+body.quarto-dark li code:not(.sourceCode),
+body.quarto-dark td code:not(.sourceCode) {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.9em;
+  color: #e6e9ec;
+  background-color: #1e2328;
+  border: 1px solid #30363d;
+  border-radius: 0;
+  padding: 0 0.25em 0.02em;
+}
+
+/* Inline code inside links / headings keeps its surroundings' colour */
+body.quarto-light a > code:not(.sourceCode),
+body.quarto-dark a > code:not(.sourceCode) {
+  color: inherit;
+}
+
+/* --- Code blocks --- */
+body.quarto-light div.sourceCode,
+body.quarto-light pre:not(.sourceCode) {
+  background-color: #f4f6f8;
+  border: 1px solid #e3e7ea;
+  border-radius: 0;
+}
+
+body.quarto-dark div.sourceCode,
+body.quarto-dark pre:not(.sourceCode) {
+  background-color: #14171b;
+  border: 1px solid #262b31;
+  border-radius: 0;
+}
+
+div.sourceCode pre.sourceCode,
+pre:not(.sourceCode) {
+  padding: 0.9rem 1rem;
+  margin: 0;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.86em;
+  line-height: 1.55;
+  background-color: transparent;
+}
+
+div.sourceCode {
+  margin: 0.6rem 0 1rem;
+}
+
+body.quarto-light pre.sourceCode code,
+body.quarto-light pre:not(.sourceCode) { color: #1f2933; }
+body.quarto-dark  pre.sourceCode code,
+body.quarto-dark  pre:not(.sourceCode) { color: #e6e9ec; }
+
+/* Copy button: keep it quiet and square */
+div.sourceCode .code-copy-button {
+  border-radius: 0;
+}
+
+/* --- Token colours: light --- */
+body.quarto-light code span.fu,                      /* function */
+body.quarto-light code span.bu,                      /* builtin */
+body.quarto-light code span.ex { color: #1a1f24; font-weight: 600; }
+body.quarto-light code span.kw,                      /* keyword */
+body.quarto-light code span.cf,                      /* control flow */
+body.quarto-light code span.im { color: #8a2d8a; }   /* import */
+body.quarto-light code span.st,                      /* string */
+body.quarto-light code span.vs,
+body.quarto-light code span.ss,
+body.quarto-light code span.ch { color: #0b6b8f; }
+body.quarto-light code span.dv,                      /* numbers */
+body.quarto-light code span.fl,
+body.quarto-light code span.bn,
+body.quarto-light code span.cn { color: #b0296f; }   /* constant */
+body.quarto-light code span.co,                      /* comment */
+body.quarto-light code span.do,
+body.quarto-light code span.an,
+body.quarto-light code span.cv,
+body.quarto-light code span.in { color: #7b8590; font-style: italic; }
+body.quarto-light code span.op,                      /* operator */
+body.quarto-light code span.ot,                      /* other */
+body.quarto-light code span.sc,                      /* special char */
+body.quarto-light code span.at,                      /* attribute / arg name */
+body.quarto-light code span.pp { color: #5b6670; }
+body.quarto-light code span.dt { color: #8a2d8a; }   /* data type */
+body.quarto-light code span.va { color: #1f2933; }   /* variable */
+body.quarto-light code span.al,                      /* alert */
+body.quarto-light code span.er { color: #c92a2a; font-weight: 600; }
+body.quarto-light code span.wa { color: #b0296f; font-style: italic; }
+
+/* --- Token colours: dark --- */
+body.quarto-dark code span.fu,
+body.quarto-dark code span.bu,
+body.quarto-dark code span.ex { color: #f2f5f7; font-weight: 600; }
+body.quarto-dark code span.kw,
+body.quarto-dark code span.cf,
+body.quarto-dark code span.im { color: #e79be0; }
+body.quarto-dark code span.st,
+body.quarto-dark code span.vs,
+body.quarto-dark code span.ss,
+body.quarto-dark code span.ch { color: #6fd8ea; }
+body.quarto-dark code span.dv,
+body.quarto-dark code span.fl,
+body.quarto-dark code span.bn,
+body.quarto-dark code span.cn { color: #f08fd0; }
+body.quarto-dark code span.co,
+body.quarto-dark code span.do,
+body.quarto-dark code span.an,
+body.quarto-dark code span.cv,
+body.quarto-dark code span.in { color: #8a949e; font-style: italic; }
+body.quarto-dark code span.op,
+body.quarto-dark code span.ot,
+body.quarto-dark code span.sc,
+body.quarto-dark code span.at,
+body.quarto-dark code span.pp { color: #a3adb7; }
+body.quarto-dark code span.dt { color: #e79be0; }
+body.quarto-dark code span.va { color: #e6e9ec; }
+body.quarto-dark code span.al,
+body.quarto-dark code span.er { color: #ff6b6b; font-weight: 600; }
+body.quarto-dark code span.wa { color: #f08fd0; font-style: italic; }
+
+/* Code-fold "Show code" toggle */
+details > summary.code-fold-summary,
+.code-fold > summary {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #6b7681;
+  cursor: pointer;
+}
+body.quarto-dark details > summary.code-fold-summary,
+body.quarto-dark .code-fold > summary { color: #9aa4ae; }
+
+/* ---------------------------------------------------------
+   NAVBAR ICON LINK (GitHub): hexagon outline instead of the
+   square wireframe, icon centred and a touch larger.
+   Quarto marks icon-only navbar items with .nav-item.compact.
+   ::before = hexagon in the border colour, ::after = inset
+   hexagon in the navbar colour, leaving a ~1.2px outline.
+--------------------------------------------------------- */
+
+.navbar .navbar-nav .nav-item.compact .nav-link {
+  --ace-hex: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.4rem;                 /* width/height = 0.875 ~ regular hexagon */
+  padding: 0 !important;
+  margin: 0 0.2rem;
+  border: 0 !important;
+  background: transparent !important;
+  color: #ffffff !important;
+}
+
+.navbar .navbar-nav .nav-item.compact .nav-link::before,
+.navbar .navbar-nav .nav-item.compact .nav-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: var(--ace-hex);
+  z-index: 0;
+}
+
+.navbar .navbar-nav .nav-item.compact .nav-link::before {
+  background: rgba(226, 98, 226, 0.55);
+}
+
+.navbar .navbar-nav .nav-item.compact .nav-link::after {
+  inset: 1.2px;
+  background: #222222;            /* navbar background */
+}
+
+.navbar .navbar-nav .nav-item.compact .nav-link .bi {
+  position: relative;
+  z-index: 1;
+  display: block;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.navbar .navbar-nav .nav-item.compact .nav-link .menu-text {
+  display: none;                  /* empty span that was pushing the icon off-centre */
+}
+
+/* Hover: solid outline, 75%-alpha fill (pre-blended over #222 since the
+   inner hexagon sits above the outline layer) */
+.navbar .navbar-nav .nav-item.compact .nav-link:hover::before,
+.navbar .navbar-nav .nav-item.compact .nav-link:focus-visible::before {
+  background: #e262e2;
+}
+.navbar .navbar-nav .nav-item.compact .nav-link:hover::after,
+.navbar .navbar-nav .nav-item.compact .nav-link:focus-visible::after {
+  background: #b050b0;            /* 75% #e262e2 over #222 */
+}
+
+body.quarto-light .navbar .navbar-nav .nav-item.compact .nav-link::before {
+  background: rgba(3, 229, 255, 0.55);
+}
+body.quarto-light .navbar .navbar-nav .nav-item.compact .nav-link:hover::before,
+body.quarto-light .navbar .navbar-nav .nav-item.compact .nav-link:focus-visible::before {
+  background: #03e5ff;
+}
+body.quarto-light .navbar .navbar-nav .nav-item.compact .nav-link:hover::after,
+body.quarto-light .navbar .navbar-nav .nav-item.compact .nav-link:focus-visible::after {
+  background: #09b2c6;            /* 75% #03e5ff over #222 */
+}
+
+/* Collapsed (hamburger) navbar: breathing room between the page links and
+   the icon links, and keep the icons side by side rather than stacked. */
+@media (max-width: 991.98px) {
+  .navbar .navbar-collapse .navbar-nav.ms-auto {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+    padding-left: 0.2rem;
+  }
+}
+
+/* ---------------------------------------------------------
+   NAVBAR UTILITY ICONS: hamburger + search
+   Thin, square-capped line icons drawn as CSS masks so they
+   take colour from `background-color` (white at rest, theme
+   accent on hover). The hamburger's lines are staggered to
+   echo the glitch wordmark and it turns into an X when open.
+--------------------------------------------------------- */
+
+/* --- Hamburger --- */
+.navbar .navbar-toggler {
+  border: 0;
+  border-radius: 0;
+  padding: 0.35rem 0.4rem;
+  box-shadow: none !important;
+}
+
+.navbar .navbar-toggler .navbar-toggler-icon {
+  width: 1.7rem;
+  height: 1.7rem;
+  background-image: none;
+  background-color: #ffffff;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='square'%3E%3Cpath d='M3 6h18M3 12h13M3 18h18'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='square'%3E%3Cpath d='M3 6h18M3 12h13M3 18h18'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: background-color 0.12s ease;
+}
+
+.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='square'%3E%3Cpath d='M5 5l14 14M19 5L5 19'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='square'%3E%3Cpath d='M5 5l14 14M19 5L5 19'/%3E%3C/svg%3E");
+}
+
+.navbar .navbar-toggler:hover .navbar-toggler-icon,
+.navbar .navbar-toggler:focus-visible .navbar-toggler-icon {
+  background-color: #e262e2;
+}
+body.quarto-light .navbar .navbar-toggler:hover .navbar-toggler-icon,
+body.quarto-light .navbar .navbar-toggler:focus-visible .navbar-toggler-icon {
+  background-color: #03e5ff;
+}
+
+/* --- Search --- */
+.navbar #quarto-search .aa-DetachedSearchButton {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  width: 2.1rem;
+  height: 2.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar #quarto-search .aa-DetachedSearchButtonIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: transparent;                    /* hide the stock SVG, keep the box */
+  background-color: #ffffff;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='square'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.4 15.4L21 21'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='square'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.4 15.4L21 21'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: background-color 0.12s ease;
+}
+
+.navbar #quarto-search .aa-DetachedSearchButtonIcon svg {
+  display: none;
+}
+
+.navbar #quarto-search .aa-DetachedSearchButton:hover .aa-DetachedSearchButtonIcon,
+.navbar #quarto-search .aa-DetachedSearchButton:focus-visible .aa-DetachedSearchButtonIcon {
+  background-color: #e262e2;
+}
+body.quarto-light .navbar #quarto-search .aa-DetachedSearchButton:hover .aa-DetachedSearchButtonIcon,
+body.quarto-light .navbar #quarto-search .aa-DetachedSearchButton:focus-visible .aa-DetachedSearchButtonIcon {
+  background-color: #03e5ff;
 }

@@ -1,0 +1,43 @@
+# Shared Zenodo settings for ACE report depositions.
+# Per-report values (title, abstract, audited DOIs, version) live in each report's
+# front matter; this file holds what is constant across every report.
+
+site_url: "https://auditclinicalevidence.org"
+publisher: "Audit Clinical Evidence"
+
+# Zenodo community to submit each record to. Create it at
+# https://zenodo.org/communities/new (and separately on the sandbox), then put
+# its identifier here. Leave blank to skip community submission.
+community: ""
+
+# Deposit licence (Zenodo identifier). Reports are CC BY 4.0; the ACE name and
+# logo are excluded, and third-party excerpts are reproduced under fair use.
+license: "cc-by-4.0"
+
+# ORCIDs materially improve citability and disambiguation - register at
+# https://orcid.org and fill these in before the first LIVE deposit.
+creators:
+  - name: "Jané, Matthew B."
+    affiliation: "University of Connecticut, Storrs, CT"
+    orcid: ""
+  - name: "Mvududu, Kutenda F."
+    affiliation: "University of Massachusetts, Boston, MA"
+    orcid: ""
+
+# Appended to each report's own categories.
+keywords:
+  - "research integrity"
+  - "forensic metascience"
+  - "error detection"
+  - "clinical trials"
+  - "audit report"
+
+# Files deposited with every report. {ace_id} is substituted per report.
+# The PDF is the record of version; the source and helpers make the findings
+# independently reproducible rather than merely asserted.
+upload_files:
+  - "docs/reports/{ace_id}/{ace_id}.pdf"
+  - "reports/{ace_id}/index.qmd"
+  - "reports/{ace_id}/images/*"
+  - "reports/references/references.bib"
+  - "reports/helpers/*.R"
