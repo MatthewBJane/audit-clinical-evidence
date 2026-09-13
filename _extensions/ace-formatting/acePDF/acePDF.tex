@@ -13,9 +13,70 @@
 \geometry{a4paper, total={170mm,257mm}, left=25mm, top=20mm, bottom=20mm, right=25mm}
 
 %% Let's define some colours
-\definecolor{light}{HTML}{000000}
-\definecolor{highlight}{HTML}{999999}
+\definecolor{light}{HTML}{F4F6F8}   % code-block background (_extension.yml: code-block-bg: light)
+\definecolor{highlight}{HTML}{4F5B66}   % links (dark slate grey)
 \definecolor{dark}{HTML}{000000}
+
+% ---------------------------------------------------------
+% CODE BLOCKS AND SYNTAX COLOURS
+% Same palette as the site's light theme (see "CODE: inline and
+% blocks" in styles.css): a very light panel, near-black text,
+% and the ACE token colours.
+% ---------------------------------------------------------
+\definecolor{acecodebg}{HTML}{F4F6F8}    % panel
+\definecolor{acecodefg}{HTML}{1F2933}    % normal text, variables
+\definecolor{acecodefun}{HTML}{1A1F24}   % functions, builtins
+\definecolor{acecodekw}{HTML}{8A2D8A}    % keywords, control flow, types
+\definecolor{acecodestr}{HTML}{0B6B8F}   % strings
+\definecolor{acecodenum}{HTML}{B0296F}   % numbers, constants
+\definecolor{acecodecom}{HTML}{7B8590}   % comments
+\definecolor{acecodeop}{HTML}{5B6670}    % operators, attributes, other
+\definecolor{acecodeerr}{HTML}{C92A2A}   % alerts and errors
+
+\makeatletter
+% The token macros exist only when a document contains highlighted code, so
+% every override is guarded and applied at the start of the document, after
+% pandoc has defined them.
+\newcommand{\aceTokPlain}[1]{#1}
+\newcommand{\aceSetTok}[3]{%
+  \@ifundefined{#1}{}{%
+    \expandafter\renewcommand\csname #1\endcsname[1]{\textcolor{#2}{#3{##1}}}}}
+\AtBeginDocument{%
+  \definecolor{shadecolor}{HTML}{F4F6F8}%
+  \definecolor{codeblockbg}{HTML}{F4F6F8}%
+  \@ifundefined{fvset}{}{\fvset{fontsize=\small}}%
+  \aceSetTok{NormalTok}{acecodefg}{\aceTokPlain}%
+  \aceSetTok{VariableTok}{acecodefg}{\aceTokPlain}%
+  \aceSetTok{FunctionTok}{acecodefun}{\textbf}%
+  \aceSetTok{BuiltInTok}{acecodefun}{\textbf}%
+  \aceSetTok{ExtensionTok}{acecodefun}{\textbf}%
+  \aceSetTok{KeywordTok}{acecodekw}{\aceTokPlain}%
+  \aceSetTok{ControlFlowTok}{acecodekw}{\aceTokPlain}%
+  \aceSetTok{ImportTok}{acecodekw}{\aceTokPlain}%
+  \aceSetTok{DataTypeTok}{acecodekw}{\aceTokPlain}%
+  \aceSetTok{StringTok}{acecodestr}{\aceTokPlain}%
+  \aceSetTok{VerbatimStringTok}{acecodestr}{\aceTokPlain}%
+  \aceSetTok{SpecialStringTok}{acecodestr}{\aceTokPlain}%
+  \aceSetTok{CharTok}{acecodestr}{\aceTokPlain}%
+  \aceSetTok{DecValTok}{acecodenum}{\aceTokPlain}%
+  \aceSetTok{FloatTok}{acecodenum}{\aceTokPlain}%
+  \aceSetTok{BaseNTok}{acecodenum}{\aceTokPlain}%
+  \aceSetTok{ConstantTok}{acecodenum}{\aceTokPlain}%
+  \aceSetTok{CommentTok}{acecodecom}{\textit}%
+  \aceSetTok{DocumentationTok}{acecodecom}{\textit}%
+  \aceSetTok{AnnotationTok}{acecodecom}{\textit}%
+  \aceSetTok{CommentVarTok}{acecodecom}{\textit}%
+  \aceSetTok{InformationTok}{acecodecom}{\textit}%
+  \aceSetTok{OperatorTok}{acecodeop}{\aceTokPlain}%
+  \aceSetTok{OtherTok}{acecodeop}{\aceTokPlain}%
+  \aceSetTok{SpecialCharTok}{acecodeop}{\aceTokPlain}%
+  \aceSetTok{AttributeTok}{acecodeop}{\aceTokPlain}%
+  \aceSetTok{PreprocessorTok}{acecodeop}{\aceTokPlain}%
+  \aceSetTok{AlertTok}{acecodeerr}{\textbf}%
+  \aceSetTok{ErrorTok}{acecodeerr}{\textbf}%
+  \aceSetTok{WarningTok}{acecodenum}{\textit}%
+}
+\makeatother
 
 
 % ---------------------------------------------------------
@@ -83,19 +144,40 @@
 % Number ### headings as 1.A, 1.B, 2.A...
 \renewcommand{\thesubsubsection}{\thesubsection.\Alph{subsubsection}}
 
+% Section headings, matching the site (see the reports/_extensions copy).
+\providecolor{acecyan}{HTML}{03E5FF}
+\providecolor{acemagenta}{HTML}{E262E2}
+\providecolor{acegrey}{HTML}{5A6570}
+\definecolor{acecyantext}{HTML}{0B7F97}
+\colorlet{acecyantint}{acecyan!22!white}
+\newcommand{\aceSecNum}[1]{{\ttfamily\bfseries\color{acecyantext}#1}%
+  \hspace{0.55em}{\color{acegrey!45}\rule[-0.22em]{1pt}{1.15em}}}
+\newcommand{\aceSecRule}{\par\nobreak\vspace{-1.4ex}\noindent%
+  {\color{acecyan}\rule[0.2pt]{2.4em}{1.4pt}}%
+  {\color{acegrey!45}\rule[0.7pt]{\dimexpr\textwidth-2.4em\relax}{0.4pt}}\par\nobreak}
+
+% Chapter headings (# in the handbook): large, plain, page already broken
+\titleformat{\section}
+  {\sffamily\huge\bfseries}
+  {}
+  {0em}
+  {}
+\titlespacing*{\section}{0pt}{0pt}{3ex}
+
 % Style ## headings
 \titleformat{\subsection}
   {\sffamily\Large\bfseries}
-  {\thesubsection}
-  {1em}
+  {\aceSecNum{\thesubsection}}
+  {0.7em}
   {}
-  [{\titlerule[0.8pt]}]
+  [\aceSecRule]
+\titlespacing*{\subsection}{0pt}{3.2ex plus 1ex minus .2ex}{1.8ex plus .2ex}
 
 % Style ### headings
 \titleformat{\subsubsection}
   {\sffamily\large\bfseries}
-  {\thesubsubsection}
-  {1em}
+  {{\ttfamily\bfseries\color{acecyantext}\thesubsubsection}}
+  {0.7em}
   {}
 
 % ---------------------------------------------------------

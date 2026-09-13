@@ -19,10 +19,10 @@ license: "cc-by-4.0"
 creators:
   - name: "Jané, Matthew B."
     affiliation: "University of Connecticut, Storrs, CT"
-    orcid: ""
+    orcid: "0000-0002-3121-7769"
   - name: "Mvududu, Kutenda F."
-    affiliation: "University of Massachusetts, Boston, MA"
-    orcid: ""
+    affiliation: "University of Massachusetts Boston, Boston, MA"
+    orcid: "0009-0009-3977-1367"
 
 # Appended to each report's own categories.
 keywords:
@@ -39,5 +39,7 @@ upload_files:
   - "docs/reports/{ace_id}/{ace_id}.pdf"
   - "reports/{ace_id}/index.qmd"
   - "reports/{ace_id}/images/*"
+  - "reports/{ace_id}/data/*"
   - "reports/references/references.bib"
-  - "reports/helpers/*.R"
+  - "reports/{ace_id}/*.R"
+  - "reports/helpers/themes.R"

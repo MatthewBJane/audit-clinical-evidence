@@ -444,7 +444,7 @@ h2 {
 h3 {
   font-family: 'Roboto', sans-serif;
   font-size: 14pt;
-  font-weight: normal;
+  font-weight: 700;
   padding: 0pt;
 }
 
@@ -548,135 +548,137 @@ body.quarto-light .navbar,
 }
 
 
-div.quarto-about-trestles .about-entity .about-link:hover {
-    color: #03e5ff; /* Changed from orange to red */
+/* ---- TABLE OF CONTENTS (right margin) ----
+   Title as a small mono-caps key, a hairline rail down the left of the list,
+   quiet grey entries, and the current section marked by an accent segment on
+   the rail plus a translucent tint (magenta in light, cyan in dark), the same
+   language as the section flags and pills. Hover = the tint without the rail. */
+
+/* Drop the whole block so its title sits level with the ACE ID pill above
+   the report title (sidebar top is set by Quarto's JS; 14px padding is its own). */
+#quarto-margin-sidebar nav[role="doc-toc"] {
+  padding-top: 1.2rem;              /* title centre lines up with the pill centre */
 }
 
-/* ---- CUSTOM TOC COLORS ---- */
+.sidebar nav[role="doc-toc"] #toc-title,
+.sidebar nav[role="doc-toc"] > h2 {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a949e;
+  margin: 0 0 0.55rem 0;
+  padding-left: 0.85rem;
+}
+body.quarto-dark .sidebar nav[role="doc-toc"] #toc-title,
+body.quarto-dark .sidebar nav[role="doc-toc"] > h2 { color: #9aa4ae; }
 
-/* Base TOC links */
-.sidebar nav[role="doc-toc"] a,
-.sidebar nav[role="doc-toc"] .nav-link {
+/* the rail */
+.sidebar nav[role="doc-toc"] > ul {
+  border-left: 2px solid rgba(138, 148, 158, 0.28);
+  margin-left: 0;
+  padding-left: 0;
+}
+body.quarto-dark .sidebar nav[role="doc-toc"] > ul { border-left-color: rgba(154, 164, 174, 0.28); }
+.sidebar nav[role="doc-toc"] ul ul {
+  border-left: 0;
+  padding-left: 0;
+  margin: 0.05rem 0 0.15rem 0;
+}
+
+/* entries */
+html body .sidebar nav[role="doc-toc"] a.nav-link {
+  display: block;
+  margin-left: -2px;                /* sit on the rail */
+  padding: 0.28rem 0.7rem 0.28rem 0.85rem;
+  border-left: 2px solid transparent;
+  border-radius: 0 6px 6px 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.3;
+  font-weight: 400 !important;
   text-decoration: none !important;
-  transition:
-    color 0.15s ease,
-    background-color 0.15s ease,
-    border-left-color 0.15s ease;
+  background-color: transparent !important;
+  transition: color 0.12s ease, background-color 0.12s ease, border-color 0.12s ease;
+}
+html body .sidebar nav[role="doc-toc"] ul ul a.nav-link {
+  font-size: 0.8rem;
+  padding-top: 0.22rem;
+  padding-bottom: 0.22rem;
+  padding-left: 1.55rem;
+}
+html body .sidebar nav[role="doc-toc"] a.nav-link .header-section-number {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.9em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-right: 0.45em;
+  opacity: 0.75;
 }
 
-/* Light theme: unhovered */
-html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a,
-html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link,
-body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a,
-body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link,
-body.quarto-light .sidebar nav[role="doc-toc"] a,
-body.quarto-light .sidebar nav[role="doc-toc"] .nav-link {
+/* colours: quiet at rest, accent when current, tint on hover */
+html body.quarto-light .sidebar nav[role="doc-toc"] a.nav-link {
+  color: #4b5560 !important;
+  -webkit-text-fill-color: #4b5560 !important;
+}
+html body.quarto-dark .sidebar nav[role="doc-toc"] a.nav-link {
+  color: #b8c2cb !important;
+  -webkit-text-fill-color: #b8c2cb !important;
+}
+
+html body.quarto-light .sidebar nav[role="doc-toc"] a.nav-link:hover,
+html body.quarto-light .sidebar nav[role="doc-toc"] a.nav-link:focus {
   color: #222222 !important;
   -webkit-text-fill-color: #222222 !important;
-  background-color: transparent !important;
+  background-color: rgba(226, 98, 226, 0.12) !important;
+  border-left-color: transparent;
 }
-
-/* Dark theme: unhovered */
-html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a,
-html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link,
-body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a,
-body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link,
-body.quarto-dark .sidebar nav[role="doc-toc"] a,
-body.quarto-dark .sidebar nav[role="doc-toc"] .nav-link {
+html body.quarto-dark .sidebar nav[role="doc-toc"] a.nav-link:hover,
+html body.quarto-dark .sidebar nav[role="doc-toc"] a.nav-link:focus {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
-  background-color: transparent !important;
+  background-color: rgba(3, 229, 255, 0.14) !important;
+  border-left-color: transparent;
 }
 
-/* Light theme: hover / active / clicked */
-html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a:hover,
-html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link:hover,
-html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a:active,
-html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link:active,
-html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a:focus,
-html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link:focus,
-body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a:hover,
-body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link:hover,
-body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a:active,
-body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link:active,
-body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a:focus,
-body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link:focus,
-body.quarto-light .sidebar nav[role="doc-toc"] a:hover,
-body.quarto-light .sidebar nav[role="doc-toc"] .nav-link:hover,
-body.quarto-light .sidebar nav[role="doc-toc"] a:active,
-body.quarto-light .sidebar nav[role="doc-toc"] .nav-link:active,
-body.quarto-light .sidebar nav[role="doc-toc"] a:focus,
-body.quarto-light .sidebar nav[role="doc-toc"] .nav-link:focus {
+html body.quarto-light .sidebar nav[role="doc-toc"] a.nav-link.active,
+html body.quarto-light .sidebar nav[role="doc-toc"] a.nav-link[aria-current="true"] {
+  color: #222222 !important;
+  -webkit-text-fill-color: #222222 !important;
+  font-weight: 700 !important;
+  background-color: rgba(226, 98, 226, 0.16) !important;
+  border-left-color: #e262e2 !important;
+}
+html body.quarto-dark .sidebar nav[role="doc-toc"] a.nav-link.active,
+html body.quarto-dark .sidebar nav[role="doc-toc"] a.nav-link[aria-current="true"] {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
-  background-color: #e262e2 !important;
-  border-left: 2px solid #e262e2 !important;
-  font-weight: bold !important;
-  text-decoration: none !important;
+  font-weight: 700 !important;
+  background-color: rgba(3, 229, 255, 0.16) !important;
+  border-left-color: #03e5ff !important;
 }
+html body.quarto-light .sidebar nav[role="doc-toc"] a.nav-link.active .header-section-number { color: #c94fc9; opacity: 1; }
+html body.quarto-dark  .sidebar nav[role="doc-toc"] a.nav-link.active .header-section-number { color: #03e5ff; opacity: 1; }
 
-/* Dark theme: hover / active / clicked */
-html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a:hover,
-html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link:hover,
-html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a:active,
-html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link:active,
-html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a:focus,
-html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link:focus,
-body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a:hover,
-body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link:hover,
-body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a:active,
-body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link:active,
-body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a:focus,
-body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link:focus,
-body.quarto-dark .sidebar nav[role="doc-toc"] a:hover,
-body.quarto-dark .sidebar nav[role="doc-toc"] .nav-link:hover,
-body.quarto-dark .sidebar nav[role="doc-toc"] a:active,
-body.quarto-dark .sidebar nav[role="doc-toc"] .nav-link:active,
-body.quarto-dark .sidebar nav[role="doc-toc"] a:focus,
-body.quarto-dark .sidebar nav[role="doc-toc"] .nav-link:focus {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  background-color: #03e5ff !important;
-  border-left: 2px solid #03e5ff !important;
-  font-weight: bold !important;
-  text-decoration: none !important;
+/* "Other Formats" block: same key style as the title, aligned to the rail */
+.sidebar nav[role="doc-toc"] .quarto-other-links,
+.sidebar nav[role="doc-toc"] .quarto-alternate-formats {
+  margin-top: 1.1rem;
+  padding-left: 0.85rem;
 }
-
-/* Light theme: current/active section */
-html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a.active,
-html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link.active,
-html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a[aria-current="true"],
-body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a.active,
-body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .nav-link.active,
-body[data-bs-theme="light"] .sidebar nav[role="doc-toc"] a[aria-current="true"],
-body.quarto-light .sidebar nav[role="doc-toc"] a.active,
-body.quarto-light .sidebar nav[role="doc-toc"] .nav-link.active,
-body.quarto-light .sidebar nav[role="doc-toc"] a[aria-current="true"] {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  background-color: #e262e2 !important;
-  border-left: 2px solid #e262e2 !important;
-  font-weight: bold !important;
-  text-decoration: none !important;
+.sidebar nav[role="doc-toc"] .quarto-other-links h2,
+.sidebar nav[role="doc-toc"] .quarto-alternate-formats h2 {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a949e;
+  margin-bottom: 0.5rem;
 }
-
-/* Dark theme: current/active section */
-html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a.active,
-html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link.active,
-html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a[aria-current="true"],
-body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a.active,
-body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .nav-link.active,
-body[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] a[aria-current="true"],
-body.quarto-dark .sidebar nav[role="doc-toc"] a.active,
-body.quarto-dark .sidebar nav[role="doc-toc"] .nav-link.active,
-body.quarto-dark .sidebar nav[role="doc-toc"] a[aria-current="true"] {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  background-color: #03e5ff !important;
-  border-left: 2px solid #03e5ff !important;
-  font-weight: bold !important;
-  text-decoration: none !important;
-}
+body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-other-links h2,
+body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-alternate-formats h2 { color: #9aa4ae; }
 
 /* ---- CUSTOM TITLE COLORS ---- */
 /* Forces specific letters to be solid colored instead of the gradient */
@@ -717,7 +719,7 @@ body.quarto-light .navbar .solid-letter {
   gap: 0.6rem;
   flex-wrap: wrap;
   min-width: 0;
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
 }
 
 /* Both Read online and PDF buttons use .ace-pdf-button */
@@ -772,16 +774,109 @@ body.quarto-dark .ace-report-card-actions .ace-pdf-button {
   text-decoration: none;
 }
 
-.quarto-alternate-formats a,
-.quarto-alternate-formats a:visited,
-.quarto-alternate-formats a:hover,
-.quarto-alternate-formats a:focus,
-.quarto-other-formats a,
-.quarto-other-formats a:visited,
-.quarto-other-formats a:hover,
-.quarto-other-formats a:focus {
-  color: #ffffff !important;
+/* ---------------------------------------------------------
+   SIDEBAR "DOWNLOAD" BLOCK (Quarto alternate formats)
+   Small mono label + the same black/white block button as the
+   listing cards. The block sits inside nav[role=doc-toc], whose
+   theme rules use !important, hence the weight here.
+--------------------------------------------------------- */
+
+.quarto-alternate-formats,
+.quarto-other-links {
+  margin-top: 1.4rem;
+}
+
+.quarto-alternate-formats h2,
+.quarto-other-links h2 {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7681;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  border: 0;
+}
+body.quarto-dark .quarto-alternate-formats h2,
+.quarto-other-links h2 { color: #9aa4ae; }
+
+.quarto-alternate-formats ul, .quarto-other-links ul { list-style: none; margin: 0; padding: 0; }
+.quarto-alternate-formats li, .quarto-other-links li { margin: 0; }
+
+.sidebar nav[role="doc-toc"] .quarto-alternate-formats a,
+.sidebar nav[role="doc-toc"] .quarto-other-links a,
+.sidebar nav[role="doc-toc"] .quarto-alternate-formats a:visited,
+.sidebar nav[role="doc-toc"] .quarto-other-links a:visited {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.85rem !important;
+  border-radius: 0;               /* squared */
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.1 !important;
   text-decoration: none !important;
+}
+
+.sidebar nav[role="doc-toc"] .quarto-alternate-formats a .bi,
+.sidebar nav[role="doc-toc"] .quarto-other-links a .bi {
+  font-size: 1.25rem;             /* bigger glyph ... */
+  line-height: 0;                 /* ... without adding height to the button */
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Grey wireframe badge like the ORCID / email badges: outline at rest,
+   grey fill with white text on hover. */
+body.quarto-light .sidebar nav[role="doc-toc"] .quarto-alternate-formats a,
+body.quarto-light .sidebar nav[role="doc-toc"] .quarto-other-links a,
+html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .quarto-alternate-formats a,
+html[data-bs-theme="light"] .sidebar nav[role="doc-toc"] .quarto-other-links a,
+body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-alternate-formats a,
+body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-other-links a,
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .quarto-alternate-formats a,
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .quarto-other-links a {
+  --ace-badge-grey: #8a949e;
+  background-color: transparent !important;
+  border: 1px solid var(--ace-badge-grey);
+  color: var(--ace-badge-grey) !important;
+  -webkit-text-fill-color: var(--ace-badge-grey) !important;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-alternate-formats a,
+body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-other-links a,
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .quarto-alternate-formats a,
+html[data-bs-theme="dark"] .sidebar nav[role="doc-toc"] .quarto-other-links a {
+  --ace-badge-grey: #9aa4ae;
+}
+
+/* Hover: the TOC's own hover rule (magenta fill, !important, specificity
+   0,4,3) outranks a plain selector, so these carry html + body.theme. */
+html body.quarto-light .sidebar nav[role="doc-toc"] .quarto-alternate-formats a:hover,
+html body.quarto-light .sidebar nav[role="doc-toc"] .quarto-other-links a:hover,
+html body.quarto-light .sidebar nav[role="doc-toc"] .quarto-alternate-formats a:focus-visible,
+html body.quarto-light .sidebar nav[role="doc-toc"] .quarto-other-links a:focus-visible,
+html body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-alternate-formats a:hover,
+html body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-other-links a:hover,
+html body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-alternate-formats a:focus-visible,
+html body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-other-links a:focus-visible {
+  background-color: var(--ace-badge-grey) !important;
+  border-color: var(--ace-badge-grey) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transform: none;
+  filter: none;
+}
+html body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-alternate-formats a:hover,
+html body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-other-links a:hover,
+html body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-alternate-formats a:focus-visible,
+html body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-other-links a:focus-visible {
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
 }
 
 
@@ -792,7 +887,7 @@ body.quarto-dark .ace-report-card-actions .ace-pdf-button {
 --------------------------------------------------------- */
 
 .ace-listing-abstract {
-  margin: 0.85rem 0 0.95rem 0;
+  margin: 0.45rem 0 0.5rem 0;
   border: 1px solid #ccc;
   border-radius: 8px;
   background: #fff;
@@ -801,7 +896,7 @@ body.quarto-dark .ace-report-card-actions .ace-pdf-button {
 
 .ace-listing-abstract summary {
   cursor: pointer;
-  padding: 0.55rem 0.75rem;
+  padding: 0.42rem 0.72rem;
 
   font-family: "Roboto Mono", monospace;
   font-size: 0.78rem;
@@ -830,7 +925,7 @@ body.quarto-dark .ace-report-card-actions .ace-pdf-button {
 }
 
 .ace-listing-abstract-content {
-  padding: 0.85rem 0.95rem;
+  padding: 0.7rem 0.85rem;
 
   color: #222;
   font-family: "Roboto", sans-serif;
@@ -870,9 +965,9 @@ body.quarto-dark .ace-listing-abstract-content {
 .ace-report-listing {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
 
-  margin-top: 1.5rem;
+  margin-top: 1.1rem;
   padding: 0;
   border: none;
   background: transparent;
@@ -884,7 +979,7 @@ body.quarto-dark .ace-listing-abstract-content {
 
   border: 1px solid rgba(0, 0, 0, 0.14);
   border-radius: 14px;
-  padding: 1.25rem 1.35rem;
+  padding: 1rem 1.2rem;
 
   background: transparent;
 }
@@ -892,7 +987,7 @@ body.quarto-dark .ace-listing-abstract-content {
 .ace-report-card-main {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.2rem;
 }
 
 /* Dark theme */
@@ -933,7 +1028,7 @@ html body.quarto-dark .ace-listing-abstract:hover {
 --------------------------------------------------------- */
 
 .ace-report-title {
-  margin: 0.5rem 0 0.5rem 0;
+  margin: 0.3rem 0 0.25rem 0;
   padding: 0;
 
   font-family: "Roboto", sans-serif;
@@ -965,7 +1060,7 @@ body.quarto-dark .ace-report-title a:focus-visible {
 }
 
 .ace-report-subtitle {
-  margin: 0.2rem 0 0.9rem 0;
+  margin: 0.15rem 0 0.5rem 0;
 
   font-family: "Roboto", sans-serif;
   font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
@@ -1065,7 +1160,7 @@ body.quarto-dark .ace-report-id {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin: 0.55rem 0 0.9rem 0;
+  margin: 0.3rem 0 0.5rem 0;
 }
 
 .ace-report-category {
@@ -1225,7 +1320,7 @@ body.quarto-dark main .ace-report-title a {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin: 0.75rem 0 1rem 0;
+  margin: 0.55rem 0 0.9rem 0;
 }
 
 /* Style only the actual category wrapper or direct category link */
@@ -1286,10 +1381,11 @@ body.quarto-light #title-block-header .quarto-category,
 body.quarto-light .quarto-title .quarto-categories > a,
 body.quarto-light .quarto-title-block .quarto-categories > a,
 body.quarto-light #title-block-header .quarto-categories > a {
-  background: rgba(226, 98, 226, 0.22) !important;
+  /* matches .ace-report-category in the listings */
+  background: rgba(226, 98, 226, 0.12) !important;
   color: #222222 !important;
   -webkit-text-fill-color: #222222 !important;
-  border-color: rgba(226, 98, 226, 0.55) !important;
+  border-color: rgba(226, 98, 226, 0.35) !important;
 }
 
 /* Dark theme */
@@ -1311,10 +1407,35 @@ body.quarto-dark #title-block-header .quarto-category,
 body.quarto-dark .quarto-title .quarto-categories > a,
 body.quarto-dark .quarto-title-block .quarto-categories > a,
 body.quarto-dark #title-block-header .quarto-categories > a {
-  background: rgba(3, 229, 255, 0.24) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-color: rgba(3, 229, 255, 0.55) !important;
+  /* matches .ace-report-category in the listings */
+  background: rgba(3, 229, 255, 0.13) !important;
+  color: #f2f2f2 !important;
+  -webkit-text-fill-color: #f2f2f2 !important;
+  border-color: rgba(3, 229, 255, 0.35) !important;
+}
+
+/* The pill text is a link. The site-wide link rules (main a ... !important)
+   outrank the plain reset above, so pin the pill text colour with an
+   ID-weighted selector: same #222222 / #f2f2f2 as the listing pills, no
+   hover box, no padding shift. */
+body.quarto-light main #title-block-header .quarto-categories .quarto-category a,
+body.quarto-light main #title-block-header .quarto-categories .quarto-category a:hover {
+  color: #222222 !important;
+  -webkit-text-fill-color: #222222 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  text-decoration: none !important;
+}
+
+body.quarto-dark main #title-block-header .quarto-categories .quarto-category a,
+body.quarto-dark main #title-block-header .quarto-categories .quarto-category a:hover {
+  color: #f2f2f2 !important;
+  -webkit-text-fill-color: #f2f2f2 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  text-decoration: none !important;
 }
 
 /* Hover only the outer pill */
@@ -1383,11 +1504,15 @@ table td {
 
 
 /* ---------------------------------------------------------
-   ACE SEARCH MODAL / SEARCH RESULTS
+   GLOBAL SEARCH (navbar magnifying glass)
+   One panel instead of a stack of rounded cards: a wireframe field like the
+   listing filter, a mono-caps header, rows separated by hairlines, and the
+   selected row marked by an accent bar and a translucent tint, the same
+   language as the table of contents and the category list. Matches are
+   washed in the accent rather than boxed.
 --------------------------------------------------------- */
 
-
-/* Light theme modal */
+/* ---- the panel surface ---- */
 html[data-bs-theme="light"] .aa-DetachedContainer,
 html[data-bs-theme="light"] .aa-Panel,
 body.quarto-light .aa-DetachedContainer,
@@ -1395,8 +1520,6 @@ body.quarto-light .aa-Panel {
   background: #ffffff !important;
   color: #222222 !important;
 }
-
-/* Dark theme modal */
 html[data-bs-theme="dark"] .aa-DetachedContainer,
 html[data-bs-theme="dark"] .aa-Panel,
 body.quarto-dark .aa-DetachedContainer,
@@ -1404,187 +1527,232 @@ body.quarto-dark .aa-Panel {
   background: #222222 !important;
   color: #ffffff !important;
 }
-
-/* Search input area */
-.aa-DetachedSearchButton,
-.aa-InputWrapper,
-.aa-InputWrapperPrefix,
-.aa-InputWrapperSuffix,
-.aa-Form {
-  border-radius: 10px !important;
+.aa-DetachedContainer,
+.aa-Panel {
+  border-radius: 0 !important;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18) !important;
 }
+.aa-Panel .aa-PanelLayout { padding: 0 !important; }
 
-.aa-Form {
-  border: 1px solid rgba(3, 229, 255, 0.65) !important;
+/* ---- the field: same wireframe as the listing filter ---- */
+.aa-DetachedFormContainer {
+  padding: 0.65rem 0.7rem !important;
+  border-bottom: 1px solid #c9d0d6;
+  /* autocomplete paints these white from its own variables */
+  background: transparent !important;
+}
+.aa-DetachedContainer, .aa-DetachedFormContainer, .aa-Form, .aa-InputWrapper {
+  --aa-background-color-rgb: 255, 255, 255;
+  --aa-input-background-color-rgb: 255, 255, 255;
+}
+body.quarto-dark .aa-DetachedContainer,
+body.quarto-dark .aa-DetachedFormContainer,
+body.quarto-dark .aa-Form,
+body.quarto-dark .aa-InputWrapper {
+  --aa-background-color-rgb: 34, 34, 34;
+  --aa-input-background-color-rgb: 34, 34, 34;
+}
+body.quarto-dark .aa-DetachedFormContainer { border-bottom-color: #3a4148; }
+
+.aa-DetachedFormContainer .aa-Form {
+  align-items: center;
+  height: 2.2rem;
+  padding: 0 0.5rem 0 0.6rem;
+  border: 1px solid #8a949e !important;
+  border-radius: 0 !important;
   box-shadow: none !important;
+  background: transparent !important;
+  transition: border-color 0.12s ease, background-color 0.12s ease;
+}
+.aa-DetachedFormContainer .aa-Form:focus-within {
+  border-color: #03e5ff !important;
+  background-color: rgba(3, 229, 255, 0.08) !important;
+}
+body.quarto-dark .aa-DetachedFormContainer .aa-Form { border-color: #9aa4ae !important; }
+body.quarto-dark .aa-DetachedFormContainer .aa-Form:focus-within {
+  border-color: #e262e2 !important;
+  background-color: rgba(226, 98, 226, 0.14) !important;
 }
 
-.aa-Input {
+.aa-Form .aa-InputWrapperPrefix { height: auto; }
+.aa-SubmitButton { padding: 0 !important; width: 1.1rem; height: 1.1rem; color: #8a949e !important; }
+.aa-SubmitIcon { width: 1rem; height: 1rem; }
+.aa-ClearButton { color: #8a949e !important; padding: 0 0.2rem !important; }
+
+.aa-Form .aa-Input {
   font-family: "Roboto Mono", monospace !important;
-  font-size: 0.95rem !important;
+  font-size: 0.85rem !important;
+  padding: 0 0 0 0.5rem !important;
+  color: #1a1f24 !important;
+  -webkit-text-fill-color: #1a1f24 !important;
 }
-
-/* Light input */
-html[data-bs-theme="light"] .aa-Form,
-body.quarto-light .aa-Form {
-  background: #ffffff !important;
-  color: #222222 !important;
+body.quarto-dark .aa-Form .aa-Input,
+body.quarto-dark .aa-Input {
+  color: #f2f5f7 !important;
+  -webkit-text-fill-color: #f2f5f7 !important;
 }
+.aa-Input::placeholder { color: #8a949e !important; -webkit-text-fill-color: #8a949e !important; }
 
-/* Dark input */
-html[data-bs-theme="dark"] .aa-Form,
-body.quarto-dark .aa-Form {
-  background: #222222 !important;
-  color: #ffffff !important;
+.aa-DetachedCancelButton {
+  font-family: "Roboto Mono", monospace !important;
+  font-size: 0.66rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: #8a949e !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 0.2rem 0 0.85rem !important;
 }
+.aa-DetachedCancelButton:hover { color: #222222 !important; }
+body.quarto-dark .aa-DetachedCancelButton:hover { color: #ffffff !important; }
 
-/* Search results list */
-.aa-List {
-  padding: 0.6rem !important;
+/* ---- results ---- */
+.search-result-header {
+  font-family: "Roboto Mono", monospace !important;
+  font-size: 0.64rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #8a949e !important;
+  background: transparent !important;
+  padding: 0.75rem 0.9rem 0.5rem !important;
 }
+body.quarto-dark .search-result-header { color: #9aa4ae !important; }
 
-/* Individual search result item */
+.aa-Panel .aa-List { padding: 0 !important; }
 .aa-Item {
-  border-radius: 10px !important;
-  margin-bottom: 0.4rem !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
   padding: 0 !important;
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
-/* Result body */
-.search-item {
-  padding: 0.75rem 0.85rem !important;
-  border-radius: 10px !important;
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease,
-    transform 0.15s ease,
-    filter 0.15s ease !important;
-}
-
-/* Light result */
+/* rows: hairline separated, never boxed */
+html .search-item,
 html[data-bs-theme="light"] .search-item,
-body.quarto-light .search-item {
-  background: #ffffff !important;
-  color: #222222 !important;
-  border: 1px solid rgba(0, 0, 0, 0.12) !important;
-}
-
-/* Dark result */
+body.quarto-light .search-item,
 html[data-bs-theme="dark"] .search-item,
 body.quarto-dark .search-item {
-  background: #222222 !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  border-top: 1px solid rgba(138, 148, 158, 0.3) !important;
+  border-left: 2px solid transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+}
+body.quarto-dark .search-item { border-top-color: rgba(154, 164, 174, 0.28) !important; }
+
+.aa-Item .search-result-link { display: block; padding: 0.6rem 0.9rem !important; }
+.aa-Item .search-result-doc-section .search-result-link { padding-left: 1.7rem !important; }
+.aa-Item .search-result-title-container {
+  padding: 0 !important;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.aa-Item .search-result-text-container { margin-left: 0 !important; padding: 0 !important; }
+.aa-Item .search-item i.bi, .search-result-icon { display: none !important; }
+.aa-Item .search-result-doc-section,
+.aa-Item .search-result-more { padding-left: 0 !important; }
+
+.search-result-title {
+  font-family: "Roboto", sans-serif !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  color: #1a1f24 !important;
+  margin: 0 !important;
+}
+body.quarto-dark .search-result-title { color: #f2f5f7 !important; }
+
+.search-result-section {
+  font-family: "Roboto Mono", monospace !important;
+  font-size: 0.64rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #0b7f97 !important;
+  margin: 0 0 0.2rem !important;
+  opacity: 1 !important;
+}
+body.quarto-dark .search-result-section { color: #e39be0 !important; }
+
+.search-result-text,
+.search-result-text-container {
+  font-family: "Roboto", sans-serif !important;
+  font-size: 0.82rem !important;
+  line-height: 1.45 !important;
+  color: #5b6670 !important;
+  opacity: 1 !important;
+}
+body.quarto-dark .search-result-text,
+body.quarto-dark .search-result-text-container { color: #b8c2cb !important; }
+
+.search-result-more {
+  font-family: "Roboto Mono", monospace !important;
+  font-size: 0.64rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #8a949e !important;
+  padding: 0.5rem 0.9rem 0.5rem 1.7rem !important;
 }
 
-/* Selected / hovered search result */
-.aa-Item[aria-selected="true"] .search-item,
-.aa-Item:hover .search-item {
-  transform: translateY(-1px);
-  filter:
-    drop-shadow(3px 3px 0px #e262e2)
-    drop-shadow(-3px -3px 0px #03e5ff);
+/* the match itself: an accent wash, no box */
+mark,
+.search-result-highlight,
+.aa-Item .search-item mark.search-match,
+.aa-Item .search-item .search-match.mark {
+  background-color: rgba(3, 229, 255, 0.3) !important;
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  padding: 0 0.12em !important;
+  border-radius: 0 !important;
+}
+body.quarto-dark mark,
+body.quarto-dark .search-result-highlight,
+body.quarto-dark .aa-Item .search-item mark.search-match,
+body.quarto-dark .aa-Item .search-item .search-match.mark {
+  background-color: rgba(226, 98, 226, 0.32) !important;
 }
 
-/* Light selected result */
+/* selection and hover: accent bar plus tint (never a filled card) */
 html[data-bs-theme="light"] .aa-Item[aria-selected="true"] .search-item,
 html[data-bs-theme="light"] .aa-Item:hover .search-item,
 body.quarto-light .aa-Item[aria-selected="true"] .search-item,
-body.quarto-light .aa-Item:hover .search-item {
-  background: #222222 !important;
-  color: #ffffff !important;
-  border-color: #222222 !important;
+body.quarto-light .aa-Item:hover .search-item,
+.aa-DetachedOverlay li.aa-Item[aria-selected="true"] .search-item,
+#quarto-search-results li.aa-Item[aria-selected="true"] .search-item {
+  background-color: rgba(3, 229, 255, 0.13) !important;
+  border-left-color: #03e5ff !important;
+  color: inherit !important;
 }
-
-/* Dark selected result */
 html[data-bs-theme="dark"] .aa-Item[aria-selected="true"] .search-item,
 html[data-bs-theme="dark"] .aa-Item:hover .search-item,
 body.quarto-dark .aa-Item[aria-selected="true"] .search-item,
 body.quarto-dark .aa-Item:hover .search-item {
-  background: #ffffff !important;
-  color: #222222 !important;
-  border-color: #ffffff !important;
+  background-color: rgba(226, 98, 226, 0.16) !important;
+  border-left-color: #e262e2 !important;
+  color: inherit !important;
 }
-
-/* Search result title */
-.search-result-title,
-.search-result-title-container {
-  font-family: "Roboto", sans-serif !important;
-  font-weight: 700 !important;
-}
-
-/* Search result section / breadcrumb */
-.search-result-section {
-  font-family: "Roboto Mono", monospace !important;
-  font-size: 0.72rem !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.04em !important;
-  opacity: 0.8 !important;
-}
-
-/* Search result preview text */
-.search-result-text,
-.search-result-text-container {
-  font-family: "Roboto", sans-serif !important;
-  font-size: 0.86rem !important;
-  line-height: 1.35 !important;
-  opacity: 0.9 !important;
-}
-
-/* Force selected search result text to inherit correctly */
-.aa-Item[aria-selected="true"] .search-item,
+/* Quarto paints the selected row's children too; keep them transparent */
 .aa-Item[aria-selected="true"] .search-item *,
-.aa-Item:hover .search-item,
 .aa-Item:hover .search-item * {
+  background-color: transparent !important;
   color: inherit !important;
   -webkit-text-fill-color: inherit !important;
-  background-color: transparent !important;
 }
-
-/* Search buttons / clear / submit icons */
-.aa-SubmitButton,
-.aa-ClearButton,
-.aa-DetachedCancelButton {
-  color: inherit !important;
+.aa-Item[aria-selected="true"] .search-item mark.search-match,
+.aa-Item:hover .search-item mark.search-match {
+  background-color: rgba(3, 229, 255, 0.38) !important;
 }
-
-/* Detached cancel button */
-.aa-DetachedCancelButton {
-  font-family: "Roboto Mono", monospace !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
+body.quarto-dark .aa-Item[aria-selected="true"] .search-item mark.search-match,
+body.quarto-dark .aa-Item:hover .search-item mark.search-match {
+  background-color: rgba(226, 98, 226, 0.4) !important;
 }
-
-/* Light cancel button */
-html[data-bs-theme="light"] .aa-DetachedCancelButton,
-body.quarto-light .aa-DetachedCancelButton {
-  color: #e262e2 !important;
-}
-
-/* Dark cancel button */
-html[data-bs-theme="dark"] .aa-DetachedCancelButton,
-body.quarto-dark .aa-DetachedCancelButton {
-  color: #03e5ff !important;
-}
-
-/* Remove weird default highlight colors */
-mark,
-.search-result-highlight {
-  background: rgba(226, 98, 226, 0.25) !important;
-  color: inherit !important;
-  padding: 0.05rem 0.15rem !important;
-  border-radius: 4px !important;
-}
-
-html[data-bs-theme="dark"] mark,
-html[data-bs-theme="dark"] .search-result-highlight,
-body.quarto-dark mark,
-body.quarto-dark .search-result-highlight {
-  background: rgba(3, 229, 255, 0.28) !important;
-  color: inherit !important;
-}
-
 
 /* Dark theme: search input text and magnifying glass */
 html[data-bs-theme="dark"] .aa-Input,
@@ -1620,48 +1788,76 @@ body.quarto-dark .aa-InputWrapperPrefix svg {
 
 
 /* ---------------------------------------------------------
-   ACE HOMEPAGE ABOUT LINKS
-   GitHub / Contact buttons
+   ACE HOMEPAGE ABOUT LINKS (GitHub / Contact)
+   Wireframe badges in the theme accent, like the author ORCID
+   badges: outline at rest, filled on hover with white text.
 --------------------------------------------------------- */
 
+/* Quarto's trestles theme stacks these full-width below 992px; keep them a
+   small centered row at every width. */
+div.quarto-about-trestles .about-entity .about-links {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem !important;
+  width: auto !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 1.25rem;        /* room before the intro box when stacked */
+}
+
 div.quarto-about-trestles .about-entity .about-link {
-  border-radius: 6px !important;
-
-  font-family: "Roboto Mono", monospace !important;
-  font-weight: 700 !important;
-
-  transition:
-    transform 0.15s ease,
-    filter 0.15s ease,
-    background-color 0.15s ease,
-    color 0.15s ease;
-}
-
-/* Light theme */
-html[data-bs-theme="light"] div.quarto-about-trestles .about-entity .about-link,
-body[data-bs-theme="light"] div.quarto-about-trestles .about-entity .about-link,
-body.quarto-light div.quarto-about-trestles .about-entity .about-link {
-  background-color: #222222 !important;
-  color: white !important;
-  border-color: white !important;
-}
-
-/* Dark theme */
-html[data-bs-theme="dark"] div.quarto-about-trestles .about-entity .about-link,
-body[data-bs-theme="dark"] div.quarto-about-trestles .about-entity .about-link,
-body.quarto-dark div.quarto-about-trestles .about-entity .about-link {
-  background-color: white !important;
+  --ace-accent: #03e5ff;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.45rem;
+  width: auto !important;
+  flex: 0 0 auto;
+  padding: 0.35rem 0.75rem !important;
+  margin: 0 !important;
+  border: 1px solid var(--ace-accent) !important;
+  border-radius: 3px !important;
+  background: transparent !important;
   color: #222222 !important;
-  border-color: #222222 !important;
+  font-family: "Roboto Mono", monospace !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+  text-decoration: none !important;
+  transition: background-color 0.12s ease, color 0.12s ease;
 }
 
-/* Hover effect matching Read online / PDF buttons */
-div.quarto-about-trestles .about-entity .about-link:hover {
-  transform: translateY(-2px);
-  filter:
-    drop-shadow(3px 3px 0px #e262e2)
-    drop-shadow(-3px -3px 0px #03e5ff);
-  text-decoration: none !important;
+div.quarto-about-trestles .about-entity .about-link .bi {
+  font-size: 1rem;
+  line-height: 1;
+  color: inherit;
+}
+
+/* Contact: same square-cornered envelope as the author email badge, drawn as
+   a mask in currentColor so it follows the badge's rest/hover colours. */
+div.quarto-about-trestles .about-entity .about-link .bi-envelope::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='2.5' y='5' width='19' height='14'/%3E%3Cpath d='M2.5 6.5l9.5 7 9.5-7'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='2.5' y='5' width='19' height='14'/%3E%3Cpath d='M2.5 6.5l9.5 7 9.5-7'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+div.quarto-about-trestles .about-entity .about-link:hover,
+div.quarto-about-trestles .about-entity .about-link:focus-visible {
+  background: var(--ace-accent) !important;
+  color: #ffffff !important;
+  transform: none;
+  filter: none;
+}
+
+body.quarto-dark div.quarto-about-trestles .about-entity .about-link {
+  --ace-accent: #e262e2;
+  color: #ffffff !important;
 }
 
 /* ---------------------------------------------------------
@@ -1916,6 +2112,31 @@ body.quarto-dark main a.ace-orcid.ace-orcid.ace-orcid.ace-orcid:focus-visible {
    Bordered statement block; accent matches the navbar borders.
 --------------------------------------------------------- */
 
+/* Home page lead paragraph: no panel, just the statement, with the project
+   name set in mono so it reads as the wordmark. */
+.ace-lead {
+  margin: 0 0 1.8rem;
+}
+.ace-lead p {
+  margin: 0;
+  font-size: 1.06rem;
+  line-height: 1.65;
+  color: #1a1f24;
+}
+.ace-wordmark {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.92em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #0b7f97;                /* the theme's text cyan */
+}
+body.quarto-dark .ace-lead p {
+  color: #f2f5f7;
+}
+body.quarto-dark .ace-wordmark {
+  color: #e39be0;                /* the theme's text magenta */
+}
+
 .ace-intro {
   border: 1px solid rgba(3, 229, 255, 0.85);
   background-color: rgba(3, 229, 255, 0.06);
@@ -1944,38 +2165,58 @@ body.quarto-dark .ace-intro p {
 }
 
 /* ---------------------------------------------------------
-   SECTION HEADING TAB (homepage "Reports")
-   Full-width accent rule with a filled label hanging off it.
-   Usage: #### [Reports]{.ace-section-label} {.ace-section-heading}
+   SECTION HEADING (home page and Reports page "Reports")
+   Same treatment as the report h2 headings: bold title, thin vertical
+   divider, grey note, and a rule underneath made of a short accent segment
+   and a grey hairline.
+   Usage: #### [Reports]{.ace-section-label} [note]{.ace-section-note} {.ace-section-heading}
 --------------------------------------------------------- */
 
 /* Quarto copies a heading's classes onto its wrapping <section>, so the
    rule is scoped to the heading element itself or it draws twice. */
 h1.ace-section-heading, h2.ace-section-heading, h3.ace-section-heading,
 h4.ace-section-heading, h5.ace-section-heading {
-  border-top: 2px solid #03e5ff;
-  padding-top: 0;
-  margin: 2.4rem 0 1rem;
-  line-height: 1;
-
+  position: relative;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.8rem;
+  gap: 0;
+  margin: 2.4rem 0 1rem;
+  padding: 0 0 0.5rem 0;
+  border: 0;
+  border-bottom: 1px solid rgba(138, 148, 158, 0.45);
+  line-height: 1;
+}
+h1.ace-section-heading::after, h2.ace-section-heading::after, h3.ace-section-heading::after,
+h4.ace-section-heading::after, h5.ace-section-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 2.6rem;
+  height: 3px;
+  background-color: #03e5ff;
 }
 
-/* Faded caption to the right of the label, outside the box */
+.ace-section-label {
+  display: inline-block;
+  padding: 0 0.7rem 0 0;
+  margin-right: 0.7rem;
+  border-right: 2px solid rgba(138, 148, 158, 0.45);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 17pt;
+  line-height: 1.15;
+  color: #222222;
+}
+
 .ace-section-note {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   line-height: 1.3;
   letter-spacing: 0;
-  color: #8a949e;
-}
-
-body.quarto-dark .ace-section-note {
-  color: #8d979f;
+  color: #4b5560;
 }
 
 section.ace-section-heading {
@@ -1983,26 +2224,24 @@ section.ace-section-heading {
   padding: 0;
   margin: 0;
 }
-
-.ace-section-label {
-  display: inline-block;
-  background-color: #03e5ff;
-  color: #000000;
-  padding: 0.3rem 0.8rem;
-  font-weight: 700;
-  font-size: 1.1rem;
-  line-height: 1.2;
-}
+section.ace-section-heading::after { content: none; }
 
 body.quarto-dark h1.ace-section-heading, body.quarto-dark h2.ace-section-heading,
 body.quarto-dark h3.ace-section-heading, body.quarto-dark h4.ace-section-heading,
 body.quarto-dark h5.ace-section-heading {
-  border-top-color: #e262e2;
+  border-bottom-color: rgba(154, 164, 174, 0.4);
 }
-
-body.quarto-dark .ace-section-label {
+body.quarto-dark h1.ace-section-heading::after, body.quarto-dark h2.ace-section-heading::after,
+body.quarto-dark h3.ace-section-heading::after, body.quarto-dark h4.ace-section-heading::after,
+body.quarto-dark h5.ace-section-heading::after {
   background-color: #e262e2;
-  color: #000000;
+}
+body.quarto-dark .ace-section-label {
+  color: #ffffff;
+  border-right-color: rgba(154, 164, 174, 0.4);
+}
+body.quarto-dark .ace-section-note {
+  color: #b8c2cb;
 }
 
 /* Tighten the gap between a section heading, the listing filter box, and
@@ -2011,9 +2250,280 @@ h4.ace-section-heading {
   margin-bottom: 0.6rem;
 }
 
-.quarto-listing .quarto-listing-filter {
-  margin-bottom: 0.5rem;
+/* ---------------------------------------------------------
+   LISTING CATEGORIES (margin sidebar on the home and Reports pages)
+   The same language as the table of contents on report pages: a mono-caps
+   key, a hairline rail, quiet rows, and an accent segment plus a translucent
+   tint on the selected category. Counts sit right-aligned in mono.
+--------------------------------------------------------- */
+#quarto-margin-sidebar .quarto-listing-category-title,
+h5.quarto-listing-category-title {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a949e;
+  /* 1.2rem clears the navbar, matching the TOC title on report pages */
+  margin: 1.2rem 0 0.45rem 0;
+  padding-left: 0.85rem;
 }
+body.quarto-dark #quarto-margin-sidebar .quarto-listing-category-title { color: #9aa4ae; }
+
+.quarto-listing-category {
+  border-left: 2px solid rgba(138, 148, 158, 0.28);
+  padding-left: 0;
+  margin-bottom: 1.1rem;
+}
+body.quarto-dark .quarto-listing-category { border-left-color: rgba(154, 164, 174, 0.28); }
+
+.quarto-listing-category .category {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin-left: -2px;                 /* sit on the rail */
+  padding: 0.17rem 0.6rem 0.17rem 0.8rem;
+  border-left: 2px solid transparent;
+  border-radius: 0 6px 6px 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.25;
+  color: #4b5560;
+  cursor: pointer;
+  transition: color 0.12s ease, background-color 0.12s ease, border-color 0.12s ease;
+}
+body.quarto-dark .quarto-listing-category .category { color: #b8c2cb; }
+
+.quarto-listing-category .category .quarto-category-count {
+  margin-left: auto;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #8a949e;
+}
+body.quarto-dark .quarto-listing-category .category .quarto-category-count { color: #9aa4ae; }
+
+.quarto-listing-category .category:hover {
+  color: #222222;
+  background-color: rgba(226, 98, 226, 0.12);
+}
+body.quarto-dark .quarto-listing-category .category:hover {
+  color: #ffffff;
+  background-color: rgba(3, 229, 255, 0.14);
+}
+
+.quarto-listing-category .category.active {
+  color: #222222;
+  font-weight: 700;
+  background-color: rgba(226, 98, 226, 0.16);
+  border-left-color: #e262e2;
+}
+.quarto-listing-category .category.active .quarto-category-count { color: #c94fc9; }
+body.quarto-dark .quarto-listing-category .category.active {
+  color: #ffffff;
+  background-color: rgba(3, 229, 255, 0.16);
+  border-left-color: #03e5ff;
+}
+body.quarto-dark .quarto-listing-category .category.active .quarto-category-count { color: #03e5ff; }
+
+/* ---------------------------------------------------------
+   CATEGORY FACETS (Population / Treatment / Outcome / Design)
+   Each report declares the four facets in its own front matter;
+   scripts/build_categories.py writes the flat `categories` list Quarto needs
+   for filtering and feeds, plus a term -> facet map (_includes/category-
+   facets.html). That map tints the chips on the listing cards and in the
+   report title block, and splits the sidebar category list into titled
+   groups. The four colors step along the ACE cyan-to-magenta axis so they
+   read as one family rather than four unrelated hues.
+--------------------------------------------------------- */
+[data-facet="population"], .ace-facet-population { --ace-facet: #03e5ff; --ace-facet-fill: rgba(3, 229, 255, 0.14);  --ace-facet-ink: #0b7f97; --ace-facet-key: 11ch; }
+[data-facet="treatment"],  .ace-facet-treatment  { --ace-facet: #4db9f5; --ace-facet-fill: rgba(77, 185, 245, 0.15); --ace-facet-ink: #1f6f9e; --ace-facet-key: 10ch; }
+[data-facet="outcome"],    .ace-facet-outcome    { --ace-facet: #978eec; --ace-facet-fill: rgba(151, 142, 236, 0.17); --ace-facet-ink: #574dae; --ace-facet-key: 8ch; }
+[data-facet="design"],     .ace-facet-design     { --ace-facet: #e262e2; --ace-facet-fill: rgba(226, 98, 226, 0.14); --ace-facet-ink: #a53ca5; --ace-facet-key: 7ch; }
+[data-facet="other"],      .ace-facet-other      { --ace-facet: #8a949e; --ace-facet-fill: rgba(138, 148, 158, 0.16); --ace-facet-ink: #5b6670; --ace-facet-key: 6ch; }
+
+/* dark: the bright hue itself carries the label */
+body.quarto-dark [data-facet="population"], body.quarto-dark .ace-facet-population { --ace-facet-ink: #03e5ff; --ace-facet-fill: rgba(3, 229, 255, 0.16); }
+body.quarto-dark [data-facet="treatment"],  body.quarto-dark .ace-facet-treatment  { --ace-facet-ink: #6cc4ff; --ace-facet-fill: rgba(77, 185, 245, 0.17); }
+body.quarto-dark [data-facet="outcome"],    body.quarto-dark .ace-facet-outcome    { --ace-facet-ink: #a99ef2; --ace-facet-fill: rgba(151, 142, 236, 0.2); }
+body.quarto-dark [data-facet="design"],     body.quarto-dark .ace-facet-design     { --ace-facet-ink: #e39be0; --ace-facet-fill: rgba(226, 98, 226, 0.16); }
+body.quarto-dark [data-facet="other"],      body.quarto-dark .ace-facet-other      { --ace-facet-ink: #9aa4ae; --ace-facet-fill: rgba(154, 164, 174, 0.18); }
+
+/* chips on the listing cards */
+html body .ace-report-category[data-facet] {
+  background: var(--ace-facet-fill);
+  border-color: var(--ace-facet);
+}
+/* chips in a report's title block */
+html body #title-block-header .quarto-category[data-facet] {
+  /* the plain pill rules above use !important, so this has to as well */
+  background: var(--ace-facet-fill) !important;
+  border-color: var(--ace-facet) !important;
+}
+
+/* hover: the facet key slides out in front of the term, inside the pill, in
+   the facet's own ink. max-width rather than width so the closed state is
+   genuinely zero and nothing reserves space for it. */
+html body .ace-report-category[data-facet],
+html body #title-block-header .quarto-category[data-facet] {
+  display: inline-flex;
+  align-items: center;
+}
+html body .ace-report-category[data-facet]::before,
+html body #title-block-header .quarto-category[data-facet]::before {
+  content: attr(data-facet);
+  flex: 0 0 auto;
+  max-width: 0;
+  margin-right: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  color: var(--ace-facet-ink);
+  -webkit-text-fill-color: var(--ace-facet-ink);
+  transition: max-width 0.2s ease, margin-right 0.2s ease, opacity 0.15s ease;
+}
+html body .ace-report-category[data-facet]:hover::before,
+html body #title-block-header .quarto-category[data-facet]:hover::before {
+  max-width: var(--ace-facet-key, 11ch);
+  margin-right: 0.55em;
+  opacity: 1;
+}
+
+/* sidebar: a small facet key above each group, the rail unchanged */
+#quarto-margin-sidebar .ace-facet-title {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ace-facet-ink);
+  margin: 0 0 0.15rem 0;
+  padding-left: 0.8rem;
+}
+#quarto-margin-sidebar .quarto-listing-category.ace-facet-group { margin-bottom: 0.7rem; }
+#quarto-margin-sidebar .quarto-listing-category.ace-facet-all { margin-bottom: 0.85rem; }
+
+/* selected or hovered row takes its own facet color */
+html body .quarto-listing-category.ace-facet-group .category:hover {
+  background-color: var(--ace-facet-fill);
+}
+html body .quarto-listing-category.ace-facet-group .category.active {
+  background-color: var(--ace-facet-fill);
+  border-left-color: var(--ace-facet);
+}
+html body .quarto-listing-category.ace-facet-group .category.active .quarto-category-count {
+  color: var(--ace-facet-ink);
+}
+
+/* ---------------------------------------------------------
+   LISTING FILTER (home page and Reports page)
+   A wireframe field in the badge language: square corners, grey outline
+   and mask magnifying glass at rest, accent outline, icon and faint tint
+   when focused. Mono caps placeholder, mono input text.
+--------------------------------------------------------- */
+.quarto-listing .quarto-listing-filter,
+.quarto-listing-filter {
+  --ace-filter-line: #8a949e;
+  --ace-filter-accent: #03e5ff;
+  display: inline-flex !important;
+  align-items: center;
+  flex-wrap: nowrap !important;   /* Bootstrap wraps input groups; keep one line */
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+  height: 2rem;                  /* the input is centred by the flex box */
+  margin-bottom: 0;
+  padding: 0 0.5rem 0 0.55rem;
+  border: 1px solid var(--ace-filter-line);
+  border-radius: 0;
+  background-color: transparent;
+  transition: border-color 0.12s ease, background-color 0.12s ease;
+}
+.quarto-listing-filter:focus-within {
+  border-color: var(--ace-filter-accent);
+  background-color: rgba(3, 229, 255, 0.08);
+}
+
+/* icon: the same drawn glass as the navbar search */
+.quarto-listing-filter .input-group-text {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: transparent;
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  background-color: var(--ace-filter-line);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='square'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.4 15.4L21 21'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='square'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.4 15.4L21 21'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: background-color 0.12s ease;
+}
+.quarto-listing-filter .input-group-text .bi { display: none; }
+.quarto-listing-filter:focus-within .input-group-text {
+  background-color: var(--ace-filter-accent);
+}
+
+/* the field itself */
+.quarto-listing-filter input.search,
+.quarto-listing-filter input.form-control {
+  flex: 1 1 auto;                /* shrink with the box instead of wrapping */
+  width: 10.5rem;
+  min-width: 0;
+  max-width: 100%;
+  height: auto;
+  padding: 0;
+  line-height: 1;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  color: #1a1f24;
+}
+.quarto-listing-filter input.search::placeholder {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8a949e;
+  opacity: 1;
+}
+
+body.quarto-dark .quarto-listing-filter {
+  --ace-filter-line: #9aa4ae;
+  --ace-filter-accent: #e262e2;
+}
+body.quarto-dark .quarto-listing-filter:focus-within {
+  background-color: rgba(226, 98, 226, 0.12);
+}
+body.quarto-dark .quarto-listing-filter input.search,
+body.quarto-dark .quarto-listing-filter input.form-control { color: #f2f5f7; }
+body.quarto-dark .quarto-listing-filter input.search::placeholder { color: #9aa4ae; }
+
+/* The row above the cards: how many reports are showing on the left, the
+   filter on the right, so the filter is not alone on an empty line. */
+.quarto-listing .listing-actions-group {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 0 0 0.9rem;
+}
+.ace-listing-count {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8a949e;
+  white-space: nowrap;
+}
+body.quarto-dark .ace-listing-count { color: #9aa4ae; }
 
 .quarto-listing .listing-actions-group + .ace-report-listing {
   margin-top: 0;
@@ -2049,8 +2559,8 @@ body.quarto-dark td code:not(.sourceCode) {
   font-family: 'Roboto Mono', monospace;
   font-size: 0.9em;
   color: #e6e9ec;
-  background-color: #1e2328;
-  border: 1px solid #30363d;
+  background-color: #2c3138;
+  border: 1px solid #3a4148;
   border-radius: 0;
   padding: 0 0.25em 0.02em;
 }
@@ -2071,8 +2581,8 @@ body.quarto-light pre:not(.sourceCode) {
 
 body.quarto-dark div.sourceCode,
 body.quarto-dark pre:not(.sourceCode) {
-  background-color: #14171b;
-  border: 1px solid #262b31;
+  background-color: #2c3138;      /* a step lighter than the #222 page */
+  border: 1px solid #3a4148;
   border-radius: 0;
 }
 
@@ -2338,4 +2848,863 @@ body.quarto-light .navbar .navbar-toggler:focus-visible .navbar-toggler-icon {
 body.quarto-light .navbar #quarto-search .aa-DetachedSearchButton:hover .aa-DetachedSearchButtonIcon,
 body.quarto-light .navbar #quarto-search .aa-DetachedSearchButton:focus-visible .aa-DetachedSearchButtonIcon {
   background-color: #03e5ff;
+}
+
+/* ---------------------------------------------------------
+   AUTHOR ORCID BADGE (report title block)
+   Quarto ships a green PNG; it is hidden and the iD mark is
+   redrawn as a mask so it can be grey at rest and white on
+   hover, inside a grey wireframe box that fills on hover.
+--------------------------------------------------------- */
+
+a.quarto-title-author-orcid,
+a.quarto-title-author-email {
+  --ace-orcid-grey: #8a949e;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  /* !important: the site-wide link rule sets margin:0 -0.22em for its hover box */
+  margin: 0 0 0 0.3rem !important; /* space between badges */
+  padding: 0 !important;
+  vertical-align: -0.3em;
+  border: 1px solid var(--ace-orcid-grey);
+  border-radius: 3px;
+  background: transparent !important;
+  opacity: 1 !important;          /* Quarto fades the email link to 0.7 */
+  transition: background-color 0.12s ease;
+}
+
+a.quarto-title-author-orcid img {
+  display: none;
+}
+
+a.quarto-title-author-orcid::before {
+  content: "";
+  width: 0.95rem;
+  height: 0.95rem;
+  background-color: var(--ace-orcid-grey);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: background-color 0.12s ease;
+}
+
+a.quarto-title-author-orcid:hover,
+a.quarto-title-author-orcid:focus-visible,
+a.quarto-title-author-email:hover,
+a.quarto-title-author-email:focus-visible {
+  background: var(--ace-orcid-grey) !important;
+}
+
+a.quarto-title-author-orcid:hover::before,
+a.quarto-title-author-orcid:focus-visible::before {
+  background-color: #ffffff;
+}
+
+/* Email badge: the Bootstrap glyph is hidden (its font baseline sits low and
+   its colour is hard to override) and an envelope is drawn as a mask, exactly
+   like the iD mark, so both badges align and invert identically. */
+a.quarto-title-author-email .bi {
+  display: none;
+}
+
+a.quarto-title-author-email::before {
+  content: "";
+  width: 0.95rem;
+  height: 0.95rem;
+  background-color: var(--ace-orcid-grey);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='2.5' y='5' width='19' height='14'/%3E%3Cpath d='M2.5 6.5l9.5 7 9.5-7'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='2.5' y='5' width='19' height='14'/%3E%3Cpath d='M2.5 6.5l9.5 7 9.5-7'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: background-color 0.12s ease;
+}
+
+a.quarto-title-author-email:hover::before,
+a.quarto-title-author-email:focus-visible::before {
+  background-color: #ffffff;
+}
+
+/* Badges BEFORE the name, in fixed slots (email | ORCID | name), so they
+   form columns across authors regardless of name length. Driven purely by
+   Quarto's author-link classes, so any report / any author gets the same.
+   An author with no email keeps an empty first slot so the ORCID column
+   still lines up. */
+p.author {
+  display: flex !important;
+  align-items: center;
+  gap: 0.3rem;
+}
+p.author > a.quarto-title-author-email { order: -2; margin: 0 !important; }
+p.author > a.quarto-title-author-orcid { order: -1; margin: 0 0.3rem 0 0 !important; }
+p.author > a.quarto-title-author-orcid:first-of-type {
+  margin-left: calc(1.35rem + 0.3rem) !important;   /* empty email slot */
+}
+
+body.quarto-dark a.quarto-title-author-orcid,
+body.quarto-dark a.quarto-title-author-email {
+  --ace-orcid-grey: #9aa4ae;
+}
+body.quarto-dark a.quarto-title-author-orcid:hover::before,
+body.quarto-dark a.quarto-title-author-orcid:focus-visible::before,
+body.quarto-dark a.quarto-title-author-email:hover::before,
+body.quarto-dark a.quarto-title-author-email:focus-visible::before {
+  background-color: #111111;
+}
+
+/* ---------------------------------------------------------
+   TITLE-BLOCK META (report pages)
+   Condensed from Quarto's four labelled columns into three short blocks:
+     AUTHORS  key with a hairline, then two lines per author (name and
+              university; email/ORCID badges and city), rebuilt by
+              report-scripts.html into a two-column grid;
+     PUBLISHED / MODIFIED as one small accent-tinted bar under the subtitle;
+     ABSTRACT key with a hairline, then the text.
+   Keys use the same mono-caps style as the TOC and the RIV page.
+--------------------------------------------------------- */
+#title-block-header.quarto-title-block .quarto-title-meta-heading,
+#title-block-header.quarto-title-block .abstract .block-title {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5a6570;
+  margin: 0 !important;                /* Quarto: margin-top 1em */
+  padding: 0;
+  border: 0;
+  opacity: 1;
+}
+body.quarto-dark #title-block-header .quarto-title-meta-heading,
+body.quarto-dark #title-block-header .abstract .block-title { color: #b8c2cb; }
+
+/* authors: the key, then a two-column grid built by report-scripts.html:
+     name              | university
+     [email] [ORCID]   | city, state
+   Badges and the small line share one size so the second line sits flush. */
+#title-block-header.quarto-title-block .quarto-title-meta-author {
+  display: block !important;
+  margin-top: 1.1rem;
+}
+#title-block-header .quarto-title-meta-author .quarto-title-meta-heading:nth-child(1) {
+  display: block;
+  border-bottom: 1px solid #c9d0d6;
+  padding-bottom: 0.3rem;
+  margin-bottom: 0.45rem !important;
+}
+#title-block-header .quarto-title-meta-author .quarto-title-meta-heading:nth-child(2) {
+  display: none;
+}
+#title-block-header .ace-authors {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 1.1rem;
+  row-gap: 0;
+  align-items: center;
+}
+#title-block-header .ace-author-name {
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+#title-block-header .ace-author-aff {
+  font-size: 0.95rem;
+  line-height: 1.35;
+  color: #4b5560;
+}
+#title-block-header .ace-author-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.65rem;
+}
+#title-block-header .ace-author-loc {
+  font-size: 0.8rem;
+  line-height: 1;
+  color: #6b7681;
+  margin-bottom: 0.65rem;
+}
+/* badge size = the small line's cap height, so both rows read as one strip */
+#title-block-header .ace-author-badges a.quarto-title-author-orcid,
+#title-block-header .ace-author-badges a.quarto-title-author-email {
+  width: 0.95rem;
+  height: 0.95rem;
+  margin: 0 !important;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+#title-block-header .ace-author-badges a.quarto-title-author-orcid::before,
+#title-block-header .ace-author-badges a.quarto-title-author-email::before {
+  width: 0.66rem;
+  height: 0.66rem;
+}
+#title-block-header .ace-authors > .ace-author-badges:nth-last-child(2),
+#title-block-header .ace-authors > .ace-author-loc:last-child { margin-bottom: 0; }
+body.quarto-dark #title-block-header .ace-author-aff { color: #b8c2cb; }
+body.quarto-dark #title-block-header .ace-author-loc { color: #9aa4ae; }
+
+/* published / modified: moved under the subtitle by report-scripts.html and
+   shown as one grey bar, right-aligned, text in the page background colour */
+/* Quarto emits an empty .quarto-title-meta on pages with no dates (the home
+   page); without this it would show as a small tinted box under the title. */
+#title-block-header.quarto-title-block .quarto-title-meta:not(:has(.quarto-title-meta-heading)) {
+  display: none !important;
+}
+#title-block-header.quarto-title-block .quarto-title-meta {
+  display: inline-flex !important;       /* one rectangle, only as wide as its text */
+  max-width: 100%;
+  align-items: baseline;
+  gap: 0 !important;                     /* Quarto's grid gap would pad the divider's left */
+  margin: 0.1rem 0 0 0;
+  padding: 0.28rem 0.6rem;
+  line-height: 1;
+  background-color: rgba(3, 229, 255, 0.18);     /* light cyan; magenta in dark */
+  border: 0;
+  border-radius: 0;
+}
+#title-block-header .quarto-title-meta > div {
+  display: flex;
+  flex: none;
+  align-items: baseline;               /* key and date share a baseline */
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+/* divider between Published and Modified, like the section-heading divider */
+#title-block-header .quarto-title-meta > div + div {
+  margin-left: 0.6rem;
+  padding-left: 0.6rem;
+  border-left: 1.5px solid rgba(3, 229, 255, 0.7);
+}
+#title-block-header.quarto-title-block .quarto-title-meta .quarto-title-meta-heading {
+  color: #222222;
+  font-weight: 700;
+  font-size: 0.66rem;
+  line-height: 1;
+  white-space: nowrap;                 /* never wrap inside the bar; the script shortens the dates instead */
+}
+#title-block-header.quarto-title-block .quarto-title .subtitle { margin-bottom: 0.45rem !important; }
+#title-block-header.quarto-title-block .quarto-title-meta .quarto-title-meta-contents,
+#title-block-header.quarto-title-block .quarto-title-meta p {
+  margin: 0 !important;
+  padding: 0;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.7rem;
+  line-height: 1;
+  color: #222222;
+  white-space: nowrap;
+}
+body.quarto-dark #title-block-header.quarto-title-block .quarto-title-meta { background-color: rgba(226, 98, 226, 0.2); }
+body.quarto-dark #title-block-header .quarto-title-meta > div + div { border-left-color: rgba(226, 98, 226, 0.7); }
+body.quarto-dark #title-block-header.quarto-title-block .quarto-title-meta .quarto-title-meta-heading { color: #ffffff; }
+body.quarto-dark #title-block-header.quarto-title-block .quarto-title-meta p { color: #ffffff; }
+
+/* abstract */
+#title-block-header.quarto-title-block .abstract {
+  margin-top: 1.5rem !important;       /* Quarto zeroes it with a heavier selector */
+}
+
+/* categories: moved under the abstract by report-scripts.html */
+#title-block-header.quarto-title-block .quarto-categories.ace-categories-after-abstract {
+  margin-top: 1rem !important;
+  margin-bottom: 0 !important;
+}
+#title-block-header.quarto-title-block .abstract .block-title {
+  display: block;
+  border-bottom: 1px solid #c9d0d6 !important;
+  padding-bottom: 0.3rem !important;
+  margin-bottom: 0.6rem !important;
+}
+body.quarto-dark #title-block-header .quarto-title-meta-author .quarto-title-meta-heading:nth-child(1),
+body.quarto-dark #title-block-header .abstract .block-title { border-color: #3a4148; }
+
+@media (max-width: 575.98px) {
+  /* narrow screens: one column, university and city under the name */
+  #title-block-header .ace-authors { grid-template-columns: 1fr; }
+  #title-block-header .ace-author-badges { margin-bottom: 0.1rem; }
+}
+
+/* Team page institutional disclaimer */
+.ace-team-note {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid #c9d0d6;
+  font-size: 0.85rem;
+  color: #6b7681;
+}
+body.quarto-dark .ace-team-note { border-top-color: #3a4148; color: #9aa4ae; }
+
+/* Citation appendix (generated by reports/_filters/ace-citation.lua) */
+.ace-cite-apa p {
+  padding-left: 2.2em;
+  text-indent: -2.2em;   /* APA hanging indent */
+  margin: 0.2rem 0 0.9rem;
+}
+
+/* ---------------------------------------------------------
+   DOI COPY BUTTON (next to the ACE ID pill; listing cards and report title)
+   Bold grey text, no box; click copies https://doi.org/<doi>.
+--------------------------------------------------------- */
+
+.ace-report-card-topline,
+.quarto-title-block .ace-report-id-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.ace-doi-copy {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #8a949e;
+  cursor: pointer;
+  transition: color 0.12s ease;
+}
+
+.ace-doi-copy:hover,
+.ace-doi-copy:focus-visible {
+  color: #5b6670;
+  outline: none;
+}
+
+.ace-doi-copy.is-copied {
+  color: #0b7f97;
+}
+
+body.quarto-dark .ace-doi-copy { color: #8d979f; }
+body.quarto-dark .ace-doi-copy:hover,
+body.quarto-dark .ace-doi-copy:focus-visible { color: #b8c2cb; }
+body.quarto-dark .ace-doi-copy.is-copied { color: #e39be0; }
+
+/* Table notes (e.g. citation_table()): same colour/size as Quarto's table
+   caption, left-aligned under the table. */
+.ace-table-note {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;             /* caption is ~15.3px on a 17px base */
+  line-height: 1.45;
+  color: #5a6570;                /* light-mode figcaption colour */
+  margin: -0.4rem 0 1.4rem;
+}
+body.quarto-dark .ace-table-note { color: #bfbfbf; }   /* dark-mode figcaption colour */
+
+/* ---------------------------------------------------------
+   LISTING CARD: date bar
+   Same object as the date bar in a report's title block (see "TITLE-BLOCK
+   META"). On a report page it is a small tinted rectangle; on a listing card
+   it is plain text with no fill, so a column of cards stays quiet. The dates
+   themselves are shortened by the site script (_quarto.yml) when the card
+   gets narrow.
+--------------------------------------------------------- */
+.ace-report-meta.ace-date-bar {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  align-self: flex-start;        /* the card is a flex column: hug the dates */
+  width: fit-content;
+  max-width: 100%;
+  margin: 0.5rem 0 0.1rem;
+  padding: 0.1rem 0;
+  background-color: transparent;
+  line-height: 1;
+}
+.ace-report-meta.ace-date-bar > div {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+}
+.ace-report-meta.ace-date-bar > div + div {
+  margin-left: 0.6rem;
+  padding-left: 0.6rem;
+  border-left: 1px solid rgba(138, 148, 158, 0.5);
+}
+.ace-date-key {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #222222;
+  white-space: nowrap;
+}
+.ace-date-value {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.7rem;
+  line-height: 1;
+  color: #222222;
+  white-space: nowrap;
+}
+body.quarto-dark .ace-report-meta.ace-date-bar > div + div {
+  border-left-color: rgba(154, 164, 174, 0.5);
+}
+body.quarto-dark .ace-date-key,
+body.quarto-dark .ace-date-value {
+  color: #ffffff;
+}
+/* Too narrow even for 09/06/26: the site script adds .ace-date-wrap and the
+   two dates stack, without the divider. */
+#title-block-header .quarto-title-meta.ace-date-wrap,
+.ace-date-bar.ace-date-wrap {
+  flex-direction: column;
+  align-items: flex-start;
+}
+#title-block-header .quarto-title-meta.ace-date-wrap > div + div,
+.ace-date-bar.ace-date-wrap > div + div {
+  margin-left: 0;
+  padding-left: 0;
+  border-left: 0;
+  margin-top: 0.3rem;
+}
+
+/* ---------------------------------------------------------
+   LISTING CARD: impact totals (right of the Read online / PDF buttons)
+   Written into each report's front matter by scripts/citations.py.
+--------------------------------------------------------- */
+
+.ace-report-card-actions .ace-report-impact {
+  margin-left: auto;             /* push to the right edge of the actions row */
+  display: grid;                 /* INFECTED | bracket | number | word, one count per row */
+  grid-template-columns: auto auto auto auto;
+  column-gap: 0.35rem;
+  row-gap: 0.05rem;
+  align-items: baseline;
+  justify-items: start;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.66rem;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: #8a949e;
+  text-align: right;
+}
+
+/* label spans the three rows, vertically centred, with a thin bracket
+   (drawn by ::before, which is a grid item) grouping the three counts */
+.ace-report-card-actions .ace-report-impact .ace-report-impact-label {
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  align-self: center;
+  justify-self: end;
+}
+
+.ace-report-card-actions .ace-report-impact::before {
+  content: "";
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: stretch;
+  width: 0.28rem;
+  border: 1px solid #b8c2cb;
+  border-right: 0;               /* "[" shape: left rule with top/bottom ticks */
+  margin: 0.1rem 0;
+}
+body.quarto-dark .ace-report-card-actions .ace-report-impact::before { border-color: #4a525a; }
+
+/* numbers right-aligned in their own column, words left-aligned after them */
+.ace-report-card-actions .ace-report-impact b {
+  justify-self: end;
+}
+
+.ace-report-card-actions .ace-report-impact b {
+  font-weight: 700;
+  color: #5b6670;
+}
+
+body.quarto-dark .ace-report-card-actions .ace-report-impact { color: #8d979f; }
+body.quarto-dark .ace-report-card-actions .ace-report-impact b { color: #b8c2cb; }
+
+@media (max-width: 480px) {
+  .ace-report-card-actions .ace-report-impact {
+    margin-left: 0;
+    width: 100%;
+    justify-content: start;
+    text-align: left;
+    margin-top: 0.25rem;
+  }
+  .ace-report-card-actions .ace-report-impact .ace-report-impact-label { justify-self: start; }
+}
+
+.ace-report-card-actions .ace-report-impact .ace-report-impact-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: #8a949e;
+  margin-right: 0.1rem;
+}
+
+
+/* ---------------------------------------------------------
+   FOLD-IN RIGHT PANEL (narrow screens)
+   Quarto hides #quarto-margin-sidebar (TOC + Download) below 768px (its md
+   breakpoint); between 768 and 991px it still shows the sidebar inline.
+   Below that width it becomes an off-canvas panel on the right, opened
+   by an edge tab with a chevron (button added by the site script in
+   _quarto.yml, on any page whose sidebar holds a TOC, categories or
+   download links).
+--------------------------------------------------------- */
+
+@media (max-width: 767.98px) {
+  #quarto-margin-sidebar {
+    display: block !important;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(80vw, 320px);
+    box-sizing: border-box;
+    padding: 4.5rem 1.1rem 1.5rem;
+    background: #ffffff;
+    border-left: 1px solid #c9d0d6;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    z-index: 1040;
+  }
+  body.ace-panel-open #quarto-margin-sidebar {
+    transform: none;
+    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12);
+  }
+  #quarto-margin-sidebar nav#TOC,
+  #quarto-margin-sidebar #TOC,
+  #quarto-margin-sidebar .quarto-listing-category,
+  #quarto-margin-sidebar .quarto-listing-category-title {
+    display: block !important;
+  }
+  /* the panel's own 4.5rem already clears the navbar here, so drop the
+     offset the two titles carry on wide screens */
+  #quarto-margin-sidebar .quarto-listing-category-title { margin-top: 0; }
+  #quarto-margin-sidebar nav[role="doc-toc"] { padding-top: 0; }
+  body.quarto-dark #quarto-margin-sidebar {
+    background: #222222;
+    border-left-color: #3a4148;
+  }
+
+  .ace-panel-toggle {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1041;
+    width: 1.7rem;
+    height: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid rgba(138, 148, 158, 0.6);
+    border-right: 0;
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.55);   /* translucent while collapsed */
+    color: rgba(138, 148, 158, 0.85);
+    cursor: pointer;
+    transition: right 0.25s ease, background-color 0.12s ease, color 0.12s ease;
+  }
+  body.ace-panel-open .ace-panel-toggle {   /* solid once the panel is open */
+    right: min(80vw, 320px);
+    background: #ffffff;
+    border-color: #8a949e;
+    color: #8a949e;
+  }
+  .ace-panel-toggle:hover,
+  .ace-panel-toggle:focus-visible { background: #8a949e; color: #ffffff; outline: none; }
+  /* chevron: points left when closed, right when open */
+  .ace-panel-toggle::before {
+    content: "";
+    width: 0.55rem;
+    height: 0.55rem;
+    border-left: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    margin-left: 0.3rem;
+    transition: transform 0.25s ease, margin 0.25s ease;
+  }
+  body.ace-panel-open .ace-panel-toggle::before {
+    transform: rotate(-135deg);
+    margin-left: -0.3rem;
+  }
+
+  body.quarto-dark #quarto-margin-sidebar { background: #222222; border-left-color: #3a4148; }
+  body.quarto-dark .ace-panel-toggle { background: rgba(34, 34, 34, 0.55); border-color: rgba(154, 164, 174, 0.6); color: rgba(154, 164, 174, 0.85); }
+  body.quarto-dark.ace-panel-open .ace-panel-toggle { background: #222222; border-color: #9aa4ae; color: #9aa4ae; }
+  body.quarto-dark .ace-panel-toggle:hover,
+  body.quarto-dark .ace-panel-toggle:focus-visible { background: #9aa4ae; color: #111111; }
+}
+
+@media (min-width: 768px) {
+  .ace-panel-toggle { display: none; }
+}
+
+/* ---------------------------------------------------------
+   RIV SEVERITY BADGES (riv.qmd)
+   Source: #### RIV 1.1: Name [Major]{.ace-sev .ace-sev-major} {#riv-1-1}
+   Same pill language as the category pills: Roboto Mono caps, translucent
+   fill, opaque border. Critical = magenta, Major = cyan, Minor = grey,
+   Indicator = dashed grey. Hidden inside the TOC so entries stay short.
+   PDF: reports/_filters/ace-severity.lua typesets the label instead.
+--------------------------------------------------------- */
+h4 .ace-sev, h3 .ace-sev, h5 .ace-sev {
+  display: inline-block;
+  vertical-align: 0.18em;
+  margin-left: 0.55em;
+  padding: 0.2rem 0.5rem 0.18rem;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #000000;
+}
+body.quarto-dark h4 .ace-sev, body.quarto-dark h3 .ace-sev, body.quarto-dark h5 .ace-sev {
+  color: #ffffff;
+}
+
+.ace-sev-critical  { background-color: rgba(226, 98, 226, 0.22); border-color: #e262e2; }
+.ace-sev-major     { background-color: rgba(3, 229, 255, 0.22);  border-color: #03e5ff; }
+.ace-sev-minor     { background-color: rgba(138, 148, 158, 0.22); border-color: #8a949e; }
+.ace-sev-indicator { background-color: transparent; border-color: #8a949e; border-style: dashed; }
+body.quarto-dark .ace-sev-minor,
+body.quarto-dark .ace-sev-indicator { border-color: #9aa4ae; }
+
+nav[role="doc-toc"] .ace-sev, #TOC .ace-sev, #quarto-margin-sidebar .ace-sev {
+  display: none;
+}
+
+/* ---------------------------------------------------------
+   RIV EVIDENCE / COUNTING BLOCK (riv.qmd)
+   ::: {.ace-riv-meta}
+   [Typical evidence]{.ace-riv-key} ...
+   [Counting]{.ace-riv-key} ...
+   :::
+   Set off from the definition with a hairline on the left and a small
+   mono-caps key; PDF equivalent lives in reports/_filters/ace-severity.lua.
+--------------------------------------------------------- */
+.ace-riv-meta {
+  margin: 0.55rem 0 1.4rem 0.15rem;
+  padding: 0.1rem 0 0.1rem 0.9rem;
+  border-left: 2px solid rgba(138, 148, 158, 0.45);
+  font-size: 0.94em;
+}
+.ace-riv-meta p {
+  margin: 0 0 0.4rem 0;
+}
+.ace-riv-meta p:last-child {
+  margin-bottom: 0;
+}
+.ace-riv-key {
+  display: inline-block;
+  margin-right: 0.45em;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5a6570;
+  vertical-align: 0.06em;
+}
+body.quarto-dark .ace-riv-meta { border-left-color: rgba(154, 164, 174, 0.45); }
+body.quarto-dark .ace-riv-key { color: #9aa4ae; }
+
+/* ---------------------------------------------------------
+   RIV ELEMENTS LIST (inside .ace-riv-meta)
+   (a), (b), (c) markers in mono grey, statute style.
+--------------------------------------------------------- */
+.ace-riv-meta ol {
+  list-style: none;
+  counter-reset: rivel;
+  margin: 0.25rem 0 0.55rem 0;
+  padding-left: 0;
+}
+.ace-riv-meta ol > li {
+  counter-increment: rivel;
+  position: relative;
+  padding-left: 2em;
+  margin: 0.15rem 0;
+}
+.ace-riv-meta ol > li::before {
+  content: "(" counter(rivel, lower-alpha) ")";
+  position: absolute;
+  left: 0.25em;
+  top: 0.16em;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.72em;
+  font-weight: 700;
+  color: #5a6570;
+}
+body.quarto-dark .ace-riv-meta ol > li::before { color: #9aa4ae; }
+.ace-riv-meta p + ol { margin-top: -0.15rem; }
+
+/* Severity pills inside the quick-reference table */
+td .ace-sev {
+  display: inline-block;
+  padding: 0.16rem 0.45rem 0.14rem;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #000000;
+}
+body.quarto-dark td .ace-sev { color: #ffffff; }
+#tbl-riv-index td:first-child, #tbl-riv-index th:first-child { white-space: nowrap; }
+#tbl-riv-index td, #tbl-riv-index th { font-size: 0.92em; vertical-align: middle; }
+#tbl-riv-index tr:has(> td:first-child strong) td { padding-top: 0.7rem; }
+
+/* RIV labels in reports are auto-linked to riv.html#riv-x-y
+   (reports/_filters/ace-riv-links.lua). Bold, in a steel blue on theme,
+   with the usual hover box. */
+html body.quarto-light main a.ace-riv-link.ace-riv-link.ace-riv-link.ace-riv-link.ace-riv-link,
+html body.quarto-dark main a.ace-riv-link.ace-riv-link.ace-riv-link.ace-riv-link.ace-riv-link {
+  font-weight: inherit;
+}
+html body.quarto-light main a.ace-riv-link.ace-riv-link.ace-riv-link.ace-riv-link.ace-riv-link {
+  color: #2f6f8f !important;               /* steel blue, between body ink and the link cyan */
+  -webkit-text-fill-color: #2f6f8f !important;
+}
+html body.quarto-dark main a.ace-riv-link.ace-riv-link.ace-riv-link.ace-riv-link.ace-riv-link {
+  color: #8fc1d6 !important;
+  -webkit-text-fill-color: #8fc1d6 !important;
+}
+
+/* ---------------------------------------------------------
+   SECTION HEADINGS (report pages and site pages)
+   h2: number in mono in the text accent, a thin vertical divider, the
+       title in Roboto bold, and a rule underneath made of a short accent
+       segment plus a grey hairline.
+   h3: number in mono in the theme's text accent, no rule.
+   Accent = cyan in light, magenta in dark. Unnumbered h2s (About, RIV
+   page) get the same rule without a chip. Mirrored in the PDF template
+   (acePDF.tex: \aceSecNum / \aceSecRule).
+--------------------------------------------------------- */
+main h2:not(.ace-report-title):not(.ace-section-heading):not(#toc-title) {
+  position: relative;
+  display: flex;                 /* number and title as siblings, centred on */
+  align-items: center;           /* each other so the divider sits mid-cap   */
+  flex-wrap: nowrap;
+  margin: 2.6rem 0 1.1rem 0;
+  padding: 0 0 0.5rem 0;
+  border-bottom: 1px solid rgba(138, 148, 158, 0.45);
+}
+main h2:not(.ace-report-title):not(.ace-section-heading):not(#toc-title)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 2.6rem;
+  height: 3px;
+  background-color: #03e5ff;
+}
+body.quarto-dark main h2:not(.ace-report-title):not(.ace-section-heading):not(#toc-title) {
+  border-bottom-color: rgba(154, 164, 174, 0.4);
+}
+body.quarto-dark main h2:not(.ace-report-title):not(.ace-section-heading):not(#toc-title)::after {
+  background-color: #e262e2;
+}
+
+/* h2 number: mono, in the text accent, set off from the title by a thin
+   vertical divider */
+main h2 > .header-section-number {
+  flex: none;
+  display: block;
+  margin-right: 0.7rem;
+  padding: 0 0.7rem 0 0;
+  border-right: 2px solid rgba(138, 148, 158, 0.45);
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.95em;
+  font-weight: 700;
+  line-height: 1.15;             /* sets the divider's height */
+}
+html body.quarto-light main h2 > .header-section-number { color: #0b7f97 !important; }
+html body.quarto-dark  main h2 > .header-section-number {
+  color: #e39be0 !important;
+  border-right-color: rgba(154, 164, 174, 0.4);
+}
+
+/* h3: mono number in the text accent */
+main h3 {
+  margin: 1.9rem 0 0.7rem 0;
+}
+main h3 > .header-section-number {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.92em;
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+html body.quarto-light main h3 > .header-section-number { color: #0b7f97 !important; }
+html body.quarto-dark  main h3 > .header-section-number { color: #e39be0 !important; }
+
+/* keep Quarto's anchor link from picking up the chip styling */
+main h2 > .anchorjs-link, main h3 > .anchorjs-link { font-family: inherit; }
+
+/* ---------------------------------------------------------
+   HOME PAGE: HANDBOOK BUTTON
+   The two wireframe badges (GitHub, Contact) sit in a two-column grid; the
+   Handbook link takes the row below and stretches across both. Unlike the
+   badges it is a translucent accent panel with a 2px frame (the section-flag
+   language), Roboto text instead of mono, and a small "PDF" tag at the end.
+--------------------------------------------------------- */
+div.quarto-about-trestles .about-entity .about-links {
+  display: grid !important;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  gap: 0.5rem !important;
+}
+div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"] {
+  grid-column: 1 / -1;
+  justify-content: flex-start;
+  gap: 0.6rem;
+  margin-top: 0.15rem !important;
+  padding: 0.55rem 0.8rem !important;
+  border: 2px solid var(--ace-accent) !important;
+  border-radius: 6px !important;
+  background: rgba(3, 229, 255, 0.14) !important;
+  color: #222222 !important;
+  font-family: "Roboto", sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0;
+}
+div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"] .bi {
+  display: none;                 /* the PDF tag on the right carries the format */
+}
+/* "PDF" tag on the right */
+div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"]::after {
+  content: "PDF";
+  margin-left: auto;
+  padding: 0.14rem 0.4rem 0.12rem;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"]:hover,
+div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"]:focus-visible {
+  background: rgba(3, 229, 255, 0.3) !important;
+  color: #222222 !important;
+}
+body.quarto-dark div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"] {
+  background: rgba(226, 98, 226, 0.16) !important;
+  color: #ffffff !important;
+}
+body.quarto-dark div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"]:hover,
+body.quarto-dark div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"]:focus-visible {
+  background: rgba(226, 98, 226, 0.32) !important;
+  color: #ffffff !important;
 }

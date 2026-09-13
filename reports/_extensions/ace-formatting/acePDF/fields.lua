@@ -182,6 +182,45 @@ local function ensure_header_includes(meta)
   end
 end
 
+-- Cover author block: emits one tikz node per line (name, affiliation,
+-- email) for every author, stacked from the top of the author area
+-- downwards. Type size and line pitch shrink as the author count grows so
+-- the block stays above the bottom-left information lines (which begin at
+-- -11cm). With three lines per author: 1-2 authors at \Large, 3 at
+-- \normalsize, 4 at \small (ends ~-11.1cm), 5 at \footnotesize
+-- (~-11.7cm). Six or more would need a two-column redesign.
+local function cover_authors_block(authors, meta)
+  local n = #authors
+  if n == 0 then return "" end
+
+  local size, pitch, gap
+  if n <= 2 then     size, pitch, gap = "\\Large",        0.70, 0.40
+  elseif n == 3 then size, pitch, gap = "\\normalsize",   0.50, 0.30
+  elseif n == 4 then size, pitch, gap = "\\small",        0.45, 0.25
+  else               size, pitch, gap = "\\footnotesize", 0.40, 0.20
+  end
+
+  local y = -4.7
+  local out = {}
+  local function node(body)
+    table.insert(out, string.format(
+      "\\node at (current page.east) [anchor=east, yshift=%.2fcm, xshift=-2cm] {%s %s};",
+      y, size, body))
+    y = y - pitch
+  end
+
+  for _, a in ipairs(authors) do
+    node("\\textbf{" .. latex_escape(author_name(a)) .. "}")
+    local aff = author_affiliation(a, meta)
+    if aff ~= "" then node(latex_escape(aff)) end
+    local em = author_email(a)
+    if em ~= "" then node(latex_escape(em)) end
+    y = y - gap
+  end
+
+  return table.concat(out, "\n")
+end
+
 function Meta(meta)
   local lines = {}
 
@@ -201,6 +240,8 @@ function Meta(meta)
   table.insert(lines, provide("coverAuthorTwo", ""))
   table.insert(lines, provide("coverAffiliationTwo", ""))
   table.insert(lines, provide("coverEmailTwo", ""))
+
+  table.insert(lines, "\\providecommand{\\coverAuthorsBlock}{}")
 
   -- Report fields.
   table.insert(lines, renew("aceID", stringify(meta["ace-id"])))
@@ -234,6 +275,11 @@ function Meta(meta)
       table.insert(lines, renew("coverAffiliationTwo", author_affiliation(a2, meta)))
       table.insert(lines, renew("coverEmailTwo", author_email(a2)))
     end
+
+    -- Any number of authors (see cover_authors_block). Not passed through
+    -- latex_escape: the block is LaTeX, its text parts are escaped inside.
+    local block = cover_authors_block(authors, meta)
+    table.insert(lines, "\\renewcommand{\\coverAuthorsBlock}{" .. block .. "}")
   end
 
   ensure_header_includes(meta)

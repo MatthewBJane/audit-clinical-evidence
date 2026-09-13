@@ -1,0 +1,4 @@
+audited_doi,label,title,year,total,reviews,guidelines,reviews_downstream,retrieved,source,downstream_unique,downstream_guidelines
+10.1097/MD.0000000000015344,Abdelbasset (2019),A randomized controlled trial on the impact of moderate-intensity continuous aerobic exercise on the depression status of middle-aged patients with congestive heart failure,2019,37,6,1,80,2026-09-08,OpenAlex,77,2
+10.1097/MD.0000000000016820,Abdelbasset (2019),Similar effects of low to moderate-intensity exercise program vs moderate-intensity continuous exercise program on depressive disorder in heart failure patients,2019,14,5,0,266,2026-09-08,OpenAlex,238,9
+10.6061/clinics/2019/e1017,Abdelbasset (2019),Examining the impacts of 12 weeks of low to moderate-intensity aerobic exercise on depression status in patients with systolic congestive heart failure - A randomized controlled study,2019,23,6,0,470,2026-09-08,OpenAlex,457,10

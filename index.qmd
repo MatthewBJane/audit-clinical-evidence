@@ -1,6 +1,8 @@
 ---
 title: "ACE"
 subtitle: "Audit Clinical Evidence"
+# Link-preview text only (og:description); hidden on the page by styles.css.
+description: "Independent audits of published clinical research for statistical errors, data inconsistencies, and research integrity violations."
 about:
   template: trestles
   links:
@@ -9,7 +11,9 @@ about:
       href: https://github.com/matthewbjane/audit-clinical-evidence
     - icon: envelope
       text: Contact
-      href: mailto:contact@AuditClinicalEvidence.org
+      href: mailto:contact@auditclinicalevidence.org
+    - text: ACE Handbook
+      href: handbook.pdf
       
       
 body-classes: homepage
@@ -19,8 +23,8 @@ body-classes: homepage
 listing:
   - id: ACEreports
     contents: "reports/*/index.qmd"
-    template: ace-report-listing.ejs.md
-    fields: [title, subtitle, abstract, categories, date, date-modified, button, ace-id]
+    template: _ace-report-listing.ejs.md
+    fields: [title, subtitle, abstract, categories, date, date-modified, ace-id, doi, impact, population, treatment, outcome, design]
     sort: "date desc"
     page-size: 10
     categories: true
@@ -29,11 +33,11 @@ listing:
 ---
 
 
-::: {.ace-intro}
-Audit Clinical Evidence (ACE) exists to protect the credibility of the scientific record. We audit published clinical research for errors and signs of falsification, fabrication, manipulation, and misconduct. If it slipped past peer review, we find it. We document it. We publish it. We report it.
+::: {.ace-lead}
+[Audit Clinical Evidence (ACE)]{.ace-wordmark} exists to protect the credibility of the scientific record. We audit published clinical research for errors and signs of falsification, fabrication, manipulation, and misconduct. If it slipped past peer review, we find it. We document it. We publish it. We report it.
 :::
 
-#### [Reports]{.ace-section-label} [A catalogue of published ACE audit reports]{.ace-section-note} {.ace-section-heading}
+#### [Reports]{.ace-section-label} [A catalog of published ACE audit reports]{.ace-section-note data-md="Published ACE audit reports" data-sm="Published reports"} {.ace-section-heading}
 
 ::: {#ACEreports}
 :::

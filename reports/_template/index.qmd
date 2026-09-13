@@ -1,0 +1,280 @@
+---
+# ---------------------------------------------------------------------------
+# ACE report template. `python3 scripts/zenodo.py new auto` copies this file to
+# reports/<new id>/index.qmd and substitutes the ACE id and both dates by exact
+# string match, so leave the ace-id and the two date lines below untouched (see
+# cmd_new in scripts/zenodo.py). Everything else is yours to replace.
+#
+# The file renders as-is: the worked example below is a complete miniature
+# report. Render once to confirm the toolchain, then write over it.
+# ---------------------------------------------------------------------------
+
+title: "Audit of Author et al. (YEAR)"        # how the report is cited
+subtitle: "One line saying what was audited"  # shown under the title
+
+ace-id: "ACE2026000"
+
+date: "2026-06-21"
+date-modified: "2026-06-01"
+
+# Written by a LIVE `zenodo.py deposit`; leave empty until then.
+doi: ""
+concept-doi: ""
+
+# DOIs of the papers this report audits -> Zenodo relation "reviews". This is
+# what links the audit to the audited work in the DataCite graph, so check every
+# digit; `deposit` resolves each one against Crossref and prints the title.
+audited: []
+# DOIs of supporting literature -> Zenodo relation "references". Everything
+# cited in the body is picked up automatically from references.bib; this is for
+# anything else worth linking.
+cites: []
+
+# Citation counts for the Impact section, written by
+#   python3 scripts/citations.py reports/ACE2026000/index.qmd
+# Uncomment after the first run.
+# impact:
+#   cited: 0
+#   infected-reviews: 0
+#   spread-guidelines: 0
+#   retrieved: "YYYY-MM-DD"
+
+# Link-preview text only (og:description); hidden on the page itself by
+# styles.css. One sentence: what was audited, the headline findings, the
+# verdict. Aim for 160 characters. See scripts/README.md for the formula.
+description: "One-sentence summary of the audit finding and recommendation."
+# Optional per-report preview image, 1200x630, relative to this folder:
+# image: images/social.png
+
+# What this report audits, in four facets. `categories:` is written from these
+# by scripts/build_categories.py on every render; do not add it by hand. Reuse
+# the exact spelling other reports use, or the site gets two categories that
+# look identical.
+population: ["Heart Disease"]
+treatment: ["Exercise"]
+outcome: ["Depression"]
+design: ["RCT"]
+
+# Shown on the listing card and at the top of the report. Citations written as
+# [-@key] render properly here and are stripped from the listing card.
+abstract: "What was audited, what the audit found, how many instances of Research Integrity Violations across how many categories, and what editorial action is recommended."
+
+author:
+  - family: "Jané"
+    given: "Matthew B."
+    email: "matthew@auditclinicalevidence.org"
+    affiliation: "University of Connecticut (Storrs, CT, USA)"
+    orcid: 0000-0002-3121-7769
+  - family: "Mvududu"
+    given: "Kutenda F."
+    email: "kutenda@auditclinicalevidence.org"
+    affiliation: "University of Massachusetts Boston (Boston, MA, USA)"
+    orcid: 0009-0009-3977-1367
+
+format:
+  html:
+    output-file: "index.html"
+    other-links:
+      - text: PDF
+        href: ACE2026000.pdf
+        icon: file-earmark-pdf
+  acePDF-pdf:
+    output-file: "ACE2026000.pdf"
+    header-includes:
+      - \newcommand{\coverAffiliation}{University of Connecticut, Storrs, CT}
+---
+
+
+```{r}
+#| include: false
+
+# Shared, cosmetic: plot theme and ACE colors (safe to evolve site-wide).
+source("reports/helpers/themes.R")
+# Frozen, per report: the analysis functions that produce findings.
+# (execute-dir is the project root, hence the full path.)
+source("reports/ACE2026000/helpers.R")
+```
+
+\clearpage
+
+<!-- ===========================================================
+     HOW TO WRITE AN ACE REPORT
+     ===========================================================
+
+     RIV LABELS. Refer to a violation as @riv-X.Y. It renders as the bold,
+     linked label "Category Name (RIV X.Y)", with the name read from riv.yml so
+     it can never be misspelled or drift. [-@riv-X.Y] gives the compact
+     "RIV X.Y". An unknown number stops the render.
+
+     DECLARING INSTANCES. Put the count in front of the reference at the place
+     the finding is documented, written as one token: N-@riv-1.7, where N is
+     the number of instances. The count and hyphen are stripped from the
+     rendered page, so the sentence can be worded any way you like, and every
+     later plain @riv-1.7 is only a link. See the worked finding below for a
+     real one. (N is a letter here on purpose: an actual digit would itself be
+     counted, because the summary table reads this file as text and does not
+     skip comments.) Declarations
+     of the same RIV in different sections add up. The unit of counting is on
+     riv.qmd under "Counting" (per article for 1.3 and 3.3, per impossible
+     statistic for 2.2, and so on).
+
+     CRITERIA. Every RIV on riv.qmd lists lettered criteria that must each be
+     met. A finding section should make plain how the record satisfies them,
+     in prose, not by quoting the taxonomy back at the reader.
+
+     SECTION LABELS. Give every finding section a {#sec-...} label. The summary
+     table links each RIV back to the sections that declared it.
+
+     TAXONOMY VERSION. State it once, where the first finding section begins.
+
+     TABLE NOTES. Start a note with "Note." and the helpers render the label in
+     italic grey, flush left, in both HTML and PDF.
+
+     BEFORE PUBLISHING.
+       python3 scripts/citations.py reports/ACE2026000/index.qmd   # impact
+       python3 scripts/riv_check.py                                # labels, counts
+       quarto render
+     =========================================================== -->
+
+
+## Executive summary
+
+### Description of audited studies
+
+What the audited articles claim to report: design, population, intervention,
+outcome measure, and timing. Enough for a reader to follow every later finding
+without opening the originals.
+
+### Impact of audited studies
+
+Run `python3 scripts/citations.py reports/ACE2026000/index.qmd` first: it
+writes `data/citations.csv` and the `impact:` block in the front matter. Then
+delete the two `eval`/`include` lines from each chunk below to switch them on,
+and write the paragraph between them using inline R, like this:
+
+```
+Based on OpenAlex (retrieved INLINE(impact$retrieved)), the audited studies are
+cited by INLINE(impact$cited) articles in total, INLINE(impact$reviews) of which
+are meta-analyses or reviews (see @tbl-impact).
+```
+
+where `INLINE(x)` is a backtick, the letter r, a space, `x`, and a closing
+backtick. A work that cites an audited study is described as *infected*: its
+findings incorporate results this report identifies as unreliable.
+
+```{r}
+#| label: impact-numbers
+#| eval: false
+#| include: false
+cites <- read.csv("reports/ACE2026000/data/citations.csv")
+impact <- list(
+  cited     = sum(cites$total),
+  reviews   = sum(cites$reviews),
+  retrieved = cites$retrieved[1]
+)
+```
+
+```{r}
+#| label: impact-table
+#| eval: false
+#| include: false
+#| results: asis
+cites <- citation_table(
+  "reports/ACE2026000/data/citations.csv",
+  labels = c("10.xxxx/yyyy" = "@citekey"),
+  caption = "Citation counts for audited studies",
+  label = "tbl-impact"
+)
+```
+
+
+## Findings
+
+Findings in this report are labeled using version 1.0 of the [ACE Research
+Integrity Violations taxonomy (ACE-RIV)](https://auditclinicalevidence.org/riv.html).
+
+### A finding, named for what was found {#sec-example-finding}
+
+State the observation first, in plain terms, and show where it comes from: the
+table, figure, registration entry, or metadata field a reader can check for
+themselves. Reproduce only what the point requires.
+
+Then show that the record meets each criterion of the category. For
+@riv-2.2 that means the reported values are arithmetically impossible for the
+stated sample size, and that the impossibility does not depend on an assumption
+the article leaves open. Three of the reported means and standard deviations
+fail that test, which warrants three instances of 3-@riv-2.2.
+
+Close by saying what the finding does and does not establish. A finding under a
+category means the record contains evidence matching that category, not that ACE
+has determined why the evidence exists.
+
+```{r}
+#| label: fig-example
+#| fig-cap: "Delete this chunk. It exists to show the house figure style."
+#| fig-width: 7
+#| fig-height: 4.5
+
+dat <- tibble(
+  x = rep(seq(0, 10, length.out = 40), 2),
+  group = rep(c("Group A", "Group B"), each = 40),
+  y = case_when(
+    group == "Group A" ~ 2.5 + 0.55 * x + rnorm(40, 0, 0.8),
+    group == "Group B" ~ 1.5 + 0.95 * x + rnorm(40, 0, 0.8)
+  )
+)
+
+ggplot(dat, aes(x = x, y = y, color = group, fill = group)) +
+  geom_point(size = 2.2, alpha = 0.75) +
+  geom_smooth(method = "lm", linewidth = 1.15, alpha = 0.16) +
+  scale_color_manual(values = c("Group A" = ace_blue, "Group B" = ace_purple)) +
+  scale_fill_manual(values = c("Group A" = ace_blue, "Group B" = ace_purple)) +
+  labs(
+    title = "Example Regression Figure",
+    subtitle = "Two fitted lines with semi-transparent confidence bands",
+    x = "Predictor",
+    y = "Outcome",
+    caption = "Note. Simulated data shown for ACE figure style development."
+  ) +
+  theme_ace()
+```
+
+### A second finding {#sec-second-finding}
+
+One section per finding. Where two findings share evidence, say so and link the
+earlier section with @sec-example-finding rather than repeating it.
+
+
+## Conclusion {#sec-conclusion}
+
+Summarize what the audit established, in the order it matters. Then state the
+recommendation, and say plainly that it is the authors' professional opinion
+based on the evidence set out above: correction, expression of concern,
+retraction, or no action warranted.
+
+<!-- Generated from the "N-@riv-X.Y" declarations above; the render stops on a
+     number that is not in riv.yml, and on a report with no declarations. -->
+
+```{r}
+#| label: riv-summary
+#| results: asis
+#| echo: false
+riv <- riv_summary_table("reports/ACE2026000/index.qmd",
+  caption = "Summary of Research Integrity Violations identified across the audited studies",
+  label = "tbl-riv-summary")
+```
+
+\clearpage
+
+## References {.unnumbered}
+
+\clearpage
+
+## Version history {.unnumbered}
+
+| Version | Date | DOI | Change |
+|---|---|---|---|
+| 1 | YYYY-MM-DD | `r if (!is.null(rmarkdown::metadata$doi) && nzchar(rmarkdown::metadata$doi)) sprintf("[%s](https://doi.org/%s)", rmarkdown::metadata$doi, rmarkdown::metadata$doi) else "reserved at deposit"` | Initial publication. |
+
+: Any change to a finding, RIV count, or recommendation creates a new version with
+a new version DOI. Superseded versions remain permanently resolvable.

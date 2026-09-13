@@ -1,0 +1,4 @@
+Data extracted or generated for this report goes here. scripts/citations.py
+writes citations.csv, citations_detail.csv and citations_downstream.csv into
+this folder; rendering reads them and never touches the network, so a published
+version's numbers are frozen with it.

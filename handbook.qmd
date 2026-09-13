@@ -1,0 +1,52 @@
+---
+# The ACE Handbook: About, Team, Disclaimers and the ACE-RIV taxonomy in one
+# PDF. The chapters are assembled from the site pages by
+# scripts/build_handbook.py (project pre-render), so this file never repeats
+# their text. Rendered to docs/handbook.pdf alongside the site; PDF only.
+title: "ACE Handbook"
+subtitle: "All you need to know."
+shorttitle: "ACE Handbook"
+
+author:
+  - name: Matthew B. Jané
+    email: contact@auditclinicalevidence.org
+    orcid: 0000-0002-3121-7769
+    affiliations:
+      - name: University of Connecticut
+        city: Storrs
+        state: CT
+
+journal:
+  title: "Audit Clinical Evidence"
+date: today
+
+number-sections: false
+toc: true
+toc-depth: 2
+filters:
+  - reports/_filters/ace-severity.lua
+
+format:
+  acePDF-pdf:
+    output-file: "handbook.pdf"
+    toc: true
+    header-includes:
+      - \newcommand{\coverAffiliation}{AuditClinicalEvidence.org}
+      # Two authors: pandoc joins them with \and, which opens a tabular and
+      # breaks inside the cover's TikZ node. Join with a comma instead.
+      - \renewcommand{\and}{\unskip, }
+---
+
+{{< include _handbook/about.md >}}
+
+{{< pagebreak >}}
+
+{{< include _handbook/team.md >}}
+
+{{< pagebreak >}}
+
+{{< include _handbook/disclaimers.md >}}
+
+{{< pagebreak >}}
+
+{{< include _handbook/riv.md >}}

@@ -9,11 +9,15 @@ One Zenodo record per report. Each report gets:
 Usage
 -----
   export ZENODO_TOKEN=...                 # never commit this
-  python3 scripts/zenodo.py reserve     reports/ACE2026001/index.qmd [--live]
-  python3 scripts/zenodo.py publish     reports/ACE2026001.qmd [--live]
-  python3 scripts/zenodo.py update      reports/ACE2026001.qmd [--live]   # metadata only
-  python3 scripts/zenodo.py new-version reports/ACE2026001.qmd [--live]
-  python3 scripts/zenodo.py show        reports/ACE2026001.qmd --dry-run
+  python3 scripts/zenodo.py status
+  python3 scripts/zenodo.py new     auto
+  python3 scripts/zenodo.py deposit reports/ACE2026001/index.qmd [--live]
+  python3 scripts/zenodo.py revise  reports/ACE2026001/index.qmd [--live]
+  python3 scripts/zenodo.py update  reports/ACE2026001/index.qmd [--live]   # metadata only
+  python3 scripts/zenodo.py show    reports/ACE2026001/index.qmd --dry-run
+
+  (reserve, publish and new-version are the lower-level steps deposit and
+  revise are built from; they take the same paths.)
 
 Defaults to the SANDBOX (sandbox.zenodo.org). Pass --live for the real archive.
 Published Zenodo records cannot be deleted, so rehearse on the sandbox first.
@@ -29,6 +33,7 @@ import datetime
 import shutil
 import subprocess
 import sys
+import time
 import unicodedata
 import urllib.error
 import urllib.request
@@ -514,20 +519,57 @@ class Zenodo:
     def __init__(self, base, token):
         self.base, self.token = base, token
 
-    def _req(self, method, path, data=None, raw=None, ctype="application/json"):
+    # Zenodo has been running degraded since early 2026 (bot and harvester load;
+    # see blog.zenodo.org, 2026-01-28), so slow responses, gateway errors and
+    # dropped connections are expected rather than exceptional. Retry, but only
+    # where a retry cannot create a second copy of something:
+    #   GET / PUT / DELETE  - idempotent, retried on any transient failure;
+    #   POST                - retried ONLY on 429 and 503, where the server is
+    #                         explicitly saying it did not process the request.
+    # A POST that fails any other way stops, because a create or a publish may
+    # have gone through even though the answer never came back. Run `status`
+    # and look at the draft before retrying one of those by hand.
+    TRANSIENT = {429, 500, 502, 503, 504}
+    POST_SAFE = {429, 503}
+
+    def _req(self, method, path, data=None, raw=None, ctype="application/json",
+             attempts=5):
         url = path if path.startswith("http") else f"{self.base}{path}"
         sep = "&" if "?" in url else "?"
         url = f"{url}{sep}access_token={self.token}"
         body = raw if raw is not None else (json.dumps(data).encode() if data is not None else None)
-        req = urllib.request.Request(url, data=body, method=method)
-        if body is not None:
-            req.add_header("Content-Type", ctype)
-        try:
-            with urllib.request.urlopen(req, timeout=120) as r:
-                payload = r.read()
-                return json.loads(payload) if payload else {}
-        except urllib.error.HTTPError as e:
-            sys.exit(f"Zenodo API {method} {path} failed: {e.code}\n{e.read().decode()[:1500]}")
+        idempotent = method in ("GET", "PUT", "DELETE")
+        timeout = 600 if raw is not None else 120      # file uploads take longer
+        shown = path.split("?")[0]
+
+        for attempt in range(1, attempts + 1):
+            req = urllib.request.Request(url, data=body, method=method)
+            if body is not None:
+                req.add_header("Content-Type", ctype)
+            last = None
+            try:
+                with urllib.request.urlopen(req, timeout=timeout) as r:
+                    payload = r.read()
+                    return json.loads(payload) if payload else {}
+            except urllib.error.HTTPError as e:
+                retryable = e.code in (self.TRANSIENT if idempotent else self.POST_SAFE)
+                if not retryable or attempt == attempts:
+                    sys.exit(f"Zenodo API {method} {shown} failed: {e.code}\n"
+                             f"{e.read().decode()[:1500]}")
+                last = f"HTTP {e.code}"
+            except (urllib.error.URLError, TimeoutError, ConnectionError, OSError) as e:
+                if not idempotent:
+                    sys.exit(f"Zenodo API {method} {shown} did not answer: {e}\n"
+                             f"The request may still have been processed. Run "
+                             f"`python3 scripts/zenodo.py status` and check the "
+                             f"draft on Zenodo before retrying.")
+                if attempt == attempts:
+                    sys.exit(f"Zenodo unreachable after {attempts} attempts: {e}")
+                last = str(e)
+            wait = min(60, 5 * 2 ** (attempt - 1))
+            print(f"  Zenodo {method} {shown}: {last}; retrying in {wait}s "
+                  f"({attempt} of {attempts - 1})")
+            time.sleep(wait)
 
     def create(self):
         return self._req("POST", "/deposit/depositions", data={})
@@ -593,12 +635,26 @@ def cmd_reserve(args):
     meta["prereserve_doi"] = True
     dep = z.update(dep["id"], meta)
     reserved = dep["metadata"].get("prereserve_doi", {}).get("doi")
+    # The concept DOI ("all versions") is only reported by Zenodo after the
+    # first publish, but it is deterministic: <DOI prefix>/zenodo.<conceptrecid>,
+    # and the draft already carries conceptrecid. Derive it now so the launch
+    # render (and the archived v1 PDF) can carry both DOIs. It is verified
+    # against Zenodo's own value after publishing.
+    concept = None
+    conceptrecid = dep.get("conceptrecid")
+    if reserved and conceptrecid:
+        prefix = reserved.split("/zenodo.")[0]
+        concept = f"{prefix}/zenodo.{conceptrecid}"
     ledger_set(fm["ace-id"], args.live, deposition_id=dep["id"],
-               reserved_doi=reserved, version=version)
+               reserved_doi=reserved, version=version,
+               **({"concept_doi": concept} if concept else {}))
     if reserved and args.live:
         set_front_matter_field(qmd, "doi", reserved)
+        if concept and not fm.get("concept-doi"):
+            set_front_matter_field(qmd, "concept-doi", concept)
     print(f"Draft deposition : {dep['id']}")
     print(f"Reserved DOI     : {reserved}")
+    print(f"Concept DOI      : {concept or '(unknown until publish)'}")
     print(f"Edit online      : {dep['links'].get('html')}")
     print("\nWritten into the report front matter. Now re-render so the PDF carries "
           "its own DOI, then run: publish")
@@ -623,6 +679,11 @@ def cmd_publish(args):
     concept_doi = rec.get("conceptdoi")
     ledger_set(fm["ace-id"], args.live, deposition_id=dep_id, version=version,
                doi=version_doi, concept_doi=concept_doi)
+    expected = ledger_get(fm["ace-id"], args.live).get("concept_doi")
+    if expected and concept_doi and expected != concept_doi:
+        print(f"WARNING: concept DOI derived before publish ({expected}) differs from "
+              f"Zenodo's ({concept_doi}). The rendered files carry the derived value; "
+              f"re-render and run `update`/`revise` to correct them.")
     if args.live:
         set_front_matter_field(qmd, "doi", version_doi or "")
         if concept_doi:
@@ -756,17 +817,39 @@ def check_dois(fm):
 
 def cmd_new(args):
     ace_id = args.report if args.report.startswith("ACE") else next_ace_id()
-    dest = REPORTS_DIR / ace_id / "index.qmd"
-    if dest.exists():
-        sys.exit(f"{dest} already exists")
-    (REPORTS_DIR / ace_id / "images").mkdir(parents=True, exist_ok=True)
+    dest_dir = REPORTS_DIR / ace_id
+    dest = dest_dir / "index.qmd"
+    if dest_dir.exists():
+        sys.exit(f"{dest_dir} already exists")
+    # The template is a report folder (index.qmd + images/ + data/), so a new
+    # report starts with the same shape as every published one.
+    src_dir = REPORTS_DIR / "_template"
+    if not (src_dir / "index.qmd").exists():
+        sys.exit(f"{src_dir}/index.qmd is missing; nothing to scaffold from")
+    shutil.copytree(src_dir, dest_dir)
+    for keep in dest_dir.rglob(".gitkeep"):      # placeholders, not content
+        keep.unlink()
     today = datetime.date.today().isoformat()
-    text = (REPORTS_DIR / "_template.qmd").read_text(encoding="utf-8")
+    text = dest.read_text(encoding="utf-8")
     text = (text.replace("ACE2026000", ace_id)
                 .replace('date: "2026-06-21"', f'date: "{today}"')
                 .replace('date-modified: "2026-06-01"', f'date-modified: "{today}"'))
     dest.write_text(text, encoding="utf-8")
-    print(f"Created {dest.relative_to(REPO_ROOT)}\n\nNext:\n"
+    # Freeze the analysis functions into the report folder so the report is
+    # self-contained and immune to later edits of reports/helpers/functions.R.
+    # The plot theme (themes.R) stays shared: cosmetic, evolves site-wide.
+    src = REPORTS_DIR / "helpers" / "functions.R"
+    header = (
+        f"# ACE report helpers ({ace_id})\n#\n"
+        "# Frozen copy of reports/helpers/functions.R at the time this report was\n"
+        "# created. Not updated when the shared copy changes, so the code archived\n"
+        "# with this report is the code that produced it. To bring a fix in, copy it\n"
+        "# here and publish a revision. Cosmetic styling comes from the shared\n"
+        "# reports/helpers/themes.R.\n\n"
+    )
+    body = src.read_text(encoding="utf-8").rstrip() + "\n" if src.exists() else ""
+    (REPORTS_DIR / ace_id / "helpers.R").write_text(header + body, encoding="utf-8")
+    print(f"Created {dest.relative_to(REPO_ROOT)} and helpers.R\n\nNext:\n"
           f"  1. write the report\n"
           f"  2. list the audited papers' DOIs under `audited:`\n"
           f"  3. python3 scripts/zenodo.py deposit reports/{ace_id}/index.qmd")

@@ -1,0 +1,84 @@
+<script>
+(function () {
+  function toAlpha(n) {
+    let s = "";
+    while (n > 0) {
+      n--;
+      s = String.fromCharCode(65 + (n % 26)) + s;
+      n = Math.floor(n / 26);
+    }
+    return s;
+  }
+    
+  function convertSectionNumbers() {
+    document.querySelectorAll("h3 .header-section-number").forEach(function(el) {
+      const raw = el.textContent.trim();
+      const parts = raw.split(".");
+    
+      if (parts.length >= 2) {
+        const section = parts[0];
+        const subsection = parseInt(parts[1], 10);
+    
+        if (!isNaN(subsection)) {
+          el.textContent = section + "." + toAlpha(subsection);
+        }
+      }
+    });
+    
+    document.querySelectorAll('nav[role="doc-toc"] a').forEach(function(link) {
+      link.innerHTML = link.innerHTML.replace(
+        /(\d+)\.(\d+)/g,
+        function(match, section, subsection) {
+          const n = parseInt(subsection, 10);
+          if (isNaN(n)) return match;
+          return section + "." + toAlpha(n);
+        }
+      );
+    });
+  }
+    
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", convertSectionNumbers);
+  } else {
+    convertSectionNumbers();
+  }
+    
+  window.addEventListener("load", convertSectionNumbers);
+})();
+</script>
+<script>
+(function () {
+  // ACE ID pill above the report title, matching the listing card.
+  // The report folder name IS the id (reports/ACE2026001/), so it is
+  // read from the URL - no template partials, nothing to maintain.
+  function addAceIdPill() {
+    var header = document.getElementById("title-block-header");
+    if (!header || header.querySelector(".ace-report-id")) return;
+    var m = window.location.pathname.match(/\/reports\/(ACE\d+)\//i);
+    if (!m) return;
+    var wrap = document.createElement("div");
+    wrap.className = "ace-report-id-wrap";
+    var pill = document.createElement("span");
+    pill.className = "ace-report-id";
+    pill.textContent = m[1].toUpperCase();
+    wrap.appendChild(pill);
+    // DOI (from <meta name="ace-doi">, written by _filters/ace-citation.lua)
+    var doiMeta = document.querySelector('meta[name="ace-doi"]');
+    if (doiMeta && doiMeta.content) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "ace-doi-copy";
+      btn.title = "Copy DOI link";
+      btn.setAttribute("data-doi", "https://doi.org/" + doiMeta.content);
+      btn.textContent = doiMeta.content;
+      wrap.appendChild(btn);
+    }
+    header.insertBefore(wrap, header.firstChild);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", addAceIdPill);
+  } else {
+    addAceIdPill();
+  }
+})();
+</script>

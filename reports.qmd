@@ -6,8 +6,8 @@ format: html
 listing:
   - id: ACEreports
     contents: "reports/*/index.qmd"
-    template: ace-report-listing.ejs.md
-    fields: [title, subtitle, abstract, categories, date, date-modified, button, ace-id]
+    template: _ace-report-listing.ejs.md
+    fields: [title, subtitle, abstract, categories, date, date-modified, ace-id, doi, impact, population, treatment, outcome, design]
     sort: "date desc"
     page-size: 10
     categories: true
@@ -21,13 +21,9 @@ listing:
       image: images/social-card.png
 ---
 
-::: {.ace-intro}
-Each ACE report is a structured audit of one or more published clinical studies. Every finding is drawn from the public record and reproducible from the report's own code, data, figures, and tables. **Every report is permanently archived, forwarded to the journal concerned, and open to a response from the authors.**
-:::
-
 Reports are identified by an ACE ID (project, year, and report number, e.g. `ACE2026001`) and are available online and as a PDF. Corrections and author responses are incorporated into new versions and recorded in each report's version history. See [About](about.qmd) for the evidence standard behind every finding and [Disclaimers](disclaimers.qmd) for the editorial and correspondence policy.
 
-#### [All reports]{.ace-section-label} [Newest first. Filter by keyword, or by category in the sidebar.]{.ace-section-note} {.ace-section-heading}
+#### [All reports]{.ace-section-label} [Newest first. Filter by keyword, or by category in the sidebar.]{.ace-section-note data-md="Newest first. Filter by keyword or category." data-sm="Newest first."} {.ace-section-heading}
 
 ::: {#ACEreports}
 :::

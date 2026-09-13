@@ -2,7 +2,7 @@ MIT License
 
 Copyright (c) 2026 Matthew B. Jané
 
-This licence covers the software in this repository: the R helpers under
+This license covers the software in this repository: the R helpers under
 reports/helpers/, the scripts under scripts/, the Quarto extension under
 _extensions/, and the site templates. The audit reports themselves are
 licensed separately under CC BY 4.0 - see LICENSE-REPORTS.md.

@@ -2,6 +2,9 @@ project:
   type: website
   output-dir: docs
   execute-dir: project
+  pre-render:
+    - scripts/build_categories.py        # writes each report's categories: from its four facet fields
+    - scripts/build_handbook.py          # assembles _handbook/*.md for handbook.qmd (docs/handbook.pdf)
   resources:
     - CNAME
     - .nojekyll
@@ -40,7 +43,7 @@ website:
         aria-label: ACE on GitHub
         
   page-footer:
-    left: "© 2026 Matthew B. Jané"
+    left: "© 2026 Matthew B. Jané · Audit Clinical Evidence™"
     right: "Reports CC BY 4.0 · Code MIT"
     center: "contact@auditclinicalevidence.org"
 
@@ -55,6 +58,294 @@ format:
     # math font that matches Roboto. Config must precede the script, so both
     # live here rather than relying on Quarto's own math loader.
     html-math-method: plain
+    include-after-body:
+      # term -> facet map (Population/Treatment/Outcome/Design), written by
+      # scripts/build_categories.py; read by the category scripts below.
+      - file: _includes/category-facets.html
+      - text: |
+          <script>
+          // Click-to-copy for DOI buttons (.ace-doi-copy) on listing cards and report pages.
+          document.addEventListener("click", function (e) {
+            var b = e.target.closest(".ace-doi-copy");
+            if (!b) return;
+            var url = b.getAttribute("data-doi");
+            var label = b.textContent;
+            function done() {
+              b.textContent = "Copied";
+              b.classList.add("is-copied");
+              setTimeout(function () { b.textContent = label; b.classList.remove("is-copied"); }, 1300);
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(url).then(done, function () { window.prompt("Copy DOI link:", url); });
+            } else {
+              window.prompt("Copy DOI link:", url);
+            }
+          });
+          </script>
+          <script>
+          // Fold-in right panel for narrow screens. Quarto hides
+          // #quarto-margin-sidebar below 768px; this adds an edge tab that
+          // slides it in as an overlay, on every page that has something in
+          // that column (report and page contents, downloads, categories).
+          // Styling lives in styles.css under "FOLD-IN RIGHT PANEL".
+          (function () {
+            function addPanelToggle() {
+              var sidebar = document.getElementById("quarto-margin-sidebar");
+              if (!sidebar || document.querySelector(".ace-panel-toggle")) return;
+              var hasToc = !!sidebar.querySelector("nav[role='doc-toc'], #TOC");
+              var hasCats = !!sidebar.querySelector(".quarto-listing-category");
+              var hasLinks = !!sidebar.querySelector(".quarto-other-links, .quarto-alternate-formats");
+              if (!hasToc && !hasCats && !hasLinks) return;
+              var what = hasCats && !hasToc ? "categories" : "contents";
+              var b = document.createElement("button");
+              b.type = "button";
+              b.className = "ace-panel-toggle";
+              b.setAttribute("aria-expanded", "false");
+              function setOpen(open) {
+                document.body.classList.toggle("ace-panel-open", open);
+                b.setAttribute("aria-expanded", open ? "true" : "false");
+                b.setAttribute("aria-label", (open ? "Close " : "Open ") + what + " panel");
+              }
+              setOpen(false);
+              b.addEventListener("click", function () {
+                setOpen(!document.body.classList.contains("ace-panel-open"));
+              });
+              // close after choosing a section, a category, or the PDF, and on Escape
+              sidebar.addEventListener("click", function (e) {
+                if (e.target.closest("a, .category")) setOpen(false);
+              });
+              document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape") setOpen(false);
+              });
+              document.body.appendChild(b);
+            }
+            if (document.readyState === "loading") {
+              document.addEventListener("DOMContentLoaded", addPanelToggle);
+            } else {
+              addPanelToggle();
+            }
+          })();
+          </script>
+          <script>
+          // Listing: "N reports" to the left of the filter, updated as the
+          // filter and the category links narrow the list.
+          (function () {
+            function setup() {
+              document.querySelectorAll(".quarto-listing").forEach(function (listing) {
+                var group = listing.querySelector(".listing-actions-group");
+                var cards = listing.querySelector(".ace-report-listing");
+                if (!group || !cards || group.querySelector(".ace-listing-count")) return;
+                var count = document.createElement("span");
+                count.className = "ace-listing-count";
+                group.insertBefore(count, group.firstChild);
+                var total = cards.querySelectorAll(".ace-report-card").length;
+                function shown() {
+                  return Array.prototype.filter.call(
+                    cards.querySelectorAll(".ace-report-card"),
+                    function (c) { return c.offsetParent !== null; }).length;
+                }
+                function update() {
+                  var n = shown();
+                  var word = total === 1 ? " report" : " reports";
+                  count.textContent = n === total ? total + word : n + " of " + total + word;
+                }
+                update();
+                new MutationObserver(update).observe(cards,
+                  { childList: true, subtree: true, attributes: true, attributeFilter: ["style", "class"] });
+              });
+            }
+            if (document.readyState === "loading") {
+              document.addEventListener("DOMContentLoaded", setup);
+            } else {
+              setup();
+            }
+          })();
+          </script>
+          <script>
+          // Date bars (.ace-date-bar: report/RIV title blocks and listing cards).
+          // A bar never wraps: the dates step down through
+          //   September 6, 2026 -> Sep 6, 2026 -> 09/06/2026 -> 09/06/26
+          // until the whole bar fits on one line.
+          (function () {
+            var MONTHS = ["January", "February", "March", "April", "May", "June",
+                          "July", "August", "September", "October", "November", "December"];
+            var LEVELS = ["long", "med", "short", "tiny"];
+            function forms(text) {
+              var d, m = text.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+              if (m) { d = new Date(+m[1], +m[2] - 1, +m[3]); } else { d = new Date(text); }
+              if (isNaN(d.getTime())) return null;
+              var mm = ("0" + (d.getMonth() + 1)).slice(-2);
+              var dd = ("0" + d.getDate()).slice(-2);
+              var yyyy = String(d.getFullYear());
+              return {
+                long: MONTHS[d.getMonth()] + " " + d.getDate() + ", " + yyyy,
+                med: MONTHS[d.getMonth()].slice(0, 3) + " " + d.getDate() + ", " + yyyy,
+                short: mm + "/" + dd + "/" + yyyy,
+                tiny: mm + "/" + dd + "/" + yyyy.slice(-2)
+              };
+            }
+            function values(bar) {
+              return Array.prototype.slice.call(
+                bar.querySelectorAll(".ace-date-value, .quarto-title-meta-contents p"));
+            }
+            function fit(bar) {
+              var vals = values(bar);
+              if (!vals.length) return;
+              vals.forEach(function (el) {
+                if (el.dataset.aceForms === undefined) {
+                  var f = forms(el.textContent.trim());
+                  el.dataset.aceForms = f ? JSON.stringify(f) : "";
+                }
+              });
+              var segs = bar.querySelectorAll(":scope > div");
+              function wrapped() {
+                var twoLines = segs.length > 1 &&
+                  segs[segs.length - 1].offsetTop > segs[0].offsetTop;
+                var tooWide = bar.scrollWidth > bar.clientWidth + 1 ||
+                  (bar.parentElement &&
+                   bar.getBoundingClientRect().width > bar.parentElement.clientWidth + 1);
+                return twoLines || tooWide;
+              }
+              bar.classList.remove("ace-date-wrap");   // measure unstacked
+              var i;
+              for (i = 0; i < LEVELS.length; i++) {
+                vals.forEach(function (el) {
+                  if (el.dataset.aceForms) el.textContent = JSON.parse(el.dataset.aceForms)[LEVELS[i]];
+                });
+                if (!wrapped()) break;
+              }
+              // even the shortest form does not fit: let the dates stack
+              if (i >= LEVELS.length) bar.classList.add("ace-date-wrap");
+            }
+            function apply() {
+              Array.prototype.forEach.call(document.querySelectorAll(".ace-date-bar"), fit);
+            }
+            window.aceFitDateBars = apply;
+            if (document.readyState === "loading") {
+              document.addEventListener("DOMContentLoaded", apply);
+            } else {
+              apply();
+            }
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(apply);
+            var pendingDates = null;
+            window.addEventListener("resize", function () {
+              if (pendingDates) cancelAnimationFrame(pendingDates);
+              pendingDates = requestAnimationFrame(apply);
+            });
+          })();
+          </script>
+          <script>
+          // Section heading note (.ace-section-note): when the note no longer
+          // fits beside the label, swap in the shorter versions authored as
+          // data-md / data-sm on the span rather than wrapping to a second line.
+          (function () {
+            function headings() {
+              return Array.prototype.filter.call(
+                document.querySelectorAll(".ace-section-heading"),
+                function (el) { return /^H[1-6]$/.test(el.tagName); });
+            }
+            function fit(h) {
+              var label = h.querySelector(".ace-section-label");
+              var note = h.querySelector(".ace-section-note");
+              if (!label || !note) return;
+              if (!note.dataset.full) note.dataset.full = note.textContent.trim();
+              var texts = [note.dataset.full, note.dataset.md, note.dataset.sm]
+                .filter(function (x) { return x; });
+              var line = parseFloat(getComputedStyle(note).lineHeight) || 20;
+              for (var i = 0; i < texts.length; i++) {
+                note.textContent = texts[i];
+                // the heading is a flex row with align-items:center, so items on
+                // the same line share a vertical centre; a wrapped note does not
+                var lr = label.getBoundingClientRect(), nr = note.getBoundingClientRect();
+                var sameLine = Math.abs((nr.top + nr.height / 2) - (lr.top + lr.height / 2)) < 4;
+                if (sameLine && nr.height < line * 1.5) break;
+              }
+            }
+            function apply() { headings().forEach(fit); }
+            if (document.readyState === "loading") {
+              document.addEventListener("DOMContentLoaded", apply);
+            } else {
+              apply();
+            }
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(apply);
+            var pending = null;
+            window.addEventListener("resize", function () {
+              if (pending) cancelAnimationFrame(pending);
+              pending = requestAnimationFrame(apply);
+            });
+          })();
+          </script>
+          <script>
+          // Listing categories, split into the four ACE facets. Quarto renders
+          // one flat list; this moves the same nodes (so its click handlers and
+          // its .quarto-listing-category selectors keep working) into a titled
+          // group per facet, using the term -> facet map written by
+          // scripts/build_categories.py. Styling: styles.css, "CATEGORY FACETS".
+          (function () {
+            var ORDER = ["population", "treatment", "outcome", "design"];
+            var LABEL = { population: "Population", treatment: "Treatment",
+                          outcome: "Outcome", design: "Design", other: "Other" };
+            // the row's own text, without the "(3)" count; data-category is
+            // base64 in newer Quarto, plain in older, so it is not used here
+            function termOf(el) {
+              var clone = el.cloneNode(true);
+              var count = clone.querySelector(".quarto-category-count");
+              if (count) count.parentNode.removeChild(count);
+              return clone.textContent.trim();
+            }
+            function group() {
+              var map = window.aceCategoryFacets || {};
+              var src = document.querySelector("#quarto-margin-sidebar .quarto-listing-category");
+              if (!src || src.classList.contains("ace-facet-group")) return;
+              var cats = Array.prototype.slice.call(src.querySelectorAll(".category"));
+              var all = [], buckets = {}, rest = [];
+              cats.forEach(function (c) {
+                if (!c.getAttribute("data-category")) { all.push(c); return; }
+                var f = map[termOf(c)];
+                if (ORDER.indexOf(f) >= 0) { (buckets[f] = buckets[f] || []).push(c); }
+                else { rest.push(c); }
+              });
+              if (!Object.keys(buckets).length) return;   // nothing mapped: leave it alone
+              var frag = document.createDocumentFragment();
+              function box(facet, items) {
+                if (!items.length) return;
+                if (facet) {
+                  var h = document.createElement("h6");
+                  h.className = "ace-facet-title ace-facet-" + facet;
+                  h.textContent = LABEL[facet];
+                  frag.appendChild(h);
+                }
+                var d = document.createElement("div");
+                d.className = "quarto-listing-category category-default ace-facet-group" +
+                              (facet ? " ace-facet-" + facet : " ace-facet-all");
+                items.forEach(function (c) {
+                  if (facet) c.setAttribute("data-facet", facet);
+                  d.appendChild(c);
+                });
+                frag.appendChild(d);
+              }
+              box(null, all);
+              ORDER.forEach(function (f) { box(f, buckets[f] || []); });
+              box("other", rest);
+              src.parentNode.insertBefore(frag, src);
+              src.remove();
+            }
+            // Report pages: tint the title-block chips with the same map.
+            function tint() {
+              var map = window.aceCategoryFacets || {};
+              document.querySelectorAll(".quarto-category").forEach(function (c) {
+                var f = map[termOf(c)];
+                if (f) c.setAttribute("data-facet", f);
+              });
+            }
+            function apply() { group(); tint(); }
+            if (document.readyState === "loading") {
+              document.addEventListener("DOMContentLoaded", apply);
+            } else {
+              apply();
+            }
+          })();
+          </script>
     include-in-header:
       text: |
         <script>
@@ -68,6 +359,7 @@ format:
         </script>
         <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml-nofont.js"></script>
     toc: true
+    toc-title: "Sections"
     mainfont: "Roboto, sans-serif"
     monofont: "Roboto Mono, monospace"
 

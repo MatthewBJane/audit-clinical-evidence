@@ -2,7 +2,7 @@
 title: "ABOUT"
 ---
 
-**Audit Clinical Evidence (ACE)** is an independent initiative that publishes detailed, reproducible audits of clinical and medical research. Each ACE report documents the errors, inconsistencies, and integrity concerns that can be verified from the public record of one or more published studies, and shows exactly how each finding was reached.
+Audit Clinical Evidence™ (ACE™) is an independent initiative that publishes detailed, reproducible audits of clinical and medical research. Each ACE report documents the errors, inconsistencies, and integrity concerns that can be verified from the public record of one or more published studies, and shows exactly how each finding was reached.
 
 ## Mission
 
@@ -56,19 +56,21 @@ For example, `ACE2026001` is the first ACE report issued in 2026. The identifier
 
 ## Versioning and Reproducibility
 
-ACE reports are archived on Zenodo. Each published version of a report receives its own DOI and is preserved immutably, while the report's concept DOI always resolves to the most recent version. Cite the concept DOI when referring to a report in general and the version DOI when a specific wording matters. Each report ends with a **Version history** section listing what changed in every revision, so readers can track how the report has evolved since it was first published.
+ACE reports are archived on Zenodo. Each published version of a report receives its own permanent DOI and is preserved as published, while the report's concept DOI always resolves to the most recent version. Cite the concept DOI when referring to a report in general and the version DOI when a specific wording matters. Each report ends with a Version history section listing what changed in every revision, so readers can track how the report has evolved since it was first published.
 
-Whenever possible, the code used to generate calculations, figures, tables, and consistency checks is included in the corresponding Quarto report files. The online report viewer includes collapsible code blocks so readers can inspect the code workflow without interrupting the main narrative. The PDF versions do **not** include code, in order to preserve readability and make the reports easier to share, cite, and review.
+Whenever possible, the code used to generate calculations, figures, tables, and consistency checks is included in the corresponding Quarto report files. The online report viewer includes collapsible code blocks so readers can inspect the code workflow without interrupting the main narrative. The PDF versions do not include code, in order to preserve readability and make the reports easier to share, cite, and review.
 
 ## Corrections and Responses
 
-Finalized ACE reports are routinely forwarded to the editorial boards and/or publishers of the corresponding journals for their independent review. Authors of an audited study who wish to provide data, clarifications, or a response are encouraged to contact ACE; correspondence relating to audit findings may be published or quoted, with personal or sensitive information redacted, unless confidentiality is agreed in advance.
+Finalized ACE reports are routinely forwarded to the editorial boards and/or publishers of the corresponding journals for their independent review. Authors of an audited study who wish to provide data, clarifications, or a response are encouraged to contact ACE. By corresponding with ACE about a report, you agree that your correspondence may be published or quoted in part, with personal or sensitive information redacted, unless confidentiality is agreed in advance.
 
 Readers may submit corrections to any report. Corrections are screened and, when credible evidence shows that a finding should be revised, incorporated into a new version of the report and recorded in its version history. See the [disclaimers](disclaimers.qmd) page for the full editorial and correspondence policy.
 
 ## Tips
 
-ACE welcomes tips about potential errors or integrity concerns in clinical research. Tips and whistleblower communications are treated as confidential, and sources will not be publicly identified without their explicit permission.
+ACE welcomes tips about potential errors or integrity concerns in clinical research. Tips and whistleblower communications are treated as confidential: ACE will not publicly identify a source without their explicit permission and will make all reasonable efforts to protect anonymity, although confidentiality cannot be guaranteed against legal process.
+
+Please do not send patient-identifiable data, or documents and datasets you are not permitted to share. Tips should rely on the published record and on material you are entitled to provide; ACE cannot accept or act on confidential internal documents.
 
 To be useful, a tip should be specific and evidence-based. General claims that a researcher, institution, journal, or public figure is "a fraud" are not sufficient on their own. A useful tip identifies the specific study, report, trial registration, dataset, figure, table, author group, journal, or publication record at issue and explains what appears to be wrong. Helpful tips include:
 
@@ -80,47 +82,7 @@ To be useful, a tip should be specific and evidence-based. General claims that a
 
 ACE reviews submitted tips, but submission does not guarantee that a report will be produced. Because capacity is limited, priority is given to cases where the concern is specific, tractable, reproducible, and relevant to the reliability of clinical evidence.
 
-::: {.about-page-grid}
-
-::: {.about-photo}
-
-```{=html}
-<div class="ace-hover-photo">
-  <img
-    src="images/about_photo.png"
-    alt="Stylized ACE team portrait with Kutenda F. Mvududu on the left and Matthew B. Jané on the right."
-  >
-
-  <div class="ace-photo-hotspot ace-photo-left" title="Kutenda" aria-label="Kutenda F. Mvududu">
-    <span class="ace-photo-tooltip">Kutenda</span>
-  </div>
-
-  <div class="ace-photo-hotspot ace-photo-right" title="Matt" aria-label="Matthew B. Jané">
-    <span class="ace-photo-tooltip">Matt</span>
-  </div>
-</div>
-```
-
-:::
-
-::: {.about-team}
-
-## Team
-
-### Matthew B. Jané [PhD candidate, MS, BS]{.degree-suffix}
-**Founder and Lead Auditor** · [ORCID](https://orcid.org/0000-0002-3121-7769)
-
-Matthew is a PhD candidate in Quantitative Psychology at the University of Connecticut, where his work focuses on statistical methods for meta-analysis and forensic meta-science. Within ACE, he leads study identification, report development, statistical analyses, and project standards.
-
-### Kutenda F. Mvududu [BS, NREMT]{.degree-suffix}
-**Project Developer and Auditor** · [ORCID](https://orcid.org/0009-0009-3977-1367)
-
-Kutenda holds a Bachelor of Science in Biology with a pre-medical concentration and is a certified EMT through the National Registry of Emergency Medical Technicians. Within ACE, she supports study identification, report preparation, documentation review, project organization, and social media content production.
-
-:::
-
-:::
 
 ## Contact
 
-Questions, corrections, tips, and responses from authors of audited studies can be sent to **[contact@AuditClinicalEvidence.org](mailto:contact@auditclinicalevidence.org)**. Tips and whistleblower communications are treated as confidential.
+Questions, corrections, tips, and responses from authors of audited studies can be sent to [contact@auditclinicalevidence.org](mailto:contact@auditclinicalevidence.org). Tips and whistleblower communications are treated as confidential, as described above.

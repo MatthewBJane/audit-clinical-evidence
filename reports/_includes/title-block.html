@@ -1,0 +1,63 @@
+<!-- Title block layout used by report pages and the RIV page: dates bar under the
+     subtitle, two-line authors, categories under the abstract. Included from
+     reports/_metadata.yml and riv.qmd (include-after-body). -->
+<script>
+(function () {
+  // Title block: the Published/Modified block moves up under the subtitle
+  // (styled as a grey bar), categories move from under the subtitle to under
+  // the abstract, and each author is re-laid out on two lines (name and
+  // university; badges and city). Styled in styles.css (.ace-authors).
+  function tidyTitleBlock() {
+    var header = document.getElementById("title-block-header");
+    if (!header) return;
+    var dates = header.querySelector(".quarto-title-meta");
+    var sub = header.querySelector(".quarto-title .subtitle") || header.querySelector(".quarto-title h1");
+    if (dates && sub && sub.nextElementSibling !== dates) {
+      sub.insertAdjacentElement("afterend", dates);
+    }
+    if (dates) dates.classList.add("ace-date-bar");
+    var cats = header.querySelector(".quarto-categories");
+    var abs = header.querySelector(".abstract");
+    if (cats && abs && !abs.contains(cats)) {
+      cats.classList.add("ace-categories-after-abstract");
+      abs.insertAdjacentElement("afterend", cats);
+    }
+    // Authors: two lines each. Line 1: name | university. Line 2: email and
+    // ORCID badges | city, state (from the "(City, ST)" in the affiliation).
+    var authorGrid = header.querySelector(".quarto-title-meta-author");
+    if (authorGrid && !authorGrid.querySelector(".ace-authors")) {
+      var contents = Array.prototype.slice.call(authorGrid.querySelectorAll(".quarto-title-meta-contents"));
+      var wrap = document.createElement("div");
+      wrap.className = "ace-authors";
+      for (var i = 0; i < contents.length; i += 2) {
+        var pAuthor = contents[i].querySelector("p.author");
+        var pAff = contents[i + 1] ? contents[i + 1].querySelector("p.affiliation") : null;
+        if (!pAuthor) continue;
+        var links = Array.prototype.slice.call(pAuthor.querySelectorAll("a"));
+        var name = Array.prototype.filter.call(pAuthor.childNodes, function (n) { return n.nodeType === 3; })
+          .map(function (n) { return n.textContent; }).join("").trim();
+        var affText = pAff ? pAff.textContent.trim().replace(/\s+/g, " ") : "";
+        // "University (City, ST)" or Quarto's structured form "University, City, ST"
+        var m = affText.match(/^(.*?)\s*\(([^()]+)\)$/) || affText.match(/^(.*?), ([^,]+, [A-Z]{2})$/);
+        var uni = m ? m[1] : affText, loc = m ? m[2] : "";
+
+        var nameEl = document.createElement("span"); nameEl.className = "ace-author-name"; nameEl.textContent = name;
+        var uniEl = document.createElement("span"); uniEl.className = "ace-author-aff"; uniEl.textContent = uni;
+        var badges = document.createElement("span"); badges.className = "ace-author-badges";
+        links.forEach(function (a) { badges.appendChild(a); });
+        var locEl = document.createElement("span"); locEl.className = "ace-author-loc"; locEl.textContent = loc;
+        wrap.appendChild(nameEl); wrap.appendChild(uniEl); wrap.appendChild(badges); wrap.appendChild(locEl);
+      }
+      contents.forEach(function (c) { c.remove(); });
+      authorGrid.appendChild(wrap);
+    }
+    // the date fitter lives in the site-wide script (_quarto.yml)
+    if (window.aceFitDateBars) window.aceFitDateBars();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", tidyTitleBlock);
+  } else {
+    tidyTitleBlock();
+  }
+})();
+</script>

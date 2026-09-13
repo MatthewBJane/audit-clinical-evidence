@@ -1,12 +1,13 @@
 ---
 title: "Research Integrity Violations"
-subtitle: "A Standardized Taxonomy"
+subtitle: "The ACE-RIV taxonomy, version 1.0"
 shorttitle: "Research Integrity Violations"
 
 author:
   - name: Matthew B. Jané
     email: contact@auditclinicalevidence.org
-    affiliations: 
+    orcid: 0000-0002-3121-7769
+    affiliations:
       - id: uconn
         name: University of Connecticut
         city: Storrs
@@ -14,137 +15,558 @@ author:
 
 journal:
   title: "Audit Clinical Evidence"
-date: "2026-06-21"
+date: "2026-09-13"
 
-abstract: "The Audit Clinical Evidence (ACE) initiative introduces the Standardized Research Integrity Violations (RIVs) framework to systematically classify and report scientific malpractices. By standardizing the taxonomy of these violations, the ACE-RIV framework guarantees transparent, reproducible documentation."
+abstract: "The Audit Clinical Evidence (ACE) initiative classifies the problems it documents in audited studies using a standardized taxonomy of Research Integrity Violations (ACE-RIV). Each RIV has a stable number, a definition, the kind of evidence that supports a finding under it, and a severity tier that guides the recommendation an audit makes. Numbers never change meaning; RIVs are only added. This page is version 1.0 of the taxonomy."
 
+filters:
+  - reports/_filters/ace-severity.lua
 
+google-scholar: true   # Quarto emits the citation_* meta tags from the fields above
 
 format:
   html:
-    includes:
-      in-header: google-scholar.html
+    include-after-body:
+      - file: reports/_includes/title-block.html
   acePDF-pdf:
     header-includes:
      - \newcommand{\coverAffiliation}{University of Connecticut, Storrs, CT}
 ---
 
-
-
 ## The ACE Research Integrity Violations (ACE-RIV)
 
-The ACE Research Integrity Violations framework is a classification system used to identify and categorize scientific errors and integrity issues in academic publishing. It synthesizes existing standards from global authorities such as: the Committee on Publication Ethics (COPE), the Council of Science Editors (CSE), the International Committee of Medical Journal Editors (ICMJE), and the European Code of Conduct for Research Integrity (ALLEA)---into four primary domains: Authorship and Publication, Statistical and Data Integrity, Ethical Oversight, and Minor Errors.
-
-Within ACE audit reports, each identified violation is described clearly and backed by objective evidence. For instance, if a statistical inconsistency is found, the report will detail the exact table or figure containing the impossible data and explain why it is invalid. To provide a comprehensive overview, each report opens with an Executive Summary featuring a reference table of all RIVs found in the study. The summary concludes with a clear, actionable recommendation advising on appropriate next steps, such as requesting raw data, issuing a correction, or initiating a full retraction. Rather than conducting systemic reviews of the literature to identify problematic clinical research, ACE uses personal and others' expertise, leads, and potential signatures of misconduct. Ultimately, ACE focuses its resources on producing comprehensive audit reports for papers exhibiting severe integrity violations, meaning the vast majority of these audits will conclude with a recommendation for retraction.
-
-*(Note: The following list of standard violations is subject to ongoing updates and revisions.)*
+The ACE-RIV taxonomy is the classification system ACE uses to describe the errors and integrity problems it documents in audited research. It draws on the standards published by the [Committee on Publication Ethics (COPE)](https://publicationethics.org/guidance), the [Council of Science Editors (CSE)](https://www.councilscienceeditors.org/recommendations-for-promoting-integrity-in-scientific-journal-publications), the [International Committee of Medical Journal Editors (ICMJE)](https://www.icmje.org/recommendations/), and the [European Code of Conduct for Research Integrity (ALLEA)](https://allea.org/code-of-conduct/). The RIVs are then organized into four domains: (1) [Authorship and Publication](#section-1-authorship-and-publication), (2) [Statistical and Data Integrity](#section-2-statistical-and-data-integrity), (3) [Ethical Oversight and Transparency](#section-3-ethical-oversight-and-transparency), and (4) [Indicators and Minor Issues](#section-4-indicators-and-minor-issues).
 
 
 
-## Section 1: Authorship and Publication
+### Quick reference
 
+@tbl-riv-index lists every category with its severity tier and the unit in which instances are counted. Each number links to the full entry below.
 
-#### **RIV 1.1: Guest, Honorary, or Gift Authorship.**
+```{r}
+#| label: riv-index
+#| echo: false
+#| results: asis
+riv <- yaml::read_yaml("riv.yml")
+rows <- character()
+for (s in riv$sections) {
+  rows <- c(rows, sprintf("| **Section %s** | *%s* | | |", s$number, s$title))
+  for (k in s$categories) {
+    rows <- c(rows, sprintf("| [%s](#riv-%s) | %s | [%s]{.ace-sev .ace-sev-%s} | %s |",
+      k$number, gsub(".", "-", k$number, fixed = TRUE), k$name,
+      k$severity, tolower(k$severity), k$unit))
+  }
+}
+cat("| RIV | Name | Severity | Counted per |\n|:---|:-----------|:----|:------|\n",
+    paste(rows, collapse = "\n"),
+    sprintf("\n\n: The ACE-RIV taxonomy, version %s {#tbl-riv-index}\n", riv$version), sep = "")
+```
+
+### How to read a RIV
+
+RIV labels are meant to act as categories of integrity issues. When a report records an instance of a violation, it means that the public record contains evidence matching that RIV as defined below; it does not assert that any author, institution, or publisher acted deliberately, which ACE is not in a position to determine. Several RIVs (for example, RIV 1.3 and RIV 1.7) describe practices that are usually intentional when they occur, and readers should understand a finding under those RIVs as evidence consistent with the practice rather than a determination that it took place.
+
+The *Criteria* of a RIV are the conditions that must be met for a single instance of that RIV to be recorded. Typical evidence is the kind of material ACE relies on to show them. 
+
+Each RIV has an associated severity tier. The tiers are:
+
+- [Critical]{.ace-riv-key} -- On its own, undermines the reliability of the article's findings.
+
+- [Major]{.ace-riv-key} -- Materially affects the accuracy, completeness, or trustworthiness of the article.
+
+- [Minor]{.ace-riv-key} -- Does not change the data, results, or conclusions. Noted for the record and for the benefit of secondary analyses.
+
+- [Indicator]{.ace-riv-key} -- Not a violation in itself but a pattern that raises the probability of one. Recorded only alongside other findings.
+
+### What is not a RIV
+
+The taxonomy describes the integrity of the published record: whether what an article reports is internally consistent, consistent with the public record around it, and produced by the process it describes. It does not grade the quality of the science. A small sample, an underpowered design, a debatable choice of statistical model, a weak control condition, a conclusion that reads more into the results than they support, or a disagreement about interpretation is not a violation and is not recorded as one, unless the article omits something it committed to report (RIV 2.3) or misstates what a source says (RIV 1.11). ACE reports may comment on such matters where they bear on how the findings should be used, and say so when they do, but those comments carry no RIV number and no count. Conduct outside the audited article, such as an author's record on other papers, is likewise not a RIV in the audited article, although it may be cited as context under RIV 1.3 or RIV 4.2.
+
+### Threshold of evidence and status of an instance
+
+An instance is recorded only when every criterion of the RIV is met, as shown by material a reader can examine: the article and its supplements, the registration or protocol, a public database, the raw data where released, the journal's own metadata, or a reproducible computation on the article's numbers. Suspicion, pattern alone, or the reputation of the authors is not enough; an audit that cannot show that every criterion is met records nothing under that RIV, however strong the impression.
+
+Each instance carries one of two statuses, stated where the instance is recorded. An instance is recorded when every criterion is met and no reasonable reading of the record avoids it. An instance is provisional when the criteria are met on the most plausible reading of an ambiguous record, but information held by the authors or the journal, such as raw data or a committee record, could resolve it; the report says which reading it adopts, why, and what information would settle the question. Unless a report says otherwise, an instance is recorded.
+
+When a response or new evidence resolves a provisional instance, or shows a recorded one to be wrong, a new version of the report marks it withdrawn, or reclassified under another RIV, and gives the reason. The summary table changes accordingly and the report's version history says so. Nothing is removed silently.
+
+### Counting instances
+
+ACE reports count violations in instances, so the size of a problem is visible and comparable across reports. An instance is the smallest piece of evidence that meets every criterion of a RIV by itself and can be checked on its own. Each RIV states what counts as one instance. RIVs about an article as a whole (for example RIV 1.3 or RIV 3.3) count once per article; RIVs about the data (for example RIV 2.2 or RIV 2.4) count once per affected value, statistic, image, or outcome.
+
+Three rules keep the counts honest. Each instance belongs to one article and one RIV; evidence that fits two RIVs is recorded under the more specific one. Different evidence in the same article can support different RIVs, and counts are never added across RIVs. Severity belongs to the RIV, not to the count, although many instances of one RIV do weigh on the recommendation.
+
+A report states each finding as a count, for example "three instances of Peer Review Subversion (RIV 1.7)". The summary table at the end of the report is generated from those statements, so it always matches the text: instances per RIV, a link to the section that documents them, and the total. Where space is short, the compact form "RIV 1.7 (×3)" is used.
+
+### From findings to a recommendation
+
+Every ACE report ends with a recommendation to the publishing journal. It follows from the instances recorded, by the rules below, applied article by article. Any Critical instance leads to a recommendation of retraction, because a Critical RIV by definition undermines the article's findings. Major instances lead to a recommendation of correction when they are isolated and the corrected article would still stand; when they leave the findings without evidentiary value, the recommendation is retraction. Minor instances on their own call for no editorial action, but an accumulation of them can support a correction or, in combination with other findings, a retraction. Indicators never change the recommendation on their own, but they may point to further investigation. Where every instance that would drive the recommendation is provisional, the recommendation is that the journal obtain the underlying data or records, together with the action that should follow if they are not produced.
+
+The recommendation is the authors' professional opinion, offered in good faith on the evidence set out in the report. The decision belongs to the journal.
+
+### Boundaries between neighboring categories
+
+Some categories sit next to each other, and the same evidence must always land in the same place. Impossibility separates RIV 2.2 from RIV 2.4: if the reported values cannot all be true, it is RIV 2.2, however small the discrepancy; if they could be true but are wrong on recomputation, it is RIV 2.4. Evidence of alteration separates RIV 2.5 from RIV 2.7: a figure with a wrong label or value is RIV 2.7 until duplication, splicing, or generation is shown. Attribution separates RIV 1.4 from RIV 1.5: reuse of other people's work is plagiarism, reuse of the authors' own is duplicate publication. Purpose separates RIV 1.6 from RIV 1.8: citations that benefit an identifiable party are manipulation, citations that serve no purpose at all are padding. Evidence about the article separates RIV 1.3 from RIV 4.2: a documented link between the article and a sale or a paper mill is RIV 1.3, patterns that merely resemble such products are RIV 4.2. An error that alters no data, result, or conclusion is RIV 4.1, whatever it looks like; one that does is RIV 2.4 or RIV 2.7. When an item would satisfy two RIVs, it is recorded once, under the more specific one, and the other is mentioned in the text without a count.
+
+### Relation to other frameworks
+
+The ACE-RIV is a classification for audits of the published record, not a definition of misconduct. In the terms used by the United States Office of Research Integrity, fabrication and falsification correspond most closely to RIV 2.2, RIV 2.5, and RIV 2.6, and plagiarism to RIV 1.4; but a finding under those RIVs is a finding about the record, and whether conduct meets a legal definition of misconduct, which requires intent and a formal process, is for institutions and regulators to determine. The authorship RIVs (1.1, 1.2, and 1.10) follow the ICMJE criteria for authorship and the CRediT contributor roles. The publication RIVs (1.5, 1.6, 1.7, and 1.8) correspond to the situations addressed by COPE's guidance and flowcharts on redundant publication, citation manipulation, and peer review manipulation, and RIV 4.2 draws on the COPE and STM guidance on paper mills. The registration and reporting RIVs (1.9 and 2.3) follow the ICMJE registration policy and the CONSORT statement. A journal applying COPE guidance will find that each RIV identifies the guidance that applies and the evidence the journal will need.
+
+### Numbering, versions, and citing the taxonomy
+
+Numbers are stable from version 1.0 onward. A RIV keeps its number for as long as the taxonomy exists, so that a RIV cited in a published report always resolves to the same definition, and new RIVs are appended to the end of a section. Version numbers have two parts. A minor version (1.1, 1.2, and so on) adds RIVs, adds evidence or boundary notes, or clarifies wording without changing what an existing number means. A major version (2.0) is reserved for any change that alters the meaning, criteria, unit of counting, or severity of an existing RIV. Every report states the version it used, and its findings are read against that version; every version of this page is archived, and the current version is always this page.
+
+To cite the taxonomy:
+
+::: {.ace-cite-apa}
+Jané, M. B. (2026). *Research Integrity Violations: The ACE-RIV taxonomy, version 1.0*. Audit Clinical Evidence. [https://auditclinicalevidence.org/riv.html](https://auditclinicalevidence.org/riv.html)
+:::
+
+```bibtex
+@techreport{ACERIV2026,
+  author      = {Jané, Matthew B.},
+  title       = {Research Integrity Violations: The ACE-RIV taxonomy, version 1.0},
+  institution = {Audit Clinical Evidence},
+  type        = {Taxonomy},
+  year        = {2026},
+  url         = {https://auditclinicalevidence.org/riv.html}
+}
+```
+
+### Proposing a change
+
+Anyone may propose a new category, a change to an existing one, or a correction. Open an issue in the [ACE repository](https://github.com/MatthewBJane/audit-clinical-evidence/issues) describing the RIV, the criteria that would have to be met, the evidence that would show them, and the unit of counting, or write to [contact@auditclinicalevidence.org](mailto:contact@auditclinicalevidence.org). Accepted changes appear in the version history at the end of this page.
+
+## Section 1: Authorship and Publication {#section-1-authorship-and-publication}
+
+#### RIV 1.1: Guest, Honorary, or Gift Authorship [Major]{.ace-sev .ace-sev-major} {#riv-1-1}
 
 Authorship is granted to individuals who have not made a substantial intellectual contribution to the research.
 
-#### **RIV 1.2: Ghost Authorship.**
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
 
-Individuals who actively participated in the research, data analysis, or manuscript drafting are absent from the author byline or acknowledgments.
+(a) an individual is listed as an author of the article;
+(b) the public record shows that the individual made no substantial contribution to the conception or design of the work, the acquisition or analysis of the data, or the drafting of the manuscript; and
+(c) no contribution statement or other disclosure in the article accounts for the authorship.
 
+[Typical evidence]{.ace-riv-key} contribution statements that assign no substantive role to an author; authors whose stated expertise or institution has no connection to the work; authorship patterns that change across closely related papers without explanation.
 
-#### **RIV 1.3: Authorship for Sale and Paper Mill Activity.**
+[Counting]{.ace-riv-key} One instance per author credited without a substantial contribution, in each article.
+:::
 
-Authorship positions on a scientific manuscript are bought, sold, or traded. Also, includes industrialized publishing of fabricated, sloppy, or low-quality papers.
+#### RIV 1.2: Ghost Authorship [Major]{.ace-sev .ace-sev-major} {#riv-1-2}
 
-#### **RIV 1.4: Plagiarism.**
+Individuals who participated substantially in the research, data analysis, or manuscript drafting are absent from the author byline and the acknowledgments.
 
-Another person's work, ideas, texts, or intellectual property are included in a manuscript without providing proper attribution, credit, or citation to the original source.
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
 
+(a) an individual made a substantial contribution to the research, the analysis, or the drafting of the manuscript, as shown by the public record (for example, a registration, protocol, funding record, preprint, or disclosure);
+(b) the individual is neither listed as an author nor named in the acknowledgments; and
+(c) the article does not disclose the omission or give a reason for it.
 
-#### **RIV 1.5: Tortured Phrases and Text Spinners.**
+[Typical evidence]{.ace-riv-key} acknowledged or externally documented contributors (for example, in a registration, protocol, funding record, or earlier version) who do not appear as authors; writing-assistance disclosures that omit the writer.
 
-The manuscript contains bizarre, unnatural synonyms or "tortured phrases" (e.g., using "flag to clamor" instead of "signal to noise," or "bosom malignancy" instead of "breast cancer").
+[Counting]{.ace-riv-key} One instance per omitted contributor identified; one per article when the contributor cannot be identified.
+:::
 
+#### RIV 1.3: Authorship for Sale and Paper Mill Activity [Critical]{.ace-sev .ace-sev-critical} {#riv-1-3}
 
-#### **RIV 1.6: Duplicate Publication and Salami Slicing.**
+Authorship positions are bought, sold, or traded, or the article is a product of industrialized publishing of fabricated, recycled, or low-quality manuscripts.
 
-Content or findings from previously published work are reproduced verbatim without explicit disclosure and justification. This also encompasses "salami slicing," where a single coherent body of research is segmented into multiple smaller papers, expanding publication counts without adding proportionate scientific value.
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
 
-#### **RIV 1.7: Citation Manipulation.**
+(a) the article, or an authorship position in it, is shown to have been offered for sale, purchased, or traded; or
+(b) the article is linked to a documented authorship-for-sale or paper-mill operation through its authors, its text, its figures, or its editorial handling; and
+(c) where the link in (b) rests on the authors alone, the article itself also exhibits substantive findings under other RIVs that are consistent with such an operation.
 
-Systematic practices are employed to force or pressure the citation of specific material, resulting in artificially elevated citation metrics for an author, journal, or institution.
+[Typical evidence]{.ace-riv-key} authors or manuscripts appearing in documented authorship-for-sale networks or advertisements; author additions between submission and publication without a stated contribution; combinations of the indicators in RIV 4.2 together with substantive problems elsewhere in the article.
 
-#### **RIV 1.8: Peer Review Subversion.**
+[Counting]{.ace-riv-key} One instance per article.
+:::
 
-The independent peer review process is bypassed or compromised. This includes participating in "collusion rings" (where groups of reviewers and authors coordinate to automatically approve each other’s publications) or the exchange of payment or favors for the allowance of uncritical or hijacked peer review reports.
+#### RIV 1.4: Plagiarism [Major]{.ace-sev .ace-sev-major} {#riv-1-4}
 
-#### **RIV 1.9: Irrelevant Citations and Reference Padding.**
+Another person's text, ideas, data, or other intellectual property is included in the manuscript without proper attribution, credit, or citation.
 
-Distinct from citation manipulation (ACE-RIV 1.7), this involves injecting citations into the bibliography that have absolutely no relevance to the surrounding text. This is a common paper mill tactic where references are sold to researchers to artificially boost their h-index, resulting in physics papers bizarrely citing clinical oncology research.
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
 
-#### **RIV 1.10: Trial Registration and Protocol Deviations.**
+(a) text, ideas, data, figures, or tables in the article originate in an earlier work by other people;
+(b) the earlier work is not cited at the point of use, or the material is presented as the authors' own; and
+(c) the overlap exceeds what could arise from common phrasing or a standard description of methods.
 
-The manuscript reports results from a clinical trial or pre-registered study that either failed to register in a recognized public database (e.g., ClinicalTrials.gov) prior to the onset of subject enrollment, or contains significant, undisclosed deviations from the original pre-registered protocol.
+[Typical evidence]{.ace-riv-key} verbatim or near-verbatim overlap with an earlier source that is not cited, identified by text comparison; reproduced figures or tables without attribution (see also RIV 2.5).
 
+[Counting]{.ace-riv-key} One instance per plagiarized passage, figure, or table.
+:::
 
-## Section 2: Statistical and Data Integrity
+#### RIV 1.5: Duplicate Publication and Salami Slicing [Critical]{.ace-sev .ace-sev-critical} {#riv-1-5}
 
-#### **RIV 2.1: Anomalies and Extreme Values.**
+Content or findings from previously published work are republished without explicit disclosure and justification, or a single coherent body of research is divided into multiple smaller papers that expand the publication count without adding proportionate scientific value.
 
-The reported data, statistics, or results display extreme, unrealistic values, or improbable distributions that are exceedingly unusual given random, natural processes.
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
 
-#### **RIV 2.2: Statistical Inconsistencies and Impossible Data Sets.**
+(a) two or more articles report the same data, participants, trial, or findings, in whole or in substantial part;
+(b) the later article does not disclose the earlier one and the relationship between them; and
+(c) the later article does not add a scientific contribution that justifies separate publication.
 
-Statistics and data that are internally incompatible with one another (e.g., reported *p* value and sample size does not match reported *t* value). Statistics that are impossible to come from a real data set (e.g., a proportion of .83 can not possibly occur from a data set of five patients)
+[Typical evidence]{.ace-riv-key} identical or overlapping participants, arms, baseline characteristics, or outcome statistics across articles that do not cite one another or disclose the overlap; the same trial registration behind articles presented as separate studies.
 
-#### **RIV 2.3: Selective Reporting, Suppressed Data, and Omitted Methodology.**
+[Counting]{.ace-riv-key} One instance per redundant article, that is, each article beyond the first that reports the same data or trial. A trial split across three articles is two instances.
+:::
 
-Published outcomes exclude relevant data, negative results, or conflicting findings that impact the study's conclusions. This violation also applies when important aspects of the study's methodology that are necessary for independent verification and reproducibility are absent.
+#### RIV 1.6: Citation Manipulation [Major]{.ace-sev .ace-sev-major} {#riv-1-6}
 
-#### **RIV 2.4: Data Miscalculation or Erroneous Reporting.**
+Citations of specific material are forced or coordinated in order to raise the citation metrics of an author, journal, or institution.
 
-Quantitative data and statistical results are inaccurately calculated, transcribed, or reported.
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
 
+(a) the article cites a specific author, journal, or institution at points where the content cited does not warrant it; and
+(b) the pattern is shown to be coordinated or imposed, for example by editor or reviewer requests, by clusters of self-citation across unrelated papers, or by reciprocal citation among a fixed group.
 
-#### **RIV 2.5: Image and Figure Manipulation.**
+[Typical evidence]{.ace-riv-key} reference lists dominated by one author, journal, or group beyond what the topic warrants; reviewer or editor requests to add citations that are unrelated to the reviewed content; coordinated citation patterns across a set of articles.
 
-Images, figures, or graphical data contain duplicated, spliced, rotated, or artificially generated elements. This violation includes taking images from other websites, people, or papers and advertising it as your own. This also applies when images, figures, or graphical data from previously published works or external sources are presented as original findings without proper attribution and authorization.
+[Counting]{.ace-riv-key} One instance per article in which the pattern is documented.
+:::
 
-#### **RIV 2.6: Data Set Anomalies.**
+#### RIV 1.7: Peer Review Subversion [Critical]{.ace-sev .ace-sev-critical} {#riv-1-7}
 
-The raw dataset exhibits structural irregularities or improper manual alterations that compromise data integrity. Examples include unexplained duplicate records, artificially injected or unjustifiably deleted rows (data trimming), manual cell overwrites, and fundamental transcription or miscalculation errors.
+The independent peer review process is bypassed or compromised, including collusion rings in which reviewers and authors coordinate to approve each other's work, fabricated reviewer identities or contact details, and the exchange of payment or favors for uncritical review.
 
-#### **RIV 2.7: Image and Figure Errors.**
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
 
-Images, figures, or graphical data contain incorrect values, nonsensical results, or other errors.
+(a) the article was accepted through a process in which independent peer review was bypassed or compromised; and
+(b) the compromise is shown by at least one of: an author acting as the handling editor or a reviewer of their own article; fabricated or author-controlled reviewer identities or contact details; documented coordination between reviewers and authors; or payment or favors exchanged for review.
 
+[Typical evidence]{.ace-riv-key} an author serving as handling editor of their own article; implausibly short review times; retraction notices or publisher investigations citing compromised review; reviewer accounts traced to the authors.
 
-## Section 3: Ethical Oversight and Transparency
+[Counting]{.ace-riv-key} One instance per article whose review was compromised.
+:::
 
-#### **RIV 3.1: Failure to Disclose Conflicts of Interest (COI).**
+#### RIV 1.8: Irrelevant Citations and Reference Padding [Major]{.ace-sev .ace-sev-major} {#riv-1-8}
 
-Financial, personal, or professional conflicts of interest are not disclosed in research proposals, publications, or public communications, where such associations could be perceived by readers or reviewers as compromising the objectivity of the work.
+References are included that have no relevance to the text that cites them. Distinct from RIV 1.6, which concerns citations placed to benefit a particular party, this RIV concerns citations that serve no scholarly purpose at all, a pattern often associated with the sale of citations.
 
-#### **RIV 3.2: Bypass of Ethical Oversight.**
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
 
-Required institutional ethical oversight committees (such as IRBs or animal care committees) are bypassed, or research participants (human or animal) are not handled strictly in accordance with established legal provisions, safety regulations, and ethical principles.
+(a) references are cited at points in the text to which they bear no relevance;
+(b) the irrelevant references are numerous or systematic rather than isolated; and
+(c) the pattern is not explained by a misnumbered or misordered reference list.
 
-#### **RIV 3.3: Ethics Approval Anomalies.**
+[Typical evidence]{.ace-riv-key} cited works whose subject matter has no connection to the claim they are attached to; clusters of unrelated citations in a single sentence; references to articles later identified as products of the same paper mill.
 
-The ethics approval or IRB (Institutional Review Board) number provided in the manuscript is fake, belongs to a completely different study, or is attributed to an ethics committee that does not actually exist at the specified institution.
+[Counting]{.ace-riv-key} One instance per article in which the pattern is documented; the irrelevant references are listed, not counted.
+:::
 
+#### RIV 1.9: Trial Registration Failures and Outcome Switching [Major]{.ace-sev .ace-sev-major} {#riv-1-9}
 
-## Section 4: Minor Errors
+A clinical trial or other pre-registered study was not registered in a recognized public registry (for example, ClinicalTrials.gov) before enrollment began, or the published report departs from the registered protocol without disclosure, including changes to primary outcomes, analysis populations, sample size, or timing.
 
-#### **RIV 4.1: Minor Typographical Error.**
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
 
-The manuscript contains spelling errors, grammatical mistakes, formatting inconsistencies, or minor transcription typos that do not alter the underlying data, the statistical significance, or the overall scientific conclusions of the research. These errors may affect meta-analyses or secondary analyses.
+(a) the study is a clinical trial or is otherwise subject to a pre-registration requirement; and either
+(b) the study was not registered in a recognized public registry before the first participant was enrolled; or
+(c) the published report departs from the registered protocol in a primary outcome, an analysis population, the sample size, or the timing of an assessment, without disclosing the change.
 
-#### **RIV 4.2: Crude and Indirect Signatures of Publication Mill Work.**
+[Typical evidence]{.ace-riv-key} registration dates after the stated enrollment start; primary outcomes, timepoints, or arms in the publication that differ from the registry entry; registered outcomes that are not reported. Escalates to Critical when the primary outcome was changed after unblinding or results were known.
 
-Several flags or characteristic patterns within the manuscript suggest the potential involvement of a paper mill. These indicators include the use of suspicious or non-institutional email domains (such as generic or disposable accounts), unusual dispersion of author affiliations across countries, authors with high number of retracted papers, authors with many publications in disparate fields, authors with unrealistically high publication rate, high rate of self-publication, and boilerplate text or formatting that closely mirrors unrelated submissions.
+[Counting]{.ace-riv-key} One instance per unregistered or retrospectively registered trial, plus one per switched, added, or unreported registered outcome.
+:::
 
+#### RIV 1.10: Incompatible Authorship or Contribution Statements [Major]{.ace-sev .ace-sev-major} {#riv-1-10}
 
+The authorship, contribution, or role statements of an article are inconsistent with one another, with the article's own content, or with those of closely related articles by the same authors reporting the same study.
 
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
 
+(a) the article carries an authorship, contribution, or role statement;
+(b) the statement is inconsistent with another statement in the same article, with the article's own content, or with the corresponding statement in another article that reports the same study; and
+(c) neither article explains the inconsistency.
+
+[Typical evidence]{.ace-riv-key} contribution statements that attribute the same task to different people across papers describing the same trial; statements that credit a role the author list makes impossible; corresponding-author or guarantor designations that change without explanation.
+
+[Counting]{.ace-riv-key} One instance per article whose statements are incompatible.
+:::
+
+#### RIV 1.11: Misrepresentation of Cited Sources [Major]{.ace-sev .ace-sev-major} {#riv-1-11}
+
+A claim is attributed to a cited source that does not support it, including citing a source for a finding it contradicts, overstating a source's result, or citing retracted work as though it stood.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) the article attributes a specific claim, finding, or value to a cited source; and
+(b) the cited source does not support the claim, contradicts it, reports a materially different result, or was retracted before the article was submitted and the article does not say so.
+
+[Typical evidence]{.ace-riv-key} side-by-side comparison of the claim with the cited passage or result; citation of an article retracted before the citing article was submitted, without acknowledgment.
+
+[Counting]{.ace-riv-key} One instance per misrepresented citation.
+:::
+
+#### RIV 1.12: Undisclosed Generated Text [Major]{.ace-sev .ace-sev-major} {#riv-1-12}
+
+Substantial portions of the manuscript were produced by text-generation software without disclosure, or generated text is presented as the authors' own analysis or findings.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) substantial passages of the article are shown to have been produced by text-generation software, for example by residual prompts or model responses in the text, by references that do not exist, or by a disclosure made elsewhere; and
+(b) the article does not disclose the use, or the generated content is presented as the authors' own analysis or findings.
+
+[Typical evidence]{.ace-riv-key} residual tool output or prompts in the published text; fabricated references or quotations characteristic of generated text; statements of generation in one version that are absent from another.
+
+[Counting]{.ace-riv-key} One instance per article.
+:::
+
+## Section 2: Statistical and Data Integrity {#section-2-statistical-and-data-integrity}
+
+#### RIV 2.1: Anomalies and Extreme Values [Major]{.ace-sev .ace-sev-major} {#riv-2-1}
+
+Reported data, statistics, or results display extreme or unrealistic values, or distributions that are exceedingly improbable under natural variation, without an explanation in the article.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) a reported value, statistic, or distribution lies far outside the range that comparable studies and the measure allow, or is exceedingly improbable under natural variation;
+(b) the article offers no explanation that accounts for it; and
+(c) the value is not attributable to a documented error under RIV 2.4 or RIV 4.1.
+
+[Typical evidence]{.ace-riv-key} effect sizes far outside the range of comparable studies; baseline characteristics more similar across randomized groups than chance allows; variances or distributions that are implausible for the measure. Escalates to Critical when combined with RIV 2.2.
+
+[Counting]{.ace-riv-key} One instance per anomalous value or statistic.
+:::
+
+#### RIV 2.2: Statistical Inconsistencies and Impossible Data Sets [Critical]{.ace-sev .ace-sev-critical} {#riv-2-2}
+
+Reported statistics are internally incompatible with one another, or could not have arisen from a real data set of the stated size and structure. The distinguishing feature is impossibility: the reported values cannot all be true at once.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) a reported statistical value is not possible or multiple values cannot all be true at once; and
+(b) the impossibility holds under every plausible reading of the article, allowing for rounding and inconsequential typographical errors.
+
+[Typical evidence]{.ace-riv-key} GRIM, GRIMMER, or SPRITE failures for means and standard deviations; test statistics, degrees of freedom, and *p* values that do not match; percentages that are impossible for the stated sample size; totals that do not sum.
+
+[Counting]{.ace-riv-key} One instance per reported statistic, or pair of statistics, shown to be impossible (for example, each failed GRIMMER test).
+:::
+
+#### RIV 2.3: Selective Reporting, Suppressed Data, and Omitted Methodology [Major]{.ace-sev .ace-sev-major} {#riv-2-3}
+
+Published outcomes exclude relevant data, negative results, or conflicting findings that bear on the study's conclusions, or the article omits methodological details that are necessary for independent verification and reproducibility.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) the article's registration, protocol, methods, or text commits to or refers to an outcome, analysis, timepoint, or methodological detail;
+(b) that item is absent from the results or methods as published; and
+(c) the absence is not disclosed and explained.
+
+[Typical evidence]{.ace-riv-key} outcomes or timepoints described in the methods, protocol, or registration that never appear in the results; analyses referred to but not reported; missing information on randomization, blinding, or analysis populations.
+
+[Counting]{.ace-riv-key} One instance per omitted outcome, analysis, or methodological element.
+:::
+
+#### RIV 2.4: Data Miscalculation or Erroneous Reporting [Major]{.ace-sev .ace-sev-major} {#riv-2-4}
+
+Quantitative results are calculated, transcribed, or reported incorrectly. Unlike RIV 2.2, the reported values are possible; they are simply wrong, as shown by recomputation from the article's own numbers.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) a reported value can be recomputed from other numbers in the article, its supplements, or its registration;
+(b) the recomputed value differs from the reported one by more than rounding; and
+(c) the reported value is possible (an impossible value is RIV 2.2).
+
+[Typical evidence]{.ace-riv-key} recomputed statistics that differ from the reported ones; values that differ between the abstract, text, tables, and figures; unit or decimal errors. Reduced to Minor when the error does not affect any result or conclusion (see RIV 4.1).
+
+[Counting]{.ace-riv-key} One instance per incorrect value; where a single error propagates through a table, the source error is counted once and the propagation is described.
+:::
+
+#### RIV 2.5: Image and Figure Manipulation [Critical]{.ace-sev .ace-sev-critical} {#riv-2-5}
+
+Images, figures, or graphical data contain duplicated, spliced, rotated, cloned, or artificially generated elements, or images taken from other sources are presented as original findings without attribution and authorization.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) an image or figure contains an element that is duplicated, spliced, cloned, rotated, rescaled, or generated, or that is taken from another source;
+(b) the element is presented as an original observation of the study; and
+(c) the alteration is not disclosed, or is inconsistent with the stated method.
+
+[Typical evidence]{.ace-riv-key} image forensic comparison showing duplicated regions within or across figures; identical images in unrelated articles; inconsistencies in noise, compression, or lighting within one image.
+
+[Counting]{.ace-riv-key} One instance per manipulated image or panel.
+:::
+
+#### RIV 2.6: Data Set Anomalies [Critical]{.ace-sev .ace-sev-critical} {#riv-2-6}
+
+The raw data set, where available, shows structural irregularities or improper manual alteration that compromises its integrity. This RIV applies only when data at the participant or observation level can be examined.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) data at the participant or observation level are available;
+(b) the data show a structural irregularity that a real data-collection process would not produce, for example duplicated records, sequences or digit patterns inconsistent with measurement, values outside the instrument's range, or edits visible in the file's metadata; and
+(c) the irregularity is not explained by the documented data handling.
+
+[Typical evidence]{.ace-riv-key} unexplained duplicate records; inserted or deleted rows; values overwritten by hand; distributions inconsistent with the described measurement; timestamps or identifiers inconsistent with the described collection.
+
+[Counting]{.ace-riv-key} One instance per distinct anomaly found in the data set (for example, duplicated rows count once, however many rows are involved).
+:::
+
+#### RIV 2.7: Image and Figure Errors [Major]{.ace-sev .ace-sev-major} {#riv-2-7}
+
+Images, figures, or graphical data contain incorrect values, mislabeled axes or groups, or results that contradict the text or tables, without evidence of manipulation (which is RIV 2.5).
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) an image, figure, or graph reports a value, label, unit, or grouping that is incorrect or contradicts the text or tables; and
+(b) there is no evidence of manipulation (which is RIV 2.5).
+
+[Typical evidence]{.ace-riv-key} figure values that cannot be reconciled with the tabulated data; swapped or mislabeled panels; error bars or axes inconsistent with the reported statistics. Reduced to Minor when the error is cosmetic.
+
+[Counting]{.ace-riv-key} One instance per erroneous figure or panel.
+:::
+
+## Section 3: Ethical Oversight and Transparency {#section-3-ethical-oversight-and-transparency}
+
+#### RIV 3.1: Failure to Disclose Conflicts of Interest [Major]{.ace-sev .ace-sev-major} {#riv-3-1}
+
+Financial, personal, or professional interests that could reasonably be perceived as compromising the objectivity of the work are not disclosed.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) an author held a financial, personal, or professional interest related to the subject of the article at the time of the work or its publication;
+(b) the interest could reasonably be perceived as affecting the work; and
+(c) the article's disclosure statement omits it.
+
+[Typical evidence]{.ace-riv-key} funding, employment, patents, or consultancies documented elsewhere (registries, disclosure databases, other publications) that are absent from the article's declaration.
+
+[Counting]{.ace-riv-key} One instance per undisclosed interest, in each article.
+:::
+
+#### RIV 3.2: Bypass of Ethical Oversight [Critical]{.ace-sev .ace-sev-critical} {#riv-3-2}
+
+Required ethical review (for example, by an institutional review board or animal care committee) was not obtained, or participants were not treated in accordance with applicable legal and ethical requirements, including informed consent.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) the study involved human participants, their data or tissue, or animals, in a way that required ethical review or informed consent under the applicable requirements; and
+(b) the article reports no approval or consent, or the public record shows that approval or consent was not obtained, or was obtained only after the work was done.
+
+[Typical evidence]{.ace-riv-key} no approval statement for research that requires one; consent procedures that are absent or incompatible with the described population; institutional confirmation that no approval exists.
+
+[Counting]{.ace-riv-key} One instance per article.
+:::
+
+#### RIV 3.3: Ethics Approval Anomalies [Critical]{.ace-sev .ace-sev-critical} {#riv-3-3}
+
+The ethics approval or IRB reference given in the article cannot be reconciled with the study: it belongs to a different study, does not match the approving committee's format, refers to a committee that does not exist at the stated institution, or differs across articles that report the same study.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) the article gives an ethics approval or IRB reference;
+(b) the reference belongs to a different study, does not match the committee's format, refers to a committee that cannot be identified at the stated institution, or differs from the reference given in another article that reports the same study; and
+(c) the article does not explain the discrepancy.
+
+[Typical evidence]{.ace-riv-key} different approval numbers across articles describing the same trial; approval numbers whose structure implies a different year or institution; committees that cannot be identified at the stated institution.
+
+[Counting]{.ace-riv-key} One instance per article whose approval information cannot be reconciled.
+:::
+
+#### RIV 3.4: Implausible Study Timelines [Major]{.ace-sev .ace-sev-major} {#riv-3-4}
+
+The dates reported for approval, registration, recruitment, intervention, follow-up, submission, or publication cannot all be true, or imply a study that could not have been conducted as described.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) the article reports dates or durations for approval, registration, recruitment, intervention, follow-up, submission, or publication; and
+(b) the dates cannot all be true, or imply that the study could not have been conducted as described in the time available.
+
+[Typical evidence]{.ace-riv-key} recruitment beginning before ethics approval or registration; follow-up periods longer than the interval between recruitment and submission; submission dates that precede the completion of the described follow-up; identical timelines in articles presented as separate studies. Escalates to Critical when the described study could not have taken place in the time available.
+
+[Counting]{.ace-riv-key} One instance per article.
+:::
+
+#### RIV 3.5: False or Unfulfilled Data Availability Statements [Major]{.ace-sev .ace-sev-major} {#riv-3-5}
+
+The article states that data or materials are available when they are not, or the authors do not provide data that the statement commits them to share.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) the article states that data, code, or materials are available, at a location or on request; and
+(b) the stated location does not provide them, or a request made under the terms of the statement was not fulfilled within a reasonable time, as documented in the report.
+
+[Typical evidence]{.ace-riv-key} repositories or links that do not contain the stated data; documented, unanswered requests for data the article says is available on request.
+
+[Counting]{.ace-riv-key} One instance per article.
+:::
+
+## Section 4: Indicators and Minor Issues {#section-4-indicators-and-minor-issues}
+
+#### RIV 4.1: Minor Typographical Error [Minor]{.ace-sev .ace-sev-minor} {#riv-4-1}
+
+Spelling, grammatical, formatting, or transcription errors that do not alter the underlying data, the statistical results, or the conclusions. Recorded because such errors can still propagate into meta-analyses and secondary analyses.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) a spelling, grammatical, formatting, or transcription error is present;
+(b) the intended value or wording is evident; and
+(c) the error does not alter the data, the results, or the conclusions.
+
+[Typical evidence]{.ace-riv-key} the error and the evidently intended value.
+
+[Counting]{.ace-riv-key} One instance per error.
+:::
+
+#### RIV 4.2: Indicators of Paper Mill Involvement [Indicator]{.ace-sev .ace-sev-indicator} {#riv-4-2}
+
+Patterns within the article or its authorship that are characteristic of industrialized publishing. These are indicators, not violations: they are recorded only alongside substantive findings and never on their own.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) the article or its authorship shows one or more of the patterns that are characteristic of paper-mill products, such as those listed under Typical evidence; and
+(b) the same article already has at least one instance recorded under a critical, major, or minor RIV, so that the indicator is reported as context for that finding rather than as a finding on its own.
+
+[Typical evidence]{.ace-riv-key} non-institutional or disposable email domains; author affiliations dispersed across countries with no collaborative history; authors with many retracted articles, implausible publication rates, or publications across unrelated fields; boilerplate text or formatting shared with unrelated articles; templated figures.
+
+[Counting]{.ace-riv-key} One instance per article; the indicators present are listed.
+:::
+
+#### RIV 4.3: Tortured Phrases and Text Spinners [Indicator]{.ace-sev .ace-sev-indicator} {#riv-4-3}
+
+The text contains unnatural synonyms produced by automated paraphrasing ("tortured phrases"), such as "flag to clamor" for "signal to noise" or "bosom malignancy" for "breast cancer", which indicate text spinning to evade plagiarism detection or generated text.
+
+::: {.ace-riv-meta}
+[Criteria]{.ace-riv-key}
+
+(a) the text contains phrases in which a standard technical expression has been replaced by an unnatural synonym;
+(b) the substitution is recognizable by reversing it to the standard expression; and
+(c) the pattern occurs more than once in the article.
+
+[Typical evidence]{.ace-riv-key} recognized tortured phrases, identified by comparison with the standard expression; passages whose meaning is recovered only by reversing the substitution.
+
+[Counting]{.ace-riv-key} One instance per article; the phrases found are listed.
+:::
+
+## Version history
+
+Version 1.0 (September 2026). Initial release.

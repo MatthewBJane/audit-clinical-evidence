@@ -31,8 +31,8 @@ No dependencies to install: the script uses only the Python standard library.
 ```sh
 python3 scripts/zenodo.py status                           # what exists, and its DOIs
 python3 scripts/zenodo.py new auto                         # scaffold the next report
-python3 scripts/zenodo.py deposit reports/ACE2026002.qmd   # first publication
-python3 scripts/zenodo.py revise  reports/ACE2026001.qmd   # a new version of one already published
+python3 scripts/zenodo.py deposit reports/ACE2026002/index.qmd   # first publication
+python3 scripts/zenodo.py revise  reports/ACE2026001/index.qmd   # a new version of one already published
 ```
 
 Everything targets the **sandbox** unless you add `--live`.
@@ -49,8 +49,23 @@ Start to finish. Steps 4 and 8 are the ones with consequences.
    python3 scripts/zenodo.py new auto
    ```
 
-   Creates the next `ACE<year><nnn>.qmd` with id, filenames, dates and the PDF
-   button already filled in.
+   Creates `reports/ACE<year><nnn>/` with `index.qmd` (id, filenames and dates
+   already filled in), an empty `images/` folder, and
+   `helpers.R`, a frozen copy of `reports/helpers/functions.R` at that moment.
+
+   Helper code is split by what it does:
+
+   - `reports/helpers/functions.R` (analysis and table functions that produce
+     findings) is the master copy new reports are seeded from. Each report
+     keeps its own frozen `helpers.R`, so editing the master never changes a
+     published report. To bring a fix into an existing report, copy it into
+     that report's `helpers.R` and publish a revision.
+   - `reports/helpers/themes.R` (plot theme, ACE colors) is shared by every
+     report and safe to evolve site-wide; changing it is cosmetic and does not
+     call for a new version.
+
+   The Zenodo bundle for a report includes its `helpers.R` and the theme file
+   as they were at publication.
 
 2. **Write the report** in that file.
 
@@ -72,11 +87,15 @@ Start to finish. Steps 4 and 8 are the ones with consequences.
 
    ```sh
    export ZENODO_TOKEN=your_sandbox_token
-   python3 scripts/zenodo.py deposit reports/ACE2026002.qmd
+   python3 scripts/zenodo.py deposit reports/ACE2026002/index.qmd
    ```
 
-   This reserves the DOI, renders the report so the PDF carries it, uploads and
-   publishes. **Read the DOI verification block it prints** - it resolves each
+   This reserves the version DOI, derives the concept DOI (Zenodo's concept DOI
+   is the prefix plus the draft's `conceptrecid`, so it is known before
+   publishing), writes both into the front matter, renders the report so the
+   HTML and PDF carry them from the first version, then uploads and publishes.
+   After publishing it checks the derived concept DOI against Zenodo's and
+   warns if they differ (they should not). **Read the DOI verification block it prints** - it resolves each
    audited DOI against Crossref and shows the title. A transposed digit would
    attach your audit to an innocent paper.
 
@@ -86,8 +105,11 @@ Start to finish. Steps 4 and 8 are the ones with consequences.
 6. **Reset the sandbox values** so the live deposit creates a fresh record:
 
    ```sh
-   sed -i '' -e 's/^zenodo-id:.*/zenodo-id: ""/' -e 's/^doi:.*/doi: ""/' \
-             -e 's/^concept-doi:.*/concept-doi: ""/' reports/ACE2026002.qmd
+   sed -i '' -e 's/^doi:.*/doi: ""/' -e 's/^concept-doi:.*/concept-doi: ""/' \
+             reports/ACE2026002/index.qmd
+
+   (Sandbox runs never write DOIs into the report, so this is only needed if
+   you ran `reserve` or `publish` with `--live` and then backed out.)
    ```
 
 7. **Fill the Version history table** in the report: version 1, today's date,
@@ -97,7 +119,7 @@ Start to finish. Steps 4 and 8 are the ones with consequences.
 
    ```sh
    export ZENODO_TOKEN=your_live_token
-   python3 scripts/zenodo.py deposit reports/ACE2026002.qmd --live
+   python3 scripts/zenodo.py deposit reports/ACE2026002/index.qmd --live
    ```
 
    Irreversible. The script refuses if an author has no ORCID and makes you type
@@ -117,6 +139,81 @@ Start to finish. Steps 4 and 8 are the ones with consequences.
     ```
 
 ---
+
+## Citation counts for audited papers (Table 1)
+
+```sh
+python3 scripts/citations.py reports/ACE2026001/index.qmd
+```
+
+Reads the `audited:` DOIs, queries OpenAlex (free, no key) for every work
+citing each paper, flags meta-analyses and reviews (OpenAlex type or title
+pattern), and writes `reports/<ID>/data/citations.csv` (summary) and
+`citations_detail.csv` (every citing work, with the flag). The report builds
+its table from the CSV with `citation_table()` in a `results: asis` chunk, so
+rendering never touches the network and a published version's numbers are
+frozen with it. Skim the detail file once per report to sanity-check the
+review flag. Counts differ between databases (OpenAlex, Scopus, Web of
+Science); the table caption records the source and retrieval date.
+
+## RIV labels and the summary table
+
+The taxonomy lives in `riv.yml` (numbers, names, severity, unit of counting);
+`riv.qmd` builds its quick-reference table from it, and every report is checked
+against it. In a report, refer to a category as `@riv-1.7`; the filter
+`reports/_filters/ace-riv-links.lua` renders it as the bold label
+"Peer Review Subversion (RIV 1.7)", name taken from `riv.yml`, linked to that
+entry on the taxonomy page (new tab in HTML; a hyperlink in the PDF).
+`[-@riv-1.7]` gives the compact "RIV 1.7". Declare the instances where the
+finding is documented by putting the count in front of the reference:
+
+    this warrants three instances of 3-@riv-1.7 because ...
+
+The `3-` is stripped from the rendered page, so the sentence can be worded any
+way you like; every later plain `@riv-1.7` is only a link. The summary table is
+generated from these declarations by `riv_summary_table()` in
+`reports/helpers/functions.R` (declarations of the same RIV in several sections
+add up), so it cannot disagree with the text; a number that is not in `riv.yml`
+stops the render.
+
+Before a push, run
+
+```sh
+python3 scripts/riv_check.py
+```
+
+which checks `riv.qmd` against `riv.yml` (every category present, names, badges,
+anchors, the Criteria / Typical evidence / Counting block) and every report
+(labels, counts, abstract total). It exits 1 if anything is off. Needs PyYAML.
+
+## Report categories (Population, Treatment, Outcome, Design)
+
+A report says what it audits in four fields in its front matter, one per facet:
+
+```yaml
+population: ["Heart Disease"]
+treatment: ["Exercise"]
+outcome: ["Depression"]
+design: ["RCT"]
+```
+
+Quarto's listing machinery (the sidebar list, the keyword filter, the RSS feed)
+understands only a single flat `categories` field, so `scripts/build_categories.py`
+runs before every render and writes that line from the four fields, in facet
+order. Do not edit `categories:` by hand; it is overwritten. The same script
+writes `_includes/category-facets.html`, a term to facet map that tints the
+category chips on the listing cards and in each report's title block, and splits
+the sidebar category list into Population / Treatment / Outcome / Design.
+
+Terms are free text, so keep them consistent across reports (`Heart Disease`,
+not `heart disease` or `CHF`) - Quarto treats different spellings as different
+categories. The same term under two different facets is reported as a problem
+and stops the render, since the map cannot be built. To see what would change
+without rendering:
+
+```sh
+python3 scripts/build_categories.py
+```
 
 ## Runbook: updating a report that is already published
 
@@ -146,7 +243,7 @@ alters the PDF requires a new version, even a one-character fix.
 
    ```sh
    export ZENODO_TOKEN=your_live_token
-   python3 scripts/zenodo.py revise reports/ACE2026001.qmd --live
+   python3 scripts/zenodo.py revise reports/ACE2026001/index.qmd --live
    ```
 
    Creates the new Zenodo version, bumps `version:`, sets `date-modified` to
@@ -168,7 +265,7 @@ alters the PDF requires a new version, even a one-character fix.
 ### B. Only the metadata changed - use `update`
 
 ```sh
-python3 scripts/zenodo.py update reports/ACE2026001.qmd --live
+python3 scripts/zenodo.py update reports/ACE2026001/index.qmd --live
 ```
 
 Reopens the published record, re-sends the metadata, republishes under the same
@@ -188,7 +285,8 @@ and the Zenodo community identifier. The script blocks a live run without ORCIDs
 ## Where state lives
 
 The report front matter carries only what belongs in the document: title,
-authors, dates, abstract, categories, `ace-id`, and the `audited:` DOIs.
+authors, dates, abstract, the four category facets, `ace-id`, and the `audited:`
+DOIs. (`categories:` is generated from the facets; see above.)
 
 Deposition ids and version numbers are plumbing and live in
 `scripts/zenodo-records.json`, keyed by report and by target, so a sandbox

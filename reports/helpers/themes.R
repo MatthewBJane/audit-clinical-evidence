@@ -8,13 +8,13 @@ ace_blue_dark <- "#02cfe6"
 ace_purple_dark <- "#cf50cf"
 
 
+# echo/warning/message/fig-dpi are set in reports/_metadata.yml. The device is
+# set here at runtime so the argument list REPLACES Quarto's per-format
+# dev.args (its `pdf` entry breaks ragg::agg_png when merged in YAML).
 knitr::opts_chunk$set(
-  echo = knitr::is_html_output(),
-  warning = FALSE,
-  message = FALSE,
+  echo = knitr::is_html_output(),   # belt and braces: code in HTML only, never PDF
   dev = "ragg_png",
-  dev.args = list(bg = "transparent"),
-  dpi = 300
+  dev.args = list(bg = "transparent")
 )
 
 

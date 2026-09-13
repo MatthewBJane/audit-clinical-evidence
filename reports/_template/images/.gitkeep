@@ -1,0 +1,3 @@
+Figures and screenshots reproduced from the audited articles go here, beside
+the report that uses them. Referenced from index.qmd as images/<file>, and
+uploaded to Zenodo with the report (see upload_files in scripts/zenodo.yml).

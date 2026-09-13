@@ -13,3 +13,4 @@ contributes:
       code-block-bg: light
       linkcolor: highlight
       urlcolor: highlight
+      citecolor: highlight
