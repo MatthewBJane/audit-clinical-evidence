@@ -66,23 +66,27 @@ Finalized ACE reports are routinely forwarded to the editorial boards and/or pub
 
 Readers may submit corrections to any report. Corrections are screened and, when credible evidence shows that a finding should be revised, incorporated into a new version of the report and recorded in its version history. See the [disclaimers](disclaimers.qmd) page for the full editorial and correspondence policy.
 
-## Tips
+## Suggesting a Study
 
-ACE welcomes tips about potential errors or integrity concerns in clinical research. Tips and whistleblower communications are treated as confidential: ACE will not publicly identify a source without their explicit permission and will make all reasonable efforts to protect anonymity, although confidentiality cannot be guaranteed against legal process.
+If you come across a published study that looks problematic, you can write to ACE and suggest it. Readers, meta-analysts, editors, reviewers, and researchers who have noticed something in their own field are all welcome to do so.
 
-Please do not send patient-identifiable data, or documents and datasets you are not permitted to share. Tips should rely on the published record and on material you are entitled to provide; ACE cannot accept or act on confidential internal documents.
+If you would rather not be named, say so and ACE will not identify you publicly without your explicit permission. ACE will make all reasonable efforts to keep correspondence private, although privacy cannot be guaranteed against legal process.
 
-To be useful, a tip should be specific and evidence-based. General claims that a researcher, institution, journal, or public figure is "a fraud" are not sufficient on their own. A useful tip identifies the specific study, report, trial registration, dataset, figure, table, author group, journal, or publication record at issue and explains what appears to be wrong. Helpful tips include:
+Some concerns are not ACE's to handle. If the matter appears criminal, or patients may be at risk, contact law enforcement or the relevant regulator. Formal misconduct allegations belong with the institution, funder, or research integrity body responsible for the work, which can compel access to data ACE cannot see. Writing to ACE is not a substitute for either.
+
+Please do not send patient-identifiable data, or documents and datasets you are not permitted to share. What you send should rest on the published record and on material you are entitled to provide; ACE cannot accept or act on confidential internal documents.
+
+A suggestion is most useful when it is specific. A general claim that a researcher, institution, journal, or public figure is "a fraud" is not something ACE can work from. What helps is naming the study, report, trial registration, dataset, figure, table, author group, journal, or publication record at issue and explaining what appears to be wrong. Useful things to include:
 
 1. the article title, DOI, journal, or trial registration number;
 2. the specific table, figure, outcome, image, statistic, or passage that appears problematic;
-3. the suspected issue, such as impossible statistics, duplicated data, image manipulation, authorship irregularities, undisclosed protocol deviations, plagiarism, or paper-mill indicators;
+3. what appears to be wrong, such as impossible statistics, duplicated data, image manipulation, authorship irregularities, undisclosed protocol deviations, plagiarism, or paper-mill indicators;
 4. any supporting documentation, screenshots, archived pages, PubPeer threads, registry records, code, calculations, or related publications;
 5. a brief explanation of why the issue matters.
 
-ACE reviews submitted tips, but submission does not guarantee that a report will be produced. Because capacity is limited, priority is given to cases where the concern is specific, tractable, reproducible, and relevant to the reliability of clinical evidence.
+ACE reads everything it receives, but writing to ACE does not guarantee that a report will follow. Because capacity is limited, priority goes to concerns that are specific, tractable, reproducible, and relevant to the reliability of clinical evidence.
 
 
 ## Contact
 
-Questions, corrections, tips, and responses from authors of audited studies can be sent to [contact@auditclinicalevidence.org](mailto:contact@auditclinicalevidence.org). Tips and whistleblower communications are treated as confidential, as described above.
+Questions, corrections, suggestions for studies to audit, and responses from authors of audited studies can be sent to [contact@auditclinicalevidence.org](mailto:contact@auditclinicalevidence.org). If you would rather not be named, say so and ACE will not identify you publicly, as described above.

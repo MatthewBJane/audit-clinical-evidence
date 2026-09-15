@@ -2,38 +2,35 @@
 title: "TEAM"
 ---
 
-::: {.about-page-grid}
-
-::: {.about-photo}
+::: {.ace-person}
 
 ```{=html}
-<div class="ace-hover-photo">
-  <img
-    src="images/about_photo.png"
-    alt="Stylized ACE team portrait with Kutenda F. Mvududu on the left and Matthew B. Jané on the right."
-  >
-
-  <div class="ace-photo-hotspot ace-photo-left" title="Kutenda" aria-label="Kutenda F. Mvududu">
-    <span class="ace-photo-tooltip">Kutenda</span>
-  </div>
-
-  <div class="ace-photo-hotspot ace-photo-right" title="Matt" aria-label="Matthew B. Jané">
-    <span class="ace-photo-tooltip">Matt</span>
-  </div>
-</div>
+<img class="ace-person-photo" src="images/matthew_headshot.jpeg" alt="Matthew B. Jane">
 ```
 
-:::
-
-::: {.about-team}
+::: {.ace-person-text}
 
 ### Matthew B. Jané [PhD candidate, MS, BS]{.degree-suffix}
-*Founder and Lead Auditor* | <a class="ace-orcid" href="https://orcid.org/0000-0002-3121-7769" rel="me"><svg class="ace-orcid-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>ORCID</a>
+*Founder and Lead Auditor* | <a class="ace-orcid" href="https://orcid.org/0000-0002-3121-7769" rel="me"><svg class="ace-orcid-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>ORCID</a>\
+<a class="ace-orcid" href="mailto:matthew@auditclinicalevidence.org"><svg class="ace-orcid-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M3.5 4h17A1.5 1.5 0 0 1 22 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5v-13A1.5 1.5 0 0 1 3.5 4Zm.4 2L12 12.1 20.1 6H3.9Zm16.6 1.4-8.05 6.05a.75.75 0 0 1-.9 0L3.5 7.4V18h17V7.4Z"/></svg>matthew@auditclinicalevidence.org</a>
 
 Matthew is a PhD candidate in Quantitative Psychology at the University of Connecticut, where his work focuses on statistical methods for meta-analysis and forensic meta-science. Within ACE, he leads study identification, report development, statistical analyses, and project standards.
 
+:::
+
+:::
+
+::: {.ace-person}
+
+```{=html}
+<img class="ace-person-photo" src="images/kutenda_headshot.jpeg" alt="Kutenda F. Mvududu">
+```
+
+::: {.ace-person-text}
+
 ### Kutenda F. Mvududu [BS, NREMT]{.degree-suffix}
-*Project Developer and Auditor* | <a class="ace-orcid" href="https://orcid.org/0009-0009-3977-1367" rel="me"><svg class="ace-orcid-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>ORCID</a>
+*Project Developer and Auditor* | <a class="ace-orcid" href="https://orcid.org/0009-0009-3977-1367" rel="me"><svg class="ace-orcid-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>ORCID</a>\
+<a class="ace-orcid" href="mailto:kutenda@auditclinicalevidence.org"><svg class="ace-orcid-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M3.5 4h17A1.5 1.5 0 0 1 22 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5v-13A1.5 1.5 0 0 1 3.5 4Zm.4 2L12 12.1 20.1 6H3.9Zm16.6 1.4-8.05 6.05a.75.75 0 0 1-.9 0L3.5 7.4V18h17V7.4Z"/></svg>kutenda@auditclinicalevidence.org</a>
 
 Kutenda holds a Bachelor of Science in Biology with a pre-medical concentration and is a certified EMT through the National Registry of Emergency Medical Technicians. Within ACE, she supports study identification, report preparation, documentation review, project organization, and social media content production.
 
@@ -42,5 +39,5 @@ Kutenda holds a Bachelor of Science in Biology with a pre-medical concentration 
 :::
 
 ::: {.ace-team-note}
-The views expressed on this site and in ACE reports are solely those of the authors and do not represent the University of Connecticut, the University of Massachusetts Boston, or any other affiliated organization.
+The views expressed on this site and in ACE reports are solely those of the authors and do not represent their affiliated organizations.
 :::

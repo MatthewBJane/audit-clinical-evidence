@@ -39,11 +39,18 @@ def strip_front_matter(text: str) -> str:
 def convert(src: str, title: str, cid: str) -> str:
     body = strip_front_matter((ROOT / src).read_text(encoding="utf-8"))
 
-    # team photo: replace the hover-photo HTML with a plain image
+    # team photo: replace the hover-photo HTML with a plain image. No-op while
+    # team.qmd carries no portrait; kept so the handbook follows if one returns.
     body = re.sub(r"```\{=html\}\n<div class=\"ace-hover-photo\">.*?</div>\n```\n",
                   "![](images/about_photo.png){width=32%}\n", body, flags=re.S)
-    # inline ORCID badge -> plain link
-    body = re.sub(r'<a class="ace-orcid" href="([^"]+)"[^>]*>.*?</a>', r"[ORCID](\1)", body, flags=re.S)
+    # inline badges (ORCID, email) -> plain links. The two share a class, so
+    # the label comes from the href: an address reads better in print than the
+    # word "Email", and labelling a mailto "ORCID" is just wrong.
+    def badge(m):
+        href = m.group(1)
+        label = href[len("mailto:"):] if href.startswith("mailto:") else "ORCID"
+        return f"[{label}]({href})"
+    body = re.sub(r'<a class="ace-orcid" href="([^"]+)"[^>]*>.*?</a>', badge, body, flags=re.S)
     # links between the handbook's own pages -> chapter anchors
     for other, other_id in IDS.items():
         body = body.replace(f"]({other})", f"](#{other_id})")

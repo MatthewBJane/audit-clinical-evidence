@@ -7,7 +7,7 @@ These notices apply to this website and to every ACE audit report, in both its o
 
 ## Statement of Independence
 
-Audit Clinical Evidence (ACE) is an independent initiative. It is not affiliated with, funded by, or acting on behalf of any journal, publisher, university, regulator, or professional body. The views expressed on this website and in ACE reports are solely those of the named authors and do not represent the University of Connecticut, the University of Massachusetts Boston, or any other organization with which the authors are or have been affiliated.
+Audit Clinical Evidence (ACE) is an independent initiative. It is not affiliated with, funded by, or acting on behalf of any journal, publisher, university, regulator, or professional body. The views expressed on this website and in ACE reports are solely those of the named authors and do not represent any of their affiliated organizations, past or present.
 
 ## Nature of ACE Reports
 
@@ -41,11 +41,13 @@ ACE encourages open, post-publication discussion. Copies of finalized ACE report
 
 Authors of an audited study who wish to provide data, clarifications, or a response are encouraged to write to [contact@auditclinicalevidence.org](mailto:contact@auditclinicalevidence.org). Substantive responses are considered for incorporation in a revised version of the report, and ACE will link to or summarize an author response on request where doing so serves readers. By corresponding with ACE about a report, you agree that your correspondence may be published or quoted in part, with personal or sensitive information redacted, unless confidentiality is explicitly agreed in advance.
 
-## Confidential Tips
+## Writing to ACE in Confidence
 
-ACE accepts confidential tips about potential statistical inconsistencies, publication irregularities, image anomalies, and other integrity concerns. ACE will not publicly identify a confidential source or whistleblower without their explicit permission and will make all reasonable efforts to protect anonymity and confidentiality; however, confidentiality cannot be guaranteed against legal process, and ACE cannot offer legal protection to sources.
+ACE welcomes messages about statistical inconsistencies, publication irregularities, image anomalies, and other integrity concerns in published research. If you ask not to be named, ACE will not identify you publicly without your explicit permission, and will make all reasonable efforts to keep your correspondence private; however, privacy cannot be guaranteed against legal process, and ACE cannot offer anyone legal protection.
 
-Please do not send patient-identifiable data, or documents and datasets you are not permitted to share. Tips should rely on the published record and on material you are entitled to provide. Guidance on what makes a tip useful is on the [About](about.qmd) page.
+ACE cannot investigate. If a concern appears criminal, or patients may be at immediate risk, contact law enforcement or the relevant regulator. Formal misconduct allegations belong with the institution, funder, or research integrity body responsible for the work. ACE works only from the public record, and a message here does not carry whatever protection a report to those bodies may.
+
+Please do not send patient-identifiable data, or documents and datasets you are not permitted to share. What you send should rest on the published record and on material you are entitled to provide. Guidance on what makes a suggestion useful is on the [About](about.qmd) page.
 
 ## Comments
 

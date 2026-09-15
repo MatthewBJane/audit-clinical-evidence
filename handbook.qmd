@@ -18,7 +18,9 @@ author:
 
 journal:
   title: "Audit Clinical Evidence"
-date: today
+# Pinned to the launch date rather than `today`: this is still the initial
+# handbook, so a rebuild must not restamp the cover with a later date.
+date: "2026-09-13"
 
 number-sections: false
 toc: true

@@ -22,6 +22,10 @@ abstract: "The Audit Clinical Evidence (ACE) initiative classifies the problems 
 filters:
   - reports/_filters/ace-severity.lua
 
+# Link-preview text only (og:description); without it Quarto uses the whole
+# abstract, which social cards truncate mid-sentence.
+description: "A standardized taxonomy of 27 research integrity violations, each with defined criteria, a severity tier, and a rule for counting instances."
+
 google-scholar: true   # Quarto emits the citation_* meta tags from the fields above
 
 format:

@@ -2327,6 +2327,50 @@ body.quarto-dark .quarto-listing-category .category.active {
 body.quarto-dark .quarto-listing-category .category.active .quarto-category-count { color: #03e5ff; }
 
 /* ---------------------------------------------------------
+   TEAM PAGE: one row per person
+   Circular headshot on the left, name and bio on the right, the two tops
+   aligned. The photo is sized to sit within the height of the text block
+   rather than towering over it. Raw <img> so the PDF handbook, which drops
+   raw HTML, stays text only.
+--------------------------------------------------------- */
+.ace-person {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr);
+  gap: 1.35rem;
+  align-items: start;
+  margin: 1.9rem 0;
+}
+
+.ace-person-photo {
+  width: 118px;
+  height: 118px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  /* nudge the circle down so its top lines up with the cap height of the
+     name beside it, not with the line box above it */
+  margin-top: 0.3rem;
+  border: 2px solid rgba(138, 148, 158, 0.45);
+  background: transparent;
+}
+body.quarto-dark .ace-person-photo { border-color: rgba(154, 164, 174, 0.45); }
+
+/* the name is the first thing in the column: no leading gap to fight the photo */
+.ace-person-text > h3:first-child,
+.ace-person-text > section:first-child > h3:first-child {
+  margin-top: 0 !important;
+}
+.ace-person-text > :last-child { margin-bottom: 0; }
+
+@media (max-width: 575.98px) {
+  .ace-person {
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: 1rem;
+  }
+  .ace-person-photo { width: 84px; height: 84px; }
+}
+
+/* ---------------------------------------------------------
    CATEGORY FACETS (Population / Treatment / Outcome / Design)
    Each report declares the four facets in its own front matter;
    scripts/build_categories.py writes the flat `categories` list Quarto needs
