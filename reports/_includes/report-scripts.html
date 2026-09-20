@@ -63,15 +63,19 @@
     pill.textContent = m[1].toUpperCase();
     wrap.appendChild(pill);
     // DOI (from <meta name="ace-doi">, written by _filters/ace-citation.lua)
-    var doiMeta = document.querySelector('meta[name="ace-doi"]');
+    // Concept DOI first: it always resolves to the newest version. The version
+    // DOI is still in the citation block and the version history table.
+    var doiMeta = document.querySelector('meta[name="ace-concept-doi"]')
+               || document.querySelector('meta[name="ace-doi"]');
     if (doiMeta && doiMeta.content) {
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "ace-doi-copy";
-      btn.title = "Copy DOI link";
-      btn.setAttribute("data-doi", "https://doi.org/" + doiMeta.content);
-      btn.textContent = doiMeta.content;
-      wrap.appendChild(btn);
+      var a = document.createElement("a");
+      a.className = "ace-doi-link";
+      a.href = "https://doi.org/" + doiMeta.content;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.title = "Open the archived record (opens in a new tab)";
+      a.textContent = doiMeta.content;
+      wrap.appendChild(a);
     }
     header.insertBefore(wrap, header.firstChild);
   }

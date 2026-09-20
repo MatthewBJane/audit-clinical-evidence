@@ -11,8 +11,9 @@
         <% if (item["ace-id"]) { %>
           <span class="ace-report-id listing-ace-id"><%- item["ace-id"] %></span>
         <% } %>
-        <% if (item.doi) { %>
-          <button type="button" class="ace-doi-copy listing-doi" data-doi="https://doi.org/<%- item.doi %>" title="Copy DOI link"><%- item.doi %></button>
+        <% const cardDoi = item["concept-doi"] || item.doi; %>
+        <% if (cardDoi) { %>
+          <a class="ace-doi-link listing-doi" href="https://doi.org/<%- cardDoi %>" target="_blank" rel="noopener" title="Open the archived record, newest version (opens in a new tab)"><%- cardDoi %></a>
         <% } %>
 
       </div>

@@ -18,8 +18,8 @@ grimmer_tt <- function(data,
                        items = 1,
                        notes = NULL,
                        table = TRUE,
-                       yes_color = ace_blue_dark,
-                       no_color = ace_purple_dark) {
+                       yes_color = ace_blue_text,
+                       no_color = ace_purple_text) {
   
   mean_col <- rlang::ensym(mean_col)
   sd_col   <- rlang::ensym(sd_col)
@@ -70,9 +70,10 @@ grimmer_tt <- function(data,
   
   # House style: a note beginning "Note." / "Note:" gets an italic "Note." label.
   if (!is.null(notes) && is.character(notes)) {
-    notes <- sub("^\\s*Note[.:]\\s*",
-                 if (knitr::is_html_output()) "<i>Note.</i> " else "\\textit{Note.} ",
-                 notes)
+    notes <- paste0(
+      if (knitr::is_html_output()) "<i>Note.</i> " else "\\textit{Note.} ",
+      sub("^\\s*Note[.:]\\s*", "", notes)
+    )
   }
   tab <- tinytable::tt(out, notes = notes, class = "ace-grimmer-table") |>
     tinytable::style_tt(
@@ -84,52 +85,69 @@ grimmer_tt <- function(data,
       align = "c"
     )
   
-  if (knitr::is_html_output()) {
-    
-    tab <- tab |>
-      tinytable::style_tt(
-        i = which(out$Consistent == "Yes"),
-        j = consistent_col,
-        background = yes_color,
-        color = "white",
-        bold = TRUE
-      ) |>
-      tinytable::style_tt(
-        i = which(out$Consistent == "No"),
-        j = consistent_col,
-        background = no_color,
-        color = "white",
-        bold = TRUE
-      )
-    
-  } else {
-    
-    tab <- tab |>
-      tinytable::style_tt(
-        i = which(out$Consistent == "Yes"),
-        j = consistent_col,
-        background = yes_color,
-        color = "white",
-        bold = TRUE,
-        line = "tblr",
-        line_color = "white",
-        line_width = 0.2
-      ) |>
-      tinytable::style_tt(
-        i = which(out$Consistent == "No"),
-        j = consistent_col,
-        background = no_color,
-        color = "white",
-        bold = TRUE,
-        line = "tblr",
-        line_color = "white",
-        line_width = 0.2
-      )
+  # Verdict styling: the failing verdict is bold magenta, the passing verdict a
+  # quieter blue at regular weight, so failures are what the eye lands on.
+  fill <- function(tab, rows, color, bold) {
+    if (!length(rows)) return(tab)
+    tinytable::style_tt(tab, i = rows, j = consistent_col,
+                        color = color, bold = bold)
   }
-  
+
+  tab <- tab |>
+    fill(which(out$Consistent == "Yes"), yes_color, FALSE) |>
+    fill(which(out$Consistent == "No"), no_color, TRUE)
   tab
 }
 
+
+# ---------------------------------------------------------------------------
+# yesno_tt(): a tinytable with one Yes/No column filled in the ACE colors, the
+# same treatment grimmer_tt gives its "Consistent" column. Used for any table
+# whose last question is a verdict, so verdict columns look the same wherever
+# they appear in a report.
+#
+#   yesno_tt(df, col = "Reproduces", center = c("Reported", "Recomputed"),
+#            notes = "Note. ...")
+#
+# `col` is the verdict column, holding "Yes" or "No"; `center` names any other
+# columns to center. Colors default to the same pair grimmer_tt uses.
+# ---------------------------------------------------------------------------
+yesno_tt <- function(data,
+                     col = "Consistent",
+                     center = NULL,
+                     notes = NULL,
+                     class = "ace-grimmer-table",
+                     yes_color = ace_blue_text,
+                     no_color = ace_purple_text) {
+
+  stopifnot(col %in% names(data))
+  verdict_col <- which(names(data) == col)
+  center_cols <- unique(c(which(names(data) %in% center), verdict_col))
+
+  # House style: a note beginning "Note." / "Note:" gets an italic "Note." label.
+  if (!is.null(notes) && is.character(notes)) {
+    notes <- paste0(
+      if (knitr::is_html_output()) "<i>Note.</i> " else "\\textit{Note.} ",
+      sub("^\\s*Note[.:]\\s*", "", notes)
+    )
+  }
+
+  tab <- tinytable::tt(data, notes = notes, class = class) |>
+    tinytable::style_tt(j = seq_along(names(data)), valign = "m") |>
+    tinytable::style_tt(j = center_cols, align = "c")
+
+  # Verdict styling: the failing verdict is bold magenta, the passing verdict a
+  # quieter blue at regular weight, so failures are what the eye lands on.
+  fill <- function(tab, rows, color, bold) {
+    if (!length(rows)) return(tab)
+    tinytable::style_tt(tab, i = rows, j = verdict_col,
+                        color = color, bold = bold)
+  }
+
+  tab |>
+    fill(which(data[[col]] == "Yes"), yes_color, FALSE) |>
+    fill(which(data[[col]] == "No"), no_color, TRUE)
+}
 
 # ---------------------------------------------------------------------------
 # citation_table(): Table of citation counts for the audited papers, from the
@@ -258,11 +276,31 @@ riv_summary_table <- function(qmd, caption = "Summary of Research Integrity Viol
   pat <- "(?<![0-9A-Za-z])([0-9]+)-@riv-([0-9]+\\.[0-9]+)(?![0-9.]*[0-9])"   # N-@riv-x.y
   decl <- data.frame(number = character(), instances = integer(),
                      section = character(), line = integer(), stringsAsFactors = FALSE)
+  # Section numbers as the report displays them: level-2 headings number 1, 2,
+  # 3 and level-3 headings letter within them (3.B). The summary table prints
+  # these itself rather than using a @sec- cross-reference, which always drags
+  # the word "Section" along with it; the prose keeps the prefixed form.
+  alpha <- function(n) {
+    s <- ""
+    while (n > 0) { n <- n - 1L; s <- paste0(LETTERS[(n %% 26) + 1L], s); n <- n %/% 26L }
+    s
+  }
+  secnum <- character()
+  major <- 0L
+  minor <- 0L
+
   section <- NA_character_
   in_code <- FALSE
   for (i in seq_along(txt)) {
     if (grepl("^```", txt[i])) { in_code <- !in_code; next }
     if (in_code) next
+    lvl <- nchar(regmatches(txt[i], regexpr("^#+(?= )", txt[i], perl = TRUE)))
+    if (length(lvl) && lvl %in% 2:3 && !grepl("\\.unnumbered", txt[i])) {
+      if (lvl == 2L) { major <- major + 1L; minor <- 0L } else { minor <- minor + 1L }
+      num <- if (lvl == 2L) as.character(major) else paste0(major, ".", alpha(minor))
+      id <- regmatches(txt[i], regexpr("(?<=\\{#)sec-[A-Za-z0-9_-]+(?=\\})", txt[i], perl = TRUE))
+      if (length(id)) secnum[id] <- num
+    }
     h <- regmatches(txt[i], regexpr("^#+ .*\\{#(sec-[A-Za-z0-9_-]+)\\}", txt[i]))
     if (length(h)) section <- sub(".*\\{#(sec-[A-Za-z0-9_-]+)\\}.*", "\\1", h)
     hits <- regmatches(txt[i], gregexpr(pat, txt[i], perl = TRUE))[[1]]
@@ -281,15 +319,25 @@ riv_summary_table <- function(qmd, caption = "Summary of Research Integrity Viol
   nums <- unique(decl$number)
   ord  <- order(as.integer(sub("\\..*", "", nums)), as.integer(sub(".*\\.", "", nums)))
   nums <- nums[ord]
+  # "3.A" linked to the section, with no prefix word. LaTeX gets \hyperref,
+  # which resolves against the \label Quarto writes for a @sec- heading; HTML
+  # gets an ordinary anchor link. Falls back to the cross-reference if a
+  # section somehow carries no computed number.
+  sec_link <- function(id) {
+    n <- unname(secnum[id])
+    if (is.na(n)) return(paste0("@", id))
+    if (knitr::is_latex_output()) sprintf("\\hyperref[%s]{%s}", id, n) else sprintf("[%s](#%s)", n, id)
+  }
+
   rows <- vapply(nums, function(n) {
     d <- decl[decl$number == n, ]
     secs <- unique(d$section[!is.na(d$section)])
     sprintf("| **RIV %s** | %s | %d | %s |", n, cats$name[match(n, cats$number)], sum(d$instances),
-            if (length(secs)) paste0("@", secs, collapse = ", ") else "")
+            if (length(secs)) paste(vapply(secs, sec_link, ""), collapse = ", ") else "")
   }, "")
   total <- sum(decl$instances)
   out <- c("| RIV | Title | Instances | Section |",
-           "|:--|:-----------|:-:|:---|",
+           "|:--|:-----------|:-:|:-:|",
            rows,
            sprintf("| ***Total*** |  | ***%d*** |  |", total),
            "",

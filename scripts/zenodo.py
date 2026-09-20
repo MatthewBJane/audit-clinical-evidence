@@ -336,6 +336,17 @@ def strip_html(s: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", s or "")).strip()
 
 
+def strip_citations(s: str) -> str:
+    """Drop pandoc citation syntax from prose bound for Zenodo.
+
+    The report's `abstract:` is markdown: citeproc turns "[-@smith2019]" into
+    "(2019)" when the page renders. Zenodo gets the raw field and has no
+    citeproc, so the keys would sit in the archived record verbatim.
+    """
+    s = re.sub(r"\s*\[[^\[\]]*-?@[^\[\]]*\](?!\()", "", s or "")
+    return re.sub(r"\s+([,.;:])", r"\1", re.sub(r"\s{2,}", " ", s)).strip()
+
+
 
 
 def current_version(ace_id: str, live: bool) -> int:
@@ -413,7 +424,7 @@ def build_metadata(fm: dict, cfg: dict, qmd: Path, version=None) -> dict:
     site = cfg["site_url"].rstrip("/")
     landing = f"{site}/reports/{ace_id}/"
 
-    abstract = strip_html(fm.get("abstract", ""))
+    abstract = strip_citations(strip_html(fm.get("abstract", "")))
     description = (
         f"<p><strong>{ace_id}</strong> &mdash; an audit report published by "
         f"{cfg['publisher']} ({site}).</p>"
@@ -708,14 +719,26 @@ def cmd_new_version(args):
     new_id = draft["id"]
     bumped = current_version(fm["ace-id"], args.live) + 1
     ledger_set(fm["ace-id"], args.live, deposition_id=new_id, version=bumped)
-    z.update(new_id, build_metadata(fm, cfg, qmd, bumped))
+    meta = build_metadata(fm, cfg, qmd, bumped)
+    meta["prereserve_doi"] = True
+    z.update(new_id, meta)
     draft = z.get(new_id)
+    # Take this version's DOI now, the way `reserve` does for a first deposit.
+    # The files are re-uploaded from the re-render that follows, so without
+    # this the archived PDF would print the PREVIOUS version's DOI on its
+    # cover and in its Version history, permanently.
+    reserved = draft["metadata"].get("prereserve_doi", {}).get("doi")
+    if reserved:
+        ledger_set(fm["ace-id"], args.live, reserved_doi=reserved)
+        if args.live:
+            set_front_matter_field(qmd, "doi", reserved)
     for f in draft.get("files", []):
         z._req("DELETE", f"/deposit/depositions/{new_id}/files/{f['id']}")
     for p in files_for(fm, cfg):
         print(f"uploading {p.relative_to(REPO_ROOT)} ...")
         z.upload(draft, p)
     print(f"\nNew draft version {new_id} created and populated (version {bumped}).")
+    print(f"Reserved DOI     : {reserved or '(none returned)'}")
     print("Add a Version history entry, re-render, then run: publish")
 
 

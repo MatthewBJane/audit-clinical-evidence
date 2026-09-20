@@ -7,7 +7,7 @@ listing:
   - id: ACEreports
     contents: "reports/*/index.qmd"
     template: _ace-report-listing.ejs.md
-    fields: [title, subtitle, abstract, categories, date, date-modified, ace-id, doi, impact, population, treatment, outcome, design]
+    fields: [title, subtitle, abstract, categories, date, date-modified, ace-id, doi, concept-doi, impact, population, treatment, outcome, design]
     sort: "date desc"
     page-size: 10
     categories: true

@@ -273,8 +273,8 @@ riv <- riv_summary_table("reports/ACE2026000/index.qmd",
 ## Version history {.unnumbered}
 
 | Version | Date | DOI | Change |
-|---|---|---|---|
+|:-:|:-----|:-------------|:----------|
 | 1 | YYYY-MM-DD | `r if (!is.null(rmarkdown::metadata$doi) && nzchar(rmarkdown::metadata$doi)) sprintf("[%s](https://doi.org/%s)", rmarkdown::metadata$doi, rmarkdown::metadata$doi) else "reserved at deposit"` | Initial publication. |
 
 : Any change to a finding, RIV count, or recommendation creates a new version with
-a new version DOI. Superseded versions remain permanently resolvable.
+a new version DOI. Superseded versions remain permanently resolvable. {tbl-colwidths="[9,16,41,34]"}

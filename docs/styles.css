@@ -1239,17 +1239,17 @@ body.quarto-dark a[role="doc-noteref"] {
 }
 
 
-html[data-bs-theme="light"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a),
-body[data-bs-theme="light"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a),
-body.quarto-light main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a) {
+html[data-bs-theme="light"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link),
+body[data-bs-theme="light"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link),
+body.quarto-light main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link) {
   color: #0b7f97 !important;
   -webkit-text-fill-color: #0b7f97 !important;
   text-decoration-color: #0b7f97 !important;
 }
 
-html[data-bs-theme="dark"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a),
-body[data-bs-theme="dark"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a),
-body.quarto-dark main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a) {
+html[data-bs-theme="dark"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link),
+body[data-bs-theme="dark"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link),
+body.quarto-dark main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link) {
   color: #e39be0 !important;
   -webkit-text-fill-color: #e39be0 !important;
   text-decoration-color: #e39be0 !important;
@@ -1258,7 +1258,7 @@ body.quarto-dark main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):n
 
 /* Links: no underline at rest; on hover the whole link is boxed with a
    translucent fill in the link colour (same pattern as listing titles). */
-main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-orcid),
+main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):not(.ace-orcid),
 #refs a,
 a.citation,
 a[role="doc-biblioref"],
@@ -1270,7 +1270,7 @@ a[role="doc-noteref"] {
   transition: background-color 0.12s ease, color 0.12s ease;
 }
 
-body.quarto-light main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):hover,
+body.quarto-light main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):hover,
 body.quarto-light #refs a:hover,
 body.quarto-light a.citation:hover,
 body.quarto-light a[role="doc-biblioref"]:hover,
@@ -1280,7 +1280,7 @@ body.quarto-light a[role="doc-noteref"]:hover {
   -webkit-text-fill-color: #066a80 !important;
 }
 
-body.quarto-dark main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):hover,
+body.quarto-dark main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):hover,
 body.quarto-dark #refs a:hover,
 body.quarto-dark a.citation:hover,
 body.quarto-dark a[role="doc-biblioref"]:hover,
@@ -1438,24 +1438,17 @@ body.quarto-dark main #title-block-header .quarto-categories .quarto-category a:
   text-decoration: none !important;
 }
 
-/* Hover only the outer pill */
+/* Hover only the outer pill. No translateY: the pill slides its facet key out
+   on hover, and lifting the whole chip at the same time reads as a wobble. */
 .quarto-title .quarto-category:hover,
 .quarto-title-block .quarto-category:hover,
 #title-block-header .quarto-category:hover,
 .quarto-title .quarto-categories > a:hover,
 .quarto-title-block .quarto-categories > a:hover,
-#title-block-header .quarto-categories > a:hover {
-  transform: translateY(-1px);
-  text-decoration: none !important;
-}
-/* Hover */
-.quarto-title .quarto-category:hover,
-.quarto-title-block .quarto-category:hover,
-#title-block-header .quarto-category:hover,
+#title-block-header .quarto-categories > a:hover,
 .quarto-title .quarto-categories a:hover,
 .quarto-title-block .quarto-categories a:hover,
 #title-block-header .quarto-categories a:hover {
-  transform: translateY(-1px);
   text-decoration: none !important;
 }
 
@@ -3197,35 +3190,67 @@ body.quarto-dark .ace-team-note { border-top-color: #3a4148; color: #9aa4ae; }
   gap: 0.6rem;
 }
 
-.ace-doi-copy {
-  appearance: none;
-  border: 0;
-  background: transparent;
-  padding: 0;
-  margin: 0;
+/* ---------------------------------------------------------
+   DOI LINK (beside the ACE ID pill, and on each listing card)
+   Quiet grey mono at rest, a bordered box on hover, opening the archived
+   record. Padding and a transparent border are present at rest so the box
+   appears without shifting anything around it.
+--------------------------------------------------------- */
+html body a.ace-doi-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12em 0.4em;
+  border: 1px solid rgba(138, 148, 158, 0.3);   /* faint wire at rest */
+  border-radius: 3px;
   font-family: "Roboto Mono", monospace;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: #8a949e;
-  cursor: pointer;
-  transition: color 0.12s ease;
+  line-height: 1.35;
+  color: #8a949e !important;
+  -webkit-text-fill-color: #8a949e !important;
+  text-decoration: none !important;
+  background-color: transparent !important;
+  transition: color 0.12s ease, background-color 0.12s ease, border-color 0.12s ease;
 }
 
-.ace-doi-copy:hover,
-.ace-doi-copy:focus-visible {
-  color: #5b6670;
+html body a.ace-doi-link:hover,
+html body a.ace-doi-link:focus-visible {
+  color: #5b6670 !important;
+  -webkit-text-fill-color: #5b6670 !important;
+  background-color: rgba(138, 148, 158, 0.14) !important;
+  border-color: rgba(138, 148, 158, 0.55);
   outline: none;
 }
 
-.ace-doi-copy.is-copied {
-  color: #0b7f97;
+html body.quarto-dark a.ace-doi-link {
+  color: #8d979f !important;
+  -webkit-text-fill-color: #8d979f !important;
+  border-color: rgba(154, 164, 174, 0.3);
+}
+html body.quarto-dark a.ace-doi-link:hover,
+html body.quarto-dark a.ace-doi-link:focus-visible {
+  color: #d3dae0 !important;
+  -webkit-text-fill-color: #d3dae0 !important;
+  background-color: rgba(154, 164, 174, 0.18) !important;
+  border-color: rgba(154, 164, 174, 0.55);
 }
 
-body.quarto-dark .ace-doi-copy { color: #8d979f; }
-body.quarto-dark .ace-doi-copy:hover,
-body.quarto-dark .ace-doi-copy:focus-visible { color: #b8c2cb; }
-body.quarto-dark .ace-doi-copy.is-copied { color: #e39be0; }
+/* Zenodo's own mark (images/zenodo-mark.svg, their published icon) to the left
+   of the number, painted as a mask so it takes the link's grey and brightens
+   with the text on hover. The slot matches the art's 48.01 x 37.1 aspect so
+   `contain` fills it exactly. The URL is relative to this stylesheet, which
+   sits at the site root, so it resolves from every page depth. */
+html body a.ace-doi-link::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 1.3em;
+  height: 1.005em;
+  margin-right: 0.45em;
+  background-color: currentColor;
+  -webkit-mask: url("images/zenodo-mark.svg") center / contain no-repeat;
+          mask: url("images/zenodo-mark.svg") center / contain no-repeat;
+}
 
 /* Table notes (e.g. citation_table()): same colour/size as Quarto's table
    caption, left-aligned under the table. */

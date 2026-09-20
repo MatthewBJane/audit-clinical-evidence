@@ -23,6 +23,39 @@
 \definecolor{acemagenta}{HTML}{E262E2}
 \definecolor{acegrey}{HTML}{5A6570}   % caption/note grey, same as the site
 
+% Facet badges on the cover, matching the chips on the website: the fill is
+% the site's translucent tint flattened onto white, the line is the facet
+% hue, the ink is the darker text tone used for the facet key.
+% The badges live on the cover, which is dark, so these are the site's dark
+% theme values: the tint flattened onto the cover's background, the hue
+% itself for the outline, and the brighter ink the site uses on dark.
+\definecolor{acefacetpopfill}{HTML}{0D3941}\definecolor{acefacetpopline}{HTML}{03E5FF}\definecolor{acefacetpopink}{HTML}{03E5FF}
+\definecolor{acefacettrtfill}{HTML}{1A313F}\definecolor{acefacettrtline}{HTML}{4DB9F5}\definecolor{acefacettrtink}{HTML}{6CC4FF}
+\definecolor{acefacetoutfill}{HTML}{28293D}\definecolor{acefacetoutline}{HTML}{978EEC}\definecolor{acefacetoutink}{HTML}{A99EF2}
+\definecolor{acefacetdesfill}{HTML}{35213C}\definecolor{acefacetdesline}{HTML}{E262E2}\definecolor{acefacetdesink}{HTML}{E39BE0}
+\definecolor{acefacettext}{HTML}{F2F2F2}   % term text, as on the site in dark
+\definecolor{aceink}{HTML}{111418}     % body text on the light interior pages
+
+% The cover is dark, and carries its own small palette. Everything on it is
+% drawn in these colors, so the interior pages are untouched by them.
+\definecolor{acecoverbg}{HTML}{0F1317}    % the page itself
+\definecolor{acecoverink}{HTML}{F4F6F7}   % titles, names, values
+\definecolor{acecovermute}{HTML}{9AA4AE}  % keys, affiliations, notes
+\definecolor{acecoversub}{HTML}{C7D1D9}   % the subtitle, a step brighter
+\definecolor{acecoverlink}{HTML}{6CC4FF}  % links
+% Band behind the cover title: a shade lifted off the page, not a panel.
+\definecolor{acetitleband}{HTML}{1B2127}
+\definecolor{aceecg}{HTML}{2C2F33}      % cover ECG trace, a step above the band
+% Mono caps, letterspaced, as the chips and the sidebar facet titles are.
+\newcommand{\aceFacetKeyFont}{\fontsize{9}{10.5}\selectfont\ttfamily\bfseries\addfontfeature{LetterSpace=14}}
+\newcommand{\aceCoverLabelFont}{\fontsize{10}{12}\selectfont\ttfamily\bfseries\addfontfeature{LetterSpace=18}}
+\newcommand{\aceCoverIDFont}{\fontsize{9.5}{11}\selectfont\ttfamily\addfontfeature{LetterSpace=12}}
+\newcommand{\aceCoverDateFont}{\fontsize{11.5}{13.5}\selectfont\ttfamily\bfseries\addfontfeature{LetterSpace=4}}
+\newcommand{\aceInfoValueFont}{\fontsize{9.5}{12}\selectfont}
+\newcommand{\aceInfoMonoFont}{\fontsize{9.5}{11}\selectfont\ttfamily}
+\newcommand{\aceInfoNoteFont}{\fontsize{8.5}{10.5}\selectfont}
+\newcommand{\aceFacetTermFont}{\fontsize{9.4}{11}\selectfont\ttfamily\bfseries\addfontfeature{LetterSpace=5}}
+
 % ---------------------------------------------------------
 % CODE BLOCKS AND SYNTAX COLOURS
 % Same palette as the site's light theme (see "CODE: inline and
@@ -110,72 +143,89 @@
 \providecommand{\aceDOI}{}
 \providecommand{\aceConceptDOI}{}
 \providecommand{\coverAuthorsBlock}{}
+\providecommand{\coverCategoriesBlock}{}
+\providecommand{\aceAuthorsLine}{}
+\providecommand{\aceAffiliationsLine}{}
 \newlength{\aceInfoY}
+\newlength{\aceInfoTop}
+\newsavebox{\aceTitleBox}
+\newlength{\aceTitleHeight}
+\newlength{\aceTitleWidth}
+\newlength{\aceTitleRun}
+\newlength{\aceBandTop}
+\newlength{\aceBandBottom}
+\newlength{\aceTitleMeasure}
+\setlength{\aceTitleMeasure}{16.6cm}
 
-% ---------------------------------------------------------
-% GLOBAL BACKGROUND STYLING (Sidebars and Corners)
-% The \ifnum logic uses a custom counter to ensure 
-% it NEVER draws on the physical first page.
-% ---------------------------------------------------------
-\newcounter{physicalpage}
-\setcounter{physicalpage}{0}
+% One PQRST beat for the cover trace, drawn from the current point and 3.2cm
+% wide: baseline, a short P wave, the QRS spike, then a short T wave back to
+% baseline. P and T are single Bezier curves, so they read as smooth humps and
+% stay well under the spike; only the QRS complex is drawn with straight lines,
+% because that part of the signal really is angular. \aceEcgStrip chains seven
+% beats into ONE path: drawn as separate paths, the round caps where two beats
+% met overlapped into a visible bright dot on the baseline.
+\newcommand{\aceEcgBeat}{%
+  -- ++(0.66,0)
+  .. controls +(0.12,0.08) and +(-0.12,0.08) .. ++(0.34,0)
+  -- ++(0.38,0)
+  -- ++(0.07,-0.10) -- ++(0.09,0.86) -- ++(0.10,-1.02) -- ++(0.09,0.26)
+  -- ++(0.36,0)
+  .. controls +(0.17,0.11) and +(-0.17,0.11) .. ++(0.50,0)
+  -- ++(0.61,0)}
+\newcommand{\aceEcgStrip}{%
+  \aceEcgBeat\aceEcgBeat\aceEcgBeat\aceEcgBeat\aceEcgBeat\aceEcgBeat\aceEcgBeat}
 
-\AddToShipoutPicture{% 
-  \stepcounter{physicalpage}%
-  \ifnum\value{physicalpage}>1
-     % logo
-    \AtPageUpperLeft{% 
-        \put(\LenToUnit{\dimexpr\paperwidth-2.5cm},-2.5cm){% 
-            \color{light}\includegraphics[width=2.5cm]{brand/alt_logo.png}
-          }%
-     }%
-  \fi
-}
-
-\AddToShipoutPictureBG{
-  \ifnum\value{physicalpage}>1
-    \AtPageCenter{
-      \hspace{-10.77cm}
-      \raisebox{11.2cm}{
-        \includegraphics[width=3.7cm]{brand/corner.png}
-      }
-    }
-  \fi
-}
+% The glitch corner wedge and the hexagon logo that used to be painted into
+% the page background were removed: the interior pages carry the mark in the
+% running head instead (see PAGE FURNITURE below), which keeps them aligned
+% with the text block and out of the way of tables and figures.
 
 
 % ---------------------------------------------------------
 % PAGE NUMBERING & HEADER STYLING
 % ---------------------------------------------------------
 
-\setlength{\headheight}{15pt}
+% The ACE mark sits in the top corner of every page after the cover, with the
+% report ID tagged beneath it in white on grey; the folio sits alone at the
+% foot. brand/logo_mark is the wordmark trimmed to its own ink, so the width
+% below is the width that prints. The block is \smash-ed, so its height never
+% reaches the text block, and \aceRunDrop is tuned to leave the mark about
+% 6 mm from the trim and the tag about 3 mm clear of the first body line.
+\newcommand{\aceRunMarkW}{1.7cm}
+\newlength{\aceRunDrop}\setlength{\aceRunDrop}{3mm}
+\newlength{\aceRunOut}\setlength{\aceRunOut}{19mm}  % how far the block hangs into the right margin
+\newcommand{\aceRunIDBox}{%
+  \setlength{\fboxsep}{3pt}%
+  \colorbox{acegrey}{\textcolor{white}{\ttfamily\scriptsize\aceID}}}
+\newcommand{\aceRunBlock}{%
+  \smash{\raisebox{-\aceRunDrop}{\shortstack{%
+    \includegraphics[width=\aceRunMarkW]{brand/logo_mark.png}\\[3pt]
+    \aceRunIDBox}}}}
+\newcommand{\aceFolio}{{\color{acegrey}\ttfamily\footnotesize\thepage}}
+
+\setlength{\headheight}{26pt}
+\setlength{\headsep}{14pt}
+\setlength{\footskip}{18pt}   % folio ~12mm from the trim, two lines clear of the text
 
 \fancypagestyle{mystyle}{
-  \fancyhf{} 
-  \renewcommand\headrulewidth{0pt} 
-  \fancyheadoffset{1.45cm} 
-
-  % Page number
-  \fancyhead[L]{\textcolor{black}{\thepage}} 
-
-  % Report ID, top center, Roboto Mono
-  \fancyhead[C]{\textcolor{black}{{\ttfamily\footnotesize\aceID}}}
+  \fancyhf{}
+  \renewcommand\headrulewidth{0pt}
+  \renewcommand\footrulewidth{0pt}
+  \fancyheadoffset[R]{\aceRunOut}
+  \fancyhead[R]{\aceRunBlock}
+  \fancyfoot[C]{\aceFolio}
 }
 
 % Force the 'plain' style, used by TOC and chapter starts, to match 'mystyle'
 \fancypagestyle{plain}{
   \fancyhf{}
   \renewcommand\headrulewidth{0pt}
-  \fancyheadoffset{1.45cm}
-
-  % Page number
-  \fancyhead[L]{\textcolor{black}{\thepage}} 
-
-  % Report ID, top center, Roboto Mono
-  \fancyhead[C]{\textcolor{black}{{\ttfamily\footnotesize\aceID}}}
+  \renewcommand\footrulewidth{0pt}
+  \fancyheadoffset[R]{\aceRunOut}
+  \fancyhead[R]{\aceRunBlock}
+  \fancyfoot[C]{\aceFolio}
 }
 
-\setlength{\footskip}{20pt}
 \pagestyle{mystyle}
 
 
@@ -215,137 +265,273 @@
   {}
 
 % ---------------------------------------------------------
+% FRONT MATTER PAGE (title, authors, abstract, contents)
+% The page after the cover. The title block repeats the title, subtitle and
+% authors but not the dates, which the cover already carries. Each part is
+% introduced by the same mono caps key used on the cover.
+% ---------------------------------------------------------
+% An exact vertical gap. Both of LaTeX's automatic skips are taken out of
+% the way first: \parskip, which it adds when the next paragraph starts,
+% and the interline glue, which otherwise stretches the gap out to a full
+% baseline. What is asked for here is what lands on the page.
+\newcommand{\aceFrontGap}[1]{\par\nobreak\nointerlineskip\vskip #1\relax}
+
+% A section key with its rule tucked directly underneath, as on the cover.
+\newcommand{\aceFrontKey}[1]{%
+  \par\begingroup\parskip=0pt\parindent=0pt
+  \noindent{\aceFacetKeyFont\color{acegrey}#1}%
+  \aceFrontGap{0.13cm}%
+  \noindent{\color{black!25}\rule{\textwidth}{0.4pt}}\par\nobreak
+  \endgroup
+  \nointerlineskip}
+
+\makeatletter
+\renewcommand{\maketitle}{%
+  \thispagestyle{plain}%
+  \begingroup\parskip=0pt\parindent=0pt
+  \noindent{\fontsize{19}{23}\selectfont\bfseries\@title\par}%
+  \@ifundefined{@subtitle}{}{%
+    \ifx\@subtitle\@empty\else
+      \aceFrontGap{0.20cm}%
+      \noindent{\fontsize{12}{15}\selectfont\color{acegrey}\@subtitle\par}%
+    \fi}%
+  \ifx\aceAuthorsLine\@empty\else
+    \aceFrontGap{0.62cm}%
+    \aceFrontKey{AUTHORS}%
+    \aceFrontGap{0.26cm}%
+    \noindent{\fontsize{11}{14}\selectfont\bfseries\aceAuthorsLine\par}%
+    \ifx\aceAffiliationsLine\@empty\else
+      \aceFrontGap{0.20cm}%
+      \noindent{\fontsize{8.5}{11}\selectfont\color{acegrey}\aceAffiliationsLine\par}%
+    \fi
+  \fi
+  \endgroup
+  \aceFrontGap{0.62cm}%
+}
+
+% The abstract, styled in place: Quarto emits it right after \maketitle.
+\newcommand{\aceAbstractStart}{%
+  \aceFrontKey{ABSTRACT}%
+  \fontsize{9.5}{12.6}\selectfont
+  \aceFrontGap{0.26cm}%
+  \noindent\ignorespaces}
+\newcommand{\aceAbstractEnd}{\aceFrontGap{0.62cm}}
+\AtBeginDocument{%
+  \@ifundefined{abstract}%
+    {\newenvironment{abstract}{\aceAbstractStart}{\aceAbstractEnd}}%
+    {\renewenvironment{abstract}{\aceAbstractStart}{\aceAbstractEnd}}%
+}
+
+% ---------------------------------------------------------
+% CONTENTS THAT ALWAYS FIT THE PAGE
+% The contents list is typeset into a box first and measured against the
+% space left on the page. The largest setting that fits wins; the last
+% resort is two columns, which holds roughly forty entries. Nothing here
+% changes what is listed, only how tightly it is set.
+% ---------------------------------------------------------
+\usepackage{multicol}
+\newsavebox{\aceTocBox}
+\newlength{\aceTocSpace}
+\newlength{\aceTocNeed}
+
+% The entries themselves, read back from the .toc written on the last pass.
+\newcommand{\aceTocEntries}{\@input{\jobname.toc}}
+
+% Last resort for a very long report: list the numbered sections only.
+\newcommand{\aceTocSectionsOnly}{%
+  \let\l@subsection\@gobbletwo
+  \let\l@subsubsection\@gobbletwo}
+
+% Measure the list at a given type size and leading factor.
+% #1 size, #2 leading, #3 extra setup (e.g. dropping the subsections)
+\newcommand{\aceTocMeasure}[3]{%
+  \sbox{\aceTocBox}{%
+    \begin{minipage}{\textwidth}%
+      \fontsize{#1}{#2}\selectfont #3%
+      \aceTocEntries
+    \end{minipage}}%
+  \setlength{\aceTocNeed}{\dimexpr\ht\aceTocBox+\dp\aceTocBox\relax}}
+
+\newcommand{\aceTocMeasureTwoCol}[3]{%
+  \sbox{\aceTocBox}{%
+    \begin{minipage}{\textwidth}%
+      \fontsize{#1}{#2}\selectfont #3%
+      \setlength{\columnsep}{1.2em}%
+      \begin{multicols}{2}\aceTocEntries\end{multicols}%
+    \end{minipage}}%
+  \setlength{\aceTocNeed}{\dimexpr\ht\aceTocBox+\dp\aceTocBox\relax}}
+
+% \@starttoc also opens the stream the next run reads back, so that has to
+% happen even though the entries are placed by hand.
+\newcommand{\aceTocOpenWrite}{%
+  \if@filesw
+    \expandafter\newwrite\csname tf@toc\endcsname
+    \immediate\openout \csname tf@toc\endcsname \jobname.toc\relax
+  \fi}
+
+\renewcommand{\tableofcontents}{%
+  \par
+  % Space left on this page, guarding against being called before the page
+  % has any material on it.
+  \setlength{\aceTocSpace}{\dimexpr\pagegoal-\pagetotal\relax}%
+  \ifdim\pagegoal=\maxdimen
+    \setlength{\aceTocSpace}{\dimexpr\textheight-\pagetotal\relax}%
+  \fi
+  \aceFrontKey{SECTIONS}%
+  \aceFrontGap{0.26cm}%
+  % what the key, its rule and the bottom margin have already taken
+  \addtolength{\aceTocSpace}{-1.3cm}%
+  % Largest setting that fits, in order: full size, tighter, two columns,
+  % and finally the numbered sections on their own.
+  \aceTocMeasure{10}{15}{}%
+  \ifdim\aceTocNeed>\aceTocSpace \aceTocMeasure{9}{13.2}{}\fi
+  \ifdim\aceTocNeed>\aceTocSpace \aceTocMeasure{8}{11.6}{}\fi
+  \ifdim\aceTocNeed>\aceTocSpace \aceTocMeasureTwoCol{8.5}{12}{}\fi
+  \ifdim\aceTocNeed>\aceTocSpace \aceTocMeasureTwoCol{7.5}{10.5}{}\fi
+  \ifdim\aceTocNeed>\aceTocSpace \aceTocMeasure{9.5}{14}{\aceTocSectionsOnly}\fi
+  \ifdim\aceTocNeed>\aceTocSpace \aceTocMeasure{8}{11.6}{\aceTocSectionsOnly}\fi
+  \ifdim\aceTocNeed>\aceTocSpace \aceTocMeasureTwoCol{8}{11.6}{\aceTocSectionsOnly}\fi
+  \noindent\usebox{\aceTocBox}\par
+  \aceTocOpenWrite
+}
+\makeatother
+
+% ---------------------------------------------------------
 % BUILD THE COVER PAGE
 % ---------------------------------------------------------
 \makeatletter
 \AtBeginDocument{
     \thispagestyle{empty} % Ensure no headers/footers on the cover
-    
-    \begin{tikzpicture}[remember picture,overlay]
-        
-        % --- Cover band ------------------------------------------------------
-        % Original raster banner (brand/banner.png), kept for easy revert:
-        % \node at (current page.center) [anchor=center,yshift=1cm] {
-        %     \includegraphics[width=1\paperwidth, height=0.8\paperheight]{brand/banner.png}
-        % };
-        % Replacement: a vector glitch band drawn in TikZ. Generated by
-        % scripts/gen_cover_band.py (deterministic seed); paste its output
-        % between the BAND markers to reroll or retune.
-        \begin{scope}[shift={(current page.center)}]
-        % BEGIN BAND
-        % --- ACE glitch band (generated by gen_banner.py; change the seed there to reroll) ---
-        \fill[black] (-11,-1.70) rectangle (11,3.40);
-        \fill[acecyan] (-11,3.40) rectangle (11,3.47);
-        \fill[acemagenta] (-11,-1.77) rectangle (11,-1.70);
-        \fill[white] (-11.00,-1.36) rectangle (-9.13,-1.15);
-        \fill[black] (-9.92,-1.36) rectangle (-8.56,-1.15);
-        \fill[acemagenta] (-11.00,-1.36) rectangle (-10.37,-1.15);
-        \fill[acecyan] (-10.04,-1.36) rectangle (-9.92,-1.15);
-        \fill[white] (-11.00,-1.35) rectangle (-8.57,-1.09);
-        \fill[black] (-10.03,-1.35) rectangle (-8.10,-1.09);
-        \fill[acemagenta] (-11.00,-1.35) rectangle (-10.39,-1.09);
-        \fill[acecyan] (-10.13,-1.35) rectangle (-10.03,-1.09);
-        \fill[white] (-11.00,-0.51) rectangle (-8.91,-0.38);
-        \fill[black] (-9.71,-0.51) rectangle (-8.13,-0.38);
-        \fill[acemagenta] (-11.00,-0.51) rectangle (-10.41,-0.38);
-        \fill[acecyan] (-9.82,-0.51) rectangle (-9.71,-0.38);
-        \fill[white] (-11.00,0.55) rectangle (-9.25,0.70);
-        \fill[black] (-9.79,0.55) rectangle (-8.54,0.70);
-        \fill[acemagenta] (-11.00,0.55) rectangle (-10.44,0.70);
-        \fill[acecyan] (-9.90,0.55) rectangle (-9.79,0.70);
-        \fill[white] (-11.00,1.44) rectangle (-9.12,1.58);
-        \fill[black] (-10.20,1.44) rectangle (-8.82,1.58);
-        \fill[acemagenta] (-11.00,1.44) rectangle (-10.37,1.58);
-        \fill[acecyan] (-10.31,1.44) rectangle (-10.20,1.58);
-        \fill[black] (-11.00,3.54) rectangle (-9.89,3.67);
-        \fill[acecyan] (-11.00,3.67) rectangle (-9.75,3.71);
-        \fill[acemagenta] (-11.00,3.50) rectangle (-10.02,3.54);
-        \fill[acecyan] (-11.00,3.85) rectangle (-9.44,3.99);
-        \fill[black] (-11.00,3.68) rectangle (-8.34,3.78);
-        \fill[black] (-11.00,-2.26) rectangle (-9.50,-2.10);
-        \fill[acecyan] (-11.00,-2.10) rectangle (-9.25,-2.06);
-        \fill[acemagenta] (-11.00,-2.30) rectangle (-9.75,-2.26);
-        \fill[acecyan] (-11.00,-2.30) rectangle (-8.56,-2.17);
-        \fill[black] (-11.00,-2.18) rectangle (-8.77,-2.04);
-        \fill[acecyan] (-10.24,-0.20) rectangle (-9.26,-0.12);
-        \fill[acemagenta] (-10.36,-0.59) rectangle (-9.22,-0.52);
-        \fill[acemagenta] (-9.98,-1.10) rectangle (-8.47,-1.05);
-        \fill[acecyan] (-9.08,4.32) rectangle (-8.62,4.40);
-        \fill[black] (-10.33,4.40) rectangle (-10.09,4.48);
-        \fill[white] (8.80,-1.11) rectangle (11.00,-0.96);
-        \fill[black] (8.11,-1.11) rectangle (9.81,-0.96);
-        \fill[acemagenta] (10.39,-1.11) rectangle (11.00,-0.96);
-        \fill[acecyan] (9.81,-1.11) rectangle (9.94,-0.96);
-        \fill[white] (8.85,0.66) rectangle (11.00,0.86);
-        \fill[black] (8.33,0.66) rectangle (9.98,0.86);
-        \fill[acemagenta] (10.37,0.66) rectangle (11.00,0.86);
-        \fill[acecyan] (9.98,0.66) rectangle (10.10,0.86);
-        \fill[white] (8.81,1.42) rectangle (11.00,1.74);
-        \fill[black] (8.33,1.42) rectangle (10.02,1.74);
-        \fill[acemagenta] (10.39,1.42) rectangle (11.00,1.74);
-        \fill[acecyan] (10.02,1.42) rectangle (10.13,1.74);
-        \fill[white] (8.81,2.14) rectangle (11.00,2.32);
-        \fill[black] (8.11,2.14) rectangle (9.79,2.32);
-        \fill[acemagenta] (10.38,2.14) rectangle (11.00,2.32);
-        \fill[acecyan] (9.79,2.14) rectangle (9.90,2.32);
-        \fill[white] (8.81,2.52) rectangle (11.00,2.69);
-        \fill[black] (8.14,2.52) rectangle (9.83,2.69);
-        \fill[acemagenta] (10.37,2.52) rectangle (11.00,2.69);
-        \fill[acecyan] (9.83,2.52) rectangle (9.91,2.69);
-        \fill[acemagenta] (9.77,3.57) rectangle (11.00,3.72);
-        \fill[black] (9.24,3.82) rectangle (11.00,3.97);
-        \fill[acecyan] (9.06,3.97) rectangle (11.00,4.01);
-        \fill[acemagenta] (9.43,3.78) rectangle (11.00,3.82);
-        \fill[acecyan] (8.81,3.83) rectangle (11.00,4.01);
-        \fill[black] (9.67,-1.99) rectangle (11.00,-1.86);
-        \fill[acecyan] (9.51,-1.86) rectangle (11.00,-1.82);
-        \fill[acemagenta] (9.83,-2.03) rectangle (11.00,-1.99);
-        \fill[acecyan] (9.96,-1.94) rectangle (11.00,-1.83);
-        \fill[acemagenta] (9.73,-2.38) rectangle (11.00,-2.18);
-        \fill[acecyan] (9.64,-0.63) rectangle (10.14,-0.59);
-        \fill[acemagenta] (9.28,0.29) rectangle (9.97,0.35);
-        \fill[acecyan] (8.74,0.61) rectangle (10.30,0.65);
-        \fill[acecyan] (10.12,-2.41) rectangle (10.51,-2.34);
-        \fill[black] (8.85,-2.99) rectangle (9.21,-2.91);
-        % END BAND
-        \end{scope}
-        
-        \node at (current page.north) [anchor=north, yshift=1cm] {
-            \includegraphics[width=0.6\paperwidth, height=0.4\paperheight, keepaspectratio]{brand/logo_whitebg_text.png}
-        };
-            
-        \node at (current page.center) [anchor=center, color=white, yshift=1.7cm] {\huge\textbf{\@title}};
-        \node at (current page.center) [anchor=center, color=white, yshift=.9cm] {\Large\textbf{\@subtitle}};
-        \node at (current page.center) [color=white, anchor=center, yshift=0cm] {\Large\textbf{Published: \@date \quad Modified: \dateModified}};
 
-        % Author block: generated by fields.lua for however many authors the
-        % report lists (name, affiliation; email for the first author). The
-        % old \coverAuthorOne/\coverAuthorTwo macros are still defined but
-        % no longer placed.
-        \coverAuthorsBlock
+    % Title and subtitle are set into a box, and their width measured, before
+    % the picture starts: TeX cannot measure anything inside a tikzpicture.
+    % The band behind them then takes its height from the type rather than
+    % from a guess, so a title that wraps to two lines makes the band taller
+    % and pushes the dates down with it.
+    \sbox{\aceTitleBox}{%
+        \begin{minipage}{\aceTitleMeasure}\raggedright
+        {\fontsize{28}{32}\selectfont\bfseries\color{acecoverink}\@title\par}%
+        \vskip 0.24cm
+        {\fontsize{15}{18}\selectfont\color{acecoversub}\@subtitle\par}%
+        \end{minipage}}%
+    \setlength{\aceTitleHeight}{\dimexpr\ht\aceTitleBox+\dp\aceTitleBox\relax}%
+
+    % How far the band runs: the longer of the two lines, plus the margin it
+    % starts from and a little air at the end. A title that fills the measure
+    % stops the band at the measure.
+    \settowidth{\aceTitleWidth}{\fontsize{28}{32}\selectfont\bfseries\@title}%
+    \settowidth{\aceTitleRun}{\fontsize{15}{18}\selectfont\@subtitle}%
+    \ifdim\aceTitleRun>\aceTitleWidth \setlength{\aceTitleWidth}{\aceTitleRun}\fi
+    \ifdim\aceTitleWidth>\aceTitleMeasure \setlength{\aceTitleWidth}{\aceTitleMeasure}\fi
+    \addtolength{\aceTitleWidth}{2.9cm}% 2cm margin plus 0.9cm of air
+    \setlength{\aceBandTop}{-8.70cm}%
+    \setlength{\aceBandBottom}{\dimexpr -9.2cm - \aceTitleHeight - 0.50cm\relax}%
+
+    % Links are lighter on the dark cover than in the body; restored below.
+    \hypersetup{urlcolor=acecoverlink}
+
+    \begin{tikzpicture}[remember picture,overlay]
+
+        % The cover is a dark page, edge to edge. The rectangle is bled 3mm
+        % past every edge: a fill that stops exactly on the page boundary
+        % leaves viewers a hairline of white where the edge pixel is blended
+        % with the page background. Anything outside the page is clipped.
+        \fill[acecoverbg] ([xshift=-3mm, yshift=-3mm]current page.south west)
+            rectangle ([xshift=3mm, yshift=3mm]current page.north east);
         
-        % Report ID and DOIs, cover only - with the other document information.
-        % The version DOI is reserved on Zenodo before the render, so it is
-        % available here before publication. The concept DOI ("all versions") is
-        % only assigned at publish time, so it appears from the second version on.
-        % Lines are stacked bottom-up from just above "Copyright", so the block
-        % stays contiguous whichever DOI fields are present.
-        \setlength{\aceInfoY}{-11cm}
+        % --- Masthead -------------------------------------------------------
+        % The cover is a dark page: logo top left, document label top right,
+        % then the title block on a band that bleeds off the left edge. The
+        % glitch band that used to fill the middle was removed; scripts/
+        % gen_cover_band.py still generates it if it is ever wanted back.
+        \node at ([xshift=2cm, yshift=-3.1cm]current page.north west) [anchor=west]
+            {\includegraphics[width=5.6cm]{brand/logo_blackbg_text.png}};
+
+        % Document label, balancing the logo across the page. The rule is cut
+        % to the width of the label itself.
+        \node (aceCoverLabel) at ([xshift=-2cm, yshift=-2.95cm]current page.north east)
+            [anchor=south east, text=acecoverink] {\aceCoverLabelFont AUDIT REPORT};
+        \draw[acecyan, line width=1.4pt] (aceCoverLabel.south west) -- (aceCoverLabel.south east);
+        \node at ([xshift=-2cm, yshift=-3.48cm]current page.north east)
+            [anchor=north east, text=acecovermute] {\aceCoverIDFont \aceID};
+
+        % --- ECG trace ------------------------------------------------------
+        % A rhythm strip sitting just above the title band, bleeding off the
+        % left edge with it and stopping at the same right edge. Drawn in a flat
+        % grey a step above the band's own value, rather than in white at low
+        % opacity: transparency made every overlap brighter than the line. The
+        % clip keeps the trace out of the band however wide the title runs.
+        \begin{scope}
+            \clip ([xshift=-3mm, yshift=\dimexpr\aceBandTop+1.70cm\relax]current page.north west)
+               rectangle ([xshift=\aceTitleWidth, yshift=\aceBandTop]current page.north west);
+            \draw[aceecg, line width=1.4pt, line cap=round, line join=round]
+              ([xshift=-0.3cm, yshift=\dimexpr\aceBandTop+0.55cm\relax]current page.north west)
+              \aceEcgStrip;
+        \end{scope}
+
+        % --- Title block ----------------------------------------------------
+        % The band bleeds off the left edge and stops just past the longer of
+        % the two lines; its height and width were measured above.
+        \fill[acetitleband]
+            ([xshift=-3mm, yshift=\aceBandTop]current page.north west) rectangle
+            ([xshift=\aceTitleWidth, yshift=\aceBandBottom]current page.north west);
+
+        \node at ([xshift=2cm, yshift=-9.2cm]current page.north west)
+            [anchor=north west, inner sep=0pt] {\usebox{\aceTitleBox}};
+
+        % Dates, a fixed distance below the band whatever its height.
+        \node at ([xshift=2cm, yshift=\dimexpr\aceBandBottom-0.62cm\relax]current page.north west)
+            [anchor=north west, inner sep=0pt, text=acecoverink] {%
+            \begin{tabular}{@{}l@{\hspace{1.5cm}}l@{}}
+            {\aceFacetKeyFont\color{acefacetpopink}PUBLISHED} & {\aceFacetKeyFont\color{acefacetdesink}MODIFIED}\\[0.16cm]
+            {\aceCoverDateFont\@date} & {\aceCoverDateFont\dateModified}
+            \end{tabular}};
+
+        \coverAuthorsBlock
+
+        % Facet badges, left side, generated by fields.lua from the report's
+        % population/treatment/outcome/design fields. Centered in the same
+        % white space as the author block.
+        \coverCategoriesBlock
+        
+        % --- Document information -------------------------------------------
+        % A key column and a value column between two hairlines, with the
+        % disclaimer running as prose underneath. The report ID is not
+        % repeated here: it is set in the corner with the document label.
+        %
+        % The block is anchored at its bottom rule (-12.71cm) and rows are
+        % stacked upward, so it stays contiguous whichever DOI fields a
+        % report has. \aceInfoY ends one row above the topmost row, which is
+        % what places the top rule. fields.lua mirrors this arithmetic to
+        % know where the author column has to stop.
+        \setlength{\aceInfoY}{-12.05cm}
+        \node at ([xshift=2cm, yshift=\aceInfoY]current page.west) [anchor=north west, inner sep=0pt, text=acecovermute] {\aceFacetKeyFont LICENSE};
+        \node at ([xshift=6.6cm, yshift=\aceInfoY]current page.west) [anchor=north west, text=acecoverink] {\aceInfoValueFont Creative Commons Attribution 4.0 International (CC BY 4.0)};
+        \addtolength{\aceInfoY}{0.62cm}
+        \node at ([xshift=2cm, yshift=\aceInfoY]current page.west) [anchor=north west, inner sep=0pt, text=acecovermute] {\aceFacetKeyFont COPYRIGHT};
+        \node at ([xshift=6.6cm, yshift=\aceInfoY]current page.west) [anchor=north west, text=acecoverink] {\aceInfoValueFont © 2026 Matthew B. Jané};
+        \addtolength{\aceInfoY}{0.62cm}
         \ifx\aceConceptDOI\empty\else
-        \node at (current page.west) [anchor=west, yshift=\aceInfoY, xshift=2cm] {\scriptsize\text{All versions: \href{https://doi.org/\aceConceptDOI}{\ttfamily https://doi.org/\aceConceptDOI}}};
-        \addtolength{\aceInfoY}{0.5cm}
+        \node at ([xshift=2cm, yshift=\aceInfoY]current page.west) [anchor=north west, inner sep=0pt, text=acecovermute] {\aceFacetKeyFont ALL VERSIONS};
+        \node at ([xshift=6.6cm, yshift=\aceInfoY]current page.west) [anchor=north west] {\aceInfoMonoFont\href{https://doi.org/\aceConceptDOI}{https://doi.org/\aceConceptDOI}};
+        \addtolength{\aceInfoY}{0.62cm}
         \fi
         \ifx\aceDOI\empty\else
-        \node at (current page.west) [anchor=west, yshift=\aceInfoY, xshift=2cm] {\scriptsize\text{DOI: \href{https://doi.org/\aceDOI}{\ttfamily https://doi.org/\aceDOI}}};
-        \addtolength{\aceInfoY}{0.5cm}
+        \node at ([xshift=2cm, yshift=\aceInfoY]current page.west) [anchor=north west, inner sep=0pt, text=acecovermute] {\aceFacetKeyFont VERSION DOI};
+        \node at ([xshift=6.6cm, yshift=\aceInfoY]current page.west) [anchor=north west] {\aceInfoMonoFont\href{https://doi.org/\aceDOI}{https://doi.org/\aceDOI}};
+        \addtolength{\aceInfoY}{0.62cm}
         \fi
-        \node at (current page.west) [anchor=west, yshift=\aceInfoY, xshift=2cm] {\scriptsize\text{Report ID: {\ttfamily\aceID}}};
-        \node at (current page.west) [anchor=west, yshift=-11.5cm, xshift=2cm] {\scriptsize\text{Copyright: © 2026 Matthew B. Jané}};
-        \node at (current page.west) [anchor=west, yshift=-12cm, xshift=2cm] {\scriptsize\text{License: Creative Commons Attribution 4.0 International (CC BY 4.0)}};
-        \node at (current page.west) [anchor=west, yshift=-12.5cm, xshift=2cm] {\scriptsize\text{Disclaimer: The views expressed herein are solely those of the authors and do not represent their affiliated organizations.}};
-        \node at (current page.west) [anchor=west, yshift=-13cm, xshift=2cm] {\scriptsize\text{Full disclaimers and editorial policy: \href{https://auditclinicalevidence.org/disclaimers.html}{auditclinicalevidence.org/disclaimers}}};
+
+        \setlength{\aceInfoTop}{\aceInfoY}\addtolength{\aceInfoTop}{-0.14cm}
+        \draw[acecovermute!55, line width=0.5pt] ([xshift=2cm, yshift=\aceInfoTop]current page.west) -- ([xshift=-2cm, yshift=\aceInfoTop]current page.east);
+        \draw[acecovermute!55, line width=0.5pt] ([xshift=2cm, yshift=-12.71cm]current page.west) -- ([xshift=-2cm, yshift=-12.71cm]current page.east);
+        \node at ([xshift=2cm, yshift=-12.91cm]current page.west) [anchor=north west, text width=16.6cm, text=acecovermute]
+            {\aceInfoNoteFont The views expressed herein are solely those of the authors and do not represent their affiliated organizations. Full disclaimers and editorial policy at \href{https://auditclinicalevidence.org/disclaimers.html}{auditclinicalevidence.org/disclaimers}.};
+
     \end{tikzpicture}
-    
+
+    \hypersetup{urlcolor=highlight}
+
     % End the cover page
     \clearpage
     

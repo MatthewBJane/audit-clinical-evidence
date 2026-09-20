@@ -8,6 +8,13 @@
 \usepackage{titlesec}
 \usepackage{graphicx}
 \usepackage{tikz}
+
+% Width of the label column on the cover information block, so every value
+% starts at the same x position. Set from the longest label used here.
+\newlength{\aceInfoLabel}
+\AtBeginDocument{\settowidth{\aceInfoLabel}{\scriptsize Disclaimer:\hspace{1.4em}}}
+% One cover information line: label in the body font, value as given.
+\newcommand{\aceInfoLine}[2]{\scriptsize\makebox[\aceInfoLabel][l]{#1}#2}
   
 %% Set page size with a wider right margin
 \geometry{a4paper, total={170mm,257mm}, left=25mm, top=20mm, bottom=20mm, right=25mm}
@@ -79,57 +86,50 @@
 \makeatother
 
 
-% ---------------------------------------------------------
-% GLOBAL BACKGROUND STYLING (Sidebars and Corners)
-% The \ifnum logic uses a custom counter to ensure 
-% it NEVER draws on the physical first page.
-% ---------------------------------------------------------
-\newcounter{physicalpage}
-\setcounter{physicalpage}{0}
-
-\AddToShipoutPicture{% 
-  \stepcounter{physicalpage}%
-  \ifnum\value{physicalpage}>1
-     % logo
-    \AtPageUpperLeft{% 
-        \put(\LenToUnit{\dimexpr\paperwidth-2.5cm},-2.5cm){% 
-            \color{light}\includegraphics[width=2.5cm]{brand/alt_logo.png}
-          }%
-     }%
-  \fi
-}
-
-\AddToShipoutPictureBG{
-  \ifnum\value{physicalpage}>1
-    \AtPageCenter{
-      \hspace{-10.77cm}
-      \raisebox{11.2cm}{
-        \includegraphics[width=3.7cm]{brand/corner.png}
-      }
-    }
-  \fi
-}
+% The glitch corner wedge and the hexagon logo that used to be painted into
+% the page background were removed: the pages carry the mark in the running
+% head instead (see below), aligned with the text block.
 
 
 % ---------------------------------------------------------
 % PAGE NUMBERING & HEADER STYLING
 % ---------------------------------------------------------
+% The ACE mark sits in the top corner of every page, the folio alone at the
+% foot. brand/logo_mark is the wordmark trimmed to its own ink, so the width
+% below is the width that prints. The block is \smash-ed so its height never
+% reaches the text block. (The reports add a report-ID tag beneath the mark;
+% riv and the handbook carry no such id.)
+\definecolor{acegrey}{HTML}{5A6570}
+\newcommand{\aceRunMarkW}{1.7cm}
+\newlength{\aceRunDrop}\setlength{\aceRunDrop}{3mm}
+\newlength{\aceRunOut}\setlength{\aceRunOut}{19mm}  % how far the mark hangs into the right margin
+\newcommand{\aceRunBlock}{%
+  \smash{\raisebox{-\aceRunDrop}{\includegraphics[width=\aceRunMarkW]{brand/logo_mark.png}}}}
+\newcommand{\aceFolio}{{\color{acegrey}\ttfamily\footnotesize\thepage}}
+
+\setlength{\headheight}{26pt}
+\setlength{\headsep}{14pt}
+\setlength{\footskip}{18pt}   % folio ~12mm from the trim, two lines clear of the text
+
 \fancypagestyle{mystyle}{
-  \fancyhf{} 
-  \renewcommand\headrulewidth{0pt} 
-  \fancyheadoffset{1.45cm} 
-  \fancyhead[L]{\textcolor{black}{\thepage}} 
+  \fancyhf{}
+  \renewcommand\headrulewidth{0pt}
+  \renewcommand\footrulewidth{0pt}
+  \fancyheadoffset[R]{\aceRunOut}
+  \fancyhead[R]{\aceRunBlock}
+  \fancyfoot[C]{\aceFolio}
 }
 
 % Force the 'plain' style (used by TOC and Chapter starts) to match 'mystyle'
 \fancypagestyle{plain}{
   \fancyhf{}
   \renewcommand\headrulewidth{0pt}
-  \fancyheadoffset{1.45cm}
-  \fancyhead[L]{\textcolor{black}{\thepage}} 
+  \renewcommand\footrulewidth{0pt}
+  \fancyheadoffset[R]{\aceRunOut}
+  \fancyhead[R]{\aceRunBlock}
+  \fancyfoot[C]{\aceFolio}
 }
 
-\setlength{\footskip}{20pt}
 \pagestyle{mystyle} 
 
 
@@ -204,9 +204,11 @@
         \node at (current page.east) [anchor=east, yshift=-5.7cm, xshift=-2cm] {\Large\text{\coverAffiliation}};
         \node at (current page.east) [anchor=east, yshift=-6.4cm, xshift=-2cm] {\Large\text{contact@auditclinicalevidence.org}};
         
-        \node at (current page.west) [anchor=west, yshift=-11.5cm, xshift=2cm] {\scriptsize\text{Copyright: © 2026 Matthew B. Jané}};
-        \node at (current page.west) [anchor=west, yshift=-12cm, xshift=2cm] {\scriptsize\text{License: CC BY 4.0}};
-        \node at (current page.west) [anchor=west, yshift=-12.5cm, xshift=2cm] {\scriptsize\text{Disclaimer: The views expressed herein are solely those of the authors and do not represent their affiliated organizations.}};
+        % Pale grey panel behind the information lines.
+        \fill[light] ([xshift=1.5cm, yshift=-11.05cm]current page.west) rectangle ([xshift=-1.5cm, yshift=-12.95cm]current page.east);
+        \node at (current page.west) [anchor=west, yshift=-11.5cm, xshift=2cm] {\aceInfoLine{Copyright:}{\text{© 2026 Matthew B. Jané}}};
+        \node at (current page.west) [anchor=west, yshift=-12cm, xshift=2cm] {\aceInfoLine{License:}{\text{CC BY 4.0}}};
+        \node at (current page.west) [anchor=west, yshift=-12.5cm, xshift=2cm] {\aceInfoLine{Disclaimer:}{\text{The views expressed herein are solely those of the authors and do not represent their affiliated organizations.}}};
     \end{tikzpicture}
     
     % End the cover page

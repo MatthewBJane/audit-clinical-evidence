@@ -1,5 +1,12 @@
 {
   "ACE2026001": {
+    "live": {
+      "concept_doi": "10.5281/zenodo.22780329",
+      "deposition_id": 22861278,
+      "doi": "10.5281/zenodo.22861278",
+      "reserved_doi": "10.5281/zenodo.22861278",
+      "version": 2
+    },
     "sandbox": {
       "concept_doi": "10.5072/zenodo.598764",
       "deposition_id": 598765,

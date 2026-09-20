@@ -7,6 +7,13 @@ ace_text   <- "#767676"
 ace_blue_dark <- "#02cfe6"
 ace_purple_dark <- "#cf50cf"
 
+# Verdict text in tables. The brand cyan is too pale to read as text on paper
+# (1.9:1 against white), so the affirmative verdict uses a darker step of it;
+# the negative verdict keeps the brand magenta and is set bold. The pair is
+# legible on the light page and on the dark site theme.
+ace_blue_text   <- "#0e9cb0"
+ace_purple_text <- "#cf50cf"
+
 
 # echo/warning/message/fig-dpi are set in reports/_metadata.yml. The device is
 # set here at runtime so the argument list REPLACES Quarto's per-format

@@ -15,7 +15,16 @@
     if (dates && sub && sub.nextElementSibling !== dates) {
       sub.insertAdjacentElement("afterend", dates);
     }
-    if (dates) dates.classList.add("ace-date-bar");
+    if (dates) {
+      dates.classList.add("ace-date-bar");
+      // Quarto renders `doi:` as a third "Doi" column beside Published and
+      // Modified. The DOI already sits in the ID pill above the title, so drop
+      // the duplicate rather than hide it: left in place it would also be
+      // picked up by the date-shortening script as if it were a date.
+      Array.prototype.slice.call(dates.children).forEach(function (cell) {
+        if (cell.querySelector && cell.querySelector("p.doi")) cell.remove();
+      });
+    }
     var cats = header.querySelector(".quarto-categories");
     var abs = header.querySelector(".abstract");
     if (cats && abs && !abs.contains(cats)) {

@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-subtitle','listing-abstract','listing-categories','listing-date','listing-date-modified','listing-ace-id','listing-doi','listing-impact','listing-population','listing-treatment','listing-outcome','listing-design',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      valueNames: ['listing-title','listing-subtitle','listing-abstract','listing-categories','listing-date','listing-date-modified','listing-ace-id','listing-doi','listing-concept-doi','listing-impact','listing-population','listing-treatment','listing-outcome','listing-design',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
       searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-number-sections","listing-google-scholar","listing-bibliography","listing-csl","listing-fig-pos","listing-execute","listing-comments","listing-link-citations","listing-appendix-cite-as","listing-Journal","listing-license","listing-title","listing-subtitle","listing-ace-id","listing-date","listing-date-modified","listing-doi","listing-concept-doi","listing-audited","listing-impact","listing-description","listing-population","listing-treatment","listing-outcome","listing-design","listing-categories","listing-abstract","listing-author","listing-path","listing-outputHref","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
@@ -240,6 +240,9 @@ window.MathJax = {
           <span class="ace-report-id listing-ace-id">ACE2026001</span>
         
         
+        
+          <a class="ace-doi-link listing-doi" href="https://doi.org/10.5281/zenodo.22780329" target="_blank" rel="noopener" title="Open the archived record, newest version (opens in a new tab)">10.5281/zenodo.22780329</a>
+        
 
       </div>
 
@@ -271,7 +274,7 @@ window.MathJax = {
         <details class="ace-listing-abstract">
           <summary>Abstract</summary>
           <div class="ace-listing-abstract-content listing-abstract">
-            This report audits three randomized controlled trials by Abdelbasset and colleagues evaluating exercise interventions for depression in patients with congestive heart failure. The three articles appear to report overlapping arms from the same underlying clinical trial while presenting them as separate studies. Across the articles, duplicated baseline characteristics and PHQ-9 outcome statistics indicate reuse of the same trial data even though the articles report incompatible authorship contribution statements and three distinct ethical approval numbers, and do not cite one another. The articles are potentially linked to a well-documented authorship-for-sale publication network. Furthermore, one of the three articles identifies Abdelbasset as both first author and editor which is a clear conflict of interest. Reported summary statistics are impossible given a real data set, specifically, seven of nine PHQ-9 (the primary outcome) mean and standard deviation pairs fail GRIMMER consistency tests. The reported outcomes also imply extreme between-group standardized mean differences of approximately three standard deviations at post-intervention, making the studies highly influential outliers in later meta-analyses. In total, this audit identifies 21 instances of Research Integrity Violations across seven categories. We conclude that the three articles are not credible and are unlikely to contain any evidentiary value thus we recommend retraction by the publishing journals.
+            This report audits three randomized controlled trials by Abdelbasset and colleagues evaluating exercise interventions for depression in patients with congestive heart failure. The three articles appear to report overlapping arms from the same underlying clinical trial while presenting them as separate studies. Across the articles, duplicated baseline characteristics and PHQ-9 outcome statistics indicate reuse of the same trial data even though the articles report incompatible authorship contribution statements and three distinct ethical approval numbers, and do not cite one another. The articles are potentially linked to a well-documented authorship-for-sale publication network. Furthermore, one of the three articles identifies Abdelbasset as both first author and editor which is a clear conflict of interest. Reported summary statistics are impossible given a real data set, specifically, seven of nine PHQ-9 (the primary outcome) mean and standard deviation pairs fail GRIMMER consistency tests. The baseline tables report probability values that cannot be correct, including two different values for a single two-group comparison of a binary variable, while the continuous comparisons in the same tables reproduce exactly. The reported outcomes also imply extreme between-group standardized mean differences of approximately three standard deviations at post-intervention, making the studies highly influential outliers in later meta-analyses. In total, this audit identifies 25 instances of Research Integrity Violations across eight categories. We conclude that the three articles are not credible and are unlikely to contain any evidentiary value thus we recommend retraction by the publishing journals.
           </div>
         </details>
       
@@ -282,7 +285,7 @@ window.MathJax = {
         
 
         
-          <div><span class="ace-date-key">Updated</span><span class="ace-date-value listing-date-modified">Sep 13, 2026</span></div>
+          <div><span class="ace-date-key">Updated</span><span class="ace-date-value listing-date-modified">Sep 20, 2026</span></div>
         
       </div>
 
@@ -898,25 +901,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </footer>
 <!-- GENERATED by scripts/build_categories.py; edit the reports, not this file. -->
 <script>window.aceCategoryFacets = {"Depression": "outcome", "Exercise": "treatment", "Heart Disease": "population", "RCT": "design"};</script>
-<script>
-// Click-to-copy for DOI buttons (.ace-doi-copy) on listing cards and report pages.
-document.addEventListener("click", function (e) {
-  var b = e.target.closest(".ace-doi-copy");
-  if (!b) return;
-  var url = b.getAttribute("data-doi");
-  var label = b.textContent;
-  function done() {
-    b.textContent = "Copied";
-    b.classList.add("is-copied");
-    setTimeout(function () { b.textContent = label; b.classList.remove("is-copied"); }, 1300);
-  }
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(url).then(done, function () { window.prompt("Copy DOI link:", url); });
-  } else {
-    window.prompt("Copy DOI link:", url);
-  }
-});
-</script>
 <script>
 // Fold-in right panel for narrow screens. Quarto hides
 // #quarto-margin-sidebar below 768px; this adds an edge tab that

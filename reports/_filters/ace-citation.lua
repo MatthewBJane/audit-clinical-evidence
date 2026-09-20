@@ -99,9 +99,14 @@ function Pandoc(doc)
 
   local doi = str(meta.doi)
   local concept = str(meta["concept-doi"])
-  -- Expose the DOI to the page scripts (ACE ID pill adds a copy-DOI button).
+  -- Expose both DOIs to the page scripts. The ID pill links the CONCEPT DOI,
+  -- which always resolves to the newest version; the version DOI pins this
+  -- revision and belongs in the citation and the version history.
   if doi ~= "" and quarto and quarto.doc then
     quarto.doc.include_text("in-header", '<meta name="ace-doi" content="' .. doi .. '">')
+  end
+  if concept ~= "" and quarto and quarto.doc then
+    quarto.doc.include_text("in-header", '<meta name="ace-concept-doi" content="' .. concept .. '">')
   end
   local url = SITE .. "/reports/" .. ace_id .. "/"
   local locator = doi ~= "" and ("https://doi.org/" .. doi) or url

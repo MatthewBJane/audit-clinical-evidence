@@ -1548,7 +1548,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     if (dates && sub && sub.nextElementSibling !== dates) {
       sub.insertAdjacentElement("afterend", dates);
     }
-    if (dates) dates.classList.add("ace-date-bar");
+    if (dates) {
+      dates.classList.add("ace-date-bar");
+      // Quarto renders `doi:` as a third "Doi" column beside Published and
+      // Modified. The DOI already sits in the ID pill above the title, so drop
+      // the duplicate rather than hide it: left in place it would also be
+      // picked up by the date-shortening script as if it were a date.
+      Array.prototype.slice.call(dates.children).forEach(function (cell) {
+        if (cell.querySelector && cell.querySelector("p.doi")) cell.remove();
+      });
+    }
     var cats = header.querySelector(".quarto-categories");
     var abs = header.querySelector(".abstract");
     if (cats && abs && !abs.contains(cats)) {
@@ -1593,25 +1602,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     tidyTitleBlock();
   }
 })();
-</script>
-<script>
-// Click-to-copy for DOI buttons (.ace-doi-copy) on listing cards and report pages.
-document.addEventListener("click", function (e) {
-  var b = e.target.closest(".ace-doi-copy");
-  if (!b) return;
-  var url = b.getAttribute("data-doi");
-  var label = b.textContent;
-  function done() {
-    b.textContent = "Copied";
-    b.classList.add("is-copied");
-    setTimeout(function () { b.textContent = label; b.classList.remove("is-copied"); }, 1300);
-  }
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(url).then(done, function () { window.prompt("Copy DOI link:", url); });
-  } else {
-    window.prompt("Copy DOI link:", url);
-  }
-});
 </script>
 <script>
 // Fold-in right panel for narrow screens. Quarto hides
