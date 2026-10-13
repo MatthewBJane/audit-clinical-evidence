@@ -17,11 +17,9 @@ ACE reports do not accuse any author, researcher, institution, or publisher of d
 
 Where a report goes beyond documenting the record, for example in assessing whether a study is credible as evidence or in recommending a correction, an expression of concern, or a retraction, that assessment is the authors' professional opinion, offered in good faith and based on the evidence set out in the report.
 
-## Use of AI Tools
+## The Use of Large Language Models
 
-ACE uses AI assistants, currently Anthropic's Claude, to help draft and edit text, to write and review the code behind this website and the report templates, and to check its own prose and formatting. ACE holds itself to the standard it applies to the literature it audits, so it states this plainly rather than leaving it to be inferred.
-
-What that assistance does not extend to is the substance of a report. Every finding originates with the authors, and every figure, statistic, and claim about an audited article is verified by the authors against the primary sources, reproduced by the code published with the report, and checked before publication. AI tools are not used to decide what counts as a finding, to determine severity, to write the recommendation a report makes to a journal, or to generate any statistical result. The authors are responsible for everything ACE publishes, including any error an assistant helped introduce.
+ACE uses Anthropic's Claude to help edit and review text, write and edit analysis code, and build this website. The authors also use Claude as a reviewer to find errors in their reports and check each of its suggestions before accepting it. Before publication, the authors verify every finding against the primary sources. The authors are responsible for all content in the reports.
 
 ## Not Medical Advice
 
@@ -75,7 +73,7 @@ Some things are not covered by these licenses. *Audit Clinical Evidence*, *ACE*,
 
 ## Privacy
 
-ACE does not run analytics or advertising and sets no tracking cookies of its own. The site is hosted on GitHub Pages, and pages load web fonts from Google Fonts, the MathJax library from the jsDelivr CDN, and the comment widget from Giscus; each of these services receives your IP address and standard request data when a page loads, under their own privacy policies. Email sent to ACE is retained for as long as needed to handle the correspondence and any resulting report, and is not shared with third parties except as described under Editorial Review and Correspondence above or as required by law.
+ACE does not run analytics or advertising and sets no tracking cookies of its own. The site is hosted on GitHub Pages, and pages load web fonts from Google Fonts and the comment widget from Giscus; each of these services receives your IP address and standard request data when a page loads, under their own privacy policies. If you sign up for report notifications, your email address is submitted to a Google Form and stored in a private Google Sheet controlled by ACE, under Google's privacy policy, and is used only to send notices of new reports until you ask to be removed. Email sent to ACE is retained for as long as needed to handle the correspondence and any resulting report, and is not shared with third parties except as described under Editorial Review and Correspondence above or as required by law.
 
 ## External Links
 

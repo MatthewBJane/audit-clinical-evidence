@@ -1,43 +1,153 @@
 ---
 title: "ACE"
-subtitle: "Audit Clinical Evidence"
-# Link-preview text only (og:description); hidden on the page by styles.css.
+pagetitle: "ACE: Audit Clinical Evidence"
+# Link-preview text only (og:description); the page itself does not show it.
 description: "Independent audits of published clinical research for statistical errors, data inconsistencies, and research integrity violations."
-about:
-  template: trestles
-  links:
-    - icon: github
-      text: Github
-      href: https://github.com/matthewbjane/audit-clinical-evidence
-    - icon: envelope
-      text: Contact
-      href: mailto:contact@auditclinicalevidence.org
-    - text: ACE Handbook
-      href: handbook.pdf
-      
-      
+
+# The home page draws its own layout edge to edge (styles.css, "HOME PAGE");
+# no title block, no table of contents, no sidebar.
+page-layout: custom
+toc: false
 body-classes: homepage
+resources:
+  - ace-home.js
 
-
-
+# Three views of the same reports, each with its own template. Drafts are
+# left out of all three, as they are from the Reports page.
+#   ace-ticker  the scrolling strip of findings (each report's `highlights:`)
+#   ace-totals  the four numbers under the hero (summed across reports)
+#   ace-latest  the two newest reports, as cards (same template as Reports)
 listing:
-  - id: ACEreports
+  - id: ace-ticker
+    contents: "reports/*/index.qmd"
+    template: _ace-home-ticker.ejs.md
+    fields: [title, ace-id, highlights]
+    sort: "date desc"
+  - id: ace-totals
+    contents: "reports/*/index.qmd"
+    template: _ace-home-totals.ejs.md
+    fields: [title, ace-id, impact, violations]
+    sort: "date desc"
+  - id: ace-latest
     contents: "reports/*/index.qmd"
     template: _ace-report-listing.ejs.md
-    fields: [title, subtitle, abstract, categories, date, date-modified, ace-id, doi, concept-doi, impact, population, treatment, outcome, design]
+    fields: [title, subtitle, abstract, categories, date, date-modified, ace-id, doi, concept-doi, impact, violations, recommendation, population, treatment, outcome, design]
     sort: "date desc"
-    page-size: 10
-    categories: true
+    max-items: 2
     sort-ui: false
-    filter-ui: true
+    filter-ui: false
 ---
 
+```{=html}
+<div class="ace-hero" id="ace-hero">
+  <div class="ace-hero-sweep" aria-hidden="true"></div>
+  <div class="ace-wrap ace-hero-inner">
+    <div class="ace-hero-deck" id="ace-hero-deck">Audit Clinical Evidence</div>
+    <h1 class="ace-hero-mark" id="ace-hero-mark" aria-label="ACE">
+      <span class="ace-mark-size" aria-hidden="true">ACE</span>
+      <span class="ace-mark-base" aria-hidden="true">ACE</span>
+      <span class="ace-mark-ghost ace-mark-c" aria-hidden="true">ACE</span>
+      <span class="ace-mark-ghost ace-mark-m" aria-hidden="true">ACE</span>
+    </h1>
+    <div class="ace-hero-thesis">
+      <p class="ace-hero-claim">Peer review missed it.<br><span class="ace-hl">We found it.</span></p>
+      <p class="ace-hero-lead"><span class="ace-wordmark">Audit Clinical Evidence</span> protects the credibility of the scientific record. We audit published clinical research for errors and signs of falsification, fabrication, manipulation, and misconduct, then document it, publish it, and report it.</p>
+      <div class="ace-hero-ctas">
+        <a class="ace-ui ace-btn" href="reports.html">Browse the reports <span class="ace-arr" aria-hidden="true">→</span></a>
+        <a class="ace-ui ace-btn ace-btn-quiet" href="#how">How we audit</a>
+      </div>
+      <div class="ace-hero-badges">
+        <a class="ace-ui ace-badge" href="https://github.com/matthewbjane/audit-clinical-evidence">GitHub</a>
+        <a class="ace-ui ace-badge" href="mailto:contact@auditclinicalevidence.org">Contact</a>
+        <a class="ace-ui ace-badge" href="handbook.pdf">ACE Handbook</a>
+      </div>
+    </div>
+  </div>
+</div>
+```
 
-::: {.ace-lead}
-[Audit Clinical Evidence (ACE)]{.ace-wordmark} exists to protect the credibility of the scientific record. We audit published clinical research for errors and signs of falsification, fabrication, manipulation, and misconduct. If it slipped past peer review, we find it. We document it. We publish it. We report it.
+::: {#ace-ticker}
 :::
 
-#### [Reports]{.ace-section-label} [A catalog of published ACE audit reports]{.ace-section-note data-md="Published ACE audit reports" data-sm="Published reports"} {.ace-section-heading}
-
-::: {#ACEreports}
+::: {.ace-home-band #ace-record}
+::: {#ace-totals}
 :::
+:::
+
+```{=html}
+<div class="ace-home-band" id="ace-reports-band"><div class="ace-wrap">
+<div class="ace-home-head">
+  <div><span class="ace-eyebrow">Latest audits</span><h2 class="ace-home-h2">Published reports</h2></div>
+  <p>Each report documents what can be verified from the public record, and shows how every finding was reached.</p>
+</div>
+```
+
+::: {#ace-latest}
+:::
+
+```{=html}
+<a class="ace-ui ace-mega" href="reports.html">
+  <span><span class="ace-mega-title">Browse all reports</span><span class="ace-mega-meta">Filter by population, treatment, outcome, and design</span></span>
+  <span class="ace-mega-arrow" aria-hidden="true">→</span>
+</a>
+</div></div>
+
+<div class="ace-home-band" id="how"><div class="ace-wrap">
+<div class="ace-home-head">
+  <div><span class="ace-eyebrow">How an audit works</span><h2 class="ace-home-h2">Four steps</h2></div>
+  <p>The same sequence for every report, from the first anomaly to a letter on the editor's desk.</p>
+</div>
+<ol class="ace-steps">
+  <li class="ace-step"><span class="ace-step-n">01</span><h3>Find</h3><p>We identify errors in published articles via the tables, text, figures, trial registrations, supplements, and article metadata.</p></li>
+  <li class="ace-step"><span class="ace-step-n">02</span><h3>Document</h3><p>Each finding and the relevant evidence is documented in the form of an audit report.</p></li>
+  <li class="ace-step"><span class="ace-step-n">03</span><h3>Publish</h3><p>Reports are open access under CC BY 4.0, archived on Zenodo with a DOI, and versioned whenever they change.</p></li>
+  <li class="ace-step"><span class="ace-step-n">04</span><h3>Report</h3><p>We send the report to the journal's editors and research integrity office, and <a class="ace-ui ace-inline" href="correspondence.html">follow the letter publicly</a> until the journal makes a decision.</p></li>
+</ol>
+<div class="ace-standard">
+  <span class="ace-eyebrow">Every finding must be</span>
+  <ul>
+    <li>Observable in the public record</li>
+    <li>Reproducible by an independent reader</li>
+    <li>Supported by the evidence</li>
+  </ul>
+</div>
+</div></div>
+
+<div class="ace-home-band" id="ace-riv-band"><div class="ace-wrap">
+```
+
+{{< include _includes/home-riv.md >}}
+
+```{=html}
+</div></div>
+
+<div class="ace-home-band" id="subscribe"><div class="ace-wrap ace-concern">
+  <div>
+    <span class="ace-eyebrow">Email updates</span>
+    <h2 class="ace-home-h2">Get an email when a report is published</h2>
+    <p>One message per report, nothing else. Your address is kept in a private list held by ACE and is not shared. Reply to any message to unsubscribe.</p>
+  </div>
+  <form class="ace-mailbox ace-subscribe" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScGCwFKLQZPUsQk86pohYvQb-kIMgw2zuJVricnv3sOyTQxFA/formResponse" method="post" target="ace-subscribe-sink" novalidate>
+    <label class="ace-eyebrow" for="ace-subscribe-email">Email</label>
+    <input class="ace-subscribe-input" id="ace-subscribe-email" name="entry.1788943182" type="email" autocomplete="email" inputmode="email" placeholder="you@example.org" required>
+    <button type="submit" class="ace-mailbox-copy ace-subscribe-btn">Subscribe</button>
+    <p class="ace-subscribe-msg" role="status" aria-live="polite"></p>
+  </form>
+  <iframe name="ace-subscribe-sink" title="" hidden></iframe>
+</div></div>
+
+<div class="ace-home-band ace-home-band-last" id="concern"><div class="ace-wrap ace-concern">
+  <div>
+    <span class="ace-eyebrow">Suggest a study</span>
+    <h2 class="ace-home-h2">Found something in a published article?</h2>
+    <p>Write us an email containing the article and the specific problem. Priority goes to concerns that are specific, tractable, reproducible, and relevant to clinical research. <a class="ace-ui ace-inline" href="about.html#suggesting-a-study">What to include</a>.</p>
+  </div>
+  <div class="ace-mailbox">
+    <span class="ace-eyebrow">Email</span>
+    <a class="ace-ui ace-mailbox-addr" href="mailto:contact@auditclinicalevidence.org">contact@auditclinicalevidence.org</a>
+    <button type="button" class="ace-mailbox-copy" data-copy="contact@auditclinicalevidence.org">Copy address</button>
+  </div>
+</div></div>
+
+<script src="ace-home.js"></script>
+```

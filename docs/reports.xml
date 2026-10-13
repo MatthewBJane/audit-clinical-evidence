@@ -17,13 +17,26 @@
 <width>144</width>
 </image>
 <generator>quarto-1.5.56</generator>
-<lastBuildDate>Sun, 13 Sep 2026 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 21 Sep 2026 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Audit of Singh et al. (1997)</title>
+  <dc:creator>Matthew B. Jané</dc:creator>
+  <dc:creator>Kutenda F. Mvududu</dc:creator>
+  <link>https://auditclinicalevidence.org/reports/ACE2026002/</link>
+  <description><![CDATA[ 1997 RCT of resistance training for depression in older adults: SEs labeled as SDs, so 19 of 24 meta-analyses carry it at up to 11 times its true effect. 110 integrity violations; retraction recommended. ]]></description>
+  <category>Older Adults</category>
+  <category>Exercise</category>
+  <category>Depression</category>
+  <category>RCT</category>
+  <guid>https://auditclinicalevidence.org/reports/ACE2026002/</guid>
+  <pubDate>Mon, 21 Sep 2026 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Audit of Abdelbasset et al. (2019)</title>
   <dc:creator>Matthew B. Jané</dc:creator>
   <dc:creator>Kutenda F. Mvududu</dc:creator>
   <link>https://auditclinicalevidence.org/reports/ACE2026001/</link>
-  <description><![CDATA[ Three 2019 RCTs on exercise for depression in heart failure: overlapping trial arms, duplicated PHQ-9 data, impossible statistics and baseline p-values. 25 integrity violations; retraction recommended. ]]></description>
+  <description><![CDATA[ Three 2019 RCTs on exercise for depression in heart failure: overlapping trial arms, duplicated PHQ-9 data, impossible statistics and baseline p-values. 29 integrity violations; retraction recommended. ]]></description>
   <category>Heart Disease</category>
   <category>Exercise</category>
   <category>Depression</category>

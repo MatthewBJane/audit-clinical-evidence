@@ -1,0 +1,29 @@
+---
+title: "CORRESPONDENCE"
+subtitle: "Where each audit stands with the journal that published the audited work"
+format: html
+
+# The data live in correspondence.yml; reports/_filters/ace-correspondence.lua
+# builds the board and the cards below from it at render time.
+metadata-files:
+  - correspondence.yml
+filters:
+  - reports/_filters/ace-correspondence.lua
+
+# Link-preview text only (og:description).
+description: "The status of every letter ACE has sent to a journal about an audited study, from the letter to the journal's final decision."
+---
+
+After an audit is published, ACE sends the report to the journal that published the audited work, addressed to its editors and, where the publisher has one, its research integrity office. This page follows each of those letters from the day it is sent to the journal's final decision, so that readers can see which concerns have been raised with which journals and what came of them. Every address listed below was taken from public records. See [Disclaimers](disclaimers.qmd) for how ACE handles correspondence about its reports.
+
+#### [Status]{.ace-section-label} [Every journal thread, by the furthest stage it has reached.]{.ace-section-note data-md="By the furthest stage reached." data-sm="By stage."} {.ace-section-heading}
+
+::: {#ace-correspondence-board}
+:::
+
+Each thread moves through three stages. A letter is sent when the report and a cover letter have gone to the journal's editors, its research integrity office, or both. It is in discussion once the journal has replied. It reaches a decision when the journal has settled the matter: no action, a correction, an expression of concern, or a retraction. ACE's own recommendation is shown beside each audit for comparison; the decision belongs to the journal.
+
+#### [By audit]{.ace-section-label} [Recipients and a dated log for each thread.]{.ace-section-note data-md="Recipients and a dated log." data-sm="Recipients and log."} {.ace-section-heading}
+
+::: {#ace-correspondence-audits}
+:::

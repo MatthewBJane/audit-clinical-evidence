@@ -158,7 +158,7 @@ Science); the table caption records the source and retrieval date.
 
 ## RIV labels and the summary table
 
-The taxonomy lives in `riv.yml` (numbers, names, severity, unit of counting);
+The taxonomy lives in `riv.yml` (numbers, names, unit of counting; earlier versions in `_riv-versions/`);
 `riv.qmd` builds its quick-reference table from it, and every report is checked
 against it. In a report, refer to a category as `@riv-1.7`; the filter
 `reports/_filters/ace-riv-links.lua` renders it as the bold label
@@ -305,3 +305,13 @@ because those get printed in the PDF and cited by other people.
   plainly that no finding changed.
 - **Nothing published about a named researcher is ever silently altered.**
   Superseded versions stay permanently resolvable at their version DOIs.
+
+## figures/
+
+Scripts that annotate article screenshots for a report (highlight boxes, legend
+band, and the labeled "SCREENSHOT" frame). `acefig.py` holds the shared frame and
+legend; `annotate_tables_ace2026002.py` and `annotate_forest_ace2026002.py`
+regenerate the annotated images in `reports/ACE2026002/images/` from the raw
+screenshots beside them. Run from anywhere with `python3 scripts/figures/<script>`.
+The fonts are DejaVu (`acefig.py`); on macOS, point the three font paths at any
+installed copy.

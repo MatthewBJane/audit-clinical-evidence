@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta name="ace-build" content="09c28669a0">
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.56">
@@ -8,7 +9,7 @@
 
 <meta name="author" content="Matthew B. Jané">
 <meta name="dcterms.date" content="2026-09-13">
-<meta name="description" content="A standardized taxonomy of 27 research integrity violations, each with defined criteria, a severity tier, and a rule for counting instances.">
+<meta name="description" content="A standardized taxonomy of 27 research integrity violations, each with defined criteria and a rule for counting instances.">
 
 <title>Research Integrity Violations – ACE</title>
 <style>
@@ -23,7 +24,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { line-height: 1.25; }
@@ -61,25 +61,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js?v=12d33484"></script>
+<script src="site_libs/quarto-nav/headroom.min.js?v=ace0360e"></script>
+<script src="site_libs/clipboard/clipboard.min.js?v=15f52a1e"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js?v=c64544db"></script>
+<script src="site_libs/quarto-search/fuse.min.js?v=de7d60e4"></script>
+<script src="site_libs/quarto-search/quarto-search.js?v=bb16b7e7"></script>
 <meta name="quarto:offset" content="./">
-<link href="./images/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="./images/favicon.png?v=14f25854" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js?v=7563d37e"></script>
+<script src="site_libs/quarto-html/popper.min.js?v=3a4a291c"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js?v=d8287752"></script>
+<script src="site_libs/quarto-html/anchor.min.js?v=91bcf6cd"></script>
+<link href="site_libs/quarto-html/tippy.css?v=ebd6f8ce" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css?v=ab2b9e94" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css?v=4dca331c" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js?v=e2b09c06"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css?v=2318f137" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css?v=7f59090b" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css?v=3d614efb" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,33 +107,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<!-- Fonts, requested straight from the page head rather than through an
+     @import inside styles.css, so the browser starts fetching them at
+     once. Rubik Glitch (the ACE wordmark) uses display=block: the mark
+     stays invisible for the moment it takes to arrive instead of
+     flashing as plain letters. -->
 <script>
-window.MathJax = {
-  output: { font: "mathjax-fira" },
-  tex: {
-    inlineMath:  [["\\(", "\\)"], ["$", "$"]],
-    displayMath: [["\\[", "\\]"], ["$$", "$$"]]
+// Freshness check. GitHub Pages lets a browser reuse a page for up to
+// 10 minutes, so right after a publish someone could still be shown
+// the previous version. Every page carries its own build stamp
+// (scripts/build_stamp.py); this asks for the published stamps,
+// skipping every cache, and if this copy is out of date it fetches
+// the current page and reloads. Tried once per new version, so it can
+// never loop; does nothing offline or when the list is unavailable.
+(function () {
+  function check() {
+    var m = document.querySelector('meta[name="ace-build"]');
+    if (!m || !window.fetch || location.protocol === "file:") return;
+    var path = decodeURIComponent(location.pathname).replace(/^\//, "");
+    if (path === "" || path.slice(-1) === "/") path += "index.html";
+    fetch("/version.json?t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (v) {
+        var live = v && v.pages && v.pages[path];
+        if (!live || live === m.content) return;
+        var key = "ace-fresh:" + path;
+        try {
+          if (sessionStorage.getItem(key) === live) return;
+          sessionStorage.setItem(key, live);
+        } catch (e) {}
+        document.documentElement.style.visibility = "hidden";
+        var go = function () { location.reload(); };
+        fetch(location.href, { cache: "reload" }).then(go, go);
+      })
+      .catch(function () {});
   }
-};
+  check();
+  // also when the browser restores a page from its back/forward memory
+  window.addEventListener("pageshow", function (e) { if (e.persisted) check(); });
+})();
 </script>
-<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml-nofont.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;family=Roboto+Mono:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&amp;display=block">
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=0b47a0cf">
 <meta property="og:title" content="Research Integrity Violations – ACE">
-<meta property="og:description" content="A standardized taxonomy of 27 research integrity violations, each with defined criteria, a severity tier, and a rule for counting instances.">
+<meta property="og:description" content="A standardized taxonomy of 27 research integrity violations, each with defined criteria and a rule for counting instances.">
 <meta property="og:image" content="https://auditclinicalevidence.org/images/social-card.png">
 <meta property="og:site_name" content="ACE">
 <meta property="og:image:height" content="630">
 <meta property="og:image:width" content="1200">
 <meta name="twitter:title" content="Research Integrity Violations – ACE">
-<meta name="twitter:description" content="A standardized taxonomy of 27 research integrity violations, each with defined criteria, a severity tier, and a rule for counting instances.">
+<meta name="twitter:description" content="A standardized taxonomy of 27 research integrity violations, each with defined criteria and a rule for counting instances.">
 <meta name="twitter:image" content="https://auditclinicalevidence.org/images/twitter-card.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image-height" content="600">
 <meta name="twitter:image-width" content="1200">
 <meta name="citation_title" content="Research Integrity Violations">
-<meta name="citation_abstract" content="The Audit Clinical Evidence (ACE) initiative classifies the problems it documents in audited studies using a standardized taxonomy of Research Integrity Violations (ACE-RIV). Each RIV has a stable number, a definition, the kind of evidence that supports a finding under it, and a severity tier that guides the recommendation an audit makes. Numbers never change meaning; RIVs are only added. This page is version 1.0 of the taxonomy.">
+<meta name="citation_abstract" content="The Audit Clinical Evidence (ACE) initiative classifies the problems it documents in audited studies using a standardized taxonomy of Research Integrity Violations (ACE-RIV). Each RIV has a stable number, a definition, the criteria that must be met to record it, the kind of evidence that supports a finding under it, and a rule for counting instances. Numbers never change meaning; RIVs are only added. This page is version 2.0 of the taxonomy.">
 <meta name="citation_author" content="Matthew B. Jané">
 <meta name="citation_publication_date" content="2026-09-13">
 <meta name="citation_cover_date" content="2026-09-13">
@@ -147,7 +181,7 @@ window.MathJax = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-xl " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
@@ -167,6 +201,10 @@ window.MathJax = {
   <li class="nav-item">
     <a class="nav-link" href="./reports.html"> 
 <span class="menu-text">Reports</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./correspondence.html"> 
+<span class="menu-text">Correspondence</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
@@ -232,7 +270,7 @@ window.MathJax = {
   <li><a href="#section-4-indicators-and-minor-issues" id="toc-section-4-indicators-and-minor-issues" class="nav-link" data-scroll-target="#section-4-indicators-and-minor-issues">Section 4: Indicators and Minor Issues</a></li>
   <li><a href="#version-history" id="toc-version-history" class="nav-link" data-scroll-target="#version-history">Version history</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="riv.pdf"><i class="bi bi-file-pdf"></i>PDF (acePDF)</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="riv.pdf?v=ab73af76"><i class="bi bi-file-pdf"></i>PDF (acePDF)</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -240,12 +278,12 @@ window.MathJax = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Research Integrity Violations</h1>
-<p class="subtitle lead">The ACE-RIV taxonomy, version 1.0</p>
+<p class="subtitle lead">The ACE-RIV taxonomy, version 2.0</p>
 </div>
 
 <div>
   <div class="description">
-    A standardized taxonomy of 27 research integrity violations, each with defined criteria, a severity tier, and a rule for counting instances.
+    A standardized taxonomy of 27 research integrity violations, each with defined criteria and a rule for counting instances.
   </div>
 </div>
 
@@ -273,13 +311,19 @@ window.MathJax = {
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 10, 2026</p>
+    </div>
+  </div>
     
   </div>
   
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    The Audit Clinical Evidence (ACE) initiative classifies the problems it documents in audited studies using a standardized taxonomy of Research Integrity Violations (ACE-RIV). Each RIV has a stable number, a definition, the kind of evidence that supports a finding under it, and a severity tier that guides the recommendation an audit makes. Numbers never change meaning; RIVs are only added. This page is version 1.0 of the taxonomy.
+    The Audit Clinical Evidence (ACE) initiative classifies the problems it documents in audited studies using a standardized taxonomy of Research Integrity Violations (ACE-RIV). Each RIV has a stable number, a definition, the criteria that must be met to record it, the kind of evidence that supports a finding under it, and a rule for counting instances. Numbers never change meaning; RIVs are only added. This page is version 2.0 of the taxonomy.
   </div>
 </div>
 
@@ -292,11 +336,11 @@ window.MathJax = {
 <p>The ACE-RIV taxonomy is the classification system ACE uses to describe the errors and integrity problems it documents in audited research. It draws on the standards published by the <a href="https://publicationethics.org/guidance">Committee on Publication Ethics (COPE)</a>, the <a href="https://www.councilscienceeditors.org/recommendations-for-promoting-integrity-in-scientific-journal-publications">Council of Science Editors (CSE)</a>, the <a href="https://www.icmje.org/recommendations/">International Committee of Medical Journal Editors (ICMJE)</a>, and the <a href="https://allea.org/code-of-conduct/">European Code of Conduct for Research Integrity (ALLEA)</a>. The RIVs are then organized into four domains: (1) <a href="#section-1-authorship-and-publication">Authorship and Publication</a>, (2) <a href="#section-2-statistical-and-data-integrity">Statistical and Data Integrity</a>, (3) <a href="#section-3-ethical-oversight-and-transparency">Ethical Oversight and Transparency</a>, and (4) <a href="#section-4-indicators-and-minor-issues">Indicators and Minor Issues</a>.</p>
 <section id="quick-reference" class="level3">
 <h3 class="anchored" data-anchor-id="quick-reference">Quick reference</h3>
-<p><a href="#tbl-riv-index" class="quarto-xref">Table&nbsp;1</a> lists every category with its severity tier and the unit in which instances are counted. Each number links to the full entry below.</p>
+<p><a href="#tbl-riv-index" class="quarto-xref">Table&nbsp;1</a> lists every category with the unit in which instances are counted. Each number links to the full entry below.</p>
 <div id="tbl-riv-index" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-riv-index-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
+Table&nbsp;1: The ACE-RIV taxonomy, version 2.0
 </figcaption>
 <div aria-describedby="tbl-riv-index-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -304,7 +348,6 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 <tr class="header">
 <th style="text-align: left;">RIV</th>
 <th style="text-align: left;">Name</th>
-<th style="text-align: left;">Severity</th>
 <th style="text-align: left;">Counted per</th>
 </tr>
 </thead>
@@ -313,186 +356,155 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 <td style="text-align: left;"><strong>Section 1</strong></td>
 <td style="text-align: left;"><em>Authorship and Publication</em></td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="#riv-1-1">1.1</a></td>
 <td style="text-align: left;">Guest, Honorary, or Gift Authorship</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">credited author, per article</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-1-2">1.2</a></td>
 <td style="text-align: left;">Ghost Authorship</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">omitted contributor (article if unidentifiable)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="#riv-1-3">1.3</a></td>
 <td style="text-align: left;">Authorship for Sale and Paper Mill Activity</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-critical">Critical</span></td>
 <td style="text-align: left;">article</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-1-4">1.4</a></td>
 <td style="text-align: left;">Plagiarism</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">passage, figure, or table</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="#riv-1-5">1.5</a></td>
 <td style="text-align: left;">Duplicate Publication and Salami Slicing</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-critical">Critical</span></td>
 <td style="text-align: left;">redundant article</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-1-6">1.6</a></td>
 <td style="text-align: left;">Citation Manipulation</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">article</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="#riv-1-7">1.7</a></td>
 <td style="text-align: left;">Peer Review Subversion</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-critical">Critical</span></td>
 <td style="text-align: left;">article</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-1-8">1.8</a></td>
 <td style="text-align: left;">Irrelevant Citations and Reference Padding</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">article</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="#riv-1-9">1.9</a></td>
 <td style="text-align: left;">Trial Registration Failures and Outcome Switching</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">unregistered trial, or switched outcome</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-1-10">1.10</a></td>
 <td style="text-align: left;">Incompatible Authorship or Contribution Statements</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">article</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="#riv-1-11">1.11</a></td>
 <td style="text-align: left;">Misrepresentation of Cited Sources</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">citation</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-1-12">1.12</a></td>
 <td style="text-align: left;">Undisclosed Generated Text</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">article</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>Section 2</strong></td>
 <td style="text-align: left;"><em>Statistical and Data Integrity</em></td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-2-1">2.1</a></td>
 <td style="text-align: left;">Anomalies and Extreme Values</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">anomalous value</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="#riv-2-2">2.2</a></td>
 <td style="text-align: left;">Statistical Inconsistencies and Impossible Data Sets</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-critical">Critical</span></td>
 <td style="text-align: left;">impossible statistic</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-2-3">2.3</a></td>
 <td style="text-align: left;">Selective Reporting, Suppressed Data, and Omitted Methodology</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">omitted outcome, analysis, or method element</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="#riv-2-4">2.4</a></td>
 <td style="text-align: left;">Data Miscalculation or Erroneous Reporting</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">incorrect value</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-2-5">2.5</a></td>
 <td style="text-align: left;">Image and Figure Manipulation</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-critical">Critical</span></td>
 <td style="text-align: left;">image or panel</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="#riv-2-6">2.6</a></td>
 <td style="text-align: left;">Data Set Anomalies</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-critical">Critical</span></td>
 <td style="text-align: left;">distinct anomaly</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-2-7">2.7</a></td>
 <td style="text-align: left;">Image and Figure Errors</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">figure or panel</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>Section 3</strong></td>
 <td style="text-align: left;"><em>Ethical Oversight and Transparency</em></td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-3-1">3.1</a></td>
 <td style="text-align: left;">Failure to Disclose Conflicts of Interest</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">undisclosed interest, per article</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="#riv-3-2">3.2</a></td>
 <td style="text-align: left;">Bypass of Ethical Oversight</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-critical">Critical</span></td>
 <td style="text-align: left;">article</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-3-3">3.3</a></td>
 <td style="text-align: left;">Ethics Approval Anomalies</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-critical">Critical</span></td>
 <td style="text-align: left;">article</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="#riv-3-4">3.4</a></td>
 <td style="text-align: left;">Implausible Study Timelines</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">article</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-3-5">3.5</a></td>
 <td style="text-align: left;">False or Unfulfilled Data Availability Statements</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-major">Major</span></td>
 <td style="text-align: left;">article</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>Section 4</strong></td>
 <td style="text-align: left;"><em>Indicators and Minor Issues</em></td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-4-1">4.1</a></td>
 <td style="text-align: left;">Minor Typographical Error</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-minor">Minor</span></td>
 <td style="text-align: left;">error</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="#riv-4-2">4.2</a></td>
 <td style="text-align: left;">Indicators of Paper Mill Involvement</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-indicator">Indicator</span></td>
 <td style="text-align: left;">article</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="#riv-4-3">4.3</a></td>
 <td style="text-align: left;">Tortured Phrases and Text Spinners</td>
-<td style="text-align: left;"><span class="ace-sev ace-sev-indicator">Indicator</span></td>
 <td style="text-align: left;">article</td>
 </tr>
 </tbody>
@@ -505,13 +517,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 <h3 class="anchored" data-anchor-id="how-to-read-a-riv">How to read a RIV</h3>
 <p>RIV labels are meant to act as categories of integrity issues. When a report records an instance of a violation, it means that the public record contains evidence matching that RIV as defined below; it does not assert that any author, institution, or publisher acted deliberately, which ACE is not in a position to determine. Several RIVs (for example, RIV 1.3 and RIV 1.7) describe practices that are usually intentional when they occur, and readers should understand a finding under those RIVs as evidence consistent with the practice rather than a determination that it took place.</p>
 <p>The <em>Criteria</em> of a RIV are the conditions that must be met for a single instance of that RIV to be recorded. Typical evidence is the kind of material ACE relies on to show them.</p>
-<p>Each RIV has an associated severity tier. The tiers are:</p>
-<ul>
-<li><p><span class="ace-riv-key">Critical</span> – On its own, undermines the reliability of the article’s findings.</p></li>
-<li><p><span class="ace-riv-key">Major</span> – Materially affects the accuracy, completeness, or trustworthiness of the article.</p></li>
-<li><p><span class="ace-riv-key">Minor</span> – Does not change the data, results, or conclusions. Noted for the record and for the benefit of secondary analyses.</p></li>
-<li><p><span class="ace-riv-key">Indicator</span> – Not a violation in itself but a pattern that raises the probability of one. Recorded only alongside other findings.</p></li>
-</ul>
+<p>RIVs are not ranked. How much an instance matters depends on the article in which it occurs: what it touches, how many instances there are, and what else the audit finds. The same violation can be decisive in one article and peripheral in another, so that judgement is made in each report, where the recommendation explains it (see <a href="#from-findings-to-a-recommendation">From findings to a recommendation</a>). RIV 4.2 and RIV 4.3 are indicators: patterns that are not violations in themselves and are recorded only alongside other findings.</p>
 </section>
 <section id="what-is-not-a-riv" class="level3">
 <h3 class="anchored" data-anchor-id="what-is-not-a-riv">What is not a RIV</h3>
@@ -526,12 +532,12 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 <section id="counting-instances" class="level3">
 <h3 class="anchored" data-anchor-id="counting-instances">Counting instances</h3>
 <p>ACE reports count violations in instances, so the size of a problem is visible and comparable across reports. An instance is the smallest piece of evidence that meets every criterion of a RIV by itself and can be checked on its own. Each RIV states what counts as one instance. RIVs about an article as a whole (for example RIV 1.3 or RIV 3.3) count once per article; RIVs about the data (for example RIV 2.2 or RIV 2.4) count once per affected value, statistic, image, or outcome.</p>
-<p>Three rules keep the counts honest. Each instance belongs to one article and one RIV; evidence that fits two RIVs is recorded under the more specific one. Different evidence in the same article can support different RIVs, and counts are never added across RIVs. Severity belongs to the RIV, not to the count, although many instances of one RIV do weigh on the recommendation.</p>
+<p>Three rules keep the counts honest. Each instance belongs to one article and one RIV; evidence that fits two RIVs is recorded under the more specific one. Different evidence in the same article can support different RIVs, and counts are never added across RIVs. A count is not a score: the recommendation weighs what the instances mean for the article, not their number alone.</p>
 <p>A report states each finding as a count, for example “three instances of Peer Review Subversion (RIV 1.7)”. The summary table at the end of the report is generated from those statements, so it always matches the text: instances per RIV, a link to the section that documents them, and the total. Where space is short, the compact form “RIV 1.7 (×3)” is used.</p>
 </section>
 <section id="from-findings-to-a-recommendation" class="level3">
 <h3 class="anchored" data-anchor-id="from-findings-to-a-recommendation">From findings to a recommendation</h3>
-<p>Every ACE report ends with a recommendation to the publishing journal. It follows from the instances recorded, by the rules below, applied article by article. Any Critical instance leads to a recommendation of retraction, because a Critical RIV by definition undermines the article’s findings. Major instances lead to a recommendation of correction when they are isolated and the corrected article would still stand; when they leave the findings without evidentiary value, the recommendation is retraction. Minor instances on their own call for no editorial action, but an accumulation of them can support a correction or, in combination with other findings, a retraction. Indicators never change the recommendation on their own, but they may point to further investigation. Where every instance that would drive the recommendation is provisional, the recommendation is that the journal obtain the underlying data or records, together with the action that should follow if they are not produced.</p>
+<p>Every ACE report ends with a recommendation to the publishing journal, made article by article. RIVs carry no fixed weight, so the recommendation rests on what the recorded instances do to the article’s findings. When they leave the findings without evidentiary value, the recommendation is retraction. When they are confined to parts of the article that can be corrected and the corrected article would still stand, the recommendation is correction. Instances that alter no data, result, or conclusion call for no editorial action on their own, although an accumulation of them can support a correction. Indicators never change the recommendation on their own, but they may point to further investigation. Where every instance that would drive the recommendation is provisional, the recommendation is that the journal obtain the underlying data or records, together with the action that should follow if they are not produced. Each report states how its findings lead to its recommendation.</p>
 <p>The recommendation is the authors’ professional opinion, offered in good faith on the evidence set out in the report. The decision belongs to the journal.</p>
 </section>
 <section id="boundaries-between-neighboring-categories" class="level3">
@@ -544,14 +550,14 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </section>
 <section id="numbering-versions-and-citing-the-taxonomy" class="level3">
 <h3 class="anchored" data-anchor-id="numbering-versions-and-citing-the-taxonomy">Numbering, versions, and citing the taxonomy</h3>
-<p>Numbers are stable from version 1.0 onward. A RIV keeps its number for as long as the taxonomy exists, so that a RIV cited in a published report always resolves to the same definition, and new RIVs are appended to the end of a section. Version numbers have two parts. A minor version (1.1, 1.2, and so on) adds RIVs, adds evidence or boundary notes, or clarifies wording without changing what an existing number means. A major version (2.0) is reserved for any change that alters the meaning, criteria, unit of counting, or severity of an existing RIV. Every report states the version it used, and its findings are read against that version; every version of this page is archived, and the current version is always this page.</p>
+<p>Numbers are stable from version 1.0 onward. A RIV keeps its number for as long as the taxonomy exists, so that a RIV cited in a published report always resolves to the same definition, and new RIVs are appended to the end of a section. Version numbers have two parts. A minor version (1.1, 1.2, and so on) adds RIVs, adds evidence or boundary notes, or clarifies wording without changing what an existing number means. A major version (2.0, 3.0, and so on) is reserved for any change that alters the meaning, criteria, or unit of counting of an existing RIV, or the structure of the taxonomy itself. Every report states the version it used, and its findings are read against that version; every version of this page is archived, and the current version is always this page.</p>
 <p>To cite the taxonomy:</p>
 <div class="ace-cite-apa">
-<p>Jané, M. B. (2026). <em>Research Integrity Violations: The ACE-RIV taxonomy, version 1.0</em>. Audit Clinical Evidence. <a href="https://auditclinicalevidence.org/riv.html">https://auditclinicalevidence.org/riv.html</a></p>
+<p>Jané, M. B. (2026). <em>Research Integrity Violations: The ACE-RIV taxonomy, version 2.0</em>. Audit Clinical Evidence. <a href="https://auditclinicalevidence.org/riv.html">https://auditclinicalevidence.org/riv.html</a></p>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bibtex code-with-copy"><code class="sourceCode bibtex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">@techreport</span>{<span class="ot">ACERIV2026</span>,</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>      = {Jané, Matthew B.},</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>       = {Research Integrity Violations: The ACE-RIV taxonomy, version 1.0},</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>       = {Research Integrity Violations: The ACE-RIV taxonomy, version 2.0},</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">institution</span> = {Audit Clinical Evidence},</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">type</span>        = {Taxonomy},</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>        = {2026},</span>
@@ -566,7 +572,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 <section id="section-1-authorship-and-publication" class="level2">
 <h2 class="anchored" data-anchor-id="section-1-authorship-and-publication">Section 1: Authorship and Publication</h2>
 <section id="riv-1-1" class="level4">
-<h4 class="anchored" data-anchor-id="riv-1-1">RIV 1.1: Guest, Honorary, or Gift Authorship <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-1-1">RIV 1.1: Guest, Honorary, or Gift Authorship</h4>
 <p>Authorship is granted to individuals who have not made a substantial intellectual contribution to the research.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -580,7 +586,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-1-2" class="level4">
-<h4 class="anchored" data-anchor-id="riv-1-2">RIV 1.2: Ghost Authorship <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-1-2">RIV 1.2: Ghost Authorship</h4>
 <p>Individuals who participated substantially in the research, data analysis, or manuscript drafting are absent from the author byline and the acknowledgments.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -594,7 +600,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-1-3" class="level4">
-<h4 class="anchored" data-anchor-id="riv-1-3">RIV 1.3: Authorship for Sale and Paper Mill Activity <span class="ace-sev ace-sev-critical">Critical</span></h4>
+<h4 class="anchored" data-anchor-id="riv-1-3">RIV 1.3: Authorship for Sale and Paper Mill Activity</h4>
 <p>Authorship positions are bought, sold, or traded, or the article is a product of industrialized publishing of fabricated, recycled, or low-quality manuscripts.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -608,7 +614,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-1-4" class="level4">
-<h4 class="anchored" data-anchor-id="riv-1-4">RIV 1.4: Plagiarism <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-1-4">RIV 1.4: Plagiarism</h4>
 <p>Another person’s text, ideas, data, or other intellectual property is included in the manuscript without proper attribution, credit, or citation.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -622,7 +628,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-1-5" class="level4">
-<h4 class="anchored" data-anchor-id="riv-1-5">RIV 1.5: Duplicate Publication and Salami Slicing <span class="ace-sev ace-sev-critical">Critical</span></h4>
+<h4 class="anchored" data-anchor-id="riv-1-5">RIV 1.5: Duplicate Publication and Salami Slicing</h4>
 <p>Content or findings from previously published work are republished without explicit disclosure and justification, or a single coherent body of research is divided into multiple smaller papers that expand the publication count without adding proportionate scientific value.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -636,7 +642,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-1-6" class="level4">
-<h4 class="anchored" data-anchor-id="riv-1-6">RIV 1.6: Citation Manipulation <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-1-6">RIV 1.6: Citation Manipulation</h4>
 <p>Citations of specific material are forced or coordinated in order to raise the citation metrics of an author, journal, or institution.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -649,7 +655,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-1-7" class="level4">
-<h4 class="anchored" data-anchor-id="riv-1-7">RIV 1.7: Peer Review Subversion <span class="ace-sev ace-sev-critical">Critical</span></h4>
+<h4 class="anchored" data-anchor-id="riv-1-7">RIV 1.7: Peer Review Subversion</h4>
 <p>The independent peer review process is bypassed or compromised, including collusion rings in which reviewers and authors coordinate to approve each other’s work, fabricated reviewer identities or contact details, and the exchange of payment or favors for uncritical review.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -662,7 +668,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-1-8" class="level4">
-<h4 class="anchored" data-anchor-id="riv-1-8">RIV 1.8: Irrelevant Citations and Reference Padding <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-1-8">RIV 1.8: Irrelevant Citations and Reference Padding</h4>
 <p>References are included that have no relevance to the text that cites them. Distinct from RIV 1.6, which concerns citations placed to benefit a particular party, this RIV concerns citations that serve no scholarly purpose at all, a pattern often associated with the sale of citations.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -676,7 +682,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-1-9" class="level4">
-<h4 class="anchored" data-anchor-id="riv-1-9">RIV 1.9: Trial Registration Failures and Outcome Switching <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-1-9">RIV 1.9: Trial Registration Failures and Outcome Switching</h4>
 <p>A clinical trial or other pre-registered study was not registered in a recognized public registry (for example, ClinicalTrials.gov) before enrollment began, or the published report departs from the registered protocol without disclosure, including changes to primary outcomes, analysis populations, sample size, or timing.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -685,12 +691,12 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 <li>the study was not registered in a recognized public registry before the first participant was enrolled; or</li>
 <li>the published report departs from the registered protocol in a primary outcome, an analysis population, the sample size, or the timing of an assessment, without disclosing the change.</li>
 </ol>
-<p><span class="ace-riv-key">Typical evidence</span> registration dates after the stated enrollment start; primary outcomes, timepoints, or arms in the publication that differ from the registry entry; registered outcomes that are not reported. Escalates to Critical when the primary outcome was changed after unblinding or results were known.</p>
+<p><span class="ace-riv-key">Typical evidence</span> registration dates after the stated enrollment start; primary outcomes, timepoints, or arms in the publication that differ from the registry entry; registered outcomes that are not reported.</p>
 <p><span class="ace-riv-key">Counting</span> One instance per unregistered or retrospectively registered trial, plus one per switched, added, or unreported registered outcome.</p>
 </div>
 </section>
 <section id="riv-1-10" class="level4">
-<h4 class="anchored" data-anchor-id="riv-1-10">RIV 1.10: Incompatible Authorship or Contribution Statements <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-1-10">RIV 1.10: Incompatible Authorship or Contribution Statements</h4>
 <p>The authorship, contribution, or role statements of an article are inconsistent with one another, with the article’s own content, or with those of closely related articles by the same authors reporting the same study.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -704,7 +710,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-1-11" class="level4">
-<h4 class="anchored" data-anchor-id="riv-1-11">RIV 1.11: Misrepresentation of Cited Sources <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-1-11">RIV 1.11: Misrepresentation of Cited Sources</h4>
 <p>A claim is attributed to a cited source that does not support it, including citing a source for a finding it contradicts, overstating a source’s result, or citing retracted work as though it stood.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -717,7 +723,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-1-12" class="level4">
-<h4 class="anchored" data-anchor-id="riv-1-12">RIV 1.12: Undisclosed Generated Text <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-1-12">RIV 1.12: Undisclosed Generated Text</h4>
 <p>Substantial portions of the manuscript were produced by text-generation software without disclosure, or generated text is presented as the authors’ own analysis or findings.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -733,7 +739,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 <section id="section-2-statistical-and-data-integrity" class="level2">
 <h2 class="anchored" data-anchor-id="section-2-statistical-and-data-integrity">Section 2: Statistical and Data Integrity</h2>
 <section id="riv-2-1" class="level4">
-<h4 class="anchored" data-anchor-id="riv-2-1">RIV 2.1: Anomalies and Extreme Values <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-2-1">RIV 2.1: Anomalies and Extreme Values</h4>
 <p>Reported data, statistics, or results display extreme or unrealistic values, or distributions that are exceedingly improbable under natural variation, without an explanation in the article.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -742,12 +748,12 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 <li>the article offers no explanation that accounts for it; and</li>
 <li>the value is not attributable to a documented error under RIV 2.4 or RIV 4.1.</li>
 </ol>
-<p><span class="ace-riv-key">Typical evidence</span> effect sizes far outside the range of comparable studies; baseline characteristics more similar across randomized groups than chance allows; variances or distributions that are implausible for the measure. Escalates to Critical when combined with RIV 2.2.</p>
+<p><span class="ace-riv-key">Typical evidence</span> effect sizes far outside the range of comparable studies; baseline characteristics more similar across randomized groups than chance allows; variances or distributions that are implausible for the measure.</p>
 <p><span class="ace-riv-key">Counting</span> One instance per anomalous value or statistic.</p>
 </div>
 </section>
 <section id="riv-2-2" class="level4">
-<h4 class="anchored" data-anchor-id="riv-2-2">RIV 2.2: Statistical Inconsistencies and Impossible Data Sets <span class="ace-sev ace-sev-critical">Critical</span></h4>
+<h4 class="anchored" data-anchor-id="riv-2-2">RIV 2.2: Statistical Inconsistencies and Impossible Data Sets</h4>
 <p>Reported statistics are internally incompatible with one another, or could not have arisen from a real data set of the stated size and structure. The distinguishing feature is impossibility: the reported values cannot all be true at once.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -760,7 +766,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-2-3" class="level4">
-<h4 class="anchored" data-anchor-id="riv-2-3">RIV 2.3: Selective Reporting, Suppressed Data, and Omitted Methodology <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-2-3">RIV 2.3: Selective Reporting, Suppressed Data, and Omitted Methodology</h4>
 <p>Published outcomes exclude relevant data, negative results, or conflicting findings that bear on the study’s conclusions, or the article omits methodological details that are necessary for independent verification and reproducibility.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -774,7 +780,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-2-4" class="level4">
-<h4 class="anchored" data-anchor-id="riv-2-4">RIV 2.4: Data Miscalculation or Erroneous Reporting <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-2-4">RIV 2.4: Data Miscalculation or Erroneous Reporting</h4>
 <p>Quantitative results are calculated, transcribed, or reported incorrectly. Unlike RIV 2.2, the reported values are possible; they are simply wrong, as shown by recomputation from the article’s own numbers.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -783,12 +789,12 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 <li>the recomputed value differs from the reported one by more than rounding; and</li>
 <li>the reported value is possible (an impossible value is RIV 2.2).</li>
 </ol>
-<p><span class="ace-riv-key">Typical evidence</span> recomputed statistics that differ from the reported ones; values that differ between the abstract, text, tables, and figures; unit or decimal errors. Reduced to Minor when the error does not affect any result or conclusion (see RIV 4.1).</p>
+<p><span class="ace-riv-key">Typical evidence</span> recomputed statistics that differ from the reported ones; values that differ between the abstract, text, tables, and figures; unit or decimal errors. An error that does not affect any result or conclusion is recorded under RIV 4.1 instead.</p>
 <p><span class="ace-riv-key">Counting</span> One instance per incorrect value; where a single error propagates through a table, the source error is counted once and the propagation is described.</p>
 </div>
 </section>
 <section id="riv-2-5" class="level4">
-<h4 class="anchored" data-anchor-id="riv-2-5">RIV 2.5: Image and Figure Manipulation <span class="ace-sev ace-sev-critical">Critical</span></h4>
+<h4 class="anchored" data-anchor-id="riv-2-5">RIV 2.5: Image and Figure Manipulation</h4>
 <p>Images, figures, or graphical data contain duplicated, spliced, rotated, cloned, or artificially generated elements, or images taken from other sources are presented as original findings without attribution and authorization.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -802,7 +808,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-2-6" class="level4">
-<h4 class="anchored" data-anchor-id="riv-2-6">RIV 2.6: Data Set Anomalies <span class="ace-sev ace-sev-critical">Critical</span></h4>
+<h4 class="anchored" data-anchor-id="riv-2-6">RIV 2.6: Data Set Anomalies</h4>
 <p>The raw data set, where available, shows structural irregularities or improper manual alteration that compromises its integrity. This RIV applies only when data at the participant or observation level can be examined.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -816,7 +822,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-2-7" class="level4">
-<h4 class="anchored" data-anchor-id="riv-2-7">RIV 2.7: Image and Figure Errors <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-2-7">RIV 2.7: Image and Figure Errors</h4>
 <p>Images, figures, or graphical data contain incorrect values, mislabeled axes or groups, or results that contradict the text or tables, without evidence of manipulation (which is RIV 2.5).</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -824,7 +830,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 <li>an image, figure, or graph reports a value, label, unit, or grouping that is incorrect or contradicts the text or tables; and</li>
 <li>there is no evidence of manipulation (which is RIV 2.5).</li>
 </ol>
-<p><span class="ace-riv-key">Typical evidence</span> figure values that cannot be reconciled with the tabulated data; swapped or mislabeled panels; error bars or axes inconsistent with the reported statistics. Reduced to Minor when the error is cosmetic.</p>
+<p><span class="ace-riv-key">Typical evidence</span> figure values that cannot be reconciled with the tabulated data; swapped or mislabeled panels; error bars or axes inconsistent with the reported statistics. A cosmetic error is recorded under RIV 4.1 instead.</p>
 <p><span class="ace-riv-key">Counting</span> One instance per erroneous figure or panel.</p>
 </div>
 </section>
@@ -832,7 +838,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 <section id="section-3-ethical-oversight-and-transparency" class="level2">
 <h2 class="anchored" data-anchor-id="section-3-ethical-oversight-and-transparency">Section 3: Ethical Oversight and Transparency</h2>
 <section id="riv-3-1" class="level4">
-<h4 class="anchored" data-anchor-id="riv-3-1">RIV 3.1: Failure to Disclose Conflicts of Interest <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-3-1">RIV 3.1: Failure to Disclose Conflicts of Interest</h4>
 <p>Financial, personal, or professional interests that could reasonably be perceived as compromising the objectivity of the work are not disclosed.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -846,7 +852,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-3-2" class="level4">
-<h4 class="anchored" data-anchor-id="riv-3-2">RIV 3.2: Bypass of Ethical Oversight <span class="ace-sev ace-sev-critical">Critical</span></h4>
+<h4 class="anchored" data-anchor-id="riv-3-2">RIV 3.2: Bypass of Ethical Oversight</h4>
 <p>Required ethical review (for example, by an institutional review board or animal care committee) was not obtained, or participants were not treated in accordance with applicable legal and ethical requirements, including informed consent.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -859,7 +865,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-3-3" class="level4">
-<h4 class="anchored" data-anchor-id="riv-3-3">RIV 3.3: Ethics Approval Anomalies <span class="ace-sev ace-sev-critical">Critical</span></h4>
+<h4 class="anchored" data-anchor-id="riv-3-3">RIV 3.3: Ethics Approval Anomalies</h4>
 <p>The ethics approval or IRB reference given in the article cannot be reconciled with the study: it belongs to a different study, does not match the approving committee’s format, refers to a committee that does not exist at the stated institution, or differs across articles that report the same study.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -873,7 +879,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-3-4" class="level4">
-<h4 class="anchored" data-anchor-id="riv-3-4">RIV 3.4: Implausible Study Timelines <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-3-4">RIV 3.4: Implausible Study Timelines</h4>
 <p>The dates reported for approval, registration, recruitment, intervention, follow-up, submission, or publication cannot all be true, or imply a study that could not have been conducted as described.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -881,12 +887,12 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 <li>the article reports dates or durations for approval, registration, recruitment, intervention, follow-up, submission, or publication; and</li>
 <li>the dates cannot all be true, or imply that the study could not have been conducted as described in the time available.</li>
 </ol>
-<p><span class="ace-riv-key">Typical evidence</span> recruitment beginning before ethics approval or registration; follow-up periods longer than the interval between recruitment and submission; submission dates that precede the completion of the described follow-up; identical timelines in articles presented as separate studies. Escalates to Critical when the described study could not have taken place in the time available.</p>
+<p><span class="ace-riv-key">Typical evidence</span> recruitment beginning before ethics approval or registration; follow-up periods longer than the interval between recruitment and submission; submission dates that precede the completion of the described follow-up; identical timelines in articles presented as separate studies.</p>
 <p><span class="ace-riv-key">Counting</span> One instance per article.</p>
 </div>
 </section>
 <section id="riv-3-5" class="level4">
-<h4 class="anchored" data-anchor-id="riv-3-5">RIV 3.5: False or Unfulfilled Data Availability Statements <span class="ace-sev ace-sev-major">Major</span></h4>
+<h4 class="anchored" data-anchor-id="riv-3-5">RIV 3.5: False or Unfulfilled Data Availability Statements</h4>
 <p>The article states that data or materials are available when they are not, or the authors do not provide data that the statement commits them to share.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -902,7 +908,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 <section id="section-4-indicators-and-minor-issues" class="level2">
 <h2 class="anchored" data-anchor-id="section-4-indicators-and-minor-issues">Section 4: Indicators and Minor Issues</h2>
 <section id="riv-4-1" class="level4">
-<h4 class="anchored" data-anchor-id="riv-4-1">RIV 4.1: Minor Typographical Error <span class="ace-sev ace-sev-minor">Minor</span></h4>
+<h4 class="anchored" data-anchor-id="riv-4-1">RIV 4.1: Minor Typographical Error</h4>
 <p>Spelling, grammatical, formatting, or transcription errors that do not alter the underlying data, the statistical results, or the conclusions. Recorded because such errors can still propagate into meta-analyses and secondary analyses.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -916,20 +922,20 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </div>
 </section>
 <section id="riv-4-2" class="level4">
-<h4 class="anchored" data-anchor-id="riv-4-2">RIV 4.2: Indicators of Paper Mill Involvement <span class="ace-sev ace-sev-indicator">Indicator</span></h4>
+<h4 class="anchored" data-anchor-id="riv-4-2">RIV 4.2: Indicators of Paper Mill Involvement</h4>
 <p>Patterns within the article or its authorship that are characteristic of industrialized publishing. These are indicators, not violations: they are recorded only alongside substantive findings and never on their own.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
 <ol type="a">
 <li>the article or its authorship shows one or more of the patterns that are characteristic of paper-mill products, such as those listed under Typical evidence; and</li>
-<li>the same article already has at least one instance recorded under a critical, major, or minor RIV, so that the indicator is reported as context for that finding rather than as a finding on its own.</li>
+<li>the same article already has at least one instance recorded under a RIV other than RIV 4.2 or RIV 4.3, so that the indicator is reported as context for that finding rather than as a finding on its own.</li>
 </ol>
 <p><span class="ace-riv-key">Typical evidence</span> non-institutional or disposable email domains; author affiliations dispersed across countries with no collaborative history; authors with many retracted articles, implausible publication rates, or publications across unrelated fields; boilerplate text or formatting shared with unrelated articles; templated figures.</p>
 <p><span class="ace-riv-key">Counting</span> One instance per article; the indicators present are listed.</p>
 </div>
 </section>
 <section id="riv-4-3" class="level4">
-<h4 class="anchored" data-anchor-id="riv-4-3">RIV 4.3: Tortured Phrases and Text Spinners <span class="ace-sev ace-sev-indicator">Indicator</span></h4>
+<h4 class="anchored" data-anchor-id="riv-4-3">RIV 4.3: Tortured Phrases and Text Spinners</h4>
 <p>The text contains unnatural synonyms produced by automated paraphrasing (“tortured phrases”), such as “flag to clamor” for “signal to noise” or “bosom malignancy” for “breast cancer”, which indicate text spinning to evade plagiarism detection or generated text.</p>
 <div class="ace-riv-meta">
 <p><span class="ace-riv-key">Criteria</span></p>
@@ -945,6 +951,7 @@ Table&nbsp;1: The ACE-RIV taxonomy, version 1.0
 </section>
 <section id="version-history" class="level2">
 <h2 class="anchored" data-anchor-id="version-history">Version history</h2>
+<p>Version 2.0 (October 2026). Severity tiers removed. How much a violation matters depends on the article in which it occurs, so RIVs are no longer ranked, and the rules for reaching a recommendation are stated without them. Numbers, names, definitions, criteria, and units of counting are unchanged, so a finding recorded under version 1.0 means the same under version 2.0.</p>
 <p>Version 1.0 (September 2026). Initial release.</p>
 
 
@@ -1087,7 +1094,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  const darkModeDefault = false;
+  const darkModeDefault = true;
   let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
@@ -1530,7 +1537,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </footer>
 <!-- GENERATED by scripts/build_categories.py; edit the reports, not this file. -->
-<script>window.aceCategoryFacets = {"Depression": "outcome", "Exercise": "treatment", "Heart Disease": "population", "RCT": "design"};</script>
+<script>window.aceCategoryFacets = {"Depression": "outcome", "Exercise": "treatment", "Heart Disease": "population", "Older Adults": "population", "RCT": "design"};</script>
 <!-- Title block layout used by report pages and the RIV page: dates bar under the
      subtitle, two-line authors, categories under the abstract. Included from
      reports/_metadata.yml and riv.qmd (include-after-body). -->
@@ -1601,6 +1608,36 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     tidyTitleBlock();
   }
+})();
+</script>
+<script>
+// Navbar wordmark glitch (styles.css, "WORDMARK HOVER GLITCH"):
+// a burst every 3.8 to 6.4 seconds, at random, like the home page
+// mark. The torn slices are drawn from data-text, which briefly
+// carries a stray glyph; the word itself never changes, so the
+// navbar never shifts. Not on the home page (the mark is hidden
+// there), not with reduced motion, not while the tab is hidden.
+(function () {
+  var t = document.querySelector(".navbar .navbar-title");
+  if (!t || document.body.classList.contains("homepage")) return;
+  var word = t.textContent.trim();
+  t.setAttribute("data-text", word);
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var GLYPHS = "ACE#%&@$XZ0187/<>?*";
+  function burst() {
+    t.classList.remove("is-burst"); void t.offsetWidth; t.classList.add("is-burst");
+    setTimeout(function () {
+      var w = word.split(""), i = Math.floor(Math.random() * w.length);
+      w[i] = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+      t.setAttribute("data-text", w.join(""));
+    }, 230);
+    setTimeout(function () { t.setAttribute("data-text", word); }, 420);
+    setTimeout(function () { t.classList.remove("is-burst"); }, 900);
+  }
+  (function next() {
+    setTimeout(function () { if (!document.hidden) burst(); next(); },
+               3800 + Math.random() * 2600);
+  })();
 })();
 </script>
 <script>
@@ -1865,6 +1902,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     apply();
   }
+})();
+</script>
+<script>
+// Collapsed navbar (below 1200px, collapse-below in this file): keep
+// the RSS and GitHub icons on the bar beside the theme toggle instead
+// of at the foot of the menu, as long as the bar has room (450px and
+// up); narrower than that they go back into the menu, side by side.
+// The nodes are moved, not copied, so their links and styles are the
+// same ones Quarto wrote. Styling: styles.css, "NAVBAR TOOLS".
+(function () {
+  var onBar = window.matchMedia("(min-width: 450px) and (max-width: 1199.98px)");
+  function place() {
+    var nav = document.querySelector(".navbar .navbar-container");
+    var collapse = nav && nav.querySelector("#navbarCollapse");
+    var icons = nav && nav.querySelector("ul.navbar-nav.ms-auto");
+    var tools = nav && nav.querySelector(".quarto-navbar-tools");
+    if (!nav || !collapse || !icons || !tools) return;
+    if (onBar.matches) {
+      if (icons.parentNode !== nav) { nav.insertBefore(icons, tools); icons.classList.add("ace-bar-icons"); }
+    } else if (icons.parentNode !== collapse) {
+      collapse.appendChild(icons); icons.classList.remove("ace-bar-icons");
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", place); else place();
+  if (onBar.addEventListener) onBar.addEventListener("change", place); else onBar.addListener(place);
 })();
 </script>
 

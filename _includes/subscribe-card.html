@@ -1,0 +1,31 @@
+```{=html}
+<!-- Email signup card (Reports page). The home page has its own band with the
+     same form; both post to the Google Form behind the private signup Sheet.
+     Styling: styles.css, "SUBSCRIBE CARD". -->
+<div class="ace-subscribe-card">
+  <div class="ace-subscribe-card-text">
+    <span class="ace-eyebrow">Email updates</span>
+    <p>Get an email when a report is published. One message per report, nothing else. Reply to any message to unsubscribe.</p>
+  </div>
+  <form class="ace-subscribe ace-subscribe-card-form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScGCwFKLQZPUsQk86pohYvQb-kIMgw2zuJVricnv3sOyTQxFA/formResponse" method="post" target="ace-subscribe-sink" novalidate>
+    <label class="visually-hidden" for="ace-subscribe-email-reports">Email</label>
+    <input class="ace-subscribe-input" id="ace-subscribe-email-reports" name="entry.1788943182" type="email" autocomplete="email" inputmode="email" placeholder="you@example.org" required>
+    <button type="submit" class="ace-subscribe-btn">Subscribe</button>
+    <p class="ace-subscribe-msg" role="status" aria-live="polite"></p>
+  </form>
+  <iframe name="ace-subscribe-sink" title="" hidden></iframe>
+</div>
+<script>
+(function () {
+  document.querySelectorAll(".ace-subscribe-card .ace-subscribe").forEach(function (form) {
+    var input = form.querySelector(".ace-subscribe-input"), msg = form.querySelector(".ace-subscribe-msg"), btn = form.querySelector(".ace-subscribe-btn");
+    form.addEventListener("submit", function (e) {
+      var v = (input.value || "").trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { e.preventDefault(); msg.className = "ace-subscribe-msg"; msg.textContent = "Enter an email address."; input.focus(); return; }
+      input.value = v; btn.disabled = true; btn.textContent = "Sending";
+      setTimeout(function () { form.classList.add("is-done"); msg.className = "ace-subscribe-msg is-ok"; msg.textContent = "Added. You will get an email when the next report is published."; }, 700);
+    });
+  });
+})();
+</script>
+```

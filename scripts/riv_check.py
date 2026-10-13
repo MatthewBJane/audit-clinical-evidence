@@ -4,11 +4,11 @@
     python3 scripts/riv_check.py            # riv.yml vs riv.qmd vs reports/*/index.qmd
     python3 scripts/riv_check.py --quiet    # only print problems
 
-riv.yml is the source of truth (numbers, names, severity, counting unit).
+riv.yml is the source of truth (numbers, names, counting unit).
 The script verifies that
 
   * riv.qmd has exactly one entry per category, with the same number, name
-    and severity badge as riv.yml, the anchor {#riv-x-y}, and a reference
+    as riv.yml, no severity badge (removed in v2.0), the anchor {#riv-x-y}, and a reference
     block with Criteria, Typical evidence and Counting;
   * every **Name (RIV x.y)** label in every report uses the exact name and
     number from riv.yml;
@@ -55,18 +55,15 @@ def load_taxonomy():
 
 def check_page(tax, cats):
     text = (ROOT / "riv.qmd").read_text(encoding="utf-8")
-    heads = re.findall(r"^#### RIV (\d+\.\d+): (.+?) \[(\w+)\]\{\.ace-sev \.ace-sev-(\w+)\} \{#riv-(\d+)-(\d+)\}$",
-                       text, re.M)
+    heads = re.findall(r"^#### RIV (\d+\.\d+): (.+?) \{#riv-(\d+)-(\d+)\}$", text, re.M)
     seen = {}
-    for num, name, badge, cls, a, b in heads:
+    for num, name, a, b in heads:
         seen[num] = name
         k = cats.get(num)
         if not k:
             problem("riv.qmd", f"RIV {num} is on the page but not in riv.yml"); continue
         if name != k["name"]:
             problem("riv.qmd", f"RIV {num} name is '{name}' but riv.yml says '{k['name']}'")
-        if badge != k["severity"] or cls != k["severity"].lower():
-            problem("riv.qmd", f"RIV {num} badge is {badge}/{cls} but riv.yml says {k['severity']}")
         if f"{a}.{b}" != num:
             problem("riv.qmd", f"RIV {num} anchor is #riv-{a}-{b}")
     for num in cats:
@@ -78,9 +75,9 @@ def check_page(tax, cats):
         for key in ("[Criteria]{.ace-riv-key}", "[Typical evidence]{.ace-riv-key}", "[Counting]{.ace-riv-key}"):
             if key not in body:
                 problem("riv.qmd", f"RIV {num} lacks {key}")
-    # unexplained "Severity:" leftovers or retired language
-    if "Severity:" in text:
-        problem("riv.qmd", "contains a 'Severity:' sentence; severity is the badge")
+    # severity tiers were removed in v2.0; none should come back by accident
+    if re.search(r"\.ace-sev\b|Severity:|Escalates to Critical|Reduced to Minor", text):
+        problem("riv.qmd", "contains severity-tier language, removed in ACE-RIV v2.0")
     m = re.search(r'subtitle:\s*"[^"]*version (\d+\.\d+)', text)
     if m and m.group(1) != str(tax["version"]):
         problem("riv.qmd", f"subtitle says version {m.group(1)} but riv.yml is {tax['version']}")
@@ -132,8 +129,11 @@ def check_report(path, tax, cats):
         if tm and int(tm.group(1)) != total:
             problem(rel, f"summary table total is {tm.group(1)} but the declarations total {total}")
     m = re.search(r"version (\d+\.\d+) of the \[ACE Research Integrity Violations taxonomy", text)
+    # a report written under an earlier version reads that version, which
+    # must be kept in _riv-versions/ (its frozen helpers.R points there)
     if m and m.group(1) != str(tax["version"]):
-        problem(rel, f"report cites ACE-RIV v{m.group(1)}; current is v{tax['version']} (fine if intentional)")
+        if not (ROOT / "_riv-versions" / f"riv-{m.group(1)}.yml").exists():
+            problem(rel, f"report cites ACE-RIV v{m.group(1)} but _riv-versions/riv-{m.group(1)}.yml is missing")
     return counts, total
 
 

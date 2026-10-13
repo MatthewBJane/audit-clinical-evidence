@@ -24,7 +24,13 @@ impact:                      # written by scripts/citations.py (OpenAlex)
   retrieved: "2026-09-08"
 
 # Link-preview text only (og:description); hidden on the page itself by styles.css.
-description: "Three 2019 RCTs on exercise for depression in heart failure: overlapping trial arms, duplicated PHQ-9 data, impossible statistics and baseline p-values. 25 integrity violations; retraction recommended."
+description: "Three 2019 RCTs on exercise for depression in heart failure: overlapping trial arms, duplicated PHQ-9 data, impossible statistics and baseline p-values. 29 integrity violations; retraction recommended."
+
+# Short findings for the scrolling strip on the home page, one per line,
+# under 70 characters each, in plain text (no citations or markdown). Write a
+# true minus sign (−) for negative numbers.
+highlights:
+  - "One trial appears to be published as three separate RCTs of exercise for depression in heart failure"
 
 # What this report audits, in four facets. `categories:` below is written
 # from these by scripts/build_categories.py on every render; do not edit it.
@@ -33,8 +39,11 @@ treatment: ["Exercise"]
 outcome: ["Depression"]
 design: ["RCT"]
 categories: ["Heart Disease", "Exercise", "Depression", "RCT"]
+# violations and recommendation: written by scripts/build_report_meta.py; do not edit.
+violations: {total: 29}
+recommendation: "retraction"
 
-abstract: "This report audits three randomized controlled trials by Abdelbasset and colleagues [-@abdelbasset2019a; -@abdelbasset2019b; -@abdelbasset2019c] evaluating exercise interventions for depression in patients with congestive heart failure. The three articles appear to report overlapping arms from the same underlying clinical trial while presenting them as separate studies. Across the articles, duplicated baseline characteristics and PHQ-9 outcome statistics indicate reuse of the same trial data even though the articles report incompatible authorship contribution statements and three distinct ethical approval numbers, and do not cite one another. The articles are potentially linked to a well-documented authorship-for-sale publication network. Furthermore, one of the three articles identifies Abdelbasset as both first author and editor which is a clear conflict of interest. Reported summary statistics are impossible given a real data set, specifically, seven of nine PHQ-9 (the primary outcome) mean and standard deviation pairs fail GRIMMER consistency tests. The baseline tables report probability values that cannot be correct, including two different values for a single two-group comparison of a binary variable, while the continuous comparisons in the same tables reproduce exactly. The reported outcomes also imply extreme between-group standardized mean differences of approximately three standard deviations at post-intervention, making the studies highly influential outliers in later meta-analyses. In total, this audit identifies 25 instances of Research Integrity Violations across eight categories. We conclude that the three articles are not credible and are unlikely to contain any evidentiary value thus we recommend retraction by the publishing journals."
+abstract: "This report audits three randomized controlled trials by Abdelbasset and colleagues [-@abdelbasset2019a; -@abdelbasset2019b; -@abdelbasset2019c] evaluating exercise interventions for depression in patients with congestive heart failure. The three articles appear to report overlapping arms from the same underlying clinical trial while presenting them as separate studies. Across the articles, duplicated baseline characteristics and PHQ-9 outcome statistics indicate reuse of the same trial data even though the articles report incompatible authorship contribution statements and three distinct ethical approval numbers, and do not cite one another. The articles are potentially linked to a well-documented authorship-for-sale publication network. Furthermore, one of the three articles identifies Abdelbasset as both first author and editor which is a clear conflict of interest. Reported summary statistics are impossible given a real data set, specifically, seven of nine PHQ-9 (the primary outcome) mean and standard deviation pairs fail GRIMMER consistency tests. The baseline tables report probability values that cannot be correct, including two different values for a single two-group comparison of a binary variable, while the continuous comparisons in the same tables reproduce exactly. The reported outcomes also imply extreme between-group standardized mean differences of approximately three standard deviations at post-intervention, making the studies highly influential outliers in later meta-analyses. In total, this audit identifies 29 instances of Research Integrity Violations across seven categories. We conclude that the three articles are not credible and are unlikely to contain any evidentiary value thus we recommend retraction by the publishing journals."
 
 author: 
   - family: "Jané"
@@ -150,12 +159,12 @@ Accordingly, this report identifies two instances of 2-@riv-1.5, corresponding t
 
 
 
-![Baseline statistics for each of the three studies: panel A is @abdelbasset2019a, panel B is @abdelbasset2019b, panel C is @abdelbasset2019c. Highlighted colors shows the matched data across studies.](images/abdelbasset_baseline_tables.png){#fig-baseline-tables}
+![Baseline statistics for each of the three studies: panel A is @abdelbasset2019a, panel B is @abdelbasset2019b, panel C is @abdelbasset2019c. Highlighted colors show the matched data across studies.](images/abdelbasset_baseline_tables.png){#fig-baseline-tables}
 
 
 
 
-![Statistics for PHQ-9 results (primary outcome) for each of the three studies: panel A is @abdelbasset2019a, panel B is @abdelbasset2019b, panel C is @abdelbasset2019c. Highlighted colors shows the matched data across studies.](images/abdelbasset_results_tables.png){#fig-results-tables}
+![Statistics for PHQ-9 results (primary outcome) for each of the three studies: panel A is @abdelbasset2019a, panel B is @abdelbasset2019b, panel C is @abdelbasset2019c. Highlighted colors show the matched data across studies.](images/abdelbasset_results_tables.png){#fig-results-tables}
 
 
 ### Authorship-for-sale scheme {#sec-auth-for-sale}
@@ -491,6 +500,44 @@ stopifnot(
   prints_as(b_educ_p$fisher,    b_educ_rep),
   !prints_as(b_marital_p$fisher, b_marital_rep)
 )
+
+# The two-arm article prints a probability value on every category row. Each
+# is read as a comparison of that category against the rest of the group: a
+# 2 x 2 table of (in category, not in category) by (study, control). For a
+# binary variable both rows give the same table, so they must share one value.
+level_vs_rest <- function(tab) lapply(seq_len(ncol(tab)), function(j)
+  p_cat(cbind(tab[, j], rowSums(tab) - tab[, j])))
+a_gender_levels  <- level_vs_rest(a_gender)
+a_marital_levels <- level_vs_rest(a_marital)
+a_cat_vars <- list(
+  list(var = "Gender",         tab = a_gender,  rep = a_gender_rep,  lv = a_gender_levels,
+       names = c("Men", "Women")),
+  list(var = "Marital status", tab = a_marital, rep = a_marital_rep, lv = a_marital_levels,
+       names = c("Single", "Married")),
+  list(var = "Education",      tab = a_educ,    rep = a_educ_rep,    lv = a_educ_levels,
+       names = c("No formal education", "Primary school", "Middle school or more"))
+)
+a_level_rows <- do.call(rbind, lapply(a_cat_vars, function(v) do.call(rbind, lapply(seq_along(v$rep), function(j) {
+  t2 <- cbind(v$tab[, j], rowSums(v$tab) - v$tab[, j])      # rows: study, control; columns: in category, rest
+  data.frame(variable = v$var, category = v$names[j],
+             a = t2[1, 1], b = t2[2, 1], c = t2[1, 2], d = t2[2, 2],
+             reported = v$rep[j], chisq = v$lv[[j]]$chisq, fisher = v$lv[[j]]$fisher,
+             any_test = any(vapply(v$lv[[j]], near_print, logical(1), reported = v$rep[j])),
+             stringsAsFactors = FALSE)
+}))))
+a_level_rows$reproduces <- mapply(function(c, f, r) near_print(c, r) || near_print(f, r),
+                                  a_level_rows$chisq, a_level_rows$fisher, a_level_rows$reported)
+cat_fail_a <- sum(!a_level_rows$reproduces)
+cat_fail_b <- sum(!c(near_print(b_gender_p$fisher, b_gender_rep),
+                     near_print(b_educ_p$fisher, b_educ_rep),
+                     near_print(b_marital_p$fisher, b_marital_rep)))
+stopifnot(
+  nrow(a_level_rows) == 7,
+  cat_fail_a == 7,                                   # none of the seven 2019a values reproduce
+  !any(a_level_rows$any_test),                       # under chi-squared, Yates, likelihood ratio, or Fisher
+  cat_fail_b == 1,                                   # 2019b: only marital status fails
+  !any(vapply(b_marital_p, near_print, logical(1), reported = b_marital_rep))
+)
 ```
 
 The baseline tables carry an additional problem, which was first raised publicly by @meyerowitzkatz2026. We verify it here and extend it to the other two articles. Every value quoted below is recomputed from the counts and summaries printed in the articles themselves, by the code published with this report.
@@ -503,13 +550,13 @@ This cannot be attributed to the authors being unable to compute a test or that 
 
 The three-arm article also identifies which test was used for the categorical variables. It reports one value per variable, and two of the three reproduce under the Fisher exact test: `r fmt_p(b_gender_p$fisher, 2)` for gender and `r fmt_p(b_educ_p$fisher, 2)` for education, against reported values of `r fmt_p(b_gender_rep, 2)` and `r fmt_p(b_educ_rep, 2)`. Marital status does not. With counts of 15 and 8, 19 and 4, and 17 and 6 across the three groups, that same exact test returns `r fmt_p(b_marital_p$fisher)`, chi-squared returns `r fmt_p(b_marital_p$chisq)`, and the likelihood ratio test returns `r fmt_p(b_marital_p$g)`, against a reported `r fmt_p(b_marital_rep, 2)`. One categorical probability value in that table is therefore wrong by the authors' own method.
 
-Applying that method back to the two-arm table, education should carry a single value of `r fmt_p(a_educ_p$fisher)`, or `r fmt_p(a_educ_p$chisq)` under chi-squared. Three values are reported instead. Reading them as three separate comparisons of one level against the rest does not fix the issue: Fisher's exact test returns `r paste(fmt_p(vapply(a_educ_levels, function(x) x$fisher, numeric(1))), collapse = ", ")`, and chi-squared returns `r paste(fmt_p(vapply(a_educ_levels, function(x) x$chisq, numeric(1))), collapse = ", ")`. No reading of the education row reproduces the reported values. The remaining article [@abdelbasset2019c] reports no probability values in its baseline table, so there is nothing to check there.
+Since the two-arm article prints a probability value on every category row, we read each value as a comparison of that category against the rest of the group, which is a two by two table (for example, participants with no formal education against everyone else, in the study group and in the control group). For a binary variable the two rows give the same two by two table, which is why two different values for gender or for marital status can not both be correct. For education, the three category-against-rest tables return `r paste(fmt_p(vapply(a_educ_levels, function(x) x$fisher, numeric(1))), collapse = ", ")` under Fisher's exact test and `r paste(fmt_p(vapply(a_educ_levels, function(x) x$chisq, numeric(1))), collapse = ", ")` under chi-squared, against reported values of `r paste(fmt_p(a_educ_rep), collapse = ", ")`. None of the `r nrow(a_level_rows)` categorical probability values in the two-arm table can be reproduced under this reading, with or without a continuity correction or by the likelihood ratio test, and a single test of the whole education table (`r fmt_p(a_educ_p$fisher)` under Fisher's exact test) does not match any of them either. The remaining article [@abdelbasset2019c] reports no probability values in its baseline table, so there is nothing to check there.
 
-@tbl-baseline-p collects every baseline comparison in the two articles that print probability values, with the value each article shows and the value its own numbers produce.
+@tbl-baseline-p collects the continuous baseline comparisons in the two articles that print probability values, with the value each article shows and the value its own numbers produce, and @tbl-baseline-cat-a and @tbl-baseline-cat-b do the same for the categorical comparisons, with the counts each test starts from laid out by group and level. The two-arm article reports a value on every level's row; the three-arm article reports one value per variable, for a table of its levels against all three groups.
 
 ```{r}
 #| label: tbl-baseline-p
-#| tbl-cap: "Reported and recomputed probability values for every baseline comparison."
+#| tbl-cap: "Reported and recomputed probability values for the continuous baseline comparisons."
 
 baseline_row <- function(article, comparison, reported, recomputed, test, digits) {
   data.frame(
@@ -527,19 +574,9 @@ baseline_p_table <- rbind(
   do.call(rbind, lapply(seq_len(nrow(a_cont)), function(i)
     baseline_row("2019a", a_cont$variable[i], a_cont$reported[i],
                  a_cont$recomputed[i], "t test", 3))),
-  baseline_row("2019a", "Gender", a_gender_rep[1], a_gender_p$fisher, "Fisher exact", 3),
-  baseline_row("2019a", "Gender (second value)", a_gender_rep[2], a_gender_p$fisher, "Fisher exact", 3),
-  baseline_row("2019a", "Marital status", a_marital_rep[1], a_marital_p$fisher, "Fisher exact", 3),
-  baseline_row("2019a", "Marital status (second value)", a_marital_rep[2], a_marital_p$fisher, "Fisher exact", 3),
-  do.call(rbind, lapply(seq_along(a_educ_rep), function(i)
-    baseline_row("2019a", sprintf("Education, level %d", i), a_educ_rep[i],
-                 a_educ_levels[[i]]$fisher, "Fisher exact", 3))),
   do.call(rbind, lapply(seq_len(nrow(b_cont)), function(i)
     baseline_row("2019b", b_cont$variable[i], b_cont$reported[i],
-                 b_cont$recomputed[i], "ANOVA", 2))),
-  baseline_row("2019b", "Gender", b_gender_rep, b_gender_p$fisher, "Fisher exact", 2),
-  baseline_row("2019b", "Education", b_educ_rep, b_educ_p$fisher, "Fisher exact", 2),
-  baseline_row("2019b", "Marital status", b_marital_rep, b_marital_p$fisher, "Fisher exact", 2)
+                 b_cont$recomputed[i], "ANOVA", 2)))
 )
 
 yesno_tt(
@@ -548,18 +585,116 @@ yesno_tt(
   center = c("Reported", "Recomputed", "Test"),
   notes = paste(
     "Note.",
-    "Recomputed from the counts, means, and standard deviations reported in each",
-    "article. Categorical comparisons use Fisher's exact test, the method the",
-    "three-arm article's own values identify; the two values reported for gender",
-    "and for marital status in 2019a are two readings of one comparison, which",
-    "admits only one probability value. A comparison counts as reproduced when",
-    "the recomputed value agrees with the reported one to within a unit in its",
-    "last digit, since the recomputation starts from rounded summaries."
+    "Recomputed from the means, standard deviations, and group sizes reported in",
+    "each article: a two-sample t test for the two-arm article and a one-way",
+    "analysis of variance for the three-arm article. A comparison counts as",
+    "reproduced when the recomputed value agrees with the reported one to within",
+    "a unit in its last digit, since the recomputation starts from rounded summaries."
   )
 )
 ```
 
-Two of these failures are impossibilities rather than errors, because the values cannot all be true at once: the two probability values printed for gender, and the two printed for marital status, in @abdelbasset2019a. These are classified as two instances of 2-@riv-2.2. The education values in that same table, and the marital status value in @abdelbasset2019b, are possible values that recomputation does not reproduce, and are classified as two instances of 2-@riv-2.4. For education we count the three printed values as a single instance rather than three, because the article does not state which test was intended and the three values are one reported comparison.
+```{r}
+#| label: tbl-baseline-cat-a
+#| tbl-cap: "Reported and recomputed probability values for the categorical baseline comparisons in the two-arm article, with each reported value read as a comparison of its level against the rest of the group."
+
+# Level columns for a contingency table: Roman numerals under each group,
+# made unique across groups by trailing spaces (invisible in HTML and LaTeX).
+roman_cols <- function(k, block) paste0(as.character(utils::as.roman(seq_len(k))), strrep(" ", block))
+p_rep_hdr <- if (knitr::is_latex_output()) "Reported \\textit{p}" else "Reported <i>p</i>"
+
+# Every comparison here is a 2 x 2 table. Gender and marital status are binary,
+# so each is one table with two reported values (one per level's row).
+# Education has three levels; each reported value is read as that level
+# against the rest of the group, so it is split into three 2 x 2 rows, with
+# I the level and II the rest of the group.
+cols_s <- roman_cols(2, 0); cols_c <- roman_cols(2, 1); cols_r <- roman_cols(2, 2)
+row_2x2 <- function(label, study, control, reported, tests) {
+  rep_cells <- c("-", "-"); rep_cells[seq_along(reported)] <- fmt_p(reported, 3)
+  data.frame(c(
+    list(Comparison = label),
+    setNames(as.list(as.character(study)), cols_s),
+    setNames(as.list(as.character(control)), cols_c),
+    setNames(as.list(rep_cells), cols_r),
+    list(`Chi-squared` = fmt_p(tests$chisq, 3), Fisher = fmt_p(tests$fisher, 3),
+         Reproduces = if (all(vapply(reported, function(r) near_print(tests$chisq, r) || near_print(tests$fisher, r),
+                                     logical(1)))) "Yes" else "No")
+  ), check.names = FALSE, stringsAsFactors = FALSE)
+}
+educ_rows <- a_level_rows[a_level_rows$variable == "Education", ]
+cat_a_table <- rbind(
+  row_2x2("Gender",         a_gender[1, ],  a_gender[2, ],  a_gender_rep,  a_gender_levels[[1]]),
+  row_2x2("Marital status", a_marital[1, ], a_marital[2, ], a_marital_rep, a_marital_levels[[1]]),
+  do.call(rbind, lapply(seq_len(nrow(educ_rows)), function(k)
+    row_2x2(sprintf("Education (level %d)", k),
+            c(educ_rows$a[k], educ_rows$c[k]), c(educ_rows$b[k], educ_rows$d[k]),
+            educ_rows$reported[k], a_educ_levels[[k]])))
+)
+stopifnot(nrow(cat_a_table) == 5, all(cat_a_table$Reproduces == "No"))
+
+yesno_tt(
+  cat_a_table,
+  col = "Reproduces",
+  center = c(cols_s, cols_c, cols_r, "Chi-squared", "Fisher"),
+  notes = paste(
+    "Note. Counts as reported in Table 1 of the two-arm article, 23 per group. Each row is a 2 by 2",
+    "table. For gender (I men, II women) and marital status (I single, II married), the article",
+    "reports a probability value on each level's row, shown under I and II; both belong to the same",
+    "table and can have only one value. For education, each reported value is read as a comparison",
+    "of one level against the rest of the group, with I the level and II the rest: level 1 no formal",
+    "education, level 2 primary school, level 3 middle school or more. Chi-squared is Pearson's test",
+    "without a continuity correction and Fisher is the exact test; neither the Yates correction nor",
+    "the likelihood ratio test reproduces any value either. Reproduces is Yes when every reported",
+    "value on the row agrees with either test to within a unit in its last digit."
+  )
+) |>
+  group_tt(j = setNames(list(2:3, 4:5, 6:7, 8:9),
+                        c("Study group", "Control group", p_rep_hdr, "Recomputed")))
+```
+
+```{r}
+#| label: tbl-baseline-cat-b
+#| tbl-cap: "Reported and recomputed probability values for the categorical baseline comparisons in the three-arm article, one test per variable across its three groups."
+
+# One row per variable: counts by group (LMIE, MICE, non-exercised) and level.
+n_lv <- 3
+cols_g <- lapply(0:2, function(b) roman_cols(n_lv, b))
+stopifnot(all(vapply(list(b_gender, b_educ, b_marital), nrow, numeric(1)) == 3),   # three groups
+          all(rowSums(b_gender) == 23), all(rowSums(b_educ) == 23), all(rowSums(b_marital) == 23))
+cat_b_row <- function(comparison, tab, reported, tests) {
+  cells <- lapply(1:3, function(g) { out <- rep("-", n_lv); out[seq_len(ncol(tab))] <- tab[g, ]; setNames(as.list(out), cols_g[[g]]) })
+  data.frame(c(list(Comparison = comparison), cells[[1]], cells[[2]], cells[[3]],
+               list(rep_p = fmt_p(reported, 2),
+                    `Chi-squared` = fmt_p(tests$chisq, 2), Fisher = fmt_p(tests$fisher, 2),
+                    Reproduces = if (near_print(tests$fisher, reported) || near_print(tests$chisq, reported)) "Yes" else "No")),
+             check.names = FALSE, stringsAsFactors = FALSE)
+}
+cat_b_table <- rbind(
+  cat_b_row("Gender",         b_gender,  b_gender_rep,  b_gender_p),
+  cat_b_row("Education",      b_educ,    b_educ_rep,    b_educ_p),
+  cat_b_row("Marital status", b_marital, b_marital_rep, b_marital_p)
+)
+names(cat_b_table)[names(cat_b_table) == "rep_p"] <- p_rep_hdr
+
+yesno_tt(
+  cat_b_table,
+  col = "Reproduces",
+  center = c(unlist(cols_g), p_rep_hdr, "Chi-squared", "Fisher"),
+  notes = paste(
+    "Note. Counts as reported in Table 1 of the three-arm article, 23 per group: low to",
+    "moderate-intensity exercise (LMIE), moderate-intensity continuous exercise (MICE), and",
+    "non-exercised. Roman numerals are the levels of each variable in the article's row order:",
+    "gender, I males, II females; education, I no formal education, II primary school, III middle",
+    "school or more; marital status, I no, II yes. The article reports one probability value per",
+    "variable, a test of the whole levels-by-groups table. Chi-squared is Pearson's test without a",
+    "continuity correction and Fisher is the Fisher-Freeman-Halton exact test. Reproduces is Yes",
+    "when either test agrees with the reported value to within a unit in its last digit."
+  )
+) |>
+  group_tt(j = list("LMIE" = 2:4, "MICE" = 5:7, "Non-exercised" = 8:10, "Recomputed" = 12:13))
+```
+
+None of the seven categorical probability values in @abdelbasset2019a can be reproduced, and four of them are impossible rather than merely wrong: the two values printed for gender, and the two printed for marital status, each belong to a single two by two table and can not differ. In @abdelbasset2019b, the marital status value can not be reproduced by the authors' own method. Each of these eight values is an inconsistent statistic and is classified as one instance of 8-@riv-2.2.
 
 ### Extreme treatment effects {#sec-extreme-effects}
 
@@ -592,7 +727,7 @@ The publication record also contains serious authorship and editorial concerns. 
 
 The ethical approval is also not reconcilable with the duplication of trial data. The three articles report three distinct ethical approval numbers, despite reporting overlapping arms from the same clinical trial. This is especially concerning because the reported trial population was highly vulnerable: participants had chronic heart failure, were assigned to exercise interventions, and had high baseline depressive symptoms. In this context, clear ethical oversight and approval is essential. Without further clarification, the differing approval numbers warrant three instances of @riv-3.3.
 
-The statistical evidence raises severe concerns about the integrity of the data. The summary statistics for the PHQ-9 outcome consistently fail GRIMMER checks, indicating that the reported summary statistics could not have been produced by a real data set (this warrants seven instances of @riv-2.2). These failures are not resolved by when allowing for possible unreported list-wise deletion of some individuals from the data set. The baseline tables fail as well: one article prints two different probability values for each of two binary variables, which cannot both be correct (two further instances of @riv-2.2), and two further categorical probability values are not reproducible by any standard test of the counts printed beside them (two instances of @riv-2.4), even though every continuous comparison in the same tables reproduces exactly. The reported outcomes also imply extremely large between-group treatment effects, approximately three standard deviations in magnitude at 12 weeks, which are far beyond conventional benchmarks for large treatment effects and appear as highly influential outliers in later meta-analyses. Due to the massive effect size observed in the articles it warrants two instances of @riv-2.1.
+The statistical evidence raises severe concerns about the integrity of the data. The summary statistics for the PHQ-9 outcome consistently fail GRIMMER checks, indicating that the reported summary statistics could not have been produced by a real data set (this warrants seven instances of @riv-2.2). These failures are not resolved by when allowing for possible unreported list-wise deletion of some individuals from the data set. The baseline tables fail as well: none of the seven categorical probability values in one article can be reproduced from the counts printed beside them, including two different values for each of two binary variables, which cannot both be correct, and one value in the other article fails by the authors' own method (eight further instances of @riv-2.2), even though every continuous comparison in the same tables reproduces exactly. The reported outcomes also imply extremely large between-group treatment effects, approximately three standard deviations in magnitude at 12 weeks, which are far beyond conventional benchmarks for large treatment effects and appear as highly influential outliers in later meta-analyses. Due to the massive effect size observed in the articles it warrants two instances of @riv-2.1.
 
 Taken together, these findings substantially undermine the reliability and integrity of the three reported RCTs. This report cannot verify that the reported trial data correspond to an actual conducted randomized controlled trial as described in the publications. The combination of duplicated trial arms, incompatible authorship roles, inconsistent ethical approval identifiers, impossible descriptive statistics, and extreme treatment effects leaves the provenance of the reported patient data unresolved.
 
@@ -622,7 +757,8 @@ riv <- riv_summary_table("reports/ACE2026001/index.qmd",
 | Version | Date | DOI | Change |
 |:-:|:-----|:-------------|:----------|
 | 1 | 2026-09-13 | [10.5281/zenodo.22780330](https://doi.org/10.5281/zenodo.22780330) | Initial publication. 21 instances across seven categories. |
-| 2 | 2026-09-20 | `r if (!is.null(rmarkdown::metadata$doi) && nzchar(rmarkdown::metadata$doi)) sprintf("[%s](https://doi.org/%s)", rmarkdown::metadata$doi, rmarkdown::metadata$doi) else "reserved at deposit"` | Adds the baseline probability values in @sec-baseline-p. Raises the total to 25 instances across eight categories, adding @riv-2.4 to the record. |
+| 2 | 2026-09-20 | [10.5281/zenodo.22861278](https://doi.org/10.5281/zenodo.22861278) | Adds the baseline probability values in @sec-baseline-p. Raises the total to 25 instances across eight categories, adding RIV 2.4 to the record. |
+| 3 | `r rmarkdown::metadata[["date-modified"]]` | `r if (!is.null(rmarkdown::metadata$doi) && nzchar(rmarkdown::metadata$doi)) sprintf("[%s](https://doi.org/%s)", rmarkdown::metadata$doi, rmarkdown::metadata$doi) else "reserved at deposit"` | Counts every irreproducible baseline probability value as one instance of RIV 2.2, reads each categorical value in the two-arm article as a comparison of its category against the rest of the group, and moves the two categorical values previously counted under RIV 2.4 to RIV 2.2 (@sec-baseline-p). Raises the total to 29 instances across seven categories. |
 
 : Any change to a finding, RIV count, or recommendation creates a new version with
 a new version DOI. Superseded versions remain permanently resolvable. {tbl-colwidths="[9,16,41,34]"}

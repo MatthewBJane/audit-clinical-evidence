@@ -1,0 +1,73 @@
+# Correspondence between ACE and the journals that published the audited work.
+# This file is the only thing to edit; correspondence.qmd builds the page from it
+# (reports/_filters/ace-correspondence.lua). Report titles come from each
+# report's own front matter.
+#
+# One `threads` entry per journal contacted about an audit. A thread covers one
+# or more audited articles; if a journal reaches different decisions on two
+# articles, split them into two threads.
+#
+# Stages, in order. Add an event each time something happens; the page shows the
+# furthest stage reached and the date each stage was first reached.
+#   sent      the letter and report went to the editors and/or research
+#             integrity office (list the addresses under `recipients`)
+#   response  first reply received; discussion under way
+#   decision  the journal has decided; also set `decision:` to one of
+#             none | correction | expression-of-concern | retraction
+# A thread with no events shows as "Letter in preparation".
+#
+# Example thread, once things move:
+#   - journal: "Medicine"
+#     publisher: "Wolters Kluwer"
+#     articles:
+#       - label: "Abdelbasset et al. (2019a)"
+#         doi: "10.1097/MD.0000000000015344"
+#     recipients:
+#       - role: "Editor-in-Chief"
+#         email: "editor@example.org"
+#       - role: "Research integrity office"
+#         email: "integrity@example.org"
+#     events:
+#       - date: "2026-10-01"
+#         stage: sent
+#         note: "Report and cover letter sent."
+#       - date: "2026-10-20"
+#         stage: response
+#         note: "Editorial office acknowledged receipt and opened an inquiry."
+#     decision: ""            # set when a decision event is added
+
+correspondence:
+  updated: "2026-09-26"
+  audits:
+    - ace-id: "ACE2026001"
+      recommendation: retraction
+      threads:
+        - journal: "Medicine"
+          publisher: "Wolters Kluwer"
+          articles:
+            - label: "Abdelbasset et al. (2019a)"
+              doi: "10.1097/MD.0000000000015344"
+            - label: "Abdelbasset et al. (2019b)"
+              doi: "10.1097/MD.0000000000016820"
+          recipients: []
+          events: []
+          decision: ""
+        - journal: "Clinics"
+          publisher: "Elsevier"
+          articles:
+            - label: "Abdelbasset et al. (2019c)"
+              doi: "10.6061/clinics/2019/e1017"
+          recipients: []
+          events: []
+          decision: ""
+    - ace-id: "ACE2026002"
+      recommendation: retraction
+      threads:
+        - journal: "The Journals of Gerontology, Series A"
+          publisher: "Oxford University Press"
+          articles:
+            - label: "Singh, Clements, and Fiatarone (1997)"
+              doi: "10.1093/gerona/52A.1.M27"
+          recipients: []
+          events: []
+          decision: ""

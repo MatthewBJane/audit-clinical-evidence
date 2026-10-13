@@ -41,6 +41,7 @@ format:
     filters:
       - ../_extensions/ace-formatting/acePDF/fields.lua
       - ../_filters/ace-riv-links.lua   # @riv-x.y labels (needed in every format)
+      - ../_filters/ace-tables.lua      # Markdown tables: grey mono column labels
       - quarto                          # position marker: the next filter runs after Quarto's
       - ../_filters/ace-pdf-xrefs.lua   # "Figure 1" / "Table 2" / "Section 2.1" fully linked
 

@@ -13,6 +13,7 @@ ace_purple_dark <- "#cf50cf"
 # legible on the light page and on the dark site theme.
 ace_blue_text   <- "#0e9cb0"
 ace_purple_text <- "#cf50cf"
+ace_purple_bg   <- "#fbe4fb"   # light magenta fill behind a failing verdict
 
 
 # echo/warning/message/fig-dpi are set in reports/_metadata.yml. The device is

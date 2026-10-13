@@ -4,10 +4,16 @@ project:
   execute-dir: project
   pre-render:
     - scripts/build_categories.py        # writes each report's categories: from its four facet fields
+    - scripts/build_report_meta.py       # writes violations: and recommendation: into each report; the home page RIV grid
     - scripts/build_handbook.py          # assembles _handbook/*.md for handbook.qmd (docs/handbook.pdf)
+  post-render:
+    - scripts/tidy_mathml.py             # plain brackets in MathML drawn as plain brackets, not stretchy ones
+    - scripts/cache_bust.py              # version tags on our CSS/JS/PDFs/images so returning visitors get fresh files
+    - scripts/build_stamp.py             # stamps every page + docs/version.json, for the freshness check in the page head
   resources:
     - CNAME
     - .nojekyll
+    - fonts/Concrete-Math.woff2        # math font (styles.css, "MATH")
 
  
 website:
@@ -21,11 +27,16 @@ website:
     image: /images/twitter-card.png
     card-style: summary_large_image
   navbar:
+    # Below 1200px the links fold into the menu button, so they never wrap or
+    # run under the ACE wordmark.
+    collapse-below: xl
     left:
       - href: index.qmd
         text: Home
       - href: reports.qmd
         text: Reports
+      - href: correspondence.qmd
+        text: Correspondence
       - href: about.qmd
         text: About
       - href: team.qmd
@@ -49,19 +60,51 @@ website:
 
 format:
   html:
-    theme: 
-      light: flatly
+    theme:
+      # dark is listed first, so it is the default; the toggle still switches to light
       dark: darkly # A better base theme for a black background
+      light: flatly
     css: styles.css
-    # Math: Quarto's bundled MathJax 3 cannot change font. Leave math as plain
-    # TeX in the page and load MathJax 4 ourselves with Fira Math, a sans
-    # math font that matches Roboto. Config must precede the script, so both
-    # live here rather than relying on Quarto's own math loader.
-    html-math-method: plain
+    # Math: pandoc writes it as MathML, which the browser draws itself in
+    # Concrete Math (fonts/Concrete-Math.woff2; @font-face in styles.css,
+    # "MATH"). No MathJax: no script, no CDN, nothing to wait for. The PDF
+    # uses the same font (acePDF.tex, \setmathfont).
+    html-math-method: mathml
     include-after-body:
       # term -> facet map (Population/Treatment/Outcome/Design), written by
       # scripts/build_categories.py; read by the category scripts below.
       - file: _includes/category-facets.html
+      - text: |
+          <script>
+          // Navbar wordmark glitch (styles.css, "WORDMARK HOVER GLITCH"):
+          // a burst every 3.8 to 6.4 seconds, at random, like the home page
+          // mark. The torn slices are drawn from data-text, which briefly
+          // carries a stray glyph; the word itself never changes, so the
+          // navbar never shifts. Not on the home page (the mark is hidden
+          // there), not with reduced motion, not while the tab is hidden.
+          (function () {
+            var t = document.querySelector(".navbar .navbar-title");
+            if (!t || document.body.classList.contains("homepage")) return;
+            var word = t.textContent.trim();
+            t.setAttribute("data-text", word);
+            if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+            var GLYPHS = "ACE#%&@$XZ0187/<>?*";
+            function burst() {
+              t.classList.remove("is-burst"); void t.offsetWidth; t.classList.add("is-burst");
+              setTimeout(function () {
+                var w = word.split(""), i = Math.floor(Math.random() * w.length);
+                w[i] = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+                t.setAttribute("data-text", w.join(""));
+              }, 230);
+              setTimeout(function () { t.setAttribute("data-text", word); }, 420);
+              setTimeout(function () { t.classList.remove("is-burst"); }, 900);
+            }
+            (function next() {
+              setTimeout(function () { if (!document.hidden) burst(); next(); },
+                         3800 + Math.random() * 2600);
+            })();
+          })();
+          </script>
       - text: |
           <script>
           // Fold-in right panel for narrow screens. Quarto hides
@@ -327,18 +370,78 @@ format:
             }
           })();
           </script>
+      - text: |
+          <script>
+          // Collapsed navbar (below 1200px, collapse-below in this file): keep
+          // the RSS and GitHub icons on the bar beside the theme toggle instead
+          // of at the foot of the menu, as long as the bar has room (450px and
+          // up); narrower than that they go back into the menu, side by side.
+          // The nodes are moved, not copied, so their links and styles are the
+          // same ones Quarto wrote. Styling: styles.css, "NAVBAR TOOLS".
+          (function () {
+            var onBar = window.matchMedia("(min-width: 450px) and (max-width: 1199.98px)");
+            function place() {
+              var nav = document.querySelector(".navbar .navbar-container");
+              var collapse = nav && nav.querySelector("#navbarCollapse");
+              var icons = nav && nav.querySelector("ul.navbar-nav.ms-auto");
+              var tools = nav && nav.querySelector(".quarto-navbar-tools");
+              if (!nav || !collapse || !icons || !tools) return;
+              if (onBar.matches) {
+                if (icons.parentNode !== nav) { nav.insertBefore(icons, tools); icons.classList.add("ace-bar-icons"); }
+              } else if (icons.parentNode !== collapse) {
+                collapse.appendChild(icons); icons.classList.remove("ace-bar-icons");
+              }
+            }
+            if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", place); else place();
+            if (onBar.addEventListener) onBar.addEventListener("change", place); else onBar.addListener(place);
+          })();
+          </script>
     include-in-header:
       text: |
+        <!-- Fonts, requested straight from the page head rather than through an
+             @import inside styles.css, so the browser starts fetching them at
+             once. Rubik Glitch (the ACE wordmark) uses display=block: the mark
+             stays invisible for the moment it takes to arrive instead of
+             flashing as plain letters. -->
         <script>
-        window.MathJax = {
-          output: { font: "mathjax-fira" },
-          tex: {
-            inlineMath:  [["\\(", "\\)"], ["$", "$"]],
-            displayMath: [["\\[", "\\]"], ["$$", "$$"]]
+        // Freshness check. GitHub Pages lets a browser reuse a page for up to
+        // 10 minutes, so right after a publish someone could still be shown
+        // the previous version. Every page carries its own build stamp
+        // (scripts/build_stamp.py); this asks for the published stamps,
+        // skipping every cache, and if this copy is out of date it fetches
+        // the current page and reloads. Tried once per new version, so it can
+        // never loop; does nothing offline or when the list is unavailable.
+        (function () {
+          function check() {
+            var m = document.querySelector('meta[name="ace-build"]');
+            if (!m || !window.fetch || location.protocol === "file:") return;
+            var path = decodeURIComponent(location.pathname).replace(/^\//, "");
+            if (path === "" || path.slice(-1) === "/") path += "index.html";
+            fetch("/version.json?t=" + Date.now(), { cache: "no-store" })
+              .then(function (r) { return r.ok ? r.json() : null; })
+              .then(function (v) {
+                var live = v && v.pages && v.pages[path];
+                if (!live || live === m.content) return;
+                var key = "ace-fresh:" + path;
+                try {
+                  if (sessionStorage.getItem(key) === live) return;
+                  sessionStorage.setItem(key, live);
+                } catch (e) {}
+                document.documentElement.style.visibility = "hidden";
+                var go = function () { location.reload(); };
+                fetch(location.href, { cache: "reload" }).then(go, go);
+              })
+              .catch(function () {});
           }
-        };
+          check();
+          // also when the browser restores a page from its back/forward memory
+          window.addEventListener("pageshow", function (e) { if (e.persisted) check(); });
+        })();
         </script>
-        <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml-nofont.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Roboto+Mono:wght@400;500;600;700&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=block">
     toc: true
     toc-title: "Sections"
     mainfont: "Roboto, sans-serif"

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta name="ace-build" content="d5d1a3dc0c">
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.56">
@@ -20,31 +21,30 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js?v=12d33484"></script>
+<script src="site_libs/quarto-nav/headroom.min.js?v=ace0360e"></script>
+<script src="site_libs/clipboard/clipboard.min.js?v=15f52a1e"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js?v=c64544db"></script>
+<script src="site_libs/quarto-search/fuse.min.js?v=de7d60e4"></script>
+<script src="site_libs/quarto-search/quarto-search.js?v=bb16b7e7"></script>
 <meta name="quarto:offset" content="./">
-<link href="./images/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="./images/favicon.png?v=14f25854" rel="icon" type="image/png">
+<script src="site_libs/quarto-listing/list.min.js?v=df008d55"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js?v=77cf2d96"></script>
+<script src="site_libs/quarto-html/quarto.js?v=7563d37e"></script>
+<script src="site_libs/quarto-html/popper.min.js?v=3a4a291c"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js?v=d8287752"></script>
+<script src="site_libs/quarto-html/anchor.min.js?v=91bcf6cd"></script>
+<link href="site_libs/quarto-html/tippy.css?v=ebd6f8ce" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css?v=ab2b9e94" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css?v=4dca331c" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js?v=e2b09c06"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css?v=2318f137" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css?v=7f59090b" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css?v=3d614efb" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -82,9 +82,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-subtitle','listing-abstract','listing-categories','listing-date','listing-date-modified','listing-ace-id','listing-doi','listing-concept-doi','listing-impact','listing-population','listing-treatment','listing-outcome','listing-design',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      valueNames: ['listing-title','listing-subtitle','listing-abstract','listing-categories','listing-date','listing-date-modified','listing-ace-id','listing-doi','listing-concept-doi','listing-impact','listing-violations','listing-recommendation','listing-population','listing-treatment','listing-outcome','listing-design',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-number-sections","listing-google-scholar","listing-bibliography","listing-csl","listing-fig-pos","listing-execute","listing-comments","listing-link-citations","listing-appendix-cite-as","listing-Journal","listing-license","listing-title","listing-subtitle","listing-ace-id","listing-date","listing-date-modified","listing-doi","listing-concept-doi","listing-audited","listing-impact","listing-description","listing-population","listing-treatment","listing-outcome","listing-design","listing-categories","listing-abstract","listing-author","listing-path","listing-outputHref","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+      searchColumns: ["listing-project","listing-website","listing-format","listing-language","listing-number-sections","listing-google-scholar","listing-bibliography","listing-csl","listing-fig-pos","listing-execute","listing-comments","listing-link-citations","listing-appendix-cite-as","listing-Journal","listing-license","listing-title","listing-subtitle","listing-ace-id","listing-date","listing-date-modified","listing-doi","listing-concept-doi","listing-audited","listing-impact","listing-description","listing-highlights","listing-population","listing-treatment","listing-outcome","listing-design","listing-categories","listing-violations","listing-recommendation","listing-abstract","listing-author","listing-path","listing-outputHref","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-draft","listing-nocite","listing-cites"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -101,19 +101,53 @@ ul.task-list li input[type="checkbox"] {
     }
   })
   </script>
+<!-- Fonts, requested straight from the page head rather than through an
+     @import inside styles.css, so the browser starts fetching them at
+     once. Rubik Glitch (the ACE wordmark) uses display=block: the mark
+     stays invisible for the moment it takes to arrive instead of
+     flashing as plain letters. -->
 <script>
-window.MathJax = {
-  output: { font: "mathjax-fira" },
-  tex: {
-    inlineMath:  [["\\(", "\\)"], ["$", "$"]],
-    displayMath: [["\\[", "\\]"], ["$$", "$$"]]
+// Freshness check. GitHub Pages lets a browser reuse a page for up to
+// 10 minutes, so right after a publish someone could still be shown
+// the previous version. Every page carries its own build stamp
+// (scripts/build_stamp.py); this asks for the published stamps,
+// skipping every cache, and if this copy is out of date it fetches
+// the current page and reloads. Tried once per new version, so it can
+// never loop; does nothing offline or when the list is unavailable.
+(function () {
+  function check() {
+    var m = document.querySelector('meta[name="ace-build"]');
+    if (!m || !window.fetch || location.protocol === "file:") return;
+    var path = decodeURIComponent(location.pathname).replace(/^\//, "");
+    if (path === "" || path.slice(-1) === "/") path += "index.html";
+    fetch("/version.json?t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (v) {
+        var live = v && v.pages && v.pages[path];
+        if (!live || live === m.content) return;
+        var key = "ace-fresh:" + path;
+        try {
+          if (sessionStorage.getItem(key) === live) return;
+          sessionStorage.setItem(key, live);
+        } catch (e) {}
+        document.documentElement.style.visibility = "hidden";
+        var go = function () { location.reload(); };
+        fetch(location.href, { cache: "reload" }).then(go, go);
+      })
+      .catch(function () {});
   }
-};
+  check();
+  // also when the browser restores a page from its back/forward memory
+  window.addEventListener("pageshow", function (e) { if (e.persisted) check(); });
+})();
 </script>
-<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml-nofont.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;family=Roboto+Mono:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&amp;display=block">
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=0b47a0cf">
 <link rel="alternate" type="application/rss+xml" title="ACE audit reports" href="reports.xml" data-external="1"><meta property="og:title" content="REPORTS – ACE">
 <meta property="og:description" content="Audits of published clinical research">
 <meta property="og:image" content="https://auditclinicalevidence.org/images/social-card.png">
@@ -132,7 +166,7 @@ window.MathJax = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-xl " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
@@ -152,6 +186,10 @@ window.MathJax = {
   <li class="nav-item">
     <a class="nav-link active" href="./reports.html" aria-current="page"> 
 <span class="menu-text">Reports</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./correspondence.html"> 
+<span class="menu-text">Correspondence</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
@@ -195,7 +233,7 @@ window.MathJax = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Depression">Depression <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Exercise">Exercise <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Heart Disease">Heart Disease <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RCT">RCT <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Depression">Depression <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Exercise">Exercise <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Heart Disease">Heart Disease <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Older Adults">Older Adults <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RCT">RCT <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -220,6 +258,35 @@ window.MathJax = {
 
 
 <p>Reports are identified by an ACE ID (project, year, and report number, e.g.&nbsp;<code>ACE2026001</code>) and are available online and as a PDF. Corrections and author responses are incorporated into new versions and recorded in each report’s version history. See <a href="./about.html">About</a> for the evidence standard behind every finding and <a href="./disclaimers.html">Disclaimers</a> for the editorial and correspondence policy.</p>
+<!-- Email signup card (Reports page). The home page has its own band with the
+     same form; both post to the Google Form behind the private signup Sheet.
+     Styling: styles.css, "SUBSCRIBE CARD". -->
+<div class="ace-subscribe-card">
+  <div class="ace-subscribe-card-text">
+    <span class="ace-eyebrow">Email updates</span>
+    <p>Get an email when a report is published. One message per report, nothing else. Reply to any message to unsubscribe.</p>
+  </div>
+  <form class="ace-subscribe ace-subscribe-card-form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScGCwFKLQZPUsQk86pohYvQb-kIMgw2zuJVricnv3sOyTQxFA/formResponse" method="post" target="ace-subscribe-sink" novalidate="">
+    <label class="visually-hidden" for="ace-subscribe-email-reports">Email</label>
+    <input class="ace-subscribe-input" id="ace-subscribe-email-reports" name="entry.1788943182" type="email" autocomplete="email" inputmode="email" placeholder="you@example.org" required="">
+    <button type="submit" class="ace-subscribe-btn">Subscribe</button>
+    <p class="ace-subscribe-msg" role="status" aria-live="polite"></p>
+  </form>
+  <iframe name="ace-subscribe-sink" title="" hidden=""></iframe>
+</div>
+<script>
+(function () {
+  document.querySelectorAll(".ace-subscribe-card .ace-subscribe").forEach(function (form) {
+    var input = form.querySelector(".ace-subscribe-input"), msg = form.querySelector(".ace-subscribe-msg"), btn = form.querySelector(".ace-subscribe-btn");
+    form.addEventListener("submit", function (e) {
+      var v = (input.value || "").trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { e.preventDefault(); msg.className = "ace-subscribe-msg"; msg.textContent = "Enter an email address."; input.focus(); return; }
+      input.value = v; btn.disabled = true; btn.textContent = "Sending";
+      setTimeout(function () { form.classList.add("is-done"); msg.className = "ace-subscribe-msg is-ok"; msg.textContent = "Added. You will get an email when the next report is published."; }, 700);
+    });
+  });
+})();
+</script>
 <section id="all-reports-newest-first.-filter-by-keyword-or-by-category-in-the-sidebar." class="level4 ace-section-heading">
 <h4 class="ace-section-heading anchored"><span class="ace-section-label">All reports</span> <span class="ace-section-note" data-md="Newest first. Filter by keyword or category." data-sm="Newest first.">Newest first. Filter by keyword, or by category in the sidebar.</span></h4>
 <div id="listing-ACEreports" class="quarto-listing quarto-listing-container-custom">
@@ -231,29 +298,124 @@ window.MathJax = {
 </div>
 <div class="ace-report-listing list">
 
-  <article class="ace-report-card" data-index="0" data-categories="Heart Disease,Exercise,Depression,RCT">
+  
+
+  <article class="ace-report-card" data-index="0" data-categories="Older Adults,Exercise,Depression,RCT">
 
     <div class="ace-report-card-main">
 
       <div class="ace-report-card-topline">
+        <div class="ace-report-card-ids">
+          
+            <span class="ace-report-id listing-ace-id">ACE2026002</span>
+          
+          
+          
+        </div>
         
-          <span class="ace-report-id listing-ace-id">ACE2026001</span>
+          <span class="ace-report-rec ace-report-rec-retraction">Retraction recommended</span>
         
-        
-        
-          <a class="ace-doi-link listing-doi" href="https://doi.org/10.5281/zenodo.22780329" target="_blank" rel="noopener" title="Open the archived record, newest version (opens in a new tab)">10.5281/zenodo.22780329</a>
-        
-
       </div>
 
       <h2 class="ace-report-title listing-title anchored" data-anchor-id="all-reports-newest-first.-filter-by-keyword-or-by-category-in-the-sidebar.">
+        <a href="./reports/ACE2026002/index.html">Audit of Singh et al. (1997)</a>
+      </h2>
+
+      
+        <p class="ace-report-subtitle listing-subtitle">A randomized controlled trial of progressive resistance training in depressed elders</p>
+      
+
+      
+      
+        <div class="ace-report-categories listing-categories">
+          
+            <span class="ace-report-category" data-facet="population">Older Adults</span>
+          
+            <span class="ace-report-category" data-facet="treatment">Exercise</span>
+          
+            <span class="ace-report-category" data-facet="outcome">Depression</span>
+          
+            <span class="ace-report-category" data-facet="design">RCT</span>
+          
+        </div>
+      
+
+      
+      
+        <div class="ace-report-stats">
+          
+            <span class="ace-report-stat ace-report-stat-riv"><b>110</b> integrity violations</span>
+          
+          
+            <span class="ace-report-stat ace-report-impact listing-impact" title="OpenAlex, retrieved 2026-09-20">
+              <span class="ace-report-impact-label">Infected</span>
+              <span><b>440</b> articles</span>
+              <span><b>77</b> reviews</span>
+              <span><b>4</b> guidelines</span>
+            </span>
+          
+        </div>
+      
+
+      
+      
+        <details class="ace-listing-abstract">
+          <summary>Abstract</summary>
+          <div class="ace-listing-abstract-content listing-abstract">
+            This report audits a randomized controlled trial by Singh, Clements, and Fiatarone that compared 10 weeks of progressive resistance training with an attention control condition in 32 community-dwelling adults aged 60 and over with major depression, minor depression, or dysthymia. Every table in the article labels the values reported in parentheses as standard deviations, yet the Methods state that they are standard errors. The article's test statistic values support the Methods (i.e., the parenthetical values are standard errors). The reported age ranges are impossible under the reported standard deviations. Additionally, the depression subgroup means in Table 4 are impossible under the whole-group standard deviations in Table 3. The largest post-test standardized mean difference that the article can support on any depression outcome is −0.72. We located 24 meta-analyses that report a study-level effect size for this trial. Of these, 19 meta-analyses assign @singh1997 a value larger than any possibly correct extraction of the effect size. The median assigned value is −2.74 and the largest is −5.04. Four report exactly −1.75, which is due to meta-analysts treating the parenthetical values of the BDI scores as standard deviations. One of these meta-analyses is a Cochrane review. Furthermore, five of the 10 categorical baseline p values can not be reproduced by any standard test of the reported contingency table cells. Later in the paper there is a reported subgroup mean that is impossible given its sample size. In total, this audit identifies 110 instances of Research Integrity Violations across two categories. Due to the pervasive contamination the misreporting has had on the evidence syntheses in this field, we recommend retraction.
+          </div>
+        </details>
+      
+
+      <div class="ace-report-card-foot">
+        <div class="ace-report-meta ace-date-bar">
+          
+            <div><span class="ace-date-key">Published</span><span class="ace-date-value listing-date">Sep 21, 2026</span></div>
+          
+          
+        </div>
+
+        <div class="ace-report-card-actions">
+          <a class="ace-pdf-button" href="./reports/ACE2026002/index.html">Read online</a>
+          
+            <a class="ace-pdf-button" href="reports/ACE2026002/ACE2026002.pdf?v=b652eba7" target="_blank">PDF</a>
+          
+        </div>
+      </div>
+
+    </div>
+
+  </article>
+
+  
+
+  <article class="ace-report-card" data-index="1" data-categories="Heart Disease,Exercise,Depression,RCT">
+
+    <div class="ace-report-card-main">
+
+      <div class="ace-report-card-topline">
+        <div class="ace-report-card-ids">
+          
+            <span class="ace-report-id listing-ace-id">ACE2026001</span>
+          
+          
+          
+            <a class="ace-doi-link listing-doi" href="https://doi.org/10.5281/zenodo.22780329" target="_blank" rel="noopener" title="Open the archived record, newest version (opens in a new tab)">10.5281/zenodo.22780329</a>
+          
+        </div>
+        
+          <span class="ace-report-rec ace-report-rec-retraction">Retraction recommended</span>
+        
+      </div>
+
+      <h2 class="ace-report-title listing-title anchored">
         <a href="./reports/ACE2026001/index.html">Audit of Abdelbasset et al. (2019)</a>
       </h2>
 
       
         <p class="ace-report-subtitle listing-subtitle">Three randomized controlled trials on exercise and depression</p>
-        
-        
+      
+
       
       
         <div class="ace-report-categories listing-categories">
@@ -268,42 +430,50 @@ window.MathJax = {
           
         </div>
       
-        
+
+      
+      
+        <div class="ace-report-stats">
+          
+            <span class="ace-report-stat ace-report-stat-riv"><b>29</b> integrity violations</span>
+          
+          
+            <span class="ace-report-stat ace-report-impact listing-impact" title="OpenAlex, retrieved 2026-09-08">
+              <span class="ace-report-impact-label">Infected</span>
+              <span><b>74</b> articles</span>
+              <span><b>17</b> reviews</span>
+              <span><b>22</b> guidelines</span>
+            </span>
+          
+        </div>
+      
+
       
       
         <details class="ace-listing-abstract">
           <summary>Abstract</summary>
           <div class="ace-listing-abstract-content listing-abstract">
-            This report audits three randomized controlled trials by Abdelbasset and colleagues evaluating exercise interventions for depression in patients with congestive heart failure. The three articles appear to report overlapping arms from the same underlying clinical trial while presenting them as separate studies. Across the articles, duplicated baseline characteristics and PHQ-9 outcome statistics indicate reuse of the same trial data even though the articles report incompatible authorship contribution statements and three distinct ethical approval numbers, and do not cite one another. The articles are potentially linked to a well-documented authorship-for-sale publication network. Furthermore, one of the three articles identifies Abdelbasset as both first author and editor which is a clear conflict of interest. Reported summary statistics are impossible given a real data set, specifically, seven of nine PHQ-9 (the primary outcome) mean and standard deviation pairs fail GRIMMER consistency tests. The baseline tables report probability values that cannot be correct, including two different values for a single two-group comparison of a binary variable, while the continuous comparisons in the same tables reproduce exactly. The reported outcomes also imply extreme between-group standardized mean differences of approximately three standard deviations at post-intervention, making the studies highly influential outliers in later meta-analyses. In total, this audit identifies 25 instances of Research Integrity Violations across eight categories. We conclude that the three articles are not credible and are unlikely to contain any evidentiary value thus we recommend retraction by the publishing journals.
+            This report audits three randomized controlled trials by Abdelbasset and colleagues evaluating exercise interventions for depression in patients with congestive heart failure. The three articles appear to report overlapping arms from the same underlying clinical trial while presenting them as separate studies. Across the articles, duplicated baseline characteristics and PHQ-9 outcome statistics indicate reuse of the same trial data even though the articles report incompatible authorship contribution statements and three distinct ethical approval numbers, and do not cite one another. The articles are potentially linked to a well-documented authorship-for-sale publication network. Furthermore, one of the three articles identifies Abdelbasset as both first author and editor which is a clear conflict of interest. Reported summary statistics are impossible given a real data set, specifically, seven of nine PHQ-9 (the primary outcome) mean and standard deviation pairs fail GRIMMER consistency tests. The baseline tables report probability values that cannot be correct, including two different values for a single two-group comparison of a binary variable, while the continuous comparisons in the same tables reproduce exactly. The reported outcomes also imply extreme between-group standardized mean differences of approximately three standard deviations at post-intervention, making the studies highly influential outliers in later meta-analyses. In total, this audit identifies 29 instances of Research Integrity Violations across seven categories. We conclude that the three articles are not credible and are unlikely to contain any evidentiary value thus we recommend retraction by the publishing journals.
           </div>
         </details>
       
 
-      <div class="ace-report-meta ace-date-bar">
-        
-          <div><span class="ace-date-key">Published</span><span class="ace-date-value listing-date">Sep 13, 2026</span></div>
-        
+      <div class="ace-report-card-foot">
+        <div class="ace-report-meta ace-date-bar">
+          
+            <div><span class="ace-date-key">Published</span><span class="ace-date-value listing-date">Sep 13, 2026</span></div>
+          
+          
+            <div><span class="ace-date-key">Updated</span><span class="ace-date-value listing-date-modified">Sep 20, 2026</span></div>
+          
+        </div>
 
-        
-          <div><span class="ace-date-key">Updated</span><span class="ace-date-value listing-date-modified">Sep 20, 2026</span></div>
-        
-      </div>
-
-      <div class="ace-report-card-actions">
-        <a class="ace-pdf-button" href="./reports/ACE2026001/index.html">Read online</a>
-
-        
-          <a class="ace-pdf-button" href="reports/ACE2026001/ACE2026001.pdf" target="_blank">PDF</a>
-        
-
-        
-          <div class="ace-report-impact listing-impact" title="OpenAlex, retrieved 2026-09-08">
-            <span class="ace-report-impact-label">Infected</span>
-            <b>74</b><span>articles</span>
-            <b>17</b><span>reviews</span>
-            <b>22</b><span>guidelines</span>
-          </div>
-        
+        <div class="ace-report-card-actions">
+          <a class="ace-pdf-button" href="./reports/ACE2026001/index.html">Read online</a>
+          
+            <a class="ace-pdf-button" href="reports/ACE2026001/ACE2026001.pdf?v=a6684cb9" target="_blank">PDF</a>
+          
+        </div>
       </div>
 
     </div>
@@ -457,7 +627,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  const darkModeDefault = false;
+  const darkModeDefault = true;
   let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
@@ -900,7 +1070,37 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </footer>
 <!-- GENERATED by scripts/build_categories.py; edit the reports, not this file. -->
-<script>window.aceCategoryFacets = {"Depression": "outcome", "Exercise": "treatment", "Heart Disease": "population", "RCT": "design"};</script>
+<script>window.aceCategoryFacets = {"Depression": "outcome", "Exercise": "treatment", "Heart Disease": "population", "Older Adults": "population", "RCT": "design"};</script>
+<script>
+// Navbar wordmark glitch (styles.css, "WORDMARK HOVER GLITCH"):
+// a burst every 3.8 to 6.4 seconds, at random, like the home page
+// mark. The torn slices are drawn from data-text, which briefly
+// carries a stray glyph; the word itself never changes, so the
+// navbar never shifts. Not on the home page (the mark is hidden
+// there), not with reduced motion, not while the tab is hidden.
+(function () {
+  var t = document.querySelector(".navbar .navbar-title");
+  if (!t || document.body.classList.contains("homepage")) return;
+  var word = t.textContent.trim();
+  t.setAttribute("data-text", word);
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var GLYPHS = "ACE#%&@$XZ0187/<>?*";
+  function burst() {
+    t.classList.remove("is-burst"); void t.offsetWidth; t.classList.add("is-burst");
+    setTimeout(function () {
+      var w = word.split(""), i = Math.floor(Math.random() * w.length);
+      w[i] = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+      t.setAttribute("data-text", w.join(""));
+    }, 230);
+    setTimeout(function () { t.setAttribute("data-text", word); }, 420);
+    setTimeout(function () { t.classList.remove("is-burst"); }, 900);
+  }
+  (function next() {
+    setTimeout(function () { if (!document.hidden) burst(); next(); },
+               3800 + Math.random() * 2600);
+  })();
+})();
+</script>
 <script>
 // Fold-in right panel for narrow screens. Quarto hides
 // #quarto-margin-sidebar below 768px; this adds an edge tab that
@@ -1163,6 +1363,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     apply();
   }
+})();
+</script>
+<script>
+// Collapsed navbar (below 1200px, collapse-below in this file): keep
+// the RSS and GitHub icons on the bar beside the theme toggle instead
+// of at the foot of the menu, as long as the bar has room (450px and
+// up); narrower than that they go back into the menu, side by side.
+// The nodes are moved, not copied, so their links and styles are the
+// same ones Quarto wrote. Styling: styles.css, "NAVBAR TOOLS".
+(function () {
+  var onBar = window.matchMedia("(min-width: 450px) and (max-width: 1199.98px)");
+  function place() {
+    var nav = document.querySelector(".navbar .navbar-container");
+    var collapse = nav && nav.querySelector("#navbarCollapse");
+    var icons = nav && nav.querySelector("ul.navbar-nav.ms-auto");
+    var tools = nav && nav.querySelector(".quarto-navbar-tools");
+    if (!nav || !collapse || !icons || !tools) return;
+    if (onBar.matches) {
+      if (icons.parentNode !== nav) { nav.insertBefore(icons, tools); icons.classList.add("ace-bar-icons"); }
+    } else if (icons.parentNode !== collapse) {
+      collapse.appendChild(icons); icons.classList.remove("ace-bar-icons");
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", place); else place();
+  if (onBar.addEventListener) onBar.addEventListener("change", place); else onBar.addListener(place);
 })();
 </script>
 

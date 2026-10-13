@@ -1,5 +1,6 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500;600;700&family=Rubik+Glitch&display=swap');
+/* Fonts (Roboto, Roboto Mono, Rubik Glitch) are linked from the page head in
+   _quarto.yml (include-in-header), not imported here, so they load in parallel
+   with this file. */
 
 /* ---- GLOBAL STYLES ---- */
 body {
@@ -21,7 +22,15 @@ code, pre {
   overflow: visible !important;
   padding-left: 8px !important;
   padding-right: 8px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
+
+/* A slimmer bar: less padding above and below, and the wordmark's line box
+   cut to the height of its letters (it was 1.5x the font size). The glitch
+   shadows still draw outside it, since .navbar-brand overflows visibly. */
+nav.navbar { --bs-navbar-padding-y: 0.55rem; }
+.navbar .navbar-title { line-height: 1 !important; }
 
 /* ---------------------------------------------------------
    NAVBAR LINKS
@@ -31,9 +40,16 @@ code, pre {
 .navbar .navbar-nav .nav-link {
   border: 1px solid rgba(226, 98, 226, 0.55);
   border-radius: 0;
-  padding: 0.3rem 0.75rem !important;
+  padding: 0.5rem 0.75rem !important;
   margin: 0 0.2rem;
   color: #ffffff !important;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  white-space: nowrap;
   text-decoration: none !important;
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
@@ -49,9 +65,12 @@ code, pre {
   color: #ffffff !important;
 }
 
-/* current page: a low-alpha fill of the theme colour; border stays subtle */
+/* current page: a low-alpha fill of the theme colour, a solid border and a
+   solid bar along the bottom edge */
 .navbar .navbar-nav .nav-link.active {
   background-color: rgba(226, 98, 226, 0.22);
+  border-color: #e262e2;
+  box-shadow: inset 0 -3px 0 #e262e2;
 }
 
 /* light theme: the navbar border is cyan, so the boxes follow */
@@ -68,6 +87,52 @@ body.quarto-light .navbar .navbar-nav .nav-link:focus-visible {
 
 body.quarto-light .navbar .navbar-nav .nav-link.active {
   background-color: rgba(3, 229, 255, 0.22);
+  border-color: #03e5ff;
+  box-shadow: inset 0 -3px 0 #03e5ff;
+}
+
+/* collapsed menu (below 1200px, see collapse-below in _quarto.yml): the
+   same boxes, stacked full width under the bar */
+@media (max-width: 1199.98px) {
+  /* wordmark beside the menu button, tools on the right (Quarto centres it) */
+  .navbar .navbar-container > .navbar-brand-container { margin-left: 0 !important; margin-right: auto !important; }
+  .navbar .navbar-collapse .navbar-nav { padding: 0.6rem 0 0.4rem; gap: 0.4rem; }
+  .navbar .navbar-collapse .navbar-nav .nav-link { margin: 0; padding: 0.7rem 0.8rem !important; }
+
+  /* NAVBAR TOOLS. The bar is one flex row that wraps; the open menu is a
+     full-width item, so everything that should stay on the top row is
+     ordered before it. Quarto's own order is kept (menu button at the left,
+     wordmark, search at the far right); the RSS/GitHub icons (moved out of
+     the menu by the script in _quarto.yml) and the theme toggle sit as a
+     group beside the search. The wordmark's auto margin takes the free
+     space, so nothing floats mid-bar. */
+  .navbar .navbar-container > .navbar-toggler { order: 1; }
+  .navbar .navbar-container > .navbar-brand-container { order: 2; }
+  .navbar .navbar-container > .navbar-nav.ace-bar-icons { order: 3; }
+  .navbar .navbar-container > .quarto-navbar-tools { order: 4; margin-left: 0.2rem; }
+  .navbar .navbar-container > #quarto-search { order: 5; margin-left: 0.4rem !important; }
+  .navbar .navbar-container > .navbar-collapse { order: 10; }
+
+  .navbar .navbar-container > .navbar-nav.ace-bar-icons {
+    flex-direction: row;
+    align-items: center;
+    margin: 0 0.1rem 0 0;
+    padding: 0;
+    gap: 0;
+  }
+  /* small screens: tighter gaps so the icons fit on the bar down to 450px */
+  @media (max-width: 575.98px) {
+    .navbar .navbar-container > #quarto-search { margin-left: 0.2rem !important; }
+    .navbar .navbar-container > .navbar-nav.ace-bar-icons { margin-left: 0.3rem !important; }
+    .navbar .navbar-container > .navbar-toggler { margin-right: 0.3rem !important; }
+  }
+  /* inside the menu (narrower than 450px): side by side, not stacked */
+  .navbar .navbar-collapse .navbar-nav.ms-auto {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.2rem;
+    padding-top: 0.2rem;
+  }
 }
 
 /* ---------------------------------------------------------
@@ -167,45 +232,47 @@ body.quarto-light .navbar .quarto-color-scheme-toggle .bi::after {
   88%  { filter: drop-shadow(-6px 3px 0 #e262e2) drop-shadow(6px -3px 0 #03e5ff); transform: translate(-2px, 1px) skewX(6deg); }
 }
 
-/* Ambient: rest for ~3.5s, then a ~1s burst (the last 22% of a 4.5s
-   cycle, eleven stepped states). Only the burst repaints. */
-@keyframes ace-glitch-ambient {
-  0%, 77%, 100% { filter: drop-shadow(3px 3px 0 #e262e2) drop-shadow(-3px -3px 0 #03e5ff); transform: none; }
-  78% { filter: drop-shadow(-5px 2px 0 #e262e2) drop-shadow(5px -2px 0 #03e5ff); transform: translate(-2px, 1px) skewX(-6deg); }
-  80% { filter: drop-shadow(6px -1px 0 #e262e2) drop-shadow(-6px 1px 0 #03e5ff); transform: translate(2px, -1px); }
-  82% { filter: drop-shadow(-2px -5px 0 #e262e2) drop-shadow(2px 5px 0 #03e5ff); transform: translate(-1px, 0) skewX(4deg); }
-  84% { filter: drop-shadow(4px 4px 0 #e262e2) drop-shadow(-4px -4px 0 #03e5ff); transform: translate(1px, 1px); }
-  86% { filter: drop-shadow(-7px 0 0 #e262e2) drop-shadow(7px 0 0 #03e5ff); transform: translate(-3px, 0) skewX(-8deg); }
-  88% { filter: drop-shadow(2px -3px 0 #e262e2) drop-shadow(-2px 3px 0 #03e5ff); transform: none; }
-  90% { filter: drop-shadow(-3px 3px 0 #e262e2) drop-shadow(3px -3px 0 #03e5ff); transform: translate(2px, 0) skewX(5deg); }
-  92% { filter: drop-shadow(5px 1px 0 #e262e2) drop-shadow(-5px -1px 0 #03e5ff); transform: translate(-1px, -1px); }
-  94% { filter: drop-shadow(-4px -2px 0 #e262e2) drop-shadow(4px 2px 0 #03e5ff); transform: translate(1px, 0) skewX(-3deg); }
-  96% { filter: drop-shadow(-6px 3px 0 #e262e2) drop-shadow(6px -3px 0 #03e5ff); transform: translate(-2px, 1px) skewX(6deg); }
-  98% { filter: drop-shadow(4px -2px 0 #e262e2) drop-shadow(-4px 2px 0 #03e5ff); transform: translate(1px, 0); }
+/* Navbar wordmark, in the home page's language: at rest it sits still;
+   every few seconds (at random, set by the site script in _quarto.yml)
+   it gets a burst: the jitter above, plus cyan and magenta slices of the
+   word torn sideways, one of them sometimes showing a stray glyph. The
+   slices are ::before / ::after copies of the text (data-text, set by the
+   script), positioned over it, so nothing in the navbar moves. Hover
+   keeps it glitching. */
+.navbar .navbar-title { position: relative; display: inline-block; }
+.navbar .navbar-title::before,
+.navbar .navbar-title::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  background: none;
 }
+.navbar .navbar-title::before { color: #03e5ff; -webkit-text-fill-color: #03e5ff; }
+.navbar .navbar-title::after  { color: #e262e2; -webkit-text-fill-color: #e262e2; }
 
-/* always on, intermittently; the homepage mark is offset so the two
-   don't burst in unison */
-.navbar .navbar-title {
-  animation: ace-glitch-ambient 4.5s steps(1, end) infinite;
-}
+.navbar .navbar-title.is-burst                { animation: ace-glitch 0.9s steps(1, end); }
+.navbar .navbar-title.is-burst::before        { animation: ace-hero-slice-c 0.9s steps(1, end); }
+.navbar .navbar-title.is-burst::after         { animation: ace-hero-slice-m 0.9s steps(1, end); }
+.navbar .navbar-brand:hover .navbar-title         { animation: ace-glitch 0.9s steps(1, end) infinite; }
+.navbar .navbar-brand:hover .navbar-title::before { animation: ace-hero-slice-c 0.9s steps(1, end) infinite; }
+.navbar .navbar-brand:hover .navbar-title::after  { animation: ace-hero-slice-m 0.9s steps(1, end) infinite; }
 
-body.homepage h1.title {
-  animation: ace-glitch-ambient 4.5s steps(1, end) -2s infinite;
-}
-
-/* hover: continuous */
-.navbar .navbar-brand:hover .navbar-title,
-body.homepage h1.title:hover {
-  animation: ace-glitch 0.8s steps(1, end) infinite;
-}
+/* home page: the hero carries the mark, so the navbar leaves it out (hidden
+   in place, so the links sit exactly where they do on every other page) */
+body.homepage .navbar .navbar-brand { visibility: hidden; }
 
 /* keep it still for people who have asked their OS for less motion */
 @media (prefers-reduced-motion: reduce) {
   .navbar .navbar-title,
-  body.homepage h1.title,
+  .navbar .navbar-title::before,
+  .navbar .navbar-title::after,
   .navbar .navbar-brand:hover .navbar-title,
-  body.homepage h1.title:hover {
+  .navbar .navbar-brand:hover .navbar-title::before,
+  .navbar .navbar-brand:hover .navbar-title::after {
     animation: none;
   }
 }
@@ -317,36 +384,6 @@ html body.quarto-dark:not(.homepage) h1.title {
   -webkit-text-fill-color: #f2f5f7 !important;
 }
 
-/* Homepage wordmark - keeps the ACE glitch treatment, matching the navbar */
-body.homepage h1.title {
-  font-size: 70pt !important;
-  font-family: 'Rubik Glitch', system-ui !important;
-  font-weight: normal !important;
-
-  background: black !important;
-
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  color: transparent !important;
-
-  filter:
-    drop-shadow(3px 3px 0px #e262e2)
-    drop-shadow(-3px -3px 0px #03e5ff);
-}
-
-body.homepage.quarto-light h1.title {
-  background-color: #222222 !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-}
-
-body.homepage.quarto-dark h1.title {
-  background-color: white !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-}
-
 /* ---------------------------------------------------------
    ACE SUBTITLE
    Quiet deck line under the title. No box, no accent bar.
@@ -389,49 +426,6 @@ html body .subtitle:hover {
   filter: none !important;
   transform: none !important;
 }
-
-/* Homepage deck line under the ACE wordmark: tracked mono caps ruled
-   top and bottom in the theme accent (cyan light / magenta dark), matching
-   the navbar borders. Report pages keep the quiet subtitle above. */
-html body.homepage .subtitle {
-  font-family: 'Roboto Mono', monospace !important;
-  /* sized so the line spans roughly the ink width of the ACE wordmark above */
-  font-size: 0.76rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.1em !important;
-  text-transform: uppercase;
-  line-height: 1.3 !important;
-
-  display: inline-block;
-  width: auto !important;
-  max-width: none !important;
-  padding: 0.4rem 0 !important;
-  margin: -0.1rem 0 1.3rem !important;
-
-  border-top: 2px solid #03e5ff !important;
-  border-bottom: 2px solid #03e5ff !important;
-}
-
-html body.homepage.quarto-light .subtitle {
-  color: #1a1f24 !important;
-  -webkit-text-fill-color: #1a1f24 !important;
-}
-
-html body.homepage.quarto-dark .subtitle {
-  color: #f2f5f7 !important;
-  -webkit-text-fill-color: #f2f5f7 !important;
-  border-top-color: #e262e2 !important;
-  border-bottom-color: #e262e2 !important;
-}
-
-html body.homepage .subtitle:hover {
-  animation: ace-text-glitch 0.8s steps(1, end) infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html body.homepage .subtitle:hover { animation: none; }
-}
-
 
 /* Standard styling for smaller headers */
 h2 {
@@ -511,19 +505,44 @@ body.quarto-dark ::selection {
   color: inherit;
 }
 
-/* ---- GLOBAL NAVBAR STYLE ---- */
+/* ---- GLOBAL NAVBAR STYLE ----
+   No top border; a thin accent line along the bottom with a faint highlight
+   that drifts slowly across it (see .navbar::after below). */
 .navbar {
+  position: relative;
   background-color: #222222 !important; /* Smooth off-black for both themes */
-  border-width: 10px 0 10px 0; 
+  border-width: 0 0 4px 0;
   border-style: solid;
   border-image: linear-gradient(90deg, #e262e2, #d75dd7) 1;
 }
 
-.navbar {
-  background-color: #222222 !important;
-  border-width: 10px 0 10px 0;
-  border-style: solid;
-  border-image: linear-gradient(90deg, #e262e2, #d75dd7) 1;
+/* the moving glow: a soft white band that sweeps along the bottom line */
+.navbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;               /* sits exactly on the 4px bottom border */
+  height: 4px;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.55) 50%,
+      rgba(255, 255, 255, 0) 60%,
+      transparent 100%) no-repeat;
+  background-size: 40% 100%;
+  background-position: -60% 0;
+  filter: blur(1px);
+  animation: ace-navbar-glow 9s ease-in-out infinite;
+}
+@keyframes ace-navbar-glow {
+  0%   { background-position: -60% 0; }
+  70%  { background-position: 160% 0; }
+  100% { background-position: 160% 0; }  /* short pause before the next pass */
+}
+@media (prefers-reduced-motion: reduce) {
+  .navbar::after { animation: none; display: none; }
 }
 
 /* Light theme gradient */
@@ -709,69 +728,54 @@ body.quarto-light .navbar .solid-letter {
 
 /* ---------------------------------------------------------
    ACE REPORT LISTING BUTTONS
+   Read online is the primary action: the accent outline with a faint wash,
+   filled on hover. PDF is a quiet grey wireframe badge. Mono caps, square
+   corners, the same language as the home page buttons.
 --------------------------------------------------------- */
 
 .ace-report-card-actions {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
-  gap: 0.6rem;
+  gap: 0.4rem;
   flex-wrap: wrap;
   min-width: 0;
-  margin-top: 0.4rem;
 }
 
-/* Both Read online and PDF buttons use .ace-pdf-button */
-.ace-report-card-actions .ace-pdf-button {
+html body .ace-report-card-actions .ace-pdf-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  width: auto;
-  max-width: max-content;
   white-space: nowrap;
-
-  border: 1px solid #222;
-  border-radius: 6px;
-  padding: 0.55rem 0.85rem;
-
+  padding: 0.42rem 0.7rem;
+  border: 1px solid var(--ace-badge);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ace-muted) !important;
+  -webkit-text-fill-color: currentColor !important;
   font-family: "Roboto Mono", monospace;
-  font-size: 0.8rem;
+  font-size: 0.68rem;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   line-height: 1.1;
   text-decoration: none;
-
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease,
-    transform 0.15s ease,
-    filter 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
-
-/* Light theme */
-html[data-bs-theme="light"] .ace-report-card-actions .ace-pdf-button,
-body[data-bs-theme="light"] .ace-report-card-actions .ace-pdf-button,
-body.quarto-light .ace-report-card-actions .ace-pdf-button {
-  background-color: #222222 !important;
-  color: white !important;
+html body .ace-report-card-actions .ace-pdf-button:first-child {
+  border-color: var(--ace-lead);
+  background: var(--ace-wash);
+  color: var(--ace-ink) !important;
 }
-
-/* Dark theme */
-html[data-bs-theme="dark"] .ace-report-card-actions .ace-pdf-button,
-body[data-bs-theme="dark"] .ace-report-card-actions .ace-pdf-button,
-body.quarto-dark .ace-report-card-actions .ace-pdf-button {
-  background-color: white !important;
-  color: #222222 !important;
-}
-
-/* Hover effect for both buttons */
-.ace-report-card-actions .ace-pdf-button:hover {
-  transform: translateY(-2px);
-  filter:
-    drop-shadow(3px 3px 0px #e262e2)
-    drop-shadow(-3px -3px 0px #03e5ff);
+html body .ace-report-card-actions .ace-pdf-button:hover,
+html body .ace-report-card-actions .ace-pdf-button:focus-visible {
+  background: var(--ace-badge);
+  color: #ffffff !important;
   text-decoration: none;
+}
+html body .ace-report-card-actions .ace-pdf-button:first-child:hover,
+html body .ace-report-card-actions .ace-pdf-button:first-child:focus-visible {
+  background: var(--ace-lead);
+  color: var(--ace-on-lead) !important;
 }
 
 /* ---------------------------------------------------------
@@ -884,89 +888,61 @@ html body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-other-links a:focus-v
 
 /* ---------------------------------------------------------
    ACE LISTING ABSTRACT DROPDOWN
+   A hairline box with a mono caps toggle. Reports page only; the home page
+   cards leave it out.
 --------------------------------------------------------- */
 
 .ace-listing-abstract {
-  margin: 0.45rem 0 0.5rem 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #fff;
-  overflow: hidden;
+  border: 1px solid var(--ace-rule-strong);
+  border-radius: 0;
+  background: transparent;
+  transition: border-color 0.15s ease;
+}
+.ace-listing-abstract:hover,
+.ace-listing-abstract[open] {
+  border-color: var(--ace-badge);
 }
 
 .ace-listing-abstract summary {
   cursor: pointer;
-  padding: 0.42rem 0.72rem;
-
+  padding: 0.45rem 0.75rem;
   font-family: "Roboto Mono", monospace;
-  font-size: 0.78rem;
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: #222;
-  background: #fff;
-
+  letter-spacing: 0.08em;
+  color: var(--ace-link);
   list-style: none;
 }
-
-.ace-listing-abstract summary::-webkit-details-marker {
-  display: none;
-}
-
+.ace-listing-abstract summary::-webkit-details-marker { display: none; }
 .ace-listing-abstract summary::before {
   content: "+";
   display: inline-block;
+  width: 1ch;
   margin-right: 0.5rem;
-  font-weight: 700;
 }
-
-.ace-listing-abstract[open] summary::before {
-  content: "−";
-}
+.ace-listing-abstract[open] summary::before { content: "\2212"; }
 
 .ace-listing-abstract-content {
-  padding: 0.7rem 0.85rem;
-
-  color: #222;
+  padding: 0 0.85rem 0.8rem;
+  color: var(--ace-fg);
   font-family: "Roboto", sans-serif;
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.55;
 }
-
-.ace-listing-abstract-content p {
-  margin: 0;
-}
-
-/* Dark theme */
-html[data-bs-theme="dark"] .ace-listing-abstract,
-body[data-bs-theme="dark"] .ace-listing-abstract,
-body.quarto-dark .ace-listing-abstract {
-  background: #222;
-  border-color: #444;
-}
-
-html[data-bs-theme="dark"] .ace-listing-abstract summary,
-body[data-bs-theme="dark"] .ace-listing-abstract summary,
-body.quarto-dark .ace-listing-abstract summary {
-  background: #222;
-  color: #fff;
-}
-
-html[data-bs-theme="dark"] .ace-listing-abstract-content,
-body[data-bs-theme="dark"] .ace-listing-abstract-content,
-body.quarto-dark .ace-listing-abstract-content {
-  color: #f2f2f2;
-}
+.ace-listing-abstract-content p { margin: 0; }
 
 /* ---------------------------------------------------------
    ACE REPORT LISTING LAYOUT
+   One card per report: square, hairline, the cyan-to-magenta bar along the
+   top edge on hover. Rows: IDs and ACE's recommendation; title; subtitle;
+   facet chips; one line of numbers; abstract; dates and buttons.
 --------------------------------------------------------- */
 
 .ace-report-listing {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-
+  gap: 1.2rem;
   margin-top: 1.1rem;
   padding: 0;
   border: none;
@@ -974,114 +950,146 @@ body.quarto-dark .ace-listing-abstract-content {
 }
 
 .ace-report-card {
+  position: relative;
   display: block;
   width: 100%;
-
-  border: 1px solid rgba(0, 0, 0, 0.14);
-  border-radius: 14px;
-  padding: 1rem 1.2rem;
-
-  background: transparent;
+  min-width: 0;
+  padding: 1.3rem 1.4rem 1.1rem;
+  border: 1px solid var(--ace-rule-strong);
+  border-radius: 0;
+  background: var(--ace-surface);
+  transition: border-color 0.15s ease;
 }
+.ace-report-card::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  top: -1px;
+  height: 4px;
+  background: linear-gradient(90deg, #03e5ff, #e262e2);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.ace-report-card:hover { border-color: var(--ace-lead); }
+.ace-report-card:hover::before { opacity: 1; }
 
 .ace-report-card-main {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.7rem;
+  min-width: 0;
 }
 
-/* Dark theme */
-html[data-bs-theme="dark"] .ace-report-card,
-body[data-bs-theme="dark"] .ace-report-card,
-body.quarto-dark .ace-report-card {
-  border-color: rgba(255, 255, 255, 0.18);
+.ace-report-card-topline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+.ace-report-card-ids {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.7rem;
+  min-width: 0;
 }
 
-/* ---------------------------------------------------------
-   ACE REPORT CARD TARGETED HOVER EFFECTS
-   Hover works only on title and abstract box
---------------------------------------------------------- */
+/* ACE's recommendation, in the Correspondence page's outcome colours */
+.ace-report-rec {
+  --ace-rec: var(--acec-none);
+  display: inline-block;
+  padding: 0.28rem 0.5rem;
+  border: 1px solid var(--ace-rec);
+  background: color-mix(in srgb, var(--ace-rec) 18%, transparent);
+  color: var(--ace-ink);
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.ace-report-rec-retraction { --ace-rec: var(--acec-retraction); }
+.ace-report-rec-correction { --ace-rec: var(--acec-correction); }
+.ace-report-rec-expression-of-concern { --ace-rec: var(--acec-concern); }
 
-.ace-report-card {
-  transition:
-    border-color 0.15s ease,
-    filter 0.15s ease;
+/* one line of numbers: violations, then citation reach */
+.ace-report-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 1.4rem;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.74rem;
+  line-height: 1.4;
+  color: var(--ace-muted);
+}
+.ace-report-stat b {
+  font-weight: 700;
+  color: var(--ace-ink);
+  font-variant-numeric: tabular-nums;
+}
+.ace-report-stat-riv b {
+  font-size: 1.05rem;
+  margin-right: 0.15rem;
+  color: var(--ace-link);
+}
+.ace-report-impact {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.75rem;
+}
+.ace-report-impact-label {
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--acec-retraction-ink);
 }
 
-
-/* Abstract hover - plain: a quiet border change, no lift and no glitch */
-.ace-listing-abstract {
-  transition: border-color 0.15s ease;
+/* dates on the left, buttons on the right, over a hairline */
+.ace-report-card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--ace-rule);
 }
-
-.ace-listing-abstract:hover {
-  border-color: #999;
-}
-
-html body.quarto-dark .ace-listing-abstract:hover {
-  border-color: #666;
-}
-
+.ace-report-card-foot .ace-report-meta.ace-date-bar { margin: 0; }
 
 /* ---------------------------------------------------------
    ACE LISTING TITLE + SUBTITLE
+   Ink-coloured title that glitches on hover (see TEXT HOVER GLITCH); quiet
+   grey subtitle tucked under it.
 --------------------------------------------------------- */
 
 .ace-report-title {
-  margin: 0.3rem 0 0.25rem 0;
+  margin: 0;
   padding: 0;
-
   font-family: "Roboto", sans-serif;
-  font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.35rem);
-  line-height: 1.15;
+  font-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.5rem);
+  line-height: 1.18;
   font-weight: 700;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
 }
-
 .ace-report-title a {
   display: inline-block;
   text-decoration: none !important;
-  /* box hugs the text without shifting the layout */
-  padding: 0.1em 0.35em;
-  margin: -0.1em -0.35em;
-  border-radius: 3px;
-  transition: background-color 0.15s ease;
-}
-
-/* hover: a faint wash of the title's own colour, no underline */
-.ace-report-title a:hover,
-.ace-report-title a:focus-visible {
-  text-decoration: none !important;
-  background-color: rgba(226, 98, 226, 0.12);   /* magenta title (light) */
-}
-
-body.quarto-dark .ace-report-title a:hover,
-body.quarto-dark .ace-report-title a:focus-visible {
-  background-color: rgba(3, 229, 255, 0.12);    /* cyan title (dark) */
 }
 
 .ace-report-subtitle {
-  margin: 0.15rem 0 0.5rem 0;
-
+  margin: -0.4rem 0 0;
   font-family: "Roboto", sans-serif;
-  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
-  line-height: 1.35;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  font-style: normal;
-}
-
-/* Light theme subtitle */
-html[data-bs-theme="light"] .ace-report-subtitle,
-body[data-bs-theme="light"] .ace-report-subtitle,
-body.quarto-light .ace-report-subtitle {
-  color: #333333;
-}
-
-/* Dark theme subtitle */
-html[data-bs-theme="dark"] .ace-report-subtitle,
-body[data-bs-theme="dark"] .ace-report-subtitle,
-body.quarto-dark .ace-report-subtitle {
-  color: #e8e8e8;
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--ace-muted);
 }
 
 /* ---------------------------------------------------------
@@ -1092,14 +1100,14 @@ body.quarto-dark .ace-report-subtitle {
 html[data-bs-theme="light"] .ace-report-title a,
 body[data-bs-theme="light"] .ace-report-title a,
 body.quarto-light .ace-report-title a {
-  color: #e262e2 !important;
+  color: #0f1419 !important;
 }
 
 /* Dark theme */
 html[data-bs-theme="dark"] .ace-report-title a,
 body[data-bs-theme="dark"] .ace-report-title a,
 body.quarto-dark .ace-report-title a {
-  color: #03e5ff !important;
+  color: #f2f5f7 !important;
 }
 
 
@@ -1118,39 +1126,24 @@ body.quarto-dark .ace-report-title a {
 
 /* ---------------------------------------------------------
    ACE ID BADGE
+   A wireframe tag in the text accent: mono caps, square corners. Same on
+   listing cards, report title blocks and the home page.
 --------------------------------------------------------- */
 
-.ace-report-id {
+html body .ace-report-id {
   display: inline-block;
-  border-radius: 999px;
-  padding: 0.25rem 0.65rem;
-
+  padding: 0.2rem 0.45rem;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  background: transparent !important;
+  color: var(--ace-link) !important;
   font-family: "Roboto Mono", monospace;
   font-size: 0.72rem;
-  font-weight: bold;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-
-  border: none;
 }
-
-/* Light theme: blue badge, slightly darker gradient */
-html[data-bs-theme="light"] .ace-report-id,
-body[data-bs-theme="light"] .ace-report-id,
-body.quarto-light .ace-report-id {
-  background: linear-gradient(135deg, #03e5ff 0%, #00cfe6 100%) !important;
-  color: #fff !important;
-}
-
-/* Dark theme: pink badge, slightly lighter gradient */
-html[data-bs-theme="dark"] .ace-report-id,
-body[data-bs-theme="dark"] .ace-report-id,
-body.quarto-dark .ace-report-id {
-  background: linear-gradient(135deg, #e262e2 0%, #f08cf0 100%) !important;
-  color: #222 !important;
-}
-
 
 /* ---------------------------------------------------------
    ACE LISTING CATEGORY TAGS
@@ -1159,14 +1152,14 @@ body.quarto-dark .ace-report-id {
 .ace-report-categories {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: 0.3rem 0 0.5rem 0;
+  gap: 0.35rem;
+  margin: 0;
 }
 
 .ace-report-category {
   display: inline-block;
-  border-radius: 999px;
-  padding: 0.22rem 0.55rem;
+  border-radius: 0;
+  padding: 0.24rem 0.5rem;
 
   font-family: "Roboto Mono", monospace;
   font-size: 0.68rem;
@@ -1239,17 +1232,17 @@ body.quarto-dark a[role="doc-noteref"] {
 }
 
 
-html[data-bs-theme="light"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link),
-body[data-bs-theme="light"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link),
-body.quarto-light main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link) {
+html[data-bs-theme="light"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):not(.ace-ui),
+body[data-bs-theme="light"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):not(.ace-ui),
+body.quarto-light main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):not(.ace-ui) {
   color: #0b7f97 !important;
   -webkit-text-fill-color: #0b7f97 !important;
   text-decoration-color: #0b7f97 !important;
 }
 
-html[data-bs-theme="dark"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link),
-body[data-bs-theme="dark"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link),
-body.quarto-dark main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link) {
+html[data-bs-theme="dark"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):not(.ace-ui),
+body[data-bs-theme="dark"] main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):not(.ace-ui),
+body.quarto-dark main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):not(.ace-ui) {
   color: #e39be0 !important;
   -webkit-text-fill-color: #e39be0 !important;
   text-decoration-color: #e39be0 !important;
@@ -1258,7 +1251,7 @@ body.quarto-dark main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):n
 
 /* Links: no underline at rest; on hover the whole link is boxed with a
    translucent fill in the link colour (same pattern as listing titles). */
-main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):not(.ace-orcid),
+main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):not(.ace-ui):not(.ace-orcid),
 #refs a,
 a.citation,
 a[role="doc-biblioref"],
@@ -1270,7 +1263,7 @@ a[role="doc-noteref"] {
   transition: background-color 0.12s ease, color 0.12s ease;
 }
 
-body.quarto-light main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):hover,
+body.quarto-light main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):not(.ace-ui):hover,
 body.quarto-light #refs a:hover,
 body.quarto-light a.citation:hover,
 body.quarto-light a[role="doc-biblioref"]:hover,
@@ -1280,7 +1273,7 @@ body.quarto-light a[role="doc-noteref"]:hover {
   -webkit-text-fill-color: #066a80 !important;
 }
 
-body.quarto-dark main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):hover,
+body.quarto-dark main a:not(.ace-pdf-button):not(.nav-link):not(.navbar-brand):not(.ace-report-title a):not(.ace-doi-link):not(.ace-ui):hover,
 body.quarto-dark #refs a:hover,
 body.quarto-dark a.citation:hover,
 body.quarto-dark a[role="doc-biblioref"]:hover,
@@ -1294,17 +1287,17 @@ body.quarto-dark a[role="doc-noteref"]:hover {
 html[data-bs-theme="light"] main .ace-report-title a,
 body[data-bs-theme="light"] main .ace-report-title a,
 body.quarto-light main .ace-report-title a {
-  color: #e262e2 !important;
-  -webkit-text-fill-color: #e262e2 !important;
-  text-decoration-color: #e262e2 !important;
+  color: #0f1419 !important;
+  -webkit-text-fill-color: #0f1419 !important;
+  text-decoration-color: #0f1419 !important;
 }
 
 html[data-bs-theme="dark"] main .ace-report-title a,
 body[data-bs-theme="dark"] main .ace-report-title a,
 body.quarto-dark main .ace-report-title a {
-  color: #03e5ff !important;
-  -webkit-text-fill-color: #03e5ff !important;
-  text-decoration-color: #03e5ff !important;
+  color: #f2f5f7 !important;
+  -webkit-text-fill-color: #f2f5f7 !important;
+  text-decoration-color: #f2f5f7 !important;
 }
 
 
@@ -1331,7 +1324,7 @@ body.quarto-dark main .ace-report-title a {
 .quarto-title-block .quarto-categories > a,
 #title-block-header .quarto-categories > a {
   display: inline-block;
-  border-radius: 999px;
+  border-radius: 0;
   padding: 0.22rem 0.55rem;
 
   font-family: "Roboto Mono", monospace;
@@ -1781,79 +1774,6 @@ body.quarto-dark .aa-InputWrapperPrefix svg {
 
 
 /* ---------------------------------------------------------
-   ACE HOMEPAGE ABOUT LINKS (GitHub / Contact)
-   Wireframe badges in the theme accent, like the author ORCID
-   badges: outline at rest, filled on hover with white text.
---------------------------------------------------------- */
-
-/* Quarto's trestles theme stacks these full-width below 992px; keep them a
-   small centered row at every width. */
-div.quarto-about-trestles .about-entity .about-links {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem !important;
-  width: auto !important;
-  padding-bottom: 0 !important;
-  margin-bottom: 1.25rem;        /* room before the intro box when stacked */
-}
-
-div.quarto-about-trestles .about-entity .about-link {
-  --ace-accent: #03e5ff;
-  display: inline-flex !important;
-  align-items: center;
-  gap: 0.45rem;
-  width: auto !important;
-  flex: 0 0 auto;
-  padding: 0.35rem 0.75rem !important;
-  margin: 0 !important;
-  border: 1px solid var(--ace-accent) !important;
-  border-radius: 3px !important;
-  background: transparent !important;
-  color: #222222 !important;
-  font-family: "Roboto Mono", monospace !important;
-  font-size: 0.8rem !important;
-  font-weight: 700 !important;
-  line-height: 1.1 !important;
-  text-decoration: none !important;
-  transition: background-color 0.12s ease, color 0.12s ease;
-}
-
-div.quarto-about-trestles .about-entity .about-link .bi {
-  font-size: 1rem;
-  line-height: 1;
-  color: inherit;
-}
-
-/* Contact: same square-cornered envelope as the author email badge, drawn as
-   a mask in currentColor so it follows the badge's rest/hover colours. */
-div.quarto-about-trestles .about-entity .about-link .bi-envelope::before {
-  content: "";
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  background-color: currentColor;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='2.5' y='5' width='19' height='14'/%3E%3Cpath d='M2.5 6.5l9.5 7 9.5-7'/%3E%3C/svg%3E") center / contain no-repeat;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='2.5' y='5' width='19' height='14'/%3E%3Cpath d='M2.5 6.5l9.5 7 9.5-7'/%3E%3C/svg%3E") center / contain no-repeat;
-}
-
-div.quarto-about-trestles .about-entity .about-link:hover,
-div.quarto-about-trestles .about-entity .about-link:focus-visible {
-  background: var(--ace-accent) !important;
-  color: #ffffff !important;
-  transform: none;
-  filter: none;
-}
-
-body.quarto-dark div.quarto-about-trestles .about-entity .about-link {
-  --ace-accent: #e262e2;
-  color: #ffffff !important;
-}
-
-/* ---------------------------------------------------------
    ACE ABOUT PAGE TEAM GRID
 --------------------------------------------------------- */
 
@@ -2101,21 +2021,9 @@ body.quarto-dark main a.ace-orcid.ace-orcid.ace-orcid.ace-orcid:focus-visible {
 }
 
 /* ---------------------------------------------------------
-   HOMEPAGE INTRO CALLOUT
-   Bordered statement block; accent matches the navbar borders.
+   WORDMARK IN RUNNING TEXT
+   The project name set in mono so it reads as the wordmark.
 --------------------------------------------------------- */
-
-/* Home page lead paragraph: no panel, just the statement, with the project
-   name set in mono so it reads as the wordmark. */
-.ace-lead {
-  margin: 0 0 1.8rem;
-}
-.ace-lead p {
-  margin: 0;
-  font-size: 1.06rem;
-  line-height: 1.65;
-  color: #1a1f24;
-}
 .ace-wordmark {
   font-family: "Roboto Mono", monospace;
   font-size: 0.92em;
@@ -2123,38 +2031,8 @@ body.quarto-dark main a.ace-orcid.ace-orcid.ace-orcid.ace-orcid:focus-visible {
   letter-spacing: 0.01em;
   color: #0b7f97;                /* the theme's text cyan */
 }
-body.quarto-dark .ace-lead p {
-  color: #f2f5f7;
-}
 body.quarto-dark .ace-wordmark {
   color: #e39be0;                /* the theme's text magenta */
-}
-
-.ace-intro {
-  border: 1px solid rgba(3, 229, 255, 0.85);
-  background-color: rgba(3, 229, 255, 0.06);
-  padding: 1rem 1.15rem;
-  margin: 0 0 1.6rem;
-}
-
-.ace-intro p {
-  margin: 0;
-  font-size: 1.02rem;
-  line-height: 1.6;
-  color: #1a1f24;
-}
-
-.ace-intro strong {
-  font-weight: 700;
-}
-
-body.quarto-dark .ace-intro {
-  border-color: rgba(226, 98, 226, 0.85);
-  background-color: rgba(226, 98, 226, 0.07);
-}
-
-body.quarto-dark .ace-intro p {
-  color: #f2f5f7;
 }
 
 /* ---------------------------------------------------------
@@ -2766,9 +2644,19 @@ body.quarto-dark .code-fold > summary { color: #9aa4ae; }
 .navbar .navbar-nav .nav-item.compact .nav-link .bi {
   position: relative;
   z-index: 1;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
   font-size: 1.25rem;
   line-height: 1;
+  letter-spacing: 0;              /* the link's mono-caps tracking would pad the glyph's right side */
+}
+.navbar .navbar-nav .nav-item.compact .nav-link .bi::before {
+  display: block;
+  line-height: 1;
+  vertical-align: 0;              /* Bootstrap Icons nudges glyphs down for inline text */
 }
 
 .navbar .navbar-nav .nav-item.compact .nav-link .menu-text {
@@ -3248,15 +3136,15 @@ html body a.ace-doi-link::before {
   height: 1.005em;
   margin-right: 0.45em;
   background-color: currentColor;
-  -webkit-mask: url("images/zenodo-mark.svg") center / contain no-repeat;
-          mask: url("images/zenodo-mark.svg") center / contain no-repeat;
+  -webkit-mask: url("images/zenodo-mark.svg?v=78d48316") center / contain no-repeat;
+          mask: url("images/zenodo-mark.svg?v=78d48316") center / contain no-repeat;
 }
 
 /* Table notes (e.g. citation_table()): same colour/size as Quarto's table
    caption, left-aligned under the table. */
 .ace-table-note {
   font-family: 'Roboto', sans-serif;
-  font-size: 0.9rem;             /* caption is ~15.3px on a 17px base */
+  font-size: 0.78rem;            /* same as the notes under tinytable tables */
   line-height: 1.45;
   color: #5a6570;                /* light-mode figcaption colour */
   margin: -0.4rem 0 1.4rem;
@@ -3333,81 +3221,6 @@ body.quarto-dark .ace-date-value {
   border-left: 0;
   margin-top: 0.3rem;
 }
-
-/* ---------------------------------------------------------
-   LISTING CARD: impact totals (right of the Read online / PDF buttons)
-   Written into each report's front matter by scripts/citations.py.
---------------------------------------------------------- */
-
-.ace-report-card-actions .ace-report-impact {
-  margin-left: auto;             /* push to the right edge of the actions row */
-  display: grid;                 /* INFECTED | bracket | number | word, one count per row */
-  grid-template-columns: auto auto auto auto;
-  column-gap: 0.35rem;
-  row-gap: 0.05rem;
-  align-items: baseline;
-  justify-items: start;
-  font-family: "Roboto Mono", monospace;
-  font-size: 0.66rem;
-  line-height: 1.3;
-  letter-spacing: 0.02em;
-  color: #8a949e;
-  text-align: right;
-}
-
-/* label spans the three rows, vertically centred, with a thin bracket
-   (drawn by ::before, which is a grid item) grouping the three counts */
-.ace-report-card-actions .ace-report-impact .ace-report-impact-label {
-  grid-column: 1;
-  grid-row: 1 / span 3;
-  align-self: center;
-  justify-self: end;
-}
-
-.ace-report-card-actions .ace-report-impact::before {
-  content: "";
-  grid-column: 2;
-  grid-row: 1 / span 3;
-  align-self: stretch;
-  width: 0.28rem;
-  border: 1px solid #b8c2cb;
-  border-right: 0;               /* "[" shape: left rule with top/bottom ticks */
-  margin: 0.1rem 0;
-}
-body.quarto-dark .ace-report-card-actions .ace-report-impact::before { border-color: #4a525a; }
-
-/* numbers right-aligned in their own column, words left-aligned after them */
-.ace-report-card-actions .ace-report-impact b {
-  justify-self: end;
-}
-
-.ace-report-card-actions .ace-report-impact b {
-  font-weight: 700;
-  color: #5b6670;
-}
-
-body.quarto-dark .ace-report-card-actions .ace-report-impact { color: #8d979f; }
-body.quarto-dark .ace-report-card-actions .ace-report-impact b { color: #b8c2cb; }
-
-@media (max-width: 480px) {
-  .ace-report-card-actions .ace-report-impact {
-    margin-left: 0;
-    width: 100%;
-    justify-content: start;
-    text-align: left;
-    margin-top: 0.25rem;
-  }
-  .ace-report-card-actions .ace-report-impact .ace-report-impact-label { justify-self: start; }
-}
-
-.ace-report-card-actions .ace-report-impact .ace-report-impact-label {
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-  color: #8a949e;
-  margin-right: 0.1rem;
-}
-
 
 /* ---------------------------------------------------------
    FOLD-IN RIGHT PANEL (narrow screens)
@@ -3511,45 +3324,6 @@ body.quarto-dark .ace-report-card-actions .ace-report-impact b { color: #b8c2cb;
 }
 
 /* ---------------------------------------------------------
-   RIV SEVERITY BADGES (riv.qmd)
-   Source: #### RIV 1.1: Name [Major]{.ace-sev .ace-sev-major} {#riv-1-1}
-   Same pill language as the category pills: Roboto Mono caps, translucent
-   fill, opaque border. Critical = magenta, Major = cyan, Minor = grey,
-   Indicator = dashed grey. Hidden inside the TOC so entries stay short.
-   PDF: reports/_filters/ace-severity.lua typesets the label instead.
---------------------------------------------------------- */
-h4 .ace-sev, h3 .ace-sev, h5 .ace-sev {
-  display: inline-block;
-  vertical-align: 0.18em;
-  margin-left: 0.55em;
-  padding: 0.2rem 0.5rem 0.18rem;
-  border-radius: 999px;
-  border: 1.5px solid currentColor;
-  font-family: "Roboto Mono", monospace;
-  font-size: 0.62rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: #000000;
-}
-body.quarto-dark h4 .ace-sev, body.quarto-dark h3 .ace-sev, body.quarto-dark h5 .ace-sev {
-  color: #ffffff;
-}
-
-.ace-sev-critical  { background-color: rgba(226, 98, 226, 0.22); border-color: #e262e2; }
-.ace-sev-major     { background-color: rgba(3, 229, 255, 0.22);  border-color: #03e5ff; }
-.ace-sev-minor     { background-color: rgba(138, 148, 158, 0.22); border-color: #8a949e; }
-.ace-sev-indicator { background-color: transparent; border-color: #8a949e; border-style: dashed; }
-body.quarto-dark .ace-sev-minor,
-body.quarto-dark .ace-sev-indicator { border-color: #9aa4ae; }
-
-nav[role="doc-toc"] .ace-sev, #TOC .ace-sev, #quarto-margin-sidebar .ace-sev {
-  display: none;
-}
-
-/* ---------------------------------------------------------
    RIV EVIDENCE / COUNTING BLOCK (riv.qmd)
    ::: {.ace-riv-meta}
    [Typical evidence]{.ace-riv-key} ...
@@ -3613,22 +3387,6 @@ body.quarto-dark .ace-riv-key { color: #9aa4ae; }
 body.quarto-dark .ace-riv-meta ol > li::before { color: #9aa4ae; }
 .ace-riv-meta p + ol { margin-top: -0.15rem; }
 
-/* Severity pills inside the quick-reference table */
-td .ace-sev {
-  display: inline-block;
-  padding: 0.16rem 0.45rem 0.14rem;
-  border-radius: 999px;
-  border: 1.5px solid currentColor;
-  font-family: "Roboto Mono", monospace;
-  font-size: 0.58rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: #000000;
-}
-body.quarto-dark td .ace-sev { color: #ffffff; }
 #tbl-riv-index td:first-child, #tbl-riv-index th:first-child { white-space: nowrap; }
 #tbl-riv-index td, #tbl-riv-index th { font-size: 0.92em; vertical-align: middle; }
 #tbl-riv-index tr:has(> td:first-child strong) td { padding-top: 0.7rem; }
@@ -3659,7 +3417,7 @@ html body.quarto-dark main a.ace-riv-link.ace-riv-link.ace-riv-link.ace-riv-link
    page) get the same rule without a chip. Mirrored in the PDF template
    (acePDF.tex: \aceSecNum / \aceSecRule).
 --------------------------------------------------------- */
-main h2:not(.ace-report-title):not(.ace-section-heading):not(#toc-title) {
+main h2:not(.ace-report-title):not(.ace-section-heading):not(.ace-home-h2):not(#toc-title) {
   position: relative;
   display: flex;                 /* number and title as siblings, centred on */
   align-items: center;           /* each other so the divider sits mid-cap   */
@@ -3668,7 +3426,7 @@ main h2:not(.ace-report-title):not(.ace-section-heading):not(#toc-title) {
   padding: 0 0 0.5rem 0;
   border-bottom: 1px solid rgba(138, 148, 158, 0.45);
 }
-main h2:not(.ace-report-title):not(.ace-section-heading):not(#toc-title)::after {
+main h2:not(.ace-report-title):not(.ace-section-heading):not(.ace-home-h2):not(#toc-title)::after {
   content: "";
   position: absolute;
   left: 0;
@@ -3677,10 +3435,10 @@ main h2:not(.ace-report-title):not(.ace-section-heading):not(#toc-title)::after 
   height: 3px;
   background-color: #03e5ff;
 }
-body.quarto-dark main h2:not(.ace-report-title):not(.ace-section-heading):not(#toc-title) {
+body.quarto-dark main h2:not(.ace-report-title):not(.ace-section-heading):not(.ace-home-h2):not(#toc-title) {
   border-bottom-color: rgba(154, 164, 174, 0.4);
 }
-body.quarto-dark main h2:not(.ace-report-title):not(.ace-section-heading):not(#toc-title)::after {
+body.quarto-dark main h2:not(.ace-report-title):not(.ace-section-heading):not(.ace-home-h2):not(#toc-title)::after {
   background-color: #e262e2;
 }
 
@@ -3720,60 +3478,1254 @@ html body.quarto-dark  main h3 > .header-section-number { color: #e39be0 !import
 main h2 > .anchorjs-link, main h3 > .anchorjs-link { font-family: inherit; }
 
 /* ---------------------------------------------------------
-   HOME PAGE: HANDBOOK BUTTON
-   The two wireframe badges (GitHub, Contact) sit in a two-column grid; the
-   Handbook link takes the row below and stretches across both. Unlike the
-   badges it is a translucent accent panel with a 2px frame (the section-flag
-   language), Roboto text instead of mono, and a small "PDF" tag at the end.
---------------------------------------------------------- */
-div.quarto-about-trestles .about-entity .about-links {
-  display: grid !important;
-  grid-template-columns: auto auto;
-  justify-content: center;
-  gap: 0.5rem !important;
+   REPORT TABLES (tinytable output and captioned markdown tables in reports)
+   A thin accent rule on top, mono column labels in the same language as the
+   table of contents (no case change, so n, p and SD read as written), hairlines between rows, a soft hover tint, and a
+   left-aligned note in the caption colour. Verdict colours (Yes/No) come
+   from the R helpers as inline styles and are untouched here.
+   --------------------------------------------------------- */
+table[id^="tinytable"],
+main table.caption-top {
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.35;
+  border-top: 2px solid #03e5ff !important;
+  border-bottom: 1px solid rgba(118, 118, 118, 0.45) !important;
+  margin: 0.4rem auto 0.6rem !important;
 }
-div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"] {
-  grid-column: 1 / -1;
-  justify-content: flex-start;
-  gap: 0.6rem;
-  margin-top: 0.15rem !important;
-  padding: 0.55rem 0.8rem !important;
-  border: 2px solid var(--ace-accent) !important;
-  border-radius: 6px !important;
-  background: rgba(3, 229, 255, 0.14) !important;
-  color: #222222 !important;
-  font-family: "Roboto", sans-serif !important;
-  font-size: 0.95rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 0;
+table[id^="tinytable"] thead th,
+main table.caption-top thead th {
+  font-family: 'Roboto Mono', monospace !important;
+  font-size: 0.74rem !important;   /* same in every table: overrides tinytable's per-cell size */
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #767676;
+  padding: 0.7rem 0.75rem 0.45rem !important;
+  border-bottom: 1px solid rgba(118, 118, 118, 0.45) !important;
+  vertical-align: bottom !important;
+  white-space: nowrap;
 }
-div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"] .bi {
-  display: none;                 /* the PDF tag on the right carries the format */
+/* group_tt() spanning labels: a rule under each label only, inset at both
+   ends so two adjacent labels show a visible gap (as the PDF does); nothing
+   under the blank cells between groups. Blank cells are one column wide, so
+   the rule goes on every multi-column label. */
+table[id^="tinytable"] thead tr:not(:last-child) th,
+main table.caption-top thead tr:not(:last-child) th {
+  border-bottom: none !important;
+  padding-bottom: 0.3rem !important;
+  color: #cf50cf;   /* ace_purple_text: the blue is too light on white */
 }
-/* "PDF" tag on the right */
-div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"]::after {
-  content: "PDF";
-  margin-left: auto;
-  padding: 0.14rem 0.4rem 0.12rem;
-  border: 1.5px solid currentColor;
-  border-radius: 999px;
-  font-family: "Roboto Mono", monospace;
-  font-size: 0.6rem;
+table[id^="tinytable"] thead tr:not(:last-child) th:not([colspan="1"]),
+main table.caption-top thead tr:not(:last-child) th:not([colspan="1"]) {
+  background-image: linear-gradient(rgba(118, 118, 118, 0.55), rgba(118, 118, 118, 0.55));
+  background-repeat: no-repeat;
+  background-size: calc(100% - 0.8rem) 1px;
+  background-position: center bottom;
+}
+table[id^="tinytable"] tbody td,
+main table.caption-top tbody td {
+  padding: 0.45rem 0.6rem !important;
+  font-size: 0.8rem !important;    /* same in every table: overrides tinytable's per-cell size */
+  border-bottom: 1px solid rgba(118, 118, 118, 0.14) !important;
+  font-variant-numeric: tabular-nums;
+}
+table[id^="tinytable"] tbody tr:last-child td,
+main table.caption-top tbody tr:last-child td { border-bottom: none !important; }
+table[id^="tinytable"] tbody tr:hover td,
+main table.caption-top tbody tr:hover td { box-shadow: inset 0 0 0 100vmax rgba(3, 229, 255, 0.10); }
+table[id^="tinytable"] tfoot td,
+main table.caption-top tfoot td {
+  font-size: 0.78rem !important;
+  line-height: 1.45;
+  color: #5a6570;
+  text-align: left !important;
+  padding: 0.6rem 0.75rem 0.25rem !important;
+  border-top: 1px solid rgba(118, 118, 118, 0.45) !important;
+}
+body.quarto-dark table[id^="tinytable"] thead th,
+body.quarto-dark main table.caption-top thead th { color: #a0a0a0; }
+body.quarto-dark table[id^="tinytable"] thead tr:not(:last-child) th,
+body.quarto-dark main table.caption-top thead tr:not(:last-child) th { color: #03e5ff; }
+body.quarto-dark table[id^="tinytable"] tfoot td,
+body.quarto-dark main table.caption-top tfoot td { color: #bfbfbf; }
+body.quarto-dark table[id^="tinytable"] tbody tr:hover td,
+body.quarto-dark main table.caption-top tbody tr:hover td { box-shadow: inset 0 0 0 100vmax rgba(3, 229, 255, 0.14); }
+@media (max-width: 768px) {
+  table[id^="tinytable"],
+  main table.caption-top { display: block; overflow-x: auto; width: 100% !important; }
+}
+
+
+/* ---------------------------------------------------------
+   CORRESPONDENCE (correspondence.qmd, built by
+   reports/_filters/ace-correspondence.lua from correspondence.yml)
+   A four-column board of stages, then one card per audit with a
+   three-step tracker per journal. Stage colours: grey (in preparation),
+   cyan (letter sent), light blue (in discussion), and the outcome
+   colour once a decision is made.
+   --------------------------------------------------------- */
+:root {
+  --acec-line: rgba(118, 118, 118, 0.35);
+  --acec-soft: rgba(118, 118, 118, 0.08);
+  --acec-muted: #6b7680;
+  --acec-s0: #9aa4ae;
+  --acec-s1: #03e5ff;
+  --acec-s1-ink: #0e9cb0;
+  --acec-s2: #6cc4ff;
+  --acec-s2-ink: #2f7fb8;
+  --acec-retraction: #e262e2;
+  --acec-retraction-ink: #cf50cf;
+  --acec-correction: #f2b134;
+  --acec-correction-ink: #b37b0c;
+  --acec-concern: #b48af0;
+  --acec-concern-ink: #7d55c7;
+  --acec-none: #8a949e;
+  --acec-none-ink: #5f6a74;
+}
+body.quarto-dark {
+  --acec-line: rgba(160, 170, 180, 0.28);
+  --acec-soft: rgba(160, 170, 180, 0.07);
+  --acec-muted: #a3adb7;
+  --acec-s1-ink: #03e5ff;
+  --acec-s2-ink: #8fd0ff;
+  --acec-retraction-ink: #f08cf0;
+  --acec-correction-ink: #f5c35c;
+  --acec-concern-ink: #c9a8f5;
+  --acec-none-ink: #b3bcc5;
+}
+
+.acec-summary {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--acec-muted);
+  margin: 0 0 1rem;
+}
+
+/* ---- overview board ---- */
+.acec-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin: 0 0 2.4rem;
+}
+.acec-col {
+  position: relative;
+  border: 1px solid var(--acec-line);
+  border-top: 3px solid var(--acec-s0);
+  border-radius: 8px;
+  padding: 0.75rem 0.8rem 0.85rem;
+  background: var(--acec-soft);
+  min-height: 9rem;
+}
+.acec-col-1 { border-top-color: var(--acec-s1); }
+.acec-col-2 { border-top-color: var(--acec-s2); }
+.acec-col-3 { border-top-color: var(--acec-retraction); }
+/* chevron between columns */
+.acec-col:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 1.35rem;
+  right: -0.72rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-top: 2px solid var(--acec-line);
+  border-right: 2px solid var(--acec-line);
+  transform: rotate(45deg);
+}
+.acec-col-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: 0.95rem;
+}
+.acec-col-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--acec-s0);
+  flex: none;
+}
+.acec-col-1 .acec-col-num { background: var(--acec-s1-ink); }
+.acec-col-2 .acec-col-num { background: var(--acec-s2-ink); }
+.acec-col-3 .acec-col-num { background: var(--acec-retraction-ink); }
+.acec-col-count {
+  margin-left: auto;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.acec-col-sub {
+  margin: 0.15rem 0 0.7rem 1.9rem;
+  font-size: 0.78rem;
+  color: var(--acec-muted);
+}
+.acec-chips { display: flex; flex-direction: column; gap: 0.4rem; }
+.acec-none { font-size: 0.78rem; color: var(--acec-muted); font-style: italic; margin-left: 1.9rem; }
+.acec-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--acec-line);
+  border-left: 3px solid var(--acec-s0);
+  border-radius: 6px;
+  background: var(--bs-body-bg, #fff);
+  text-decoration: none !important;
+  color: inherit !important;
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+.acec-chip:hover { transform: translateY(-1px); border-color: var(--acec-s1); }
+.acec-col-1 .acec-chip { border-left-color: var(--acec-s1); }
+.acec-col-2 .acec-chip { border-left-color: var(--acec-s2); }
+.acec-chip-id { font-family: 'Roboto Mono', monospace; font-size: 0.72rem; color: var(--acec-muted); }
+.acec-chip-journal { font-size: 0.84rem; line-height: 1.25; color: var(--bs-body-color, #212529) !important; }
+.acec-chip-outcome { font-family: 'Roboto Mono', monospace; font-size: 0.7rem; font-weight: 600; margin-top: 0.1rem; }
+
+/* ---- outcome colours (chips, badges, the last step) ---- */
+.acec-chip.acec-outcome-retraction { border-left-color: var(--acec-retraction); }
+.acec-chip.acec-outcome-correction { border-left-color: var(--acec-correction); }
+.acec-chip.acec-outcome-concern    { border-left-color: var(--acec-concern); }
+.acec-chip.acec-outcome-none       { border-left-color: var(--acec-none); }
+.acec-outcome-retraction .acec-chip-outcome { color: var(--acec-retraction-ink); }
+.acec-outcome-correction .acec-chip-outcome { color: var(--acec-correction-ink); }
+.acec-outcome-concern .acec-chip-outcome    { color: var(--acec-concern-ink); }
+.acec-outcome-none .acec-chip-outcome       { color: var(--acec-none-ink); }
+
+/* ---- audit cards ---- */
+.acec-audit {
+  border: 1px solid var(--acec-line);
+  border-radius: 10px;
+  padding: 1rem 1.1rem 0.4rem;
+  margin: 0 0 1.4rem;
+  scroll-margin-top: 5rem;
+}
+.acec-audit-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.7rem;
+}
+.acec-id {                      /* same wireframe tag as the ACE ID on listing cards */
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.45rem;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  color: var(--ace-link);
+  background: transparent;
+}
+.acec-title { font-weight: 700; font-size: 1.05rem; text-decoration: none; }
+.acec-title:hover { text-decoration: underline; }
+.acec-rec {
+  margin-left: auto;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--acec-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.acec-badge {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.12rem 0.45rem;
+  border-radius: 0;
+  border: 1px solid currentColor;
+}
+.acec-badge.acec-outcome-retraction { color: var(--acec-retraction-ink); }
+.acec-badge.acec-outcome-correction { color: var(--acec-correction-ink); }
+.acec-badge.acec-outcome-concern    { color: var(--acec-concern-ink); }
+.acec-badge.acec-outcome-none       { color: var(--acec-none-ink); }
+.acec-subtitle { margin: 0.25rem 0 0.4rem; font-size: 0.85rem; color: var(--acec-muted); }
+
+.acec-thread {
+  border-top: 1px solid var(--acec-line);
+  padding: 0.85rem 0 0.7rem;
+  scroll-margin-top: 5rem;
+}
+.acec-thread:target { animation: acec-flash 1.6s ease-out; }
+@keyframes acec-flash { from { background: rgba(3, 229, 255, 0.14); } to { background: transparent; } }
+.acec-thread-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 0.6rem; }
+.acec-journal { font-weight: 700; font-size: 0.98rem; }
+.acec-publisher { font-size: 0.82rem; color: var(--acec-muted); }
+.acec-stage-pill, .acec-ev-stage {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.1rem 0.45rem;
+  border-radius: 0;
+  color: #fff;
+  background: var(--acec-s0);
+  white-space: nowrap;
+}
+.acec-stage-pill { margin-left: auto; }
+body.quarto-dark .acec-stage-pill, body.quarto-dark .acec-ev-stage, body.quarto-dark .acec-col-num { color: #111418; }
+.acec-pill-1 { background: var(--acec-s1-ink); }
+.acec-pill-2 { background: var(--acec-s2-ink); }
+.acec-pill-3 { background: var(--acec-retraction-ink); }
+.acec-thread.acec-outcome-retraction .acec-stage-pill { background: var(--acec-retraction-ink); }
+.acec-thread.acec-outcome-correction .acec-stage-pill { background: var(--acec-correction-ink); }
+.acec-thread.acec-outcome-concern .acec-stage-pill    { background: var(--acec-concern-ink); }
+.acec-thread.acec-outcome-none .acec-stage-pill       { background: var(--acec-none-ink); }
+.acec-articles { margin: 0.2rem 0 0.2rem; font-size: 0.85rem; color: var(--acec-muted); }
+
+/* the three-step tracker */
+.acec-steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.9rem 0 0.35rem;
+  padding: 0;
+}
+.acec-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 1.3rem;
+}
+/* connector to the previous step */
+.acec-step:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: 0.45rem;
+  left: -50%;
+  width: 100%;
+  height: 3px;
+  background: var(--acec-line);
+  z-index: 0;
+}
+.acec-step.acec-done:not(:first-child)::before,
+.acec-step.acec-current:not(:first-child)::before { background: var(--acec-s1); }
+.acec-dot {
+  position: absolute;
+  top: 0;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px solid var(--acec-line);
+  background: var(--bs-body-bg, #fff);
+  z-index: 1;
+}
+.acec-done .acec-dot { background: var(--acec-s1); border-color: var(--acec-s1); }
+.acec-current .acec-dot {
+  background: var(--acec-s1);
+  border-color: var(--acec-s1);
+  box-shadow: 0 0 0 4px rgba(3, 229, 255, 0.22);
+}
+.acec-steps[data-stage="2"] .acec-current .acec-dot { background: var(--acec-s2); border-color: var(--acec-s2); box-shadow: 0 0 0 4px rgba(108, 196, 255, 0.25); }
+.acec-step.acec-outcome-retraction .acec-dot { background: var(--acec-retraction); border-color: var(--acec-retraction); box-shadow: 0 0 0 4px rgba(226, 98, 226, 0.22); }
+.acec-step.acec-outcome-correction .acec-dot { background: var(--acec-correction); border-color: var(--acec-correction); box-shadow: 0 0 0 4px rgba(242, 177, 52, 0.25); }
+.acec-step.acec-outcome-concern .acec-dot    { background: var(--acec-concern); border-color: var(--acec-concern); box-shadow: 0 0 0 4px rgba(180, 138, 240, 0.25); }
+.acec-step.acec-outcome-none .acec-dot       { background: var(--acec-none); border-color: var(--acec-none); box-shadow: 0 0 0 4px rgba(138, 148, 158, 0.22); }
+.acec-step-label {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--acec-muted);
+  margin-top: 0.3rem;
+}
+.acec-done .acec-step-label, .acec-current .acec-step-label { color: inherit; font-weight: 600; }
+.acec-step.acec-outcome-retraction .acec-step-label { color: var(--acec-retraction-ink); }
+.acec-step.acec-outcome-correction .acec-step-label { color: var(--acec-correction-ink); }
+.acec-step.acec-outcome-concern .acec-step-label    { color: var(--acec-concern-ink); }
+.acec-step.acec-outcome-none .acec-step-label       { color: var(--acec-none-ink); }
+.acec-step-date { font-family: 'Roboto Mono', monospace; font-size: 0.68rem; color: var(--acec-muted); }
+.acec-status { margin: 0.35rem 0 0.4rem; font-size: 0.88rem; }
+
+/* recipients and log */
+.acec-log { margin: 0.2rem 0 0.2rem; font-size: 0.84rem; }
+.acec-log summary {
+  cursor: pointer;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.74rem;
+  color: var(--acec-muted);
+}
+.acec-log-count { margin-left: 0.4rem; opacity: 0.8; }
+.acec-log-label {
+  margin: 0.6rem 0 0.2rem;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--acec-muted);
+}
+.acec-recipients, .acec-events { list-style: none; margin: 0; padding: 0; }
+.acec-recipients li { padding: 0.15rem 0; }
+.acec-email { font-family: 'Roboto Mono', monospace; font-size: 0.78rem; margin-left: 0.3rem; }
+.acec-events li {
+  display: grid;
+  grid-template-columns: 6.2rem 8.5rem 1fr;
+  gap: 0.6rem;
+  align-items: baseline;
+  padding: 0.3rem 0;
+  border-top: 1px solid var(--acec-line);
+}
+.acec-events li:first-child { border-top: none; }
+.acec-ev-date { font-family: 'Roboto Mono', monospace; font-size: 0.76rem; color: var(--acec-muted); }
+.acec-ev-stage { justify-self: start; }
+
+@media (max-width: 900px) {
+  .acec-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .acec-col:nth-child(2)::after { display: none; }
+}
+@media (max-width: 560px) {
+  .acec-board { grid-template-columns: 1fr; }
+  .acec-col::after { display: none; }
+  .acec-col { min-height: 0; }
+  .acec-rec { margin-left: 0; }
+  .acec-events li { grid-template-columns: 1fr; gap: 0.15rem; }
+}
+
+
+/* =========================================================
+   MATH
+   Pandoc writes math as MathML (_quarto.yml, html-math-method) and the
+   browser sets it in Concrete Math, Knuth's low-contrast companion to
+   Concrete Roman: even strokes that sit at Roboto's weight, with italic
+   variables that stay distinct from the text. OFL 1.1, from CTAN
+   (concmath-otf). The file is only fetched on pages that have math.
+========================================================= */
+@font-face {
+  font-family: "Concrete Math";
+  src: url("fonts/Concrete-Math.woff2?v=f9107f76") format("woff2");
+  font-display: swap;
+}
+math {
+  font-family: "Concrete Math", math;
+  font-size: 1.06em;
+}
+math[display="block"] {
+  font-size: 1.12em;
+  margin: 1em 0;
+}
+
+/* =========================================================
+   SITE TOKENS
+   The palette as custom properties, so the home page and the shared
+   components (cards, buttons, headers) draw from one set. Cyan leads in
+   light, magenta leads in dark, as everywhere else on the site.
+========================================================= */
+body {
+  --ace-ink: #0f1419;
+  --ace-fg: #1a1f24;
+  --ace-muted: #6b7681;
+  --ace-badge: #8a949e;
+  --ace-lead: #03e5ff;
+  --ace-on-lead: #0f1419;
+  --ace-link: #0b7f97;
+  --ace-mark-fill: #222222;
+  --ace-surface: #ffffff;
+  --ace-surface-2: #f5f8f9;
+  --ace-rule: rgba(15, 20, 25, 0.12);
+  --ace-rule-strong: rgba(15, 20, 25, 0.22);
+  --ace-grid: rgba(3, 229, 255, 0.2);
+  --ace-wash: rgba(3, 229, 255, 0.07);
+  --ace-lead-wash: rgba(3, 229, 255, 0.2);
+  --ace-scan: rgba(15, 20, 25, 0.035);
+}
+body.quarto-dark {
+  --ace-ink: #f2f5f7;
+  --ace-fg: #e6eaee;
+  --ace-muted: #9aa4ae;
+  --ace-badge: #9aa4ae;
+  --ace-lead: #e262e2;
+  --ace-on-lead: #ffffff;
+  --ace-link: #e39be0;
+  --ace-mark-fill: #ffffff;
+  --ace-surface: transparent;
+  --ace-surface-2: rgba(255, 255, 255, 0.035);
+  --ace-rule: rgba(242, 245, 247, 0.12);
+  --ace-rule-strong: rgba(242, 245, 247, 0.22);
+  --ace-grid: rgba(226, 98, 226, 0.15);
+  --ace-wash: rgba(226, 98, 226, 0.08);
+  --ace-lead-wash: rgba(226, 98, 226, 0.24);
+  --ace-scan: rgba(0, 0, 0, 0.22);
+}
+
+::selection { background: rgba(226, 98, 226, 0.28); }
+body.quarto-dark ::selection { background: rgba(3, 229, 255, 0.3); }
+
+
+/* =========================================================
+   PAGE HEADER BAND (every page but home)
+   A faint measurement grid behind the title block, fading out to the
+   lower right: the home page hero's ground, without its noise. Titles in
+   Roboto Black, as on the home page.
+========================================================= */
+body:not(.homepage) #quarto-content {
+  position: relative;
+  isolation: isolate;
+}
+body:not(.homepage) #quarto-content::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 340px;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--ace-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ace-grid) 1px, transparent 1px);
+  background-size: 44px 44px;
+  background-position: -1px -1px;
+  -webkit-mask-image: radial-gradient(ellipse 65% 100% at 35% 0%, #000 15%, transparent 72%);
+          mask-image: radial-gradient(ellipse 65% 100% at 35% 0%, #000 15%, transparent 72%);
+}
+html body:not(.homepage) h1.title {
+  font-weight: 900 !important;
+  letter-spacing: -0.03em !important;
+}
+
+
+/* =========================================================
+   HOME PAGE
+   index.qmd draws its own layout edge to edge (page-layout: custom):
+   hero, findings strip, totals, latest audits, how an audit works, the
+   ACE-RIV grid, and a contact block. Motion is in ace-home.js; with
+   reduced motion asked for the page is the same, only still.
+========================================================= */
+body.homepage #title-block-header { display: none; }
+body.homepage #quarto-content,
+body.homepage main.content,
+body.homepage #quarto-document-content {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+body.homepage main.content > *:first-child { margin-top: 0; }
+body.homepage .quarto-listing { margin: 0; }
+body.homepage #quarto-content { overflow-x: clip; }
+
+body.homepage .ace-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 4vw, 40px);
+}
+body.homepage .ace-eyebrow {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ace-link);
+}
+
+/* ---- buttons, badges, inline links ---- */
+body.homepage .ace-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.15rem;
+  border: 2px solid var(--ace-lead);
+  background: var(--ace-wash);
+  color: var(--ace-ink);
+  font: 700 0.78rem/1 "Roboto Mono", monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+body.homepage .ace-btn:hover,
+body.homepage .ace-btn:focus-visible { background: var(--ace-lead); color: var(--ace-on-lead); }
+body.homepage .ace-btn .ace-arr { transition: transform 0.2s ease; }
+body.homepage .ace-btn:hover .ace-arr { transform: translateX(4px); }
+body.homepage .ace-btn-quiet {
+  border: 1px solid var(--ace-badge);
+  padding: calc(0.85rem + 1px) calc(1.15rem + 1px);
+  background: transparent;
+  color: var(--ace-muted);
+}
+body.homepage .ace-btn-quiet:hover,
+body.homepage .ace-btn-quiet:focus-visible { background: var(--ace-badge); color: #ffffff; }
+
+body.homepage .ace-badge {
+  padding: 0.3rem 0.55rem;
+  border: 1px solid var(--ace-badge);
+  color: var(--ace-badge);
+  font: 600 0.68rem/1 "Roboto Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+body.homepage .ace-badge:hover,
+body.homepage .ace-badge:focus-visible { background: var(--ace-badge); color: #ffffff; }
+
+body.homepage .ace-inline {
+  color: var(--ace-link);
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 currentColor;
+}
+body.homepage .ace-inline:hover { background: var(--ace-lead-wash); }
+
+/* ---- hero ---- */
+body.homepage .ace-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 1px solid var(--ace-rule);
+}
+body.homepage .ace-hero::before {            /* measurement grid */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(var(--ace-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ace-grid) 1px, transparent 1px);
+  background-size: 44px 44px;
+  background-position: -1px -1px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 30% 45%, #000 20%, transparent 75%);
+          mask-image: radial-gradient(ellipse 70% 80% at 30% 45%, #000 20%, transparent 75%);
+}
+body.homepage .ace-hero::after {             /* CRT scanlines */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, var(--ace-scan) 0 1px, transparent 1px 3px);
+}
+body.homepage .ace-hero-inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding-block: clamp(2.5rem, 6vw, 5rem) clamp(2.5rem, 5vw, 4.2rem);
+}
+body.homepage .ace-hero-deck {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-bottom: -0.4rem;
+  padding: 0.5rem 0;
+  border-top: 2px solid var(--ace-lead);
+  border-bottom: 2px solid var(--ace-lead);
+  font: 600 clamp(0.72rem, 0.6rem + 0.4vw, 0.95rem)/1.2 "Roboto Mono", monospace;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ace-ink);
+}
+body.homepage .ace-hero-deck .ace-scr { color: var(--ace-lead); }
+
+body.homepage h1.ace-hero-mark {
+  --ace-px: 0;
+  --ace-py: 0;
+  align-self: center;             /* centred on the text beside it, not sitting at its foot */
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Rubik Glitch", "Roboto Mono", monospace;
+  font-weight: 400;
+  font-size: clamp(6.5rem, 36vw, 17.5rem);
+  line-height: 0.8;
+  letter-spacing: 0.01em;
+  user-select: none;
+  cursor: crosshair;
+}
+/* The box is sized by an invisible "ACE"; the drawn layers sit on top of it,
+   so scrambled glyphs of other widths never move the page. */
+body.homepage .ace-mark-size {
+  display: block;
+  visibility: hidden;
+  white-space: nowrap;
+}
+body.homepage .ace-mark-base {
+  position: absolute;
+  inset: 0;
+  white-space: nowrap;
+  color: var(--ace-mark-fill);
+  filter:
+    drop-shadow(calc(0.028em + var(--ace-px) * 0.03em) calc(0.028em + var(--ace-py) * 0.03em) 0 #e262e2)
+    drop-shadow(calc(-0.028em - var(--ace-px) * 0.03em) calc(-0.028em - var(--ace-py) * 0.03em) 0 #03e5ff);
+}
+body.homepage .ace-mark-ghost {
+  position: absolute;
+  inset: 0;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+}
+body.homepage .ace-mark-c { color: #03e5ff; }
+body.homepage .ace-mark-m { color: #e262e2; }
+body.homepage .ace-hero-mark.is-burst .ace-mark-base  { animation: ace-hero-jolt var(--ace-burst-dur, 0.9s) steps(1, end); }
+body.homepage .ace-hero-mark.is-burst .ace-mark-c     { animation: ace-hero-slice-c var(--ace-burst-dur, 0.9s) steps(1, end); }
+body.homepage .ace-hero-mark.is-burst .ace-mark-m     { animation: ace-hero-slice-m var(--ace-burst-dur, 0.9s) steps(1, end); }
+body.homepage .ace-hero-mark.is-storm .ace-mark-base  { animation: ace-hero-jolt 0.9s steps(1, end) infinite; }
+body.homepage .ace-hero-mark.is-storm .ace-mark-c     { animation: ace-hero-slice-c 0.9s steps(1, end) infinite; }
+body.homepage .ace-hero-mark.is-storm .ace-mark-m     { animation: ace-hero-slice-m 0.9s steps(1, end) infinite; }
+
+@keyframes ace-hero-jolt {
+  0%   { filter: drop-shadow(-0.05em 0.02em 0 #e262e2) drop-shadow(0.05em -0.02em 0 #03e5ff); transform: translate(-0.01em, 0) skewX(-6deg); }
+  11%  { filter: drop-shadow(0.06em -0.01em 0 #e262e2) drop-shadow(-0.06em 0.01em 0 #03e5ff); transform: translate(0.012em, -0.004em); }
+  22%  { filter: drop-shadow(-0.02em -0.05em 0 #e262e2) drop-shadow(0.02em 0.05em 0 #03e5ff); transform: skewX(4deg); }
+  33%  { filter: drop-shadow(0.08em 0 0 #e262e2) drop-shadow(-0.08em 0 0 #03e5ff); transform: translate(-0.02em, 0) skewX(-9deg) scaleY(1.02); }
+  44%  { filter: drop-shadow(0.028em 0.028em 0 #e262e2) drop-shadow(-0.028em -0.028em 0 #03e5ff); transform: none; }
+  55%  { filter: drop-shadow(-0.04em 0.03em 0 #e262e2) drop-shadow(0.04em -0.03em 0 #03e5ff); transform: translate(0.015em, 0) skewX(5deg); }
+  66%  { filter: drop-shadow(0.05em 0.01em 0 #e262e2) drop-shadow(-0.05em -0.01em 0 #03e5ff); transform: translate(-0.006em, -0.006em); }
+  77%  { filter: drop-shadow(-0.07em 0.03em 0 #e262e2) drop-shadow(0.07em -0.03em 0 #03e5ff); transform: translate(-0.012em, 0.004em) skewX(7deg); }
+  88%, 100% { filter: drop-shadow(0.028em 0.028em 0 #e262e2) drop-shadow(-0.028em -0.028em 0 #03e5ff); transform: none; }
+}
+@keyframes ace-hero-slice-c {
+  0%   { opacity: 1; clip-path: inset(12% 0 70% 0); transform: translateX(-0.07em); }
+  11%  { opacity: 1; clip-path: inset(58% 0 28% 0); transform: translateX(0.05em); }
+  22%  { opacity: 0; }
+  33%  { opacity: 1; clip-path: inset(30% 0 52% 0); transform: translateX(-0.11em); }
+  44%  { opacity: 0; }
+  55%  { opacity: 1; clip-path: inset(78% 0 6% 0); transform: translateX(0.08em); }
+  66%  { opacity: 1; clip-path: inset(4% 0 88% 0); transform: translateX(-0.04em); }
+  77%  { opacity: 1; clip-path: inset(44% 0 44% 0); transform: translateX(0.13em); }
+  88%, 100% { opacity: 0; }
+}
+@keyframes ace-hero-slice-m {
+  0%   { opacity: 1; clip-path: inset(64% 0 20% 0); transform: translateX(0.08em); }
+  11%  { opacity: 0; }
+  22%  { opacity: 1; clip-path: inset(18% 0 66% 0); transform: translateX(-0.09em); }
+  33%  { opacity: 1; clip-path: inset(50% 0 38% 0); transform: translateX(0.12em); }
+  44%  { opacity: 0; }
+  55%  { opacity: 1; clip-path: inset(8% 0 80% 0); transform: translateX(-0.06em); }
+  66%  { opacity: 0; }
+  77%  { opacity: 1; clip-path: inset(84% 0 2% 0); transform: translateX(-0.1em); }
+  88%, 100% { opacity: 0; }
+}
+
+body.homepage .ace-hero-tear {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.9;
+}
+body.homepage .ace-hero-tear.is-c { background: #03e5ff; }
+body.homepage .ace-hero-tear.is-m { background: #e262e2; }
+body.homepage .ace-hero-sweep {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  height: 2px;
+  pointer-events: none;
+  background: var(--ace-lead);
+  box-shadow: 0 0 18px 4px var(--ace-lead-wash);
+  opacity: 0;
+}
+body.homepage .ace-hero-sweep.is-on { animation: ace-hero-sweep var(--ace-burst-dur, 0.9s) linear; }
+@keyframes ace-hero-sweep { 0% { top: 0; opacity: 0.9; } 100% { top: 100%; opacity: 0; } }
+
+body.homepage .ace-hero-thesis {
+  display: grid;
+  gap: 1.2rem;
+  max-width: 34rem;
+  padding-bottom: 0.4rem;
+}
+body.homepage .ace-hero-thesis p { margin: 0; }
+body.homepage .ace-hero-claim {
+  font-weight: 900;
+  font-size: clamp(1.9rem, 1.2rem + 2.2vw, 3.1rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--ace-ink);
+  text-wrap: balance;
+}
+body.homepage .ace-hl { background: linear-gradient(transparent 62%, var(--ace-lead-wash) 62%); }
+body.homepage .ace-hero-lead {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--ace-fg);
+}
+body.homepage .ace-hero-ctas,
+body.homepage .ace-hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+body.homepage .ace-hero-badges { gap: 0.45rem; }
+
+@media (max-width: 1060px) {
+  body.homepage .ace-hero-inner { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  body.homepage .ace-hero-deck { letter-spacing: 0.2em; }
+}
+
+/* ---- findings strip ---- */
+body.homepage .ace-ticker {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--ace-rule);
+  background: var(--ace-surface-2);
+}
+body.homepage .ace-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ace-tick 80s linear infinite;
+}
+body.homepage .ace-ticker:hover .ace-ticker-track,
+body.homepage .ace-ticker:focus-within .ace-ticker-track { animation-play-state: paused; }
+body.homepage .ace-tick {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1.6rem;
+  border-right: 1px solid var(--ace-rule);
+  white-space: nowrap;
+  color: var(--ace-fg);
+  font: 500 0.8rem/1.2 "Roboto Mono", monospace;
+  text-decoration: none;
+}
+body.homepage .ace-tick:hover .ace-tick-text { color: var(--ace-ink); box-shadow: inset 0 -1px 0 currentColor; }
+body.homepage .ace-tick-id {
+  padding: 0.12rem 0.4rem;
+  border: 1px solid currentColor;
+  color: var(--ace-link);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+body.homepage .ace-tick-x { color: #e262e2; font-weight: 700; }
+@keyframes ace-tick { to { transform: translateX(-50%); } }
+
+/* ---- bands and section heads ---- */
+body.homepage .ace-home-band { padding-block: clamp(3rem, 7vw, 5.5rem); }
+body.homepage .ace-home-band + .ace-home-band { border-top: 1px solid var(--ace-rule); }
+body.homepage .ace-home-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.6rem 2rem;
+  margin-bottom: 2rem;
+}
+body.homepage .ace-home-head p {
+  margin: 0;
+  max-width: 52ch;
+  color: var(--ace-muted);
+}
+body.homepage h2.ace-home-h2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--ace-ink);
+  text-wrap: balance;
+}
+
+/* ---- totals ---- */
+body.homepage .ace-totals {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 2px solid var(--ace-ink);
+}
+body.homepage .ace-total {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+  padding: 1.4rem 1.2rem 1.2rem;
+  border-right: 1px solid var(--ace-rule);
+}
+body.homepage .ace-total:first-child { padding-left: 0; }
+body.homepage .ace-total:last-child { border-right: 0; }
+body.homepage .ace-total-key {
+  font: 600 0.66rem/1 "Roboto Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ace-muted);
+}
+body.homepage .ace-total-num {
+  font: 700 clamp(2.4rem, 1.6rem + 2.8vw, 4.2rem)/1 "Roboto Mono", monospace;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ace-ink);
+}
+body.homepage .ace-total-num.is-scrambling { color: var(--ace-lead); text-shadow: -2px 0 #03e5ff, 2px 0 #e262e2; }
+body.homepage .ace-total-what { font-size: 0.92rem; color: var(--ace-fg); }
+body.homepage .ace-totals-note { margin: 0.9rem 0 0; font-size: 0.8rem; color: var(--ace-muted); }
+@media (max-width: 760px) {
+  body.homepage .ace-totals { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  body.homepage .ace-total,
+  body.homepage .ace-total:first-child { padding: 1.2rem 1rem 1.1rem 0; }
+  body.homepage .ace-total:nth-child(2n) { border-right: 0; padding-left: 1rem; }
+  body.homepage .ace-total:nth-child(n + 3) { border-top: 1px solid var(--ace-rule); }
+}
+
+/* ---- latest audits: the Reports cards, two up, no abstract ---- */
+body.homepage .ace-report-listing {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+  margin: 0;
+}
+body.homepage .ace-report-card:only-child { grid-column: 1 / -1; }
+body.homepage .ace-listing-abstract { display: none; }
+@media (max-width: 860px) {
+  body.homepage .ace-report-listing { grid-template-columns: minmax(0, 1fr); }
+}
+
+body.homepage .ace-mega {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem 2rem;
+  margin-top: 1.6rem;
+  padding: clamp(1.4rem, 3vw, 2.2rem) clamp(1.2rem, 3vw, 2.4rem);
+  border: 2px solid var(--ace-lead);
+  background: var(--ace-wash);
+  color: var(--ace-ink);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+body.homepage .ace-mega::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--ace-lead);
+  transform: translateX(-101%);
+  transition: transform 0.35s cubic-bezier(0.7, 0, 0.2, 1);
+}
+body.homepage .ace-mega > * { position: relative; z-index: 1; }
+body.homepage .ace-mega:hover,
+body.homepage .ace-mega:focus-visible { color: var(--ace-on-lead); }
+body.homepage .ace-mega:hover::before,
+body.homepage .ace-mega:focus-visible::before { transform: none; }
+body.homepage .ace-mega-title {
+  display: block;
+  font-weight: 900;
+  font-size: clamp(1.7rem, 1rem + 2.8vw, 3.2rem);
   line-height: 1;
+  letter-spacing: -0.03em;
 }
-div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"]:hover,
-div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"]:focus-visible {
-  background: rgba(3, 229, 255, 0.3) !important;
-  color: #222222 !important;
+body.homepage .ace-mega:hover .ace-mega-title { animation: ace-text-glitch 0.8s steps(1, end) infinite; }
+body.homepage .ace-mega-meta {
+  display: block;
+  margin-top: 0.6rem;
+  font: 600 0.74rem/1.3 "Roboto Mono", monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.8;
 }
-body.quarto-dark div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"] {
-  background: rgba(226, 98, 226, 0.16) !important;
-  color: #ffffff !important;
+body.homepage .ace-mega-arrow {
+  font-family: "Rubik Glitch", "Roboto Mono", monospace;
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3.6rem);
+  line-height: 1;
+  transition: transform 0.25s ease;
 }
-body.quarto-dark div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"]:hover,
-body.quarto-dark div.quarto-about-trestles .about-entity .about-link[href$="handbook.pdf"]:focus-visible {
-  background: rgba(226, 98, 226, 0.32) !important;
-  color: #ffffff !important;
+body.homepage .ace-mega:hover .ace-mega-arrow { transform: translateX(8px); }
+
+/* ---- how an audit works ---- */
+body.homepage .ace-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body.homepage .ace-step {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 0.55rem;
+  padding: 1.3rem 1.3rem 1.4rem;
+  border-top: 2px solid var(--ace-rule-strong);
+}
+body.homepage .ace-step:first-child { padding-left: 0; }
+body.homepage .ace-step + .ace-step { border-left: 1px solid var(--ace-rule); }
+body.homepage .ace-step::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--ace-lead);
+  transition: width 0.5s ease;
+}
+body.homepage .ace-step:hover::before { width: 100%; }
+body.homepage .ace-step-n {
+  font: 700 0.72rem/1 "Roboto Mono", monospace;
+  letter-spacing: 0.1em;
+  color: var(--ace-link);
+}
+body.homepage .ace-step h3 {
+  margin: 0;
+  font-family: "Rubik Glitch", "Roboto Mono", monospace;
+  font-weight: 400;
+  font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.7rem);
+  line-height: 1;
+  color: var(--ace-ink);
+  filter: drop-shadow(2px 2px 0 #e262e2) drop-shadow(-2px -2px 0 #03e5ff);
+}
+body.homepage .ace-step p { margin: 0; font-size: 0.93rem; color: var(--ace-fg); }
+@media (max-width: 900px) {
+  body.homepage .ace-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.2rem; }
+  body.homepage .ace-step:nth-child(3) { padding-left: 0; border-left: 0; }
+}
+@media (max-width: 520px) {
+  body.homepage .ace-steps { grid-template-columns: minmax(0, 1fr); }
+  body.homepage .ace-step,
+  body.homepage .ace-step + .ace-step { padding-left: 0; padding-right: 0; border-left: 0; }
+}
+
+body.homepage .ace-standard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 1rem 2rem;
+  margin-top: 2.4rem;
+  padding: 1.3rem 1.4rem;
+  border: 1px dashed var(--ace-rule-strong);
+  background: var(--ace-surface-2);
+}
+body.homepage .ace-standard .ace-eyebrow { margin: 0.15rem 0 0; color: var(--ace-muted); }
+body.homepage .ace-standard ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem 1.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body.homepage .ace-standard li {
+  display: flex;
+  gap: 0.55rem;
+  font: 500 0.85rem/1.45 "Roboto Mono", monospace;
+  color: var(--ace-fg);
+}
+body.homepage .ace-standard li::before { content: "[x]"; flex: none; font-weight: 700; color: var(--ace-link); }
+@media (max-width: 860px) {
+  body.homepage .ace-standard,
+  body.homepage .ace-standard ul { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- ACE-RIV grid (markup: _includes/home-riv.md, from riv.yml) ---- */
+body.homepage .ace-riv-grid { display: grid; gap: 0.9rem; }
+body.homepage .ace-riv-row {
+  display: grid;
+  grid-template-columns: 16rem minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+}
+body.homepage .ace-riv-row-title {
+  font: 600 0.74rem/1.3 "Roboto Mono", monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ace-muted);
+}
+body.homepage .ace-riv-row-title b { margin-right: 0.45rem; color: var(--ace-ink); }
+body.homepage .ace-riv-cells { display: flex; flex-wrap: wrap; gap: 6px; }
+body.homepage .ace-rc {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 3.3rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ace-ink);
+  font: 700 0.74rem/1 "Roboto Mono", monospace;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+body.homepage .ace-rc { border-color: var(--ace-rule-strong); }
+body.homepage .ace-rc.is-found,
+body.homepage .ace-riv-legend i.is-found { border-color: var(--ace-lead); background: var(--ace-lead-wash); }
+body.homepage .ace-rc:hover,
+body.homepage .ace-rc:focus-visible,
+body.homepage .ace-rc.is-selected {
+  transform: translateY(-2px);
+  outline: 2px solid var(--ace-ink);
+  outline-offset: 1px;
+}
+body.homepage .ace-rc-count {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: var(--ace-ink);
+  color: var(--bs-body-bg, #ffffff);
+  font-size: 0.6rem;
+  line-height: 18px;
+  text-align: center;
+}
+body.homepage .ace-riv-readout {
+  display: grid;
+  gap: 0.2rem;
+  min-height: 4.4rem;
+  margin-top: 1.4rem;
+  padding: 0.9rem 1.1rem;
+  border-left: 3px solid var(--ace-lead);
+  background: var(--ace-surface-2);
+  font: 500 0.82rem/1.4 "Roboto Mono", monospace;
+  color: var(--ace-fg);
+}
+body.homepage .ace-riv-readout-name {
+  font: 700 1rem/1.3 "Roboto", sans-serif;
+  color: var(--ace-ink);
+}
+body.homepage .ace-riv-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.2rem;
+  margin-top: 1rem;
+  font: 500 0.72rem/1 "Roboto Mono", monospace;
+  color: var(--ace-muted);
+}
+body.homepage .ace-riv-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+body.homepage .ace-riv-legend i { display: inline-block; width: 14px; height: 14px; border: 1px solid var(--ace-rule-strong); }
+body.homepage .ace-arrow-link {
+  margin-left: auto;
+  color: var(--ace-link);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+body.homepage .ace-arrow-link:hover { box-shadow: inset 0 -1px 0 currentColor; }
+@media (max-width: 760px) {
+  body.homepage .ace-riv-row { grid-template-columns: minmax(0, 1fr); gap: 0.5rem; }
+  body.homepage .ace-rc { width: 2.9rem; }
+}
+
+/* ---- suggest a study ---- */
+body.homepage .ace-concern {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 2rem;
+}
+body.homepage .ace-concern .ace-home-h2 { margin-bottom: 0.6rem; }
+body.homepage .ace-concern p { margin: 0; max-width: 58ch; color: var(--ace-fg); }
+body.homepage .ace-mailbox {
+  display: grid;
+  gap: 0.8rem;
+  min-width: 0;
+  padding: 1.2rem;
+  border: 2px solid var(--ace-lead);
+  background: var(--ace-wash);
+}
+body.homepage .ace-mailbox .ace-eyebrow { margin: 0; color: var(--ace-muted); }
+body.homepage .ace-mailbox-addr {
+  overflow-wrap: anywhere;
+  color: var(--ace-ink);
+  font: 600 clamp(0.85rem, 0.7rem + 0.5vw, 1.05rem)/1.3 "Roboto Mono", monospace;
+  text-decoration: none;
+}
+body.homepage .ace-mailbox-addr:hover { box-shadow: inset 0 -1px 0 currentColor; }
+body.homepage .ace-mailbox-copy {
+  justify-self: start;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--ace-lead);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ace-ink);
+  font: 700 0.7rem/1 "Roboto Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+body.homepage .ace-mailbox-copy:hover { background: var(--ace-lead); color: var(--ace-on-lead); }
+/* ---- SUBSCRIBE CARD (Reports page): one row, text left, form right ---- */
+.ace-subscribe-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 1.2rem 2rem;
+  align-items: center;
+  margin: 1.6rem 0 2rem;
+  padding: 1.1rem 1.3rem;
+  border: 2px solid var(--ace-lead);
+  background: var(--ace-wash);
+}
+.ace-subscribe-card .ace-eyebrow {
+  display: block;
+  margin: 0 0 0.3rem;
+  color: var(--ace-muted);
+  font: 700 0.68rem/1 "Roboto Mono", monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.ace-subscribe-card p { margin: 0; color: var(--ace-ink); }
+.ace-subscribe-card-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.5rem 0.6rem; align-items: center; min-width: 0; }
+.ace-subscribe-card-form .ace-subscribe-input {
+  width: 100%; min-width: 0; padding: 0.55rem 0.7rem;
+  border: 1px solid var(--ace-lead); border-radius: 0;
+  background: var(--ace-bg, transparent); color: var(--ace-ink);
+  font: 500 0.95rem/1.3 "Roboto Mono", monospace;
+}
+.ace-subscribe-card-form .ace-subscribe-input::placeholder { color: var(--ace-muted); opacity: 1; }
+.ace-subscribe-card-form .ace-subscribe-input:focus { outline: 2px solid var(--ace-lead); outline-offset: 2px; }
+.ace-subscribe-card-form .ace-subscribe-btn {
+  padding: 0.6rem 0.9rem; border: 1px solid var(--ace-lead); border-radius: 0;
+  background: transparent; color: var(--ace-ink);
+  font: 700 0.7rem/1 "Roboto Mono", monospace; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
+}
+.ace-subscribe-card-form .ace-subscribe-btn:hover { background: var(--ace-lead); color: var(--ace-on-lead, #0f1419); }
+.ace-subscribe-card-form .ace-subscribe-msg { grid-column: 1 / -1; margin: 0; min-height: 0; color: var(--ace-muted); font: 500 0.8rem/1.4 "Roboto", sans-serif; }
+.ace-subscribe-card-form .ace-subscribe-msg:empty { display: none; }
+.ace-subscribe-card-form .ace-subscribe-msg.is-ok { color: var(--ace-ink); }
+.ace-subscribe-card-form.is-done .ace-subscribe-input,
+.ace-subscribe-card-form.is-done .ace-subscribe-btn { display: none; }
+@media (max-width: 760px) {
+  .ace-subscribe-card { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- email updates (same box as the mailbox; posts to a Google Form that
+   fills a private Sheet, see ace-home.js "subscribe") ---- */
+body.homepage .ace-subscribe-input {
+  width: 100%;
+  min-width: 0;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--ace-lead);
+  border-radius: 0;
+  background: var(--ace-bg);
+  color: var(--ace-ink);
+  font: 500 clamp(0.85rem, 0.7rem + 0.5vw, 1rem)/1.3 "Roboto Mono", monospace;
+}
+body.homepage .ace-subscribe-input::placeholder { color: var(--ace-muted); opacity: 1; }
+body.homepage .ace-subscribe-input:focus { outline: 2px solid var(--ace-lead); outline-offset: 2px; }
+body.homepage .ace-subscribe-msg { margin: 0; min-height: 1.2em; color: var(--ace-muted); font: 500 0.8rem/1.4 "Roboto", sans-serif; }
+body.homepage .ace-subscribe-msg.is-ok { color: var(--ace-ink); }
+body.homepage .ace-subscribe.is-done .ace-subscribe-input,
+body.homepage .ace-subscribe.is-done .ace-subscribe-btn { display: none; }
+
+@media (max-width: 860px) {
+  body.homepage .ace-concern { grid-template-columns: minmax(0, 1fr); }
+}
+
+body.homepage a:focus-visible,
+body.homepage button:focus-visible { outline: 2px solid var(--ace-lead); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  body.homepage .ace-ticker { overflow-x: auto; }
+  body.homepage .ace-ticker-track { animation: none; }
+  body.homepage .ace-hero-mark *,
+  body.homepage .ace-hero-sweep,
+  body.homepage .ace-mega:hover .ace-mega-title { animation: none !important; }
+  body.homepage .ace-mega::before { transition: none; }
 }

@@ -1,17 +1,21 @@
 # ACE-RIV: the ACE taxonomy of Research Integrity Violations.
 #
-# Single source of truth for the numbers, names, severity tiers and counting
-# units. riv.qmd builds its quick-reference table from this file, the report
+# Single source of truth for the numbers, names and counting units.
+# riv.qmd builds its quick-reference table from this file, the report
 # helpers (riv_summary_table) validate report labels against it, and
 # scripts/riv_check.py checks riv.qmd and every report for drift.
 #
-# Definitions, elements and evidence live as prose in riv.qmd. Numbers are
+# Definitions, criteria and evidence live as prose in riv.qmd. Numbers are
 # stable: never renumber or reuse a number; append new categories at the end
 # of a section and bump `version` (minor for additions/clarifications, major
 # for any change to what an existing number means).
+#
+# Earlier versions are kept in _riv-versions/ (riv-1.0.yml, ...). A published
+# report reads the version it was written under: its frozen helpers.R points
+# riv_summary_table() at that file, so a new version never relabels it.
 
-version: "1.0"
-date: "2026-09-13"
+version: "2.0"
+date: "2026-10-10"
 url: "https://auditclinicalevidence.org/riv.html"
 
 sections:
@@ -20,118 +24,91 @@ sections:
     categories:
       - number: "1.1"
         name: Guest, Honorary, or Gift Authorship
-        severity: Major
         unit: credited author, per article
       - number: "1.2"
         name: Ghost Authorship
-        severity: Major
         unit: omitted contributor (article if unidentifiable)
       - number: "1.3"
         name: Authorship for Sale and Paper Mill Activity
-        severity: Critical
         unit: article
       - number: "1.4"
         name: Plagiarism
-        severity: Major
         unit: passage, figure, or table
       - number: "1.5"
         name: Duplicate Publication and Salami Slicing
-        severity: Critical
         unit: redundant article
       - number: "1.6"
         name: Citation Manipulation
-        severity: Major
         unit: article
       - number: "1.7"
         name: Peer Review Subversion
-        severity: Critical
         unit: article
       - number: "1.8"
         name: Irrelevant Citations and Reference Padding
-        severity: Major
         unit: article
       - number: "1.9"
         name: Trial Registration Failures and Outcome Switching
-        severity: Major
         unit: unregistered trial, or switched outcome
       - number: "1.10"
         name: Incompatible Authorship or Contribution Statements
-        severity: Major
         unit: article
       - number: "1.11"
         name: Misrepresentation of Cited Sources
-        severity: Major
         unit: citation
       - number: "1.12"
         name: Undisclosed Generated Text
-        severity: Major
         unit: article
   - number: 2
     title: Statistical and Data Integrity
     categories:
       - number: "2.1"
         name: Anomalies and Extreme Values
-        severity: Major
         unit: anomalous value
       - number: "2.2"
         name: Statistical Inconsistencies and Impossible Data Sets
-        severity: Critical
         unit: impossible statistic
       - number: "2.3"
         name: Selective Reporting, Suppressed Data, and Omitted Methodology
-        severity: Major
         unit: omitted outcome, analysis, or method element
       - number: "2.4"
         name: Data Miscalculation or Erroneous Reporting
-        severity: Major
         unit: incorrect value
       - number: "2.5"
         name: Image and Figure Manipulation
-        severity: Critical
         unit: image or panel
       - number: "2.6"
         name: Data Set Anomalies
-        severity: Critical
         unit: distinct anomaly
       - number: "2.7"
         name: Image and Figure Errors
-        severity: Major
         unit: figure or panel
   - number: 3
     title: Ethical Oversight and Transparency
     categories:
       - number: "3.1"
         name: Failure to Disclose Conflicts of Interest
-        severity: Major
         unit: undisclosed interest, per article
       - number: "3.2"
         name: Bypass of Ethical Oversight
-        severity: Critical
         unit: article
       - number: "3.3"
         name: Ethics Approval Anomalies
-        severity: Critical
         unit: article
       - number: "3.4"
         name: Implausible Study Timelines
-        severity: Major
         unit: article
       - number: "3.5"
         name: False or Unfulfilled Data Availability Statements
-        severity: Major
         unit: article
   - number: 4
     title: Indicators and Minor Issues
     categories:
       - number: "4.1"
         name: Minor Typographical Error
-        severity: Minor
         unit: error
       - number: "4.2"
         name: Indicators of Paper Mill Involvement
-        severity: Indicator
         unit: article
       - number: "4.3"
         name: Tortured Phrases and Text Spinners
-        severity: Indicator
         unit: article

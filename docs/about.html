@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta name="ace-build" content="e1bd986d18">
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.56">
@@ -20,29 +21,28 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js?v=12d33484"></script>
+<script src="site_libs/quarto-nav/headroom.min.js?v=ace0360e"></script>
+<script src="site_libs/clipboard/clipboard.min.js?v=15f52a1e"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js?v=c64544db"></script>
+<script src="site_libs/quarto-search/fuse.min.js?v=de7d60e4"></script>
+<script src="site_libs/quarto-search/quarto-search.js?v=bb16b7e7"></script>
 <meta name="quarto:offset" content="./">
-<link href="./images/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="./images/favicon.png?v=14f25854" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js?v=7563d37e"></script>
+<script src="site_libs/quarto-html/popper.min.js?v=3a4a291c"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js?v=d8287752"></script>
+<script src="site_libs/quarto-html/anchor.min.js?v=91bcf6cd"></script>
+<link href="site_libs/quarto-html/tippy.css?v=ebd6f8ce" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css?v=ab2b9e94" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css?v=4dca331c" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js?v=e2b09c06"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css?v=2318f137" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css?v=7f59090b" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css?v=3d614efb" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,19 +70,53 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<!-- Fonts, requested straight from the page head rather than through an
+     @import inside styles.css, so the browser starts fetching them at
+     once. Rubik Glitch (the ACE wordmark) uses display=block: the mark
+     stays invisible for the moment it takes to arrive instead of
+     flashing as plain letters. -->
 <script>
-window.MathJax = {
-  output: { font: "mathjax-fira" },
-  tex: {
-    inlineMath:  [["\\(", "\\)"], ["$", "$"]],
-    displayMath: [["\\[", "\\]"], ["$$", "$$"]]
+// Freshness check. GitHub Pages lets a browser reuse a page for up to
+// 10 minutes, so right after a publish someone could still be shown
+// the previous version. Every page carries its own build stamp
+// (scripts/build_stamp.py); this asks for the published stamps,
+// skipping every cache, and if this copy is out of date it fetches
+// the current page and reloads. Tried once per new version, so it can
+// never loop; does nothing offline or when the list is unavailable.
+(function () {
+  function check() {
+    var m = document.querySelector('meta[name="ace-build"]');
+    if (!m || !window.fetch || location.protocol === "file:") return;
+    var path = decodeURIComponent(location.pathname).replace(/^\//, "");
+    if (path === "" || path.slice(-1) === "/") path += "index.html";
+    fetch("/version.json?t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (v) {
+        var live = v && v.pages && v.pages[path];
+        if (!live || live === m.content) return;
+        var key = "ace-fresh:" + path;
+        try {
+          if (sessionStorage.getItem(key) === live) return;
+          sessionStorage.setItem(key, live);
+        } catch (e) {}
+        document.documentElement.style.visibility = "hidden";
+        var go = function () { location.reload(); };
+        fetch(location.href, { cache: "reload" }).then(go, go);
+      })
+      .catch(function () {});
   }
-};
+  check();
+  // also when the browser restores a page from its back/forward memory
+  window.addEventListener("pageshow", function (e) { if (e.persisted) check(); });
+})();
 </script>
-<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml-nofont.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;family=Roboto+Mono:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&amp;display=block">
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=0b47a0cf">
 <meta property="og:title" content="ABOUT – ACE">
 <meta property="og:description" content="Independent audits of clinical research for statistical errors and research integrity violations.">
 <meta property="og:image" content="https://auditclinicalevidence.org/images/social-card.png">
@@ -101,7 +135,7 @@ window.MathJax = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-xl " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
@@ -121,6 +155,10 @@ window.MathJax = {
   <li class="nav-item">
     <a class="nav-link" href="./reports.html"> 
 <span class="menu-text">Reports</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./correspondence.html"> 
+<span class="menu-text">Correspondence</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./about.html" aria-current="page"> 
@@ -414,7 +452,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  const darkModeDefault = false;
+  const darkModeDefault = true;
   let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
@@ -857,7 +895,37 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </footer>
 <!-- GENERATED by scripts/build_categories.py; edit the reports, not this file. -->
-<script>window.aceCategoryFacets = {"Depression": "outcome", "Exercise": "treatment", "Heart Disease": "population", "RCT": "design"};</script>
+<script>window.aceCategoryFacets = {"Depression": "outcome", "Exercise": "treatment", "Heart Disease": "population", "Older Adults": "population", "RCT": "design"};</script>
+<script>
+// Navbar wordmark glitch (styles.css, "WORDMARK HOVER GLITCH"):
+// a burst every 3.8 to 6.4 seconds, at random, like the home page
+// mark. The torn slices are drawn from data-text, which briefly
+// carries a stray glyph; the word itself never changes, so the
+// navbar never shifts. Not on the home page (the mark is hidden
+// there), not with reduced motion, not while the tab is hidden.
+(function () {
+  var t = document.querySelector(".navbar .navbar-title");
+  if (!t || document.body.classList.contains("homepage")) return;
+  var word = t.textContent.trim();
+  t.setAttribute("data-text", word);
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var GLYPHS = "ACE#%&@$XZ0187/<>?*";
+  function burst() {
+    t.classList.remove("is-burst"); void t.offsetWidth; t.classList.add("is-burst");
+    setTimeout(function () {
+      var w = word.split(""), i = Math.floor(Math.random() * w.length);
+      w[i] = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+      t.setAttribute("data-text", w.join(""));
+    }, 230);
+    setTimeout(function () { t.setAttribute("data-text", word); }, 420);
+    setTimeout(function () { t.classList.remove("is-burst"); }, 900);
+  }
+  (function next() {
+    setTimeout(function () { if (!document.hidden) burst(); next(); },
+               3800 + Math.random() * 2600);
+  })();
+})();
+</script>
 <script>
 // Fold-in right panel for narrow screens. Quarto hides
 // #quarto-margin-sidebar below 768px; this adds an edge tab that
@@ -1120,6 +1188,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     apply();
   }
+})();
+</script>
+<script>
+// Collapsed navbar (below 1200px, collapse-below in this file): keep
+// the RSS and GitHub icons on the bar beside the theme toggle instead
+// of at the foot of the menu, as long as the bar has room (450px and
+// up); narrower than that they go back into the menu, side by side.
+// The nodes are moved, not copied, so their links and styles are the
+// same ones Quarto wrote. Styling: styles.css, "NAVBAR TOOLS".
+(function () {
+  var onBar = window.matchMedia("(min-width: 450px) and (max-width: 1199.98px)");
+  function place() {
+    var nav = document.querySelector(".navbar .navbar-container");
+    var collapse = nav && nav.querySelector("#navbarCollapse");
+    var icons = nav && nav.querySelector("ul.navbar-nav.ms-auto");
+    var tools = nav && nav.querySelector(".quarto-navbar-tools");
+    if (!nav || !collapse || !icons || !tools) return;
+    if (onBar.matches) {
+      if (icons.parentNode !== nav) { nav.insertBefore(icons, tools); icons.classList.add("ace-bar-icons"); }
+    } else if (icons.parentNode !== collapse) {
+      collapse.appendChild(icons); icons.classList.remove("ace-bar-icons");
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", place); else place();
+  if (onBar.addEventListener) onBar.addEventListener("change", place); else onBar.addListener(place);
 })();
 </script>
 

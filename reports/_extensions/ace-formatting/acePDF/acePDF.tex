@@ -23,6 +23,67 @@
 \definecolor{acemagenta}{HTML}{E262E2}
 \definecolor{acegrey}{HTML}{5A6570}   % caption/note grey, same as the site
 
+% ---- Tables (tinytable / tabularray) in the site's look ---------------------
+% Cyan top rule, light grey header and bottom rules (table notes are styled
+% further down, with the captions). tabularray refuses to redefine a table command, so the booktabs rules
+% are recolored by replacing their implementations; every step is guarded, so
+% a tabularray version with other internals just keeps its default rules.
+\definecolor{acerule}{HTML}{BFC5CA}
+\ExplSyntaxOn
+\AtBeginDocument{
+  \bool_lazy_and:nnT
+    { \cs_if_exist_p:c { __tblr_table_command_toprule:w } }
+    { \cs_if_exist_p:c { tblr@booktabs@hline } }
+    {
+      \RenewDocumentCommand \__tblr_table_command_toprule:w { O{} }
+        { \use:c { tblr@booktabs@hline } [wd=0.12em, fg=acecyan, #1] }
+      \RenewDocumentCommand \__tblr_table_command_midrule:w { O{} }
+        { \use:c { tblr@booktabs@hline } [wd=0.05em, fg=acerule, #1] }
+      \RenewDocumentCommand \__tblr_table_command_bottomrule:w { O{} }
+        { \use:c { tblr@booktabs@hline } [wd=0.05em, fg=acerule, #1] }
+    }
+  \bool_lazy_and:nnT
+    { \cs_if_exist_p:c { __tblr_table_command_cmidrule:w } }
+    { \cs_if_exist_p:c { tblr@booktabs@cline } }
+    {
+      \RenewDocumentCommand \__tblr_table_command_cmidrule:w { O{} m }
+        { \use:c { tblr@booktabs@cline } [wd=\cmidrulewidth, endpos, fg=acerule, #1] {#2} }
+    }
+}
+\ExplSyntaxOff
+
+% ---- Markdown (pandoc longtable) tables in the same look --------------------
+% booktabs colours its rules with \CT@arc@ (colortbl's hook, empty without
+% colortbl), so each rule sets it first: a 0.12em cyan top rule, 0.05em light
+% grey rules otherwise (pandoc never passes these rules a width of its own). tabularray's own copies of these commands are handled above.
+% \aceTableHead is inserted by _filters/ace-tables.lua.
+\definecolor{acelabel}{HTML}{767676}
+\definecolor{acehair}{HTML}{E6E9EC}
+% Table type sizes, the same for both kinds of table: body at 0.9em and column
+% labels at 0.85em of the normal size (what ace_tt_pdf() and yesno_tt() give
+% tinytable), notes and captions \small (set below with the captions).
+\newcommand{\aceTableHead}{\normalsize\ttfamily\fontsize{0.85em}{1.1em}\selectfont\color{acelabel}}
+\makeatletter
+\AtBeginDocument{%
+  \@ifundefined{@BTrule}{}{%
+    \providecommand*\CT@arc@{}%
+    \let\aceBT@toprule\toprule
+    \let\aceBT@midrule\midrule
+    \let\aceBT@bottomrule\bottomrule
+    \let\aceBT@cmidrule\cmidrule
+    \def\toprule{\noalign{\gdef\CT@arc@{\color{acecyan}}}\aceBT@toprule[0.12em]}%
+    \def\midrule{\noalign{\gdef\CT@arc@{\color{acerule}}}\aceBT@midrule[0.05em]}%
+    \def\bottomrule{\noalign{\gdef\CT@arc@{\color{acerule}}}\aceBT@bottomrule[0.05em]}%
+    \def\cmidrule{\noalign{\gdef\CT@arc@{\color{acerule}}}\aceBT@cmidrule}%
+  }%
+}
+\makeatother
+% Body size and a little more air between rows of a Markdown table, to match tinytable.
+\makeatletter
+\@ifundefined{AddToHook}{}{\AddToHook{env/longtable/begin}{\fontsize{0.9em}{1.2em}\selectfont\renewcommand{\arraystretch}{1.3}}}
+\makeatother
+
+
 % Facet badges on the cover, matching the chips on the website: the fill is
 % the site's translucent tint flattened onto white, the line is the facet
 % hue, the ink is the darker text tone used for the facet key.
@@ -201,7 +262,19 @@
   \smash{\raisebox{-\aceRunDrop}{\shortstack{%
     \includegraphics[width=\aceRunMarkW]{brand/logo_mark.png}\\[3pt]
     \aceRunIDBox}}}}
-\newcommand{\aceFolio}{{\color{acegrey}\ttfamily\footnotesize\thepage}}
+% "Page x of N". lastpage records the final page number; \pageref* (the
+% hyperref form) keeps the total from being drawn as a link.
+\usepackage{lastpage}
+% \needspace{<lines>} starts a new page when less room than that is left (keeps short tables whole).
+\usepackage{needspace}
+% No table or figure may float past the heading of the next section or
+% subsection, so every float stays inside the (sub)section that refers to it.
+\usepackage{placeins}
+\usepackage{etoolbox}
+\pretocmd{\section}{\FloatBarrier}{}{}
+\pretocmd{\subsection}{\FloatBarrier}{}{}
+\newcommand{\aceLastPage}{\ifdefined\hypersetup\pageref*{LastPage}\else\pageref{LastPage}\fi}
+\newcommand{\aceFolio}{{\color{acegrey}\ttfamily\footnotesize Page \thepage\ of \aceLastPage}}
 
 \setlength{\headheight}{26pt}
 \setlength{\headsep}{14pt}
@@ -570,15 +643,15 @@
     ItalicFont=*-Italic,
     ]
     
-\setmathfont{FiraMath-Regular.otf}[
-  % Fira Math: sans-serif OpenType math font that pairs with Roboto.
+\setmathfont{Concrete-Math.otf}[
+  % Concrete Math: Knuth's low-contrast Concrete, the same math font as the
+  % website (styles.css, "MATH"). Even strokes that sit at Roboto's weight.
   % Bundled in the extension's fonts/ folder, like Roboto - no tlmgr needed.
   Path = ../_extensions/ace-formatting/acePDF/fonts/,
   Scale = MatchLowercase
 ]
 
-% Fira Math has no distinct script alphabet (\mathcal falls back to its regular
-% letters). Take the calligraphic capitals alone from Euler Math: Zapf's Euler
+% Calligraphic capitals come from Euler Math, Concrete's original partner: Zapf's Euler
 % Script is upright-leaning with a uniform stroke, so it stays legible and
 % sturdy beside a sans body where Computer Modern's hairlines look wispy.
 % Alternatives, same line: STIXTwoMath-Regular.otf (formal roundhand),
@@ -588,3 +661,11 @@
   Path = ../_extensions/ace-formatting/acePDF/fonts/,
   Scale = MatchLowercase
 ]
+
+% A float that gets a page to itself (a large table or figure) sits at the
+% top of that page, not centered vertically with white space above it.
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{12pt plus 2fil}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother

@@ -1,3 +1,18 @@
+# ---------------------------------------------------------------------------
+# ace_tt_pdf(): the HTML table look carried into the PDF. Column labels in grey
+# mono; the rules themselves (cyan top rule, grey header and bottom rules) and
+# the grey notes are set once for every table in acePDF.tex. The PDF has no
+# lines between body rows. Does nothing for HTML, where styles.css does this.
+# `n_rows` is unused, kept so existing calls do not change.
+ace_tt_pdf <- function(tab, n_rows = NULL) {
+  if (!knitr::is_latex_output()) return(tab)
+  tinytable::style_tt(tab, i = 0, color = ace_axis, monospace = TRUE, fontsize = 0.85)
+}
+
+# The fill behind a failing verdict: translucent in HTML so it reads on the
+# dark theme too, solid in the PDF.
+ace_no_bg <- function() if (knitr::is_html_output()) "rgba(226, 98, 226, 0.16)" else ace_purple_bg
+
 grimmer_tt <- function(data,
                        mean_col,
                        sd_col,
@@ -7,8 +22,11 @@ grimmer_tt <- function(data,
                        notes = NULL,
                        table = TRUE,
                        yes_color = ace_blue_text,
-                       no_color = ace_purple_text) {
-  
+                       no_color = ace_purple_text,
+                       no_bg = NULL,
+                       fontsize = 0.9) {
+  if (is.null(no_bg)) no_bg <- ace_no_bg()
+
   mean_col <- rlang::ensym(mean_col)
   sd_col   <- rlang::ensym(sd_col)
   n_col    <- rlang::ensym(n_col)
@@ -75,16 +93,21 @@ grimmer_tt <- function(data,
   
   # Verdict styling: the failing verdict is bold magenta, the passing verdict a
   # quieter blue at regular weight, so failures are what the eye lands on.
-  fill <- function(tab, rows, color, bold) {
+  fill <- function(tab, rows, color, bold, background = NULL) {
     if (!length(rows)) return(tab)
-    tinytable::style_tt(tab, i = rows, j = consistent_col,
-                        color = color, bold = bold)
+    if (is.null(background)) {
+      tinytable::style_tt(tab, i = rows, j = consistent_col, color = color, bold = bold)
+    } else {
+      tinytable::style_tt(tab, i = rows, j = consistent_col, color = color, bold = bold,
+                          background = background)
+    }
   }
 
   tab <- tab |>
+    tinytable::style_tt(fontsize = fontsize) |>
     fill(which(out$Consistent == "Yes"), yes_color, FALSE) |>
-    fill(which(out$Consistent == "No"), no_color, TRUE)
-  tab
+    fill(which(out$Consistent == "No"), no_color, TRUE, no_bg)
+  ace_tt_pdf(tab, nrow(out))
 }
 
 # ---------------------------------------------------------------------------
@@ -96,7 +119,7 @@ grimmer_tt <- function(data,
 #   yesno_tt(df, col = "Reproduces", center = c("Reported", "Recomputed"),
 #            notes = "Note. ...")
 #
-# `col` is the verdict column, holding "Yes" or "No"; `center` names any other
+# `col` names the verdict column(s), holding "Yes" or "No"; `center` names any other
 # columns to center. Colors default to the same pair grimmer_tt uses.
 # ---------------------------------------------------------------------------
 yesno_tt <- function(data,
@@ -105,11 +128,17 @@ yesno_tt <- function(data,
                      notes = NULL,
                      class = "ace-grimmer-table",
                      yes_color = ace_blue_text,
-                     no_color = ace_purple_text) {
+                     no_color = ace_purple_text,
+                     no_bg = NULL,
+                     fontsize = 0.9,
+                     groups_i = NULL,
+                     width = NULL) {
 
-  stopifnot(col %in% names(data))
-  verdict_col <- which(names(data) == col)
-  center_cols <- unique(c(which(names(data) %in% center), verdict_col))
+  # `col` may name more than one verdict column; each is styled the same way.
+  # `groups_i` is passed to tinytable::group_tt(i = ) to label blocks of rows.
+  stopifnot(all(col %in% names(data)))
+  verdict_cols <- which(names(data) %in% col)
+  center_cols <- unique(c(which(names(data) %in% center), verdict_cols))
 
   # House style: a note beginning "Note." / "Note:" gets an italic "Note." label.
   if (!is.null(notes) && is.character(notes)) {
@@ -119,21 +148,46 @@ yesno_tt <- function(data,
     )
   }
 
-  tab <- tinytable::tt(data, notes = notes, class = class) |>
+  # `width`: optional column widths as fractions of the table width, passed to tinytable::tt().
+  tab <- if (is.null(width)) tinytable::tt(data, notes = notes, class = class) else
+    tinytable::tt(data, notes = notes, class = class, width = width)
+  if (!is.null(groups_i)) {
+    tab <- tab |>
+      tinytable::group_tt(i = groups_i) |>
+      tinytable::style_tt(i = "groupi", italic = TRUE)
+  }
+  tab <- tab |>
     tinytable::style_tt(j = seq_along(names(data)), valign = "m") |>
     tinytable::style_tt(j = center_cols, align = "c")
 
   # Verdict styling: the failing verdict is bold magenta, the passing verdict a
   # quieter blue at regular weight, so failures are what the eye lands on.
-  fill <- function(tab, rows, color, bold) {
+  fill <- function(tab, rows, j, color, bold, background = NULL) {
     if (!length(rows)) return(tab)
-    tinytable::style_tt(tab, i = rows, j = verdict_col,
-                        color = color, bold = bold)
+    if (is.null(background)) {
+      tinytable::style_tt(tab, i = rows, j = j, color = color, bold = bold)
+    } else {
+      tinytable::style_tt(tab, i = rows, j = j, color = color, bold = bold,
+                          background = background)
+    }
   }
 
-  tab |>
-    fill(which(data[[col]] == "Yes"), yes_color, FALSE) |>
-    fill(which(data[[col]] == "No"), no_color, TRUE)
+  # Once group_tt(i = ) has inserted label rows, style_tt() row indices refer
+  # to the displayed rows, so each data row is pushed down by the number of
+  # group rows inserted at or above it.
+  shift <- function(rows) {
+    if (is.null(groups_i) || !length(rows)) return(rows)
+    at <- unlist(groups_i)
+    rows + vapply(rows, function(r) sum(at <= r), numeric(1))
+  }
+  if (is.null(no_bg)) no_bg <- ace_no_bg()
+  tab <- tinytable::style_tt(tab, fontsize = fontsize)
+  for (j in verdict_cols) {
+    tab <- tab |>
+      fill(shift(which(data[[j]] == "Yes")), j, yes_color, FALSE) |>
+      fill(shift(which(data[[j]] == "No")), j, no_color, TRUE, no_bg)
+  }
+  ace_tt_pdf(tab, nrow(data) + length(groups_i))
 }
 
 # ---------------------------------------------------------------------------
@@ -280,7 +334,7 @@ riv_summary_table <- function(qmd, caption = "Summary of Research Integrity Viol
   tax <- yaml::read_yaml(taxonomy)
   cats <- do.call(rbind, lapply(tax$sections, function(s)
     do.call(rbind, lapply(s$categories, function(k)
-      data.frame(number = k$number, name = k$name, severity = k$severity,
+      data.frame(number = k$number, name = k$name,
                  stringsAsFactors = FALSE)))))
 
   pat <- "(?<![0-9A-Za-z])([0-9]+)-@riv-([0-9]+\\.[0-9]+)(?![0-9.]*[0-9])"   # N-@riv-x.y
