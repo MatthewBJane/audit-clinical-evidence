@@ -38,3 +38,4 @@ acePDF.log
 reports/**/*.log
 reports/**/*.aux
 reports/**/index.tex
+reports/**/index.html
