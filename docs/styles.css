@@ -1065,6 +1065,7 @@ html body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-other-links a:focus-v
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "dates" "actions" "rec";
   }
+  .ace-report-card-foot > .ace-report-card-rec { justify-self: start; }
 }
 /* the recommendation down here is a quiet grey status tag, not a button */
 .ace-report-card-rec .ace-report-rec {

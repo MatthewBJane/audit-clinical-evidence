@@ -43,7 +43,9 @@ OUT = ROOT / "_includes" / "home-riv.md"
 
 DECL = re.compile(r"(?<![0-9A-Za-z])([0-9]+)-@riv-([0-9]+\.[0-9]+)(?![0-9.]*[0-9])")
 COMMENT = re.compile(r"<!--.*?-->", re.S)
-GENERATED = "# violations and recommendation: written by scripts/build_report_meta.py; do not edit."
+GENERATED = "# violations, recommendation and citation: written by scripts/build_report_meta.py; do not edit."
+SITE = "https://auditclinicalevidence.org"
+PUBLISHER = "Audit Clinical Evidence"
 
 
 def load_yaml(path):
@@ -80,7 +82,8 @@ def rewrite(fm, lines_to_add):
     """Drop earlier generated lines, then put the new ones under `categories:`
     (or under the last facet field if there is no categories line yet)."""
     keep = [l for l in fm.split("\n")
-            if not re.match(r"^(violations|recommendation)\s*:", l) and l != GENERATED]
+            if not re.match(r"^(violations|recommendation|citation)\s*:", l)
+            and not l.startswith("# violations and recommendation:") and l != GENERATED]
     anchor = None
     for i, l in enumerate(keep):
         if re.match(r"^(categories|population|treatment|outcome|design)\s*:", l):
@@ -91,6 +94,40 @@ def rewrite(fm, lines_to_add):
         anchor += 1
     keep[anchor + 1:anchor + 1] = [GENERATED] + lines_to_add
     return "\n".join(keep)
+
+
+def yq(v):
+    """A double-quoted YAML scalar."""
+    return '"%s"' % v.replace("\\", "\\\\").replace('"', '\\"')
+
+
+def plain(text):
+    """Abstract text for indexers: no citation syntax or markdown."""
+    text = re.sub(r"\[-?@[^\]]*\]", "", text)          # [-@key; -@key]
+    text = re.sub(r"(?<![\w.])@[A-Za-z][\w:-]*", "the audited study", text)
+    text = re.sub(r"[*_`]", "", text)
+    return re.sub(r"\s+([.,;:])", r"\1", re.sub(r"\s{2,}", " ", text)).strip()
+
+
+def citation_line(fm, ace_id):
+    """Google Scholar reads the citation_* meta tags Quarto writes from this
+    block: the full title (title: subtitle), ACE as the journal and publisher,
+    the report number, the page, the PDF, and the DOI once there is one."""
+    title = (read_field(fm, "title") or [""])[0]
+    sub = (read_field(fm, "subtitle") or [""])[0]
+    full = "%s: %s" % (title, sub) if sub else title
+    doi = (read_field(fm, "doi") or [""])[0]
+    abstract = (read_field(fm, "abstract") or [""])[0]
+    parts = ["type: article-journal", "title: %s" % yq(full),
+             "container-title: %s" % yq(PUBLISHER), "publisher: %s" % yq(PUBLISHER),
+             "number: %s" % yq(ace_id),
+             "url: %s" % yq("%s/reports/%s/" % (SITE, ace_id)),
+             "pdf-url: %s" % yq("%s/reports/%s/%s.pdf" % (SITE, ace_id, ace_id))]
+    if doi:
+        parts.append("doi: %s" % yq(doi))
+    if abstract:
+        parts.append("abstract: %s" % yq(plain(abstract)))
+    return "citation: {%s}" % ", ".join(parts)
 
 
 def grid_html(version, tax, found):
@@ -163,6 +200,7 @@ def main():
         add = ["violations: {total: %d}" % sum(found.values())]
         if recs.get(ace_id):
             add.append('recommendation: "%s"' % recs[ace_id])
+        add.append(citation_line(fm, ace_id))
 
         new_fm = rewrite(fm, add)
         if new_fm is None:

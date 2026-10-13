@@ -525,6 +525,20 @@ function Meta(meta)
     table.insert(lines, "\\renewcommand{\\aceAffiliationsLine}{" .. affs_line .. "}")
   end
 
+  -- PDF document properties, which Google Scholar and reference managers read
+  -- from the file itself: the full title (title: subtitle) and ACE as the
+  -- subject, matching the citation_* tags on the report page. pagetitle feeds
+  -- the template's pdftitle; subject and keywords its pdfsubject/pdfkeywords.
+  do
+    local t = stringify(meta.title)
+    local st = stringify(meta.subtitle)
+    local id = stringify(meta["ace-id"])
+    meta.pagetitle = pandoc.MetaString((st ~= "") and (t .. ": " .. st) or t)
+    meta["title-meta"] = meta.pagetitle
+    meta.subject = pandoc.MetaString("Audit Clinical Evidence" .. ((id ~= "") and (", report " .. id) or ""))
+    meta.keywords = pandoc.MetaList({pandoc.MetaString("Audit Clinical Evidence"), pandoc.MetaString(id)})
+  end
+
   ensure_header_includes(meta)
   table.insert(meta["header-includes"], pandoc.RawBlock("latex", table.concat(lines, "\n")))
 
