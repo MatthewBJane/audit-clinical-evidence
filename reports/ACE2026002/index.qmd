@@ -6,8 +6,8 @@ draft: false
 
 ace-id: "ACE2026002"
 
-date: "2026-09-21"
-date-modified: "2026-09-21"
+date: "2026-10-12"
+date-modified: "2026-10-12"
 
 # Written by a LIVE `zenodo.py deposit`; leave empty until then.
 doi: ""
@@ -1240,7 +1240,7 @@ riv <- riv_summary_table("reports/ACE2026002/index.qmd",
 
 | Version | Date | DOI | Change |
 |:-:|:-----|:-------------|:----------|
-| 1 | 2026-09-21 | `r if (!is.null(rmarkdown::metadata$doi) && nzchar(rmarkdown::metadata$doi)) sprintf("[%s](https://doi.org/%s)", rmarkdown::metadata$doi, rmarkdown::metadata$doi) else "reserved at deposit"` | Initial publication. 110 instances across two categories. |
+| 1 | 2026-10-12 | `r if (!is.null(rmarkdown::metadata$doi) && nzchar(rmarkdown::metadata$doi)) sprintf("[%s](https://doi.org/%s)", rmarkdown::metadata$doi, rmarkdown::metadata$doi) else "reserved at deposit"` | Initial publication. 110 instances across two categories. |
 
 : {tbl-colwidths="[9,16,41,34]"}
 

@@ -29,9 +29,6 @@
             <a class="ace-doi-link listing-doi" href="https://doi.org/<%- cardDoi %>" target="_blank" rel="noopener" title="Open the archived record, newest version (opens in a new tab)"><%- cardDoi %></a>
           <% } %>
         </div>
-        <% if (rec) { %>
-          <span class="ace-report-rec ace-report-rec-<%- rec %>"><%- REC[rec] %></span>
-        <% } %>
       </div>
 
       <h2 class="ace-report-title listing-title">
@@ -109,13 +106,11 @@
       <% } %>
 
       <div class="ace-report-card-foot">
+        <!-- Every slot is always drawn, so a missing value leaves a gap
+             rather than letting the next item slide into its place. -->
         <div class="ace-report-meta ace-date-bar">
-          <% if (item.date) { %>
-            <div><span class="ace-date-key">Published</span><span class="ace-date-value listing-date"><%- item.date %></span></div>
-          <% } %>
-          <% if (item["date-modified"] && item["date-modified"] !== item.date) { %>
-            <div><span class="ace-date-key">Updated</span><span class="ace-date-value listing-date-modified"><%- item["date-modified"] %></span></div>
-          <% } %>
+          <div><span class="ace-date-key">Published</span><span class="ace-date-value listing-date"><%- item.date || "" %></span></div>
+          <div><span class="ace-date-key">Updated</span><span class="ace-date-value listing-date-modified"><%- item["date-modified"] || "" %></span></div>
         </div>
 
         <div class="ace-report-card-actions">
@@ -124,6 +119,10 @@
             <a class="ace-pdf-button" href="reports/<%- item["ace-id"] %>/<%- item["ace-id"] %>.pdf" target="_blank">PDF</a>
           <% } %>
         </div>
+
+        <% if (rec) { %>
+          <div class="ace-report-card-rec"><span class="ace-report-rec ace-report-rec-<%- rec %>"><%- REC[rec] %></span></div>
+        <% } %>
       </div>
 
     </div>

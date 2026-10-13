@@ -1,6 +1,6 @@
 ---
 title: "Research Integrity Violations"
-subtitle: "The ACE-RIV taxonomy, version 2.0"
+subtitle: "The ACE-RIV taxonomy, version 1.1"
 shorttitle: "Research Integrity Violations"
 
 author:
@@ -18,7 +18,7 @@ journal:
 date: "2026-09-13"
 date-modified: "2026-10-10"
 
-abstract: "The Audit Clinical Evidence (ACE) initiative classifies the problems it documents in audited studies using a standardized taxonomy of Research Integrity Violations (ACE-RIV). Each RIV has a stable number, a definition, the criteria that must be met to record it, the kind of evidence that supports a finding under it, and a rule for counting instances. Numbers never change meaning; RIVs are only added. This page is version 2.0 of the taxonomy."
+abstract: "The Audit Clinical Evidence (ACE) initiative classifies the problems it documents in audited studies using a standardized taxonomy of Research Integrity Violations (ACE-RIV). Each RIV has a stable number, a definition, the criteria that must be met to record it, the kind of evidence that supports a finding under it, and a rule for counting instances. Numbers never change meaning; RIVs are only added. This page is version 1.1 of the taxonomy."
 
 filters:
   - reports/_filters/ace-severity.lua
@@ -115,13 +115,13 @@ Numbers are stable from version 1.0 onward. A RIV keeps its number for as long a
 To cite the taxonomy:
 
 ::: {.ace-cite-apa}
-Jané, M. B. (2026). *Research Integrity Violations: The ACE-RIV taxonomy, version 2.0*. Audit Clinical Evidence. [https://auditclinicalevidence.org/riv.html](https://auditclinicalevidence.org/riv.html)
+Jané, M. B. (2026). *Research Integrity Violations: The ACE-RIV taxonomy, version 1.1*. Audit Clinical Evidence. [https://auditclinicalevidence.org/riv.html](https://auditclinicalevidence.org/riv.html)
 :::
 
 ```bibtex
 @techreport{ACERIV2026,
   author      = {Jané, Matthew B.},
-  title       = {Research Integrity Violations: The ACE-RIV taxonomy, version 2.0},
+  title       = {Research Integrity Violations: The ACE-RIV taxonomy, version 1.1},
   institution = {Audit Clinical Evidence},
   type        = {Taxonomy},
   year        = {2026},
@@ -565,6 +565,6 @@ The text contains unnatural synonyms produced by automated paraphrasing ("tortur
 
 ## Version history
 
-Version 2.0 (October 2026). Severity tiers removed. How much a violation matters depends on the article in which it occurs, so RIVs are no longer ranked, and the rules for reaching a recommendation are stated without them. Numbers, names, definitions, criteria, and units of counting are unchanged, so a finding recorded under version 1.0 means the same under version 2.0.
+Version 1.1 (October 2026). Severity tiers removed. How much a violation matters depends on the article in which it occurs, so RIVs are no longer ranked, and the rules for reaching a recommendation are stated without them. Numbers, names, definitions, criteria, and units of counting are unchanged, so a finding recorded under version 1.0 means the same under version 1.1.
 
 Version 1.0 (September 2026). Initial release.

@@ -14,7 +14,7 @@
 # report reads the version it was written under: its frozen helpers.R points
 # riv_summary_table() at that file, so a new version never relabels it.
 
-version: "2.0"
+version: "1.1"
 date: "2026-10-10"
 url: "https://auditclinicalevidence.org/riv.html"
 

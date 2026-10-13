@@ -8,7 +8,7 @@ riv.yml is the source of truth (numbers, names, counting unit).
 The script verifies that
 
   * riv.qmd has exactly one entry per category, with the same number, name
-    as riv.yml, no severity badge (removed in v2.0), the anchor {#riv-x-y}, and a reference
+    as riv.yml, no severity badge (removed in v1.1), the anchor {#riv-x-y}, and a reference
     block with Criteria, Typical evidence and Counting;
   * every **Name (RIV x.y)** label in every report uses the exact name and
     number from riv.yml;
@@ -75,9 +75,9 @@ def check_page(tax, cats):
         for key in ("[Criteria]{.ace-riv-key}", "[Typical evidence]{.ace-riv-key}", "[Counting]{.ace-riv-key}"):
             if key not in body:
                 problem("riv.qmd", f"RIV {num} lacks {key}")
-    # severity tiers were removed in v2.0; none should come back by accident
+    # severity tiers were removed in v1.1; none should come back by accident
     if re.search(r"\.ace-sev\b|Severity:|Escalates to Critical|Reduced to Minor", text):
-        problem("riv.qmd", "contains severity-tier language, removed in ACE-RIV v2.0")
+        problem("riv.qmd", "contains severity-tier language, removed in ACE-RIV v1.1")
     m = re.search(r'subtitle:\s*"[^"]*version (\d+\.\d+)', text)
     if m and m.group(1) != str(tax["version"]):
         problem("riv.qmd", f"subtitle says version {m.group(1)} but riv.yml is {tax['version']}")

@@ -1050,15 +1050,27 @@ html body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-other-links a:focus-v
   color: var(--acec-retraction-ink);
 }
 
-/* dates on the left, buttons on the right, over a hairline */
+/* Over a hairline: dates on the left and buttons on the right, then the
+   recommendation in the bottom-right corner below them. Fixed grid areas, so
+   an empty slot stays empty instead of pulling the next item into it. */
 .ace-report-card-foot {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "dates actions" ". rec";
   align-items: center;
-  justify-content: space-between;
   gap: 0.6rem 1rem;
   padding-top: 0.8rem;
   border-top: 1px solid var(--ace-rule);
+}
+.ace-report-card-foot > .ace-date-bar { grid-area: dates; }
+.ace-report-card-foot > .ace-report-card-actions { grid-area: actions; justify-self: end; }
+.ace-report-card-foot > .ace-report-card-rec { grid-area: rec; justify-self: end; }
+@media (max-width: 575.98px) {
+  .ace-report-card-foot {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "dates" "actions" "rec";
+  }
+  .ace-report-card-foot > .ace-report-card-actions { justify-self: start; }
 }
 .ace-report-card-foot .ace-report-meta.ace-date-bar { margin: 0; }
 
