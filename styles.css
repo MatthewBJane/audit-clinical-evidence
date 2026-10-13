@@ -728,9 +728,9 @@ body.quarto-light .navbar .solid-letter {
 
 /* ---------------------------------------------------------
    ACE REPORT LISTING BUTTONS
-   Read online is the primary action: the accent outline with a faint wash,
-   filled on hover. PDF is a quiet grey wireframe badge. Mono caps, square
-   corners, the same language as the home page buttons.
+   Read online and PDF: the accent outline with a faint wash, filled on
+   hover. Mono caps, square corners, the same language as the home page
+   buttons.
 --------------------------------------------------------- */
 
 .ace-report-card-actions {
@@ -761,21 +761,16 @@ html body .ace-report-card-actions .ace-pdf-button {
   text-decoration: none;
   transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
-html body .ace-report-card-actions .ace-pdf-button:first-child {
+html body .ace-report-card-actions .ace-pdf-button {
   border-color: var(--ace-lead);
   background: var(--ace-wash);
   color: var(--ace-ink) !important;
 }
 html body .ace-report-card-actions .ace-pdf-button:hover,
 html body .ace-report-card-actions .ace-pdf-button:focus-visible {
-  background: var(--ace-badge);
-  color: #ffffff !important;
-  text-decoration: none;
-}
-html body .ace-report-card-actions .ace-pdf-button:first-child:hover,
-html body .ace-report-card-actions .ace-pdf-button:first-child:focus-visible {
   background: var(--ace-lead);
   color: var(--ace-on-lead) !important;
+  text-decoration: none;
 }
 
 /* ---------------------------------------------------------
@@ -1050,28 +1045,35 @@ html body.quarto-dark .sidebar nav[role="doc-toc"] .quarto-other-links a:focus-v
   color: var(--acec-retraction-ink);
 }
 
-/* Over a hairline: dates on the left and buttons on the right, then the
-   recommendation in the bottom-right corner below them. Fixed grid areas, so
-   an empty slot stays empty instead of pulling the next item into it. */
+/* Over a hairline: the dates on their own row, then the buttons at the
+   bottom left and the recommendation at the bottom right. Fixed grid areas,
+   so an empty slot stays empty instead of pulling the next item into it. */
 .ace-report-card-foot {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-areas: "dates actions" ". rec";
+  grid-template-areas: "dates dates" "actions rec";
   align-items: center;
-  gap: 0.6rem 1rem;
+  gap: 0.75rem 1rem;
   padding-top: 0.8rem;
   border-top: 1px solid var(--ace-rule);
 }
 .ace-report-card-foot > .ace-date-bar { grid-area: dates; }
-.ace-report-card-foot > .ace-report-card-actions { grid-area: actions; justify-self: end; }
+.ace-report-card-foot > .ace-report-card-actions { grid-area: actions; justify-self: start; }
 .ace-report-card-foot > .ace-report-card-rec { grid-area: rec; justify-self: end; }
-@media (max-width: 575.98px) {
+@media (max-width: 479.98px) {
   .ace-report-card-foot {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "dates" "actions" "rec";
   }
-  .ace-report-card-foot > .ace-report-card-actions { justify-self: start; }
 }
+/* the recommendation down here is a quiet grey status tag, not a button */
+.ace-report-card-rec .ace-report-rec {
+  border-color: var(--ace-badge);
+  background: transparent;
+  color: var(--ace-muted) !important;
+}
+/* subtitle always reserves two lines, so every card lines up */
+.ace-report-card .ace-report-subtitle { min-height: calc(2 * 1.4em); }
 .ace-report-card-foot .ace-report-meta.ace-date-bar { margin: 0; }
 
 /* ---------------------------------------------------------
