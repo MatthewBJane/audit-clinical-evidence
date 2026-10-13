@@ -13,5 +13,14 @@
       "doi": "10.5072/zenodo.598765",
       "version": 1
     }
+  },
+  "ACE2026002": {
+    "live": {
+      "concept_doi": "10.5281/zenodo.23331178",
+      "deposition_id": 23331179,
+      "doi": "10.5281/zenodo.23331179",
+      "reserved_doi": "10.5281/zenodo.23331179",
+      "version": 1
+    }
   }
 }
