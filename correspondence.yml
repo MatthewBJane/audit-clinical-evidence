@@ -37,7 +37,7 @@
 #     decision: ""            # set when a decision event is added
 
 correspondence:
-  updated: "2026-09-26"
+  updated: "2026-10-13"
   audits:
     - ace-id: "ACE2026001"
       recommendation: retraction
@@ -49,8 +49,17 @@ correspondence:
               doi: "10.1097/MD.0000000000015344"
             - label: "Abdelbasset et al. (2019b)"
               doi: "10.1097/MD.0000000000016820"
-          recipients: []
-          events: []
+          recipients:
+            - role: "Editorial office"
+              email: "medicine@wolterskluwer.com"
+            - role: "Senior Publisher"
+              email: "megan.larkin@wolterskluwer.com"
+            - role: "Publisher"
+              email: "hannah.zhang@wolterskluwer.cn"
+          events:
+            - date: "2026-10-13"
+              stage: sent
+              note: "Report and cover letter sent to the editorial office and the publisher."
           decision: ""
         - journal: "Clinics"
           publisher: "Elsevier"
