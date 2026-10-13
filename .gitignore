@@ -52,5 +52,3 @@ reports/**/index_files/
 reports/**/*.toc
 reports/*/ACE*.pdf
 
-# Copies of cover letters renamed for sending
-correspondence/Cover_Letter_*.pdf

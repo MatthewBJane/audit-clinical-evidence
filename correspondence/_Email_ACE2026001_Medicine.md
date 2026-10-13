@@ -1,8 +1,8 @@
-# ACE2026001: email to Medicine (Wolters Kluwer)
+# ACE2026001: email sent to Medicine (Wolters Kluwer), 2026-10-13
 
 From: matthew@auditclinicalevidence.org
 To: medicine@wolterskluwer.com
-Cc: megan.larkin@wolterskluwer.com, hannah.zhang@wolterskluwer.cn
+Cc: megan.larkin@wolterskluwer.com, hannah.zhang@wolterskluwer.cn, kutenda@auditclinicalevidence.org
 Attachments: Cover_Letter_ACE2026001.pdf, ACE2026001.pdf
 
 **Subject:** Research integrity concern about two articles by Abdelbasset et al. (2019) in Medicine (ACE report ACE2026001)
