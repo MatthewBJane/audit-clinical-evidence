@@ -33,3 +33,8 @@ __pycache__/
 acePDF.log
 
 **/*.quarto_ipynb
+
+# LaTeX build leftovers beside a report
+reports/**/*.log
+reports/**/*.aux
+reports/**/index.tex
