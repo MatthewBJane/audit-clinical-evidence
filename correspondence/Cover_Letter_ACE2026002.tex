@@ -1,0 +1,140 @@
+% ACE cover letter to a journal: one page, sent with the audit report.
+%
+% Letter to The Journals of Gerontology, Series A (OUP for GSA) about Singh et al. (1997).
+% Made from letter_template.tex. To make a letter, copy this file (e.g. ACE2026002_letter.tex), fill in the
+% \def lines in the VARIABLES block, and compile with xelatex from this
+% directory. Nothing below the VARIABLES block needs editing. Values left at
+% their defaults print as magenta [placeholders] so they are easy to spot.
+%
+% Fonts and the logo are the report's own (reports/_extensions/ace-formatting).
+
+\documentclass[10pt,a4paper]{article}
+\usepackage{xcolor}
+\definecolor{acemagenta}{HTML}{E262E2}
+\newcommand{\ph}[1]{\textcolor{acemagenta}{[#1]}}   % a placeholder, magenta until filled in
+
+% ------------------------------------------------------------------ VARIABLES
+\def\aceid{ACE2026002}
+\def\letterdate{13 October 2026}
+\def\recipientname{Editorial Office}
+\def\journal{The Journals of Gerontology, Series A}
+\def\publisher{Oxford University Press}
+\def\recipientemail{Joyce.Siette@westernsydney.edu.au}
+\def\nerrors{110}
+\def\nerrorsjournal{4}
+\def\reporturl{https://auditclinicalevidence.org/reports/ACE2026002}
+\def\reportdoi{10.5281/zenodo.23331179}
+\def\findings{Every table in the article labels the values reported in parentheses as standard deviations, but they are standard errors, as the Methods state. Meta-analysts who use the values as labeled inflate the trial's effect on depression by a factor of about four. The article is one of the most cited trials of exercise for depression, cited by 440 articles, 77 of them reviews or meta-analyses. Of the 24 meta-analyses we located that report an effect size for this trial, 19 assign a value larger than any possibly correct extraction, including a Cochrane review. The error has therefore biased the pooled evidence on exercise as a treatment for depression in older adults. Additionally, the reported age ranges, several baseline \textit{p}-values, and a subgroup mean are not possible given the article's own summary statistics.}
+\def\recommendation{retraction of the article}
+\def\authorsnote{ACE has not contacted the authors.}
+\def\enclosure{ACE2026002.pdf}
+% ------------------------------------------------------------------ END
+
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage[a4paper, left=25mm, right=25mm, top=15mm, bottom=16mm]{geometry}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage[most]{tcolorbox}
+
+\setmainfont{Roboto}[
+  Path=../reports/_extensions/ace-formatting/acePDF/Roboto/static/,
+  Scale=0.9, Extension=.ttf,
+  UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic]
+\setmonofont{RobotoMono}[
+  Path=../reports/_extensions/ace-formatting/acePDF/Roboto_Mono/static/,
+  Scale=0.9, Extension=.ttf,
+  UprightFont=*-Medium, BoldFont=*-Bold, ItalicFont=*-Italic]
+
+\definecolor{aceink}{HTML}{111418}
+\definecolor{acegrey}{HTML}{5A6570}
+\definecolor{acelabel}{HTML}{767676}
+\definecolor{acerule}{HTML}{BFC5CA}
+\definecolor{highlight}{HTML}{4F5B66}
+\definecolor{acepanel}{HTML}{F3F4F6}
+\hypersetup{colorlinks=true, urlcolor=highlight, linkcolor=highlight, pdftitle={Audit Clinical Evidence: cover letter \aceid}}
+\urlstyle{same}
+
+\color{aceink}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setstretch{1.06}
+\pagestyle{empty}
+
+% Small grey mono label, as on the report cover.
+\newcommand{\lab}[1]{{\ttfamily\footnotesize\color{acelabel}#1}}
+\newcommand{\acerule}{{\color{acerule}\hrule height 0.5pt}}
+
+\begin{document}
+
+% ---- letterhead ----------------------------------------------------------
+\vspace*{-7mm}
+\noindent
+\begin{minipage}[b]{0.5\textwidth}
+  \includegraphics[width=46mm]{../brand/logo_whitebg_text.png}
+\end{minipage}%
+\begin{minipage}[b]{0.5\textwidth}
+  \raggedleft
+  \lab{COVER LETTER \textbar{} \aceid}\\[2pt]
+  \lab{\letterdate}\\[2pt]
+  \lab{auditclinicalevidence.org}\\[2pt]
+  \lab{contact@auditclinicalevidence.org}
+\end{minipage}
+
+\vspace{6pt}
+\acerule
+\vspace{10pt}
+
+% ---- addressee panel ---------------------------------------------------------
+\begin{tcolorbox}[enhanced, breakable=false, colback=acepanel, colframe=acepanel,
+  borderline west={2.2pt}{0pt}{acemagenta}, arc=0pt, outer arc=0pt,
+  left=10pt, right=10pt, top=7pt, bottom=7pt, boxsep=0pt]
+\setlength{\parskip}{0pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}p{17mm}X@{}}
+  \leavevmode\lab{TO}       & Dr Joyce Siette, Editor-in-Chief, Medical Sciences, \textit{\journal}\newline{\ttfamily\footnotesize\color{acegrey}\recipientemail}\\
+  \leavevmode\lab{CC}       & Kathleen Jackson, Managing Editor, The Gerontological Society of America\newline{\ttfamily\footnotesize\color{acegrey}kjackson@geron.org}\\
+  \leavevmode\lab{RE}       & \textbf{Audit report \aceid{} on an article published in \textit{\journal}}\\
+\end{tabularx}
+
+\vspace{3pt}{\color{acerule}\hrule height 0.4pt}\vspace{5pt}
+{\small
+\begin{tabularx}{\linewidth}{@{}p{17mm}X@{}}
+  \leavevmode\lab{1997} & Singh, N. A., Clements, K. M., \& Fiatarone, M. A. (1997). A randomized controlled trial of progressive resistance training in depressed elders. \textit{The Journals of Gerontology, Series A: Biological Sciences and Medical Sciences}, 52A(1), M27--M35. \lab{DOI 10.1093/gerona/52A.1.M27}\\
+\end{tabularx}}
+\end{tcolorbox}
+
+\vspace{6pt}
+Dear Dr Siette,
+
+Audit Clinical Evidence (ACE) is an independent initiative that publishes reproducible audits of clinical research. We write to make you aware of our audit of the article cited above. The report, \aceid, is published on the ACE website and permanently archived with a DOI. A copy is enclosed.
+
+\begin{tabular}{@{\hspace{8mm}}l@{\hspace{4mm}}l}
+  \lab{Report}  & {\ttfamily\small\reporturl}\\
+  \lab{Archive} & {\ttfamily\small https://doi.org/\reportdoi}
+\end{tabular}
+
+The audit finds serious errors in the article. \findings{} In total, the report documents \nerrors{} errors. Every number in the report is computed from the article's published values with code that accompanies the report, so each finding can be checked independently. On the basis of these findings, ACE recommends \recommendation. The decision belongs to the journal.
+
+We ask that the journal assess the report under its research integrity procedures and the COPE guidelines, and let us know the outcome. \authorsnote{} We would welcome a response from the authors and will publish any response alongside the report, in full or quoted in part, as described in our correspondence policy at \url{https://auditclinicalevidence.org/disclaimers}.
+
+ACE records its correspondence with journals on a public page, \url{https://auditclinicalevidence.org/correspondence}, which shows the date this letter was sent, the date of any reply, and the journal's decision. If this letter should go to a different office, we would be grateful for the correct address.
+
+Sincerely,
+
+\vspace{4pt}
+\begin{tabular}{@{}l@{\hspace{18mm}}l@{}}
+  \textbf{Matthew B. Jané} & \textbf{Kutenda F. Mvududu}\\
+  University of Connecticut & University of Massachusetts Boston\\
+  \lab{matthew@auditclinicalevidence.org} & \lab{kutenda@auditclinicalevidence.org}
+\end{tabular}
+
+\vspace{2pt}
+on behalf of Audit Clinical Evidence
+
+\vfill
+\acerule
+\vspace{4pt}
+\lab{Enclosure: \enclosure}\hfill\lab{Audit Clinical Evidence \textbar{} auditclinicalevidence.org}
+
+\end{document}

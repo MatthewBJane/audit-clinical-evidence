@@ -82,6 +82,13 @@ correspondence:
           articles:
             - label: "Singh, Clements, and Fiatarone (1997)"
               doi: "10.1093/gerona/52A.1.M27"
-          recipients: []
-          events: []
+          recipients:
+            - role: "Editor-in-Chief, Medical Sciences"
+              email: "Joyce.Siette@westernsydney.edu.au"
+            - role: "Managing Editor"
+              email: "kjackson@geron.org"
+          events:
+            - date: "2026-10-13"
+              stage: sent
+              note: "Report and cover letter sent to the Editor-in-Chief and the managing editor."
           decision: ""
