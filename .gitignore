@@ -39,3 +39,15 @@ reports/**/*.log
 reports/**/*.aux
 reports/**/index.tex
 reports/**/index.html
+
+# Quarto writes these at the project root while a render is running and moves
+# them into docs/ when it finishes. Never commit them from the root.
+/site_libs/
+/*.html
+/*-listing.json
+/*.feed-partial*
+/riv.pdf
+/handbook.pdf
+reports/**/index_files/
+reports/**/*.toc
+reports/*/ACE*.pdf

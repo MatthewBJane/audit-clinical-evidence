@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta name="ace-build" content="a8fc478c72">
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Independent audits of published clinical research for statistical errors, data inconsistencies, and research integrity violations.">
 
-<title>ACE: Audit Clinical Evidence – ACE</title>
+<title>license-reports – ACE</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,28 +30,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js?v=7a5e071e"></script>
+<script src="site_libs/quarto-nav/headroom.min.js?v=ace0360e"></script>
+<script src="site_libs/clipboard/clipboard.min.js?v=15f52a1e"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js?v=b514204f"></script>
+<script src="site_libs/quarto-search/fuse.min.js?v=de7d60e4"></script>
+<script src="site_libs/quarto-search/quarto-search.js?v=9c992af7"></script>
 <meta name="quarto:offset" content="./">
-<link href="./images/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-29774376e2e8c7d42cc30db5f57dbaa2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-3a8964d00d45f6eb00e93a48f4f7ac3b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="./images/favicon.png?v=14f25854" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js?v=6f424574" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js?v=e8d6a886" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js?v=3a4a291c"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js?v=d8287752"></script>
+<script src="site_libs/quarto-html/anchor.min.js?v=91bcf6cd"></script>
+<link href="site_libs/quarto-html/tippy.css?v=ebd6f8ce" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css?v=64a204ab" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css?v=b85bc7c3" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js?v=e2b09c06"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css?v=886da841" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-29774376e2e8c7d42cc30db5f57dbaa2.min.css?v=29774376" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-3a8964d00d45f6eb00e93a48f4f7ac3b.min.css?v=3a8964d0" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,91 +77,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-ace-ticker .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-ace-id','listing-highlights',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
-      
-      searchColumns: ["listing-project","listing-website","listing-format","listing-engines","listing-language","listing-number-sections","listing-google-scholar","listing-bibliography","listing-csl","listing-fig-pos","listing-execute","listing-comments","listing-link-citations","listing-appendix-cite-as","listing-Journal","listing-license","listing-title","listing-subtitle","listing-ace-id","listing-date","listing-date-modified","listing-doi","listing-concept-doi","listing-audited","listing-impact","listing-description","listing-highlights","listing-population","listing-treatment","listing-outcome","listing-design","listing-categories","listing-violations","listing-recommendation","listing-citation","listing-abstract","listing-author","listing-path","listing-outputHref","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-draft","listing-nocite","listing-cites"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-ace-ticker'] = new List('listing-ace-ticker', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-ace-totals .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-ace-id','listing-impact','listing-violations',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
-      
-      searchColumns: ["listing-project","listing-website","listing-format","listing-engines","listing-language","listing-number-sections","listing-google-scholar","listing-bibliography","listing-csl","listing-fig-pos","listing-execute","listing-comments","listing-link-citations","listing-appendix-cite-as","listing-Journal","listing-license","listing-title","listing-subtitle","listing-ace-id","listing-date","listing-date-modified","listing-doi","listing-concept-doi","listing-audited","listing-impact","listing-description","listing-highlights","listing-population","listing-treatment","listing-outcome","listing-design","listing-categories","listing-violations","listing-recommendation","listing-citation","listing-abstract","listing-author","listing-path","listing-outputHref","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-draft","listing-nocite","listing-cites"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-ace-totals'] = new List('listing-ace-totals', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-ace-latest .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-subtitle','listing-abstract','listing-categories','listing-date','listing-date-modified','listing-ace-id','listing-doi','listing-concept-doi','listing-impact','listing-violations','listing-recommendation','listing-population','listing-treatment','listing-outcome','listing-design',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
-      
-      searchColumns: ["listing-project","listing-website","listing-format","listing-engines","listing-language","listing-number-sections","listing-google-scholar","listing-bibliography","listing-csl","listing-fig-pos","listing-execute","listing-comments","listing-link-citations","listing-appendix-cite-as","listing-Journal","listing-license","listing-title","listing-subtitle","listing-ace-id","listing-date","listing-date-modified","listing-doi","listing-concept-doi","listing-audited","listing-impact","listing-description","listing-highlights","listing-population","listing-treatment","listing-outcome","listing-design","listing-categories","listing-violations","listing-recommendation","listing-citation","listing-abstract","listing-author","listing-path","listing-outputHref","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-draft","listing-nocite","listing-cites"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-ace-latest'] = new List('listing-ace-latest', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <!-- Fonts, requested straight from the page head rather than through an
      @import inside styles.css, so the browser starts fetching them at
      once. Rubik Glitch (the ACE wordmark) uses display=block: the mark
@@ -210,22 +123,22 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&amp;display=block">
 
 
-<link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="ACE: Audit Clinical Evidence">
-<meta property="og:description" content="Independent audits of published clinical research for statistical errors, data inconsistencies, and research integrity violations.">
+<link rel="stylesheet" href="styles.css?v=6d6f7736">
+<meta property="og:title" content="ACE">
+<meta property="og:description" content="Independent audits of clinical research for statistical errors and research integrity violations.">
 <meta property="og:image" content="https://auditclinicalevidence.org/images/social-card.png">
 <meta property="og:site_name" content="ACE">
 <meta property="og:image:height" content="630">
 <meta property="og:image:width" content="1200">
-<meta name="twitter:title" content="ACE: Audit Clinical Evidence">
-<meta name="twitter:description" content="Independent audits of published clinical research for statistical errors, data inconsistencies, and research integrity violations.">
+<meta name="twitter:title" content="ACE">
+<meta name="twitter:description" content="Independent audits of clinical research for statistical errors and research integrity violations.">
 <meta name="twitter:image" content="https://auditclinicalevidence.org/images/twitter-card.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image-height" content="600">
 <meta name="twitter:image-width" content="1200">
 </head>
 
-<body class="nav-fixed homepage fullcontent quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -403,7 +316,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -451,404 +364,47 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-layout-custom page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-<!-- main -->
-
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">ACE</h1>
-</div>
-
-<div>
-  <div class="description">
-    Independent audits of published clinical research for statistical errors, data inconsistencies, and research integrity violations.
-  </div>
-</div>
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<div class="ace-hero" id="ace-hero">
-  <div class="ace-hero-sweep" aria-hidden="true"></div>
-  <div class="ace-wrap ace-hero-inner">
-    <div class="ace-hero-deck" id="ace-hero-deck">Audit Clinical Evidence</div>
-    <h1 class="ace-hero-mark" id="ace-hero-mark" aria-label="ACE">
-      <span class="ace-mark-size" aria-hidden="true">ACE</span>
-      <span class="ace-mark-base" aria-hidden="true">ACE</span>
-      <span class="ace-mark-ghost ace-mark-c" aria-hidden="true">ACE</span>
-      <span class="ace-mark-ghost ace-mark-m" aria-hidden="true">ACE</span>
-    </h1>
-    <div class="ace-hero-thesis">
-      <p class="ace-hero-claim">Peer review missed it.<br><span class="ace-hl">We found it.</span></p>
-      <p class="ace-hero-lead"><span class="ace-wordmark">Audit Clinical Evidence</span> protects the credibility of the scientific record. We audit published clinical research for errors and signs of falsification, fabrication, manipulation, and misconduct, then document it, publish it, and report it.</p>
-      <div class="ace-hero-ctas">
-        <a class="ace-ui ace-btn" href="reports.html">Browse the reports <span class="ace-arr" aria-hidden="true">→</span></a>
-        <a class="ace-ui ace-btn ace-btn-quiet" href="#how">How we audit</a>
-      </div>
-      <div class="ace-hero-badges">
-        <a class="ace-ui ace-badge" href="https://github.com/matthewbjane/audit-clinical-evidence">GitHub</a>
-        <a class="ace-ui ace-badge" href="mailto:contact@auditclinicalevidence.org">Contact</a>
-        <a class="ace-ui ace-badge" href="handbook.pdf">ACE Handbook</a>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="listing-ace-ticker" class="quarto-listing quarto-listing-container-custom">
-
-<div class="ace-ticker" aria-label="Findings from published reports">
-  <div class="ace-ticker-track">
-    
-      
-        <a class="ace-ui ace-tick" href="./reports/ACE2026002/index.html">
-          <span class="ace-tick-id">ACE2026002</span>
-          <span class="ace-tick-text">Artificially inflated effect size from a single RCT impacts 19 meta-analyses of exercise as a treatment for depression</span>
-          <span class="ace-tick-x" aria-hidden="true">✕</span>
-        </a>
-      
-        <a class="ace-ui ace-tick" href="./reports/ACE2026001/index.html">
-          <span class="ace-tick-id">ACE2026001</span>
-          <span class="ace-tick-text">One trial appears to be published as three separate RCTs of exercise for depression in heart failure</span>
-          <span class="ace-tick-x" aria-hidden="true">✕</span>
-        </a>
-      
-    
-      
-        <a class="ace-ui ace-tick" href="./reports/ACE2026002/index.html" aria-hidden="true" tabindex="-1">
-          <span class="ace-tick-id">ACE2026002</span>
-          <span class="ace-tick-text">Artificially inflated effect size from a single RCT impacts 19 meta-analyses of exercise as a treatment for depression</span>
-          <span class="ace-tick-x" aria-hidden="true">✕</span>
-        </a>
-      
-        <a class="ace-ui ace-tick" href="./reports/ACE2026001/index.html" aria-hidden="true" tabindex="-1">
-          <span class="ace-tick-id">ACE2026001</span>
-          <span class="ace-tick-text">One trial appears to be published as three separate RCTs of exercise for depression in heart failure</span>
-          <span class="ace-tick-x" aria-hidden="true">✕</span>
-        </a>
-      
-    
-  </div>
-</div>
-
-<div class="listing-no-matching d-none">No matching items</div>
-</div>
-<div id="ace-record" class="ace-home-band">
-<div id="listing-ace-totals" class="quarto-listing quarto-listing-container-custom">
-
-<div class="ace-wrap">
-  <div class="ace-home-head">
-    <div><span class="ace-eyebrow">The record so far</span><h2 class="ace-home-h2">What two audits found</h2></div>
-    <p>Totals across every published report. They update with each new report and each new version.</p>
-  </div>
-  <div class="ace-totals">
-    
-      <div class="ace-total">
-        <span class="ace-total-key">ACE-RIV</span>
-        <span class="ace-total-num" data-v="139">139</span>
-        <span class="ace-total-what">Research integrity violations documented</span>
-      </div>
-    
-      <div class="ace-total">
-        <span class="ace-total-key">Infected</span>
-        <span class="ace-total-num" data-v="514">514</span>
-        <span class="ace-total-what">Articles that cite the audited work</span>
-      </div>
-    
-      <div class="ace-total">
-        <span class="ace-total-key">Infected</span>
-        <span class="ace-total-num" data-v="94">94</span>
-        <span class="ace-total-what">Systematic reviews built on it</span>
-      </div>
-    
-      <div class="ace-total">
-        <span class="ace-total-key">Spread</span>
-        <span class="ace-total-num" data-v="26">26</span>
-        <span class="ace-total-what">Clinical guidelines it reached</span>
-      </div>
-    
-  </div>
-  <p class="ace-totals-note">Citation counts from OpenAlex, retrieved September 20, 2026. Integrity violations are counted under ACE-RIV.</p>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div>
-</div>
-<div class="ace-home-band" id="ace-reports-band"><div class="ace-wrap">
-<div class="ace-home-head">
-  <div><span class="ace-eyebrow">Latest audits</span><h2 class="ace-home-h2">Published reports</h2></div>
-  <p>Each report documents what can be verified from the public record, and shows how every finding was reached.</p>
-</div>
-<div id="listing-ace-latest" class="quarto-listing quarto-listing-container-custom">
-<div class="ace-report-listing list">
-
-  
-
-  <article class="ace-report-card" data-index="0" data-categories="Older Adults,Exercise,Depression,RCT">
-
-    <div class="ace-report-card-main">
-
-      <div class="ace-report-card-topline">
-        <div class="ace-report-card-ids">
-          
-            <span class="ace-report-id listing-ace-id">ACE2026002</span>
-          
-          
-          
-        </div>
-      </div>
-
-      <h2 class="ace-report-title listing-title">
-        <a href="./reports/ACE2026002/index.html">Audit of Singh et al. (1997)</a>
-      </h2>
-
-      
-        <p class="ace-report-subtitle listing-subtitle">A randomized controlled trial of progressive resistance training in depressed elders</p>
-      
-
-      
-      
-        <div class="ace-report-categories listing-categories">
-          
-            <span class="ace-report-category" data-facet="population">Older Adults</span>
-          
-            <span class="ace-report-category" data-facet="treatment">Exercise</span>
-          
-            <span class="ace-report-category" data-facet="outcome">Depression</span>
-          
-            <span class="ace-report-category" data-facet="design">RCT</span>
-          
-        </div>
-      
-
-      
-      
-        <div class="ace-report-stats">
-          
-            <span class="ace-report-stat ace-report-stat-riv"><b>110</b> integrity violations</span>
-          
-          
-            <span class="ace-report-stat ace-report-impact listing-impact" title="OpenAlex, retrieved 2026-09-20">
-              <span class="ace-report-impact-label">Infected</span>
-              <span><b>440</b> articles</span>
-              <span><b>77</b> reviews</span>
-              <span><b>4</b> guidelines</span>
-            </span>
-          
-        </div>
-      
-
-      
-      
-        <details class="ace-listing-abstract">
-          <summary>Abstract</summary>
-          <div class="ace-listing-abstract-content listing-abstract">
-            This report audits a randomized controlled trial by Singh, Clements, and Fiatarone that compared 10 weeks of progressive resistance training with an attention control condition in 32 community-dwelling adults aged 60 and over with major depression, minor depression, or dysthymia. Every table in the article labels the values reported in parentheses as standard deviations, yet the Methods state that they are standard errors. The article's test statistic values support the Methods (i.e., the parenthetical values are standard errors). The reported age ranges are impossible under the reported standard deviations. Additionally, the depression subgroup means in Table 4 are impossible under the whole-group standard deviations in Table 3. The largest post-test standardized mean difference that the article can support on any depression outcome is −0.72. We located 24 meta-analyses that report a study-level effect size for this trial. Of these, 19 meta-analyses assign @singh1997 a value larger than any possibly correct extraction of the effect size. The median assigned value is −2.74 and the largest is −5.04. Four report exactly −1.75, which is due to meta-analysts treating the parenthetical values of the BDI scores as standard deviations. One of these meta-analyses is a Cochrane review. Furthermore, five of the 10 categorical baseline p values can not be reproduced by any standard test of the reported contingency table cells. Later in the paper there is a reported subgroup mean that is impossible given its sample size. In total, this audit identifies 110 instances of Research Integrity Violations across two categories. Due to the pervasive contamination the misreporting has had on the evidence syntheses in this field, we recommend retraction.
-          </div>
-        </details>
-      
-
-      <div class="ace-report-card-foot">
-        <!-- Every slot is always drawn, so a missing value leaves a gap
-             rather than letting the next item slide into its place. -->
-        <div class="ace-report-meta ace-date-bar">
-          <div><span class="ace-date-key">Published</span><span class="ace-date-value listing-date">Oct 12, 2026</span></div>
-          <div><span class="ace-date-key">Updated</span><span class="ace-date-value listing-date-modified">Oct 12, 2026</span></div>
-        </div>
-
-        <div class="ace-report-card-actions">
-          <a class="ace-pdf-button" href="./reports/ACE2026002/index.html">Read online</a>
-          
-            <a class="ace-pdf-button" href="reports/ACE2026002/ACE2026002.pdf" target="_blank">PDF</a>
-          
-        </div>
-
-        
-          <div class="ace-report-card-rec"><span class="ace-report-rec ace-report-rec-retraction">Retraction recommended</span></div>
-        
-      </div>
-
-    </div>
-
-  </article>
-
-  
-
-  <article class="ace-report-card" data-index="1" data-categories="Heart Disease,Exercise,Depression,RCT">
-
-    <div class="ace-report-card-main">
-
-      <div class="ace-report-card-topline">
-        <div class="ace-report-card-ids">
-          
-            <span class="ace-report-id listing-ace-id">ACE2026001</span>
-          
-          
-          
-            <a class="ace-doi-link listing-doi" href="https://doi.org/10.5281/zenodo.22780329" target="_blank" rel="noopener" title="Open the archived record, newest version (opens in a new tab)">10.5281/zenodo.22780329</a>
-          
-        </div>
-      </div>
-
-      <h2 class="ace-report-title listing-title">
-        <a href="./reports/ACE2026001/index.html">Audit of Abdelbasset et al. (2019)</a>
-      </h2>
-
-      
-        <p class="ace-report-subtitle listing-subtitle">Three randomized controlled trials on exercise and depression</p>
-      
-
-      
-      
-        <div class="ace-report-categories listing-categories">
-          
-            <span class="ace-report-category" data-facet="population">Heart Disease</span>
-          
-            <span class="ace-report-category" data-facet="treatment">Exercise</span>
-          
-            <span class="ace-report-category" data-facet="outcome">Depression</span>
-          
-            <span class="ace-report-category" data-facet="design">RCT</span>
-          
-        </div>
-      
-
-      
-      
-        <div class="ace-report-stats">
-          
-            <span class="ace-report-stat ace-report-stat-riv"><b>29</b> integrity violations</span>
-          
-          
-            <span class="ace-report-stat ace-report-impact listing-impact" title="OpenAlex, retrieved 2026-09-08">
-              <span class="ace-report-impact-label">Infected</span>
-              <span><b>74</b> articles</span>
-              <span><b>17</b> reviews</span>
-              <span><b>22</b> guidelines</span>
-            </span>
-          
-        </div>
-      
-
-      
-      
-        <details class="ace-listing-abstract">
-          <summary>Abstract</summary>
-          <div class="ace-listing-abstract-content listing-abstract">
-            This report audits three randomized controlled trials by Abdelbasset and colleagues evaluating exercise interventions for depression in patients with congestive heart failure. The three articles appear to report overlapping arms from the same underlying clinical trial while presenting them as separate studies. Across the articles, duplicated baseline characteristics and PHQ-9 outcome statistics indicate reuse of the same trial data even though the articles report incompatible authorship contribution statements and three distinct ethical approval numbers, and do not cite one another. The articles are potentially linked to a well-documented authorship-for-sale publication network. Furthermore, one of the three articles identifies Abdelbasset as both first author and editor which is a clear conflict of interest. Reported summary statistics are impossible given a real data set, specifically, seven of nine PHQ-9 (the primary outcome) mean and standard deviation pairs fail GRIMMER consistency tests. The baseline tables report probability values that cannot be correct, including two different values for a single two-group comparison of a binary variable, while the continuous comparisons in the same tables reproduce exactly. The reported outcomes also imply extreme between-group standardized mean differences of approximately three standard deviations at post-intervention, making the studies highly influential outliers in later meta-analyses. In total, this audit identifies 29 instances of Research Integrity Violations across seven categories. We conclude that the three articles are not credible and are unlikely to contain any evidentiary value thus we recommend retraction by the publishing journals.
-          </div>
-        </details>
-      
-
-      <div class="ace-report-card-foot">
-        <!-- Every slot is always drawn, so a missing value leaves a gap
-             rather than letting the next item slide into its place. -->
-        <div class="ace-report-meta ace-date-bar">
-          <div><span class="ace-date-key">Published</span><span class="ace-date-value listing-date">Sep 13, 2026</span></div>
-          <div><span class="ace-date-key">Updated</span><span class="ace-date-value listing-date-modified">Sep 20, 2026</span></div>
-        </div>
-
-        <div class="ace-report-card-actions">
-          <a class="ace-pdf-button" href="./reports/ACE2026001/index.html">Read online</a>
-          
-            <a class="ace-pdf-button" href="reports/ACE2026001/ACE2026001.pdf" target="_blank">PDF</a>
-          
-        </div>
-
-        
-          <div class="ace-report-card-rec"><span class="ace-report-rec ace-report-rec-retraction">Retraction recommended</span></div>
-        
-      </div>
-
-    </div>
-
-  </article>
-
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div>
-<a class="ace-ui ace-mega" href="reports.html">
-  <span><span class="ace-mega-title">Browse all reports</span><span class="ace-mega-meta">Filter by population, treatment, outcome, and design</span></span>
-  <span class="ace-mega-arrow" aria-hidden="true">→</span>
-</a>
-</div></div>
-
-<div class="ace-home-band" id="how"><div class="ace-wrap">
-<div class="ace-home-head">
-  <div><span class="ace-eyebrow">How an audit works</span><h2 class="ace-home-h2">Four steps</h2></div>
-  <p>The same sequence for every report, from the first anomaly to a letter on the editor's desk.</p>
-</div>
-<ol class="ace-steps">
-  <li class="ace-step"><span class="ace-step-n">01</span><h3>Find</h3><p>We identify errors in published articles via the tables, text, figures, trial registrations, supplements, and article metadata.</p></li>
-  <li class="ace-step"><span class="ace-step-n">02</span><h3>Document</h3><p>Each finding and the relevant evidence is documented in the form of an audit report.</p></li>
-  <li class="ace-step"><span class="ace-step-n">03</span><h3>Publish</h3><p>Reports are open access under CC BY 4.0, archived on Zenodo with a DOI, and versioned whenever they change.</p></li>
-  <li class="ace-step"><span class="ace-step-n">04</span><h3>Report</h3><p>We send the report to the journal's editors and research integrity office, and <a class="ace-ui ace-inline" href="correspondence.html">follow the letter publicly</a> until the journal makes a decision.</p></li>
-</ol>
-<div class="ace-standard">
-  <span class="ace-eyebrow">Every finding must be</span>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sections</h2>
+   
   <ul>
-    <li>Observable in the public record</li>
-    <li>Reproducible by an independent reader</li>
-    <li>Supported by the evidence</li>
+  <li><a href="#licensing-of-ace-audit-reports" id="toc-licensing-of-ace-audit-reports" class="nav-link active" data-scroll-target="#licensing-of-ace-audit-reports">Licensing of ACE audit reports</a>
+  <ul class="collapse">
+  <li><a href="#excluded" id="toc-excluded" class="nav-link" data-scroll-target="#excluded">Excluded</a></li>
+  </ul></li>
   </ul>
-</div>
-</div></div>
-
-<div class="ace-home-band" id="ace-riv-band"><div class="ace-wrap">
-<!-- GENERATED by scripts/build_report_meta.py from riv.yml and the published reports; edit those, not this file. -->
-<div class="ace-home-head">
-  <div><span class="ace-eyebrow">ACE-RIV v1.1</span><h2 class="ace-home-h2">The ACE Taxonomy of Research Integrity Violations</h2></div>
-  <p>Every finding in every report maps to a numbered category. Select one to see it. Badges count the instances documented so far.</p>
-</div>
-<div class="ace-riv-grid" id="ace-riv-grid"><div class="ace-riv-row"><span class="ace-riv-row-title"><b>1</b>Authorship and Publication</span><div class="ace-riv-cells"><button type="button" class="ace-rc" data-riv="1.1" data-name="Guest, Honorary, or Gift Authorship" data-count="0" aria-label="RIV 1.1: Guest, Honorary, or Gift Authorship">1.1</button><button type="button" class="ace-rc" data-riv="1.2" data-name="Ghost Authorship" data-count="0" aria-label="RIV 1.2: Ghost Authorship">1.2</button><button type="button" class="ace-rc is-found" data-riv="1.3" data-name="Authorship for Sale and Paper Mill Activity" data-count="3" aria-label="RIV 1.3: Authorship for Sale and Paper Mill Activity">1.3<span class="ace-rc-count">3</span></button><button type="button" class="ace-rc" data-riv="1.4" data-name="Plagiarism" data-count="0" aria-label="RIV 1.4: Plagiarism">1.4</button><button type="button" class="ace-rc is-found" data-riv="1.5" data-name="Duplicate Publication and Salami Slicing" data-count="2" aria-label="RIV 1.5: Duplicate Publication and Salami Slicing">1.5<span class="ace-rc-count">2</span></button><button type="button" class="ace-rc" data-riv="1.6" data-name="Citation Manipulation" data-count="0" aria-label="RIV 1.6: Citation Manipulation">1.6</button><button type="button" class="ace-rc is-found" data-riv="1.7" data-name="Peer Review Subversion" data-count="1" aria-label="RIV 1.7: Peer Review Subversion">1.7<span class="ace-rc-count">1</span></button><button type="button" class="ace-rc" data-riv="1.8" data-name="Irrelevant Citations and Reference Padding" data-count="0" aria-label="RIV 1.8: Irrelevant Citations and Reference Padding">1.8</button><button type="button" class="ace-rc" data-riv="1.9" data-name="Trial Registration Failures and Outcome Switching" data-count="0" aria-label="RIV 1.9: Trial Registration Failures and Outcome Switching">1.9</button><button type="button" class="ace-rc is-found" data-riv="1.10" data-name="Incompatible Authorship or Contribution Statements" data-count="3" aria-label="RIV 1.10: Incompatible Authorship or Contribution Statements">1.10<span class="ace-rc-count">3</span></button><button type="button" class="ace-rc" data-riv="1.11" data-name="Misrepresentation of Cited Sources" data-count="0" aria-label="RIV 1.11: Misrepresentation of Cited Sources">1.11</button><button type="button" class="ace-rc" data-riv="1.12" data-name="Undisclosed Generated Text" data-count="0" aria-label="RIV 1.12: Undisclosed Generated Text">1.12</button></div></div><div class="ace-riv-row"><span class="ace-riv-row-title"><b>2</b>Statistical and Data Integrity</span><div class="ace-riv-cells"><button type="button" class="ace-rc is-found" data-riv="2.1" data-name="Anomalies and Extreme Values" data-count="2" aria-label="RIV 2.1: Anomalies and Extreme Values">2.1<span class="ace-rc-count">2</span></button><button type="button" class="ace-rc is-found" data-riv="2.2" data-name="Statistical Inconsistencies and Impossible Data Sets" data-count="39" aria-label="RIV 2.2: Statistical Inconsistencies and Impossible Data Sets">2.2<span class="ace-rc-count">39</span></button><button type="button" class="ace-rc" data-riv="2.3" data-name="Selective Reporting, Suppressed Data, and Omitted Methodology" data-count="0" aria-label="RIV 2.3: Selective Reporting, Suppressed Data, and Omitted Methodology">2.3</button><button type="button" class="ace-rc is-found" data-riv="2.4" data-name="Data Miscalculation or Erroneous Reporting" data-count="86" aria-label="RIV 2.4: Data Miscalculation or Erroneous Reporting">2.4<span class="ace-rc-count">86</span></button><button type="button" class="ace-rc" data-riv="2.5" data-name="Image and Figure Manipulation" data-count="0" aria-label="RIV 2.5: Image and Figure Manipulation">2.5</button><button type="button" class="ace-rc" data-riv="2.6" data-name="Data Set Anomalies" data-count="0" aria-label="RIV 2.6: Data Set Anomalies">2.6</button><button type="button" class="ace-rc" data-riv="2.7" data-name="Image and Figure Errors" data-count="0" aria-label="RIV 2.7: Image and Figure Errors">2.7</button></div></div><div class="ace-riv-row"><span class="ace-riv-row-title"><b>3</b>Ethical Oversight and Transparency</span><div class="ace-riv-cells"><button type="button" class="ace-rc" data-riv="3.1" data-name="Failure to Disclose Conflicts of Interest" data-count="0" aria-label="RIV 3.1: Failure to Disclose Conflicts of Interest">3.1</button><button type="button" class="ace-rc" data-riv="3.2" data-name="Bypass of Ethical Oversight" data-count="0" aria-label="RIV 3.2: Bypass of Ethical Oversight">3.2</button><button type="button" class="ace-rc is-found" data-riv="3.3" data-name="Ethics Approval Anomalies" data-count="3" aria-label="RIV 3.3: Ethics Approval Anomalies">3.3<span class="ace-rc-count">3</span></button><button type="button" class="ace-rc" data-riv="3.4" data-name="Implausible Study Timelines" data-count="0" aria-label="RIV 3.4: Implausible Study Timelines">3.4</button><button type="button" class="ace-rc" data-riv="3.5" data-name="False or Unfulfilled Data Availability Statements" data-count="0" aria-label="RIV 3.5: False or Unfulfilled Data Availability Statements">3.5</button></div></div><div class="ace-riv-row"><span class="ace-riv-row-title"><b>4</b>Indicators and Minor Issues</span><div class="ace-riv-cells"><button type="button" class="ace-rc" data-riv="4.1" data-name="Minor Typographical Error" data-count="0" aria-label="RIV 4.1: Minor Typographical Error">4.1</button><button type="button" class="ace-rc" data-riv="4.2" data-name="Indicators of Paper Mill Involvement" data-count="0" aria-label="RIV 4.2: Indicators of Paper Mill Involvement">4.2</button><button type="button" class="ace-rc" data-riv="4.3" data-name="Tortured Phrases and Text Spinners" data-count="0" aria-label="RIV 4.3: Tortured Phrases and Text Spinners">4.3</button></div></div></div>
-<div class="ace-riv-readout" id="ace-riv-readout" aria-live="polite"><span class="ace-riv-readout-key">RIV 2.4</span><span class="ace-riv-readout-name">Data Miscalculation or Erroneous Reporting</span><span class="ace-riv-readout-count">86 instances documented so far</span></div>
-<div class="ace-riv-legend"><span><i class="is-found"></i>Documented in a published report</span><span><i></i>Not yet documented</span><a class="ace-ui ace-arrow-link" href="riv.html">Read the taxonomy <span aria-hidden="true">→</span></a></div>
-</div></div>
-
-<div class="ace-home-band" id="subscribe"><div class="ace-wrap ace-concern">
-  <div>
-    <span class="ace-eyebrow">Email updates</span>
-    <h2 class="ace-home-h2">Get an email when a report is published</h2>
-    <p>One message per report, nothing else. Your address is kept in a private list held by ACE and is not shared. Reply to any message to unsubscribe.</p>
-  </div>
-  <form class="ace-mailbox ace-subscribe" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScGCwFKLQZPUsQk86pohYvQb-kIMgw2zuJVricnv3sOyTQxFA/formResponse" method="post" target="ace-subscribe-sink" novalidate="">
-    <label class="ace-eyebrow" for="ace-subscribe-email">Email</label>
-    <input class="ace-subscribe-input" id="ace-subscribe-email" name="entry.1788943182" type="email" autocomplete="email" inputmode="email" placeholder="you@example.org" required="">
-    <button type="submit" class="ace-mailbox-copy ace-subscribe-btn">Subscribe</button>
-    <p class="ace-subscribe-msg" role="status" aria-live="polite"></p>
-  </form>
-  <iframe name="ace-subscribe-sink" title="" hidden=""></iframe>
-</div></div>
-
-<div class="ace-home-band ace-home-band-last" id="concern"><div class="ace-wrap ace-concern">
-  <div>
-    <span class="ace-eyebrow">Suggest a study</span>
-    <h2 class="ace-home-h2">Found something in a published article?</h2>
-    <p>Write us an email containing the article and the specific problem. Priority goes to concerns that are specific, tractable, reproducible, and relevant to clinical research. <a class="ace-ui ace-inline" href="about.html#suggesting-a-study">What to include</a>.</p>
-  </div>
-  <div class="ace-mailbox">
-    <span class="ace-eyebrow">Email</span>
-    <a class="ace-ui ace-mailbox-addr" href="mailto:contact@auditclinicalevidence.org">contact@auditclinicalevidence.org</a>
-    <button type="button" class="ace-mailbox-copy" data-copy="contact@auditclinicalevidence.org">Copy address</button>
-  </div>
-</div></div>
-
-<script src="ace-home.js"></script>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
 
 
+<section id="licensing-of-ace-audit-reports" class="level1">
+<h1>Licensing of ACE audit reports</h1>
+<p>© 2026 Matthew B. Jané.</p>
+<p>Audit reports (everything under <code>reports/</code> authored by ACE: text, figures, tables) are licensed under Creative Commons Attribution 4.0 International (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/</p>
+<p>You may copy, redistribute, translate and adapt them for any purpose, including commercially, provided you credit Audit Clinical Evidence, link to the license, and indicate any changes. Cite the report’s concept DOI. Each published version is archived on Zenodo with its own permanent version DOI.</p>
+<p>Extracted data** compiled by ACE from audited publications: CC0 1.0, to the extent ACE holds any rights in it.</p>
+<p>Code: MIT, see <code>LICENSE</code>.</p>
+<section id="excluded" class="level2">
+<h2 class="anchored" data-anchor-id="excluded">Excluded</h2>
+<ul>
+<li><em>Audit Clinical Evidence</em>, <em>ACE</em>, and the ACE wordmark and logo are trademarks (™) of the Audit Clinical Evidence project. They, and the site’s visual identity: all rights reserved. They may not be used to suggest that any report, statement or product is published or endorsed by ACE.</li>
+<li>Excerpts, tables and images reproduced from audited publications remain the copyright of their original rights-holders and are reproduced under fair use for criticism and review. The CC BY license does not extend to them.</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
