@@ -344,7 +344,32 @@ def strip_citations(s: str) -> str:
     citeproc, so the keys would sit in the archived record verbatim.
     """
     s = re.sub(r"\s*\[[^\[\]]*-?@[^\[\]]*\](?!\()", "", s or "")
+    # A bare in-text key ("assign @smith2019 a value") becomes "Smith et al. (2019)",
+    # as citeproc would render it on the page.
+    s = re.sub(r"(?<![\w.])@([A-Za-z][\w:-]*)", lambda m: in_text(m.group(1)), s)
     return re.sub(r"\s+([,.;:])", r"\1", re.sub(r"\s{2,}", " ", s)).strip()
+
+
+_BIB = None
+
+
+def in_text(key: str) -> str:
+    """Author-year for a citation key, from reports/references/references.bib."""
+    global _BIB
+    if _BIB is None:
+        bib = REPO_ROOT / "reports" / "references" / "references.bib"
+        _BIB = bib.read_text(encoding="utf-8") if bib.exists() else ""
+    m = re.search(r"@\w+\{\s*" + re.escape(key) + r"\s*,(.*?)\n\}", _BIB, re.S)
+    if not m:
+        return key
+    body = m.group(1)
+    au = re.search(r"author\s*=\s*\{(.*?)\}\s*,?\s*\n", body, re.S)
+    yr = re.search(r"year\s*=\s*\{?(\d{4})", body)
+    if not au:
+        return key
+    fams = [a.split(",")[0].strip().strip("{}") for a in re.split(r"\s+and\s+", au.group(1))]
+    who = fams[0] if len(fams) == 1 else (f"{fams[0]} and {fams[1]}" if len(fams) == 2 else f"{fams[0]} et al.")
+    return f"{who} ({yr.group(1)})" if yr else who
 
 
 
