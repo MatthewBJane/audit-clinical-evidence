@@ -66,8 +66,13 @@ correspondence:
           articles:
             - label: "Abdelbasset et al. (2019c)"
               doi: "10.6061/clinics/2019/e1017"
-          recipients: []
-          events: []
+          recipients:
+            - role: "Editor-in-Chief, via the editorial office"
+              email: "clinics@hc.fm.usp.br"
+          events:
+            - date: "2026-10-13"
+              stage: sent
+              note: "Report and cover letter sent to the Editor-in-Chief."
           decision: ""
     - ace-id: "ACE2026002"
       recommendation: retraction
