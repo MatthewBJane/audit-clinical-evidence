@@ -60,6 +60,9 @@ correspondence:
             - date: "2026-10-13"
               stage: sent
               note: "Report and cover letter sent to the editorial office and the publisher."
+            - date: "2026-10-13"
+              stage: response
+              note: "Publisher acknowledged receipt of the concerns."
           decision: ""
         - journal: "Clinics"
           publisher: "Elsevier"
